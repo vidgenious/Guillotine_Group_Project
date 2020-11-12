@@ -46,19 +46,33 @@ public class GuillotineComputerPlayer1 extends GameComputerPlayer {
             return;
         }
 
+
         GuillotineState gameState = (GuillotineState) info;
-        Random rand = new Random();
-        int play = rand.nextInt(2);
 
-        int pos = rand.nextInt(gameState.getP1Hand().size());
-        if(play == 1){
+        if(gameState.getPlayerTurn() == 1) {
+            if(gameState.getTurnPhase() == 0) {
+                Random rand = new Random();
+                int play = rand.nextInt(2);
+
+                int pos = rand.nextInt(gameState.getP1Hand().size());
+                if (play == 1) {
 
 
+                    game.sendAction(new PlayAction(this, pos));
 
-            game.sendAction(new PlayAction(this, pos));
-
-        } else{
-            game.sendAction(new SkipAction(this));
+                    gameState.setTurnPhase(1);
+                } else {
+                    game.sendAction(new SkipAction(this));
+                }
+            }else if(gameState.getTurnPhase() == 1){
+                game.sendAction(new NobleAction(this));
+                gameState.setTurnPhase(2);
+            }else if(gameState.getTurnPhase() == 2){
+                game.sendAction(new DrawAction(this));
+                gameState.setTurnPhase(0);
+            }
+        }else{
+            game.sendAction(new NullAction(this));
         }
     }
 }

@@ -25,10 +25,15 @@ import edu.up.cs301.game.R;
 public class DrawBoard extends FlashSurfaceView {
 
     private GuillotineState state;
+    private Paint grey = new Paint();
+    private Paint black = new Paint();
 
     public DrawBoard(Context context, AttributeSet attrs) {
         super(context, attrs);
         setWillNotDraw(false);
+        grey.setColor(Color.GRAY);
+        black.setColor(Color.BLACK);
+        black.setTextSize(50.0f);
     }
 
     public void setState(GuillotineState state) {
@@ -42,6 +47,12 @@ public class DrawBoard extends FlashSurfaceView {
             return;
         }
 
+        canvas.drawRect(10.0f, 970.0f, 160.0f, 1070.0f, grey);
+        canvas.drawText("Skip", 30.0f,1030.0f, black);
+        canvas.drawRect(10.0f, 860.0f, 160.0f, 960.0f, grey);
+        canvas.drawText("Accept", 10.0f,930.0f, black);
+
+        //P0 Hand
         float left = 1700;
         Bitmap draw;
         for(int i = 0; i < state.getP0Hand().size(); i++){
@@ -51,8 +62,7 @@ public class DrawBoard extends FlashSurfaceView {
             left -= 220;
         }
 
-
-
+        //P0 field
         left = 1800;
         for(int i = 0; i < state.getP0Field().size(); i++){
             draw = BitmapFactory.decodeResource(getResources(), state.getP0Field().get(i).image);
@@ -61,12 +71,22 @@ public class DrawBoard extends FlashSurfaceView {
             left -= 120;
         }
 
-        left = 1500;
+        //Noble line
+        left = 1700;
         for(int i = 0; i < state.getNobleLine().size(); i++){
             draw = BitmapFactory.decodeResource(getResources(), state.getNobleLine().get(i).image);
             draw = Bitmap.createScaledBitmap(draw, 200, 280, true);
             canvas.drawBitmap(draw, left, 350.0f, null);
             left -= 100;
+        }
+
+        //P1 field
+        left = 1800;
+        for(int i = 0; i < state.getP1Field().size(); i++){
+            draw = BitmapFactory.decodeResource(getResources(), state.getP1Field().get(i).image);
+            draw = Bitmap.createScaledBitmap(draw, 100, 140, true);
+            canvas.drawBitmap(draw, left, 150.0f, null);
+            left -= 120;
         }
 
 
