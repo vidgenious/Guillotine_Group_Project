@@ -1,5 +1,6 @@
 package edu.up.cs301.guillotine;
 
+import android.graphics.Point;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
@@ -21,8 +22,17 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
     public View getTopView() { return myActivity.findViewById(R.id.top_gui_layout);}
 
     @Override
-    public boolean onTouch(View view, MotionEvent motionEvent) {
-        return false;
+    public boolean onTouch(View view, MotionEvent event) {
+        if (event.getAction() != MotionEvent.ACTION_UP) return true;
+
+        int x = (int) event.getX();
+        int y = (int) event.getY();
+
+        PlayAction action = new PlayAction(this, handCard(x, y));
+        game.sendAction(action);
+        board.invalidate();
+
+        return true;
     }
 
     @Override
@@ -46,5 +56,12 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
         board.setOnTouchListener(this);
         board.setState(state);
 
+    }
+
+    private int handCard(int x, int y){
+        if(x > 1700 && x < 1800 && y > 800 && y < 1080){
+            return 0;
+        }
+        return -1;
     }
 }
