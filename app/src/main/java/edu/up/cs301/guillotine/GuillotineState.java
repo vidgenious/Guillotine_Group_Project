@@ -22,6 +22,7 @@ public class GuillotineState extends GameState {
     private int lastFirstPlayer;
     private int currFirstPlayer;
     private int turnPhase;
+    private boolean begun;
     private ArrayList<Card> p1Hand;
     private ArrayList<Card> p1Field;
     private ArrayList<Card> p0Hand;
@@ -42,6 +43,7 @@ public class GuillotineState extends GameState {
         this.lastFirstPlayer = 0;
         this.currFirstPlayer = 0;
         this.turnPhase = 0;
+        this.begun = false;
         //this.playerNames = new String[2];
         this.p1Hand = new ArrayList<Card>();
         this.p0Hand = new ArrayList<Card>();
@@ -57,7 +59,7 @@ public class GuillotineState extends GameState {
 
         this.actionCardPlayed = false;
 
-
+        startGame();
     }
 
     //Deep copy constructor
@@ -69,6 +71,7 @@ public class GuillotineState extends GameState {
         this.lastFirstPlayer = origin.lastFirstPlayer;
         this.currFirstPlayer = origin.currFirstPlayer;
         this.turnPhase = origin.turnPhase;
+        this.begun = origin.begun;
 
         this.p1Hand = new ArrayList<Card>();
         for (Card c : origin.p1Hand) {
@@ -259,6 +262,8 @@ public class GuillotineState extends GameState {
         return this.p1Score;
     }
 
+    public boolean getBegun() { return this.begun;}
+
     public int getLastFirstPlayer() {
         return this.lastFirstPlayer;
     }
@@ -331,6 +336,8 @@ public class GuillotineState extends GameState {
     public void setTurnPhase(int turnPhase) {
         this.turnPhase = turnPhase;
     }
+
+    public void setBegun(boolean begun){ this.begun = begun;}
 
     //Variables that are not used outside of a single call
     private boolean gameStart = false;

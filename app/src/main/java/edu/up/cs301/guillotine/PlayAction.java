@@ -13,6 +13,7 @@ public class PlayAction extends GameAction {
      */
     public PlayAction(GamePlayer player, int pos) {
         super(player);
+        this.pos = pos;
     }
 
     public int getPos(){return pos;}

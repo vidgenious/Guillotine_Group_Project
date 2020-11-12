@@ -33,7 +33,7 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
         Log.w("X:", Integer.toString(x));
         Log.w("Y:", Integer.toString(y));
 
-        if(cardPos < 0 || cardPos + 1 >= state.getP0Hand().size() ) {
+        if(cardPos < 0 || cardPos + 1 > state.getP0Hand().size() ) {
             return false;
         }
         PlayAction action = new PlayAction(this, cardPos);
@@ -51,6 +51,8 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
         }
 
         this.state = (GuillotineState)info;
+        board.setState(state);
+        board.invalidate();
     }
 
     @Override
@@ -73,15 +75,15 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
             return 1;
         }else if(x > 1260 && x < 1460 && y > 800 && y < 1080){
             return 2;
-        }else if(x > 1240 && x < 1440 && y > 800 && y < 1080){
+        }else if(x > 1040 && x < 1240 && y > 800 && y < 1080){
             return 3;
-        }else if(x > 1020 && x < 1220 && y > 800 && y < 1080){
+        }else if(x > 820 && x < 1020 && y > 800 && y < 1080){
             return 4;
-        }else if(x > 800 && x < 1000 && y > 800 && y < 1080){
+        }else if(x > 600 && x < 800 && y > 800 && y < 1080){
             return 5;
-        }else if(x > 580 && x < 780 && y > 800 && y < 1080){
+        }else if(x > 380 && x < 580 && y > 800 && y < 1080){
             return 6;
-        }else if(x > 360 && x < 560 && y > 800 && y < 1080) {
+        }else if(x > 160 && x < 360 && y > 800 && y < 1080) {
             return 7;
         }
         return -1;

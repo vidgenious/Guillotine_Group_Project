@@ -2,6 +2,8 @@ package edu.up.cs301.guillotine;
 
 import android.util.Log;
 
+import java.util.Random;
+
 import edu.up.cs301.game.GameFramework.infoMessage.GameInfo;
 import edu.up.cs301.game.GameFramework.GameComputerPlayer;
 import edu.up.cs301.game.GameFramework.GameMainActivity;
@@ -35,13 +37,15 @@ public class GuillotineComputerPlayer1 extends GameComputerPlayer {
         }
 
         GuillotineState gameState = (GuillotineState) info;
+        Random rand = new Random();
+        int play = rand.nextInt(2);
 
-        if(gameState.getPlayerTurn() == 1){
-            int locp1 = (int)(Math.random()*gameState.getP1Hand().size());
+        int pos = rand.nextInt(gameState.getP1Hand().size());
+        if(play == 1){
 
-            if(Math.random() < .5) {
 
-            }
+
+            game.sendAction(new PlayAction(this, pos));
 
         } else{
             game.sendAction(new SkipAction(this));
