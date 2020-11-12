@@ -815,25 +815,218 @@ public class GuillotineState extends GameState {
      *
      * @return always return true because it has to be checked by another method.
      */
+
+
     public boolean calculatePoints(ArrayList<Card> field, int user) {
         boolean end = false;
+        int hasTragic = -1;
+        int churchSupport = -1;
+        int civicSupport = -1;
+        int indifferent = -1;
+        int militarySupport = -1;
+
+        //checks who the user is
+        //checks to see if they have specialty cards like count or countess
+        //adds the noble card points into score
         if (user == 0) {
+            //checks to see if this is last time this method will be called
+            if(dayNum != 4){
+
+                //goes through field to see if special card is present
+                for (int k = 0; k < field.size(); k++){
+                    if(field.get(k).id.equals("Indifferent")){
+                        indifferent = 0;
+                    }
+                }
+
+                //goes through field to see all noble cards
             for (int i = 0; i < field.size(); i++) {
 
-                if (field.get(i).isNoble) {
-                    this.p0Score += field.get(i).points;
+                if (field.get(i).id.equals("Count")) {
+                    this.p0Count = true;
+                }
+                else if (field.get(i).id.equals("Countess")) {
+                    this.p0Countess = true;
+                }
+                else if (field.get(i).isNoble) {
+                    if(field.get(i).cardColor.equals("Grey") && indifferent == 0){
+                        this.p0Score ++;
+                    }
+                    else {
+                        this.p0Score += field.get(i).points;
+                    }
                 }
 
             }
+            }
+            //finally counts all special cards that change values based off of other cards
+            else {
+                for (int i = 0; i < field.size(); i++) {
 
-        } else {
-            for (int i = 0; i < field.size(); i++) {
+                    if(field.get(i).id.equals("Church_Support")){
+                        churchSupport = 0;
+                    }
 
-                if (field.get(i).isNoble) {
-                    this.p1Score += field.get(i).points;
+                    if(field.get(i).id.equals("Civic_Support")){
+                        civicSupport = 0;
+                    }
+
+                    if(field.get(i).id.equals("Military_Support")){
+                        militarySupport = 0;
+                    }
+
+                    if(field.get(i).id.equals("Tough_Crowd")){
+                        this.p0Score-= 2;
+                    }
+
+                    if(field.get(i).id.equals("Fountain")){
+                        this.p0Score+= 2;
+                    }
+
+                    if(churchSupport == 0){
+                        if(field.get(i).cardColor.equals("Blue")){
+                            this.p0Score++;
+                        }
+                    }
+
+                    if(civicSupport == 0){
+                        if(field.get(i).cardColor.equals("Green")){
+                            this.p0Score++;
+                        }
+                    }
+
+                    if(militarySupport == 0){
+                        if(field.get(i).cardColor.equals("Red")){
+                            this.p0Score++;
+                        }
+                    }
+
+                    if (field.get(i).id.contains("Palace_Guard")) {
+                        this.p0PalaceGuard++;
+                    }
+
+                    if (field.get(i).id.equals("Tragic_Figure")) {
+                        hasTragic = 0;
+                    }
+
+                    if (hasTragic == 0) {
+                        if (field.get(i).cardColor.equals("Gray")) {
+                            this.p0Score--;
+                        }
+                    }
+                }
+
+                //adding special cards to p0score
+                this.p0Score+=this.p0PalaceGuard * this.p0PalaceGuard;
+                if(p0Count && p0Countess){
+                    this.p0Score+=8;
+                }
+                else if (p0Countess || p0Count){
+                    this.p0Score+= 2;
                 }
 
             }
+        }
+
+        //same exact code as p0, except it is for p1
+        else {
+             //checks to see if this is last time this method will be called
+                if(dayNum != 4){
+
+                    //goes through field to see if special card is present
+                    for (int k = 0; k < field.size(); k++){
+                        if(field.get(k).id.equals("Indifferent")){
+                            indifferent = 1;
+                        }
+                    }
+
+                    //goes through field to see all noble cards
+                    for (int i = 0; i < field.size(); i++) {
+
+                        if (field.get(i).id.equals("Count")) {
+                            this.p1Count = true;
+                        }
+                        else if (field.get(i).id.equals("Countess")) {
+                            this.p1Countess = true;
+                        }
+                        else if (field.get(i).isNoble) {
+                            if(field.get(i).cardColor.equals("Grey") && indifferent == 1){
+                                this.p1Score ++;
+                            }
+                            else {
+                                this.p1Score += field.get(i).points;
+                            }
+                        }
+
+                    }
+                }
+                //finally counts all special cards that change values based off of other cards
+                else {
+                    for (int i = 0; i < field.size(); i++) {
+
+                        if(field.get(i).id.equals("Church_Support")){
+                            churchSupport = 1;
+                        }
+
+                        if(field.get(i).id.equals("Civic_Support")){
+                            civicSupport = 1;
+                        }
+
+                        if(field.get(i).id.equals("Military_Support")){
+                            militarySupport = 1;
+                        }
+
+                        if(field.get(i).id.equals("Tough_Crowd")){
+                            this.p1Score-= 2;
+                        }
+
+                        if(field.get(i).id.equals("Fountain")){
+                            this.p1Score+= 2;
+                        }
+
+                        if(churchSupport == 0){
+                            if(field.get(i).cardColor.equals("Blue")){
+                                this.p1Score++;
+                            }
+                        }
+
+                        if(civicSupport == 0){
+                            if(field.get(i).cardColor.equals("Green")){
+                                this.p1Score++;
+                            }
+                        }
+
+                        if(militarySupport == 0){
+                            if(field.get(i).cardColor.equals("Red")){
+                                this.p1Score++;
+                            }
+                        }
+
+                        if (field.get(i).id.contains("Palace_Guard")) {
+                            this.p1PalaceGuard++;
+                        }
+
+                        if (field.get(i).id.equals("Tragic_Figure")) {
+                            hasTragic = 1;
+                        }
+
+                        if (hasTragic == 1) {
+                            if (field.get(i).cardColor.equals("Gray")) {
+                                this.p1Score--;
+                            }
+                        }
+                    }
+
+                    //adding special cards to p0score
+                    this.p1Score+=this.p1PalaceGuard * this.p1PalaceGuard;
+                    if(p1Count && p0Countess){
+                        this.p1Score+=8;
+                    }
+                    else if (p0Countess || p0Count){
+                        this.p1Score+= 2;
+                    }
+
+                }
         }
 
         return true;
@@ -1096,6 +1289,7 @@ public class GuillotineState extends GameState {
                     this.actionCardPlayed = false;
                     break;
 
+                    //Draw additional action card
                 case "Lord":
                     this.actionCardPlayed = true;
                     if (this.playerTurn == 0) {
@@ -1121,6 +1315,7 @@ public class GuillotineState extends GameState {
                     this.actionCardPlayed = false;
                     break;
 
+                    //Palace guards are worth more points the more palace guards a person has
                 case "Palace_Guard1":
                     //ability is in calculate point method
                     if (this.playerTurn == 0) {
@@ -1129,7 +1324,8 @@ public class GuillotineState extends GameState {
                         p1PalaceGuard++;
                     }
                     break;
-            //test
+
+                //Palace guards are worth more points the more palace guards a person has
                 case "Palace_Guard2":
                     //ability is in calculate point method
                     if (this.playerTurn == 0) {
@@ -1139,6 +1335,7 @@ public class GuillotineState extends GameState {
                     }
                     break;
 
+                //Palace guards are worth more points the more palace guards a person has
                 case "Palace_Guard3":
                     //ability is in calculate point method
                     if (this.playerTurn == 0) {
@@ -1148,6 +1345,7 @@ public class GuillotineState extends GameState {
                     }
                     break;
 
+                //Palace guards are worth more points the more palace guards a person has
                 case "Palace_Guard4":
                     //ability is in calculate point method
                     if (this.playerTurn == 0) {
@@ -1157,6 +1355,7 @@ public class GuillotineState extends GameState {
                     }
                     break;
 
+                //Palace guards are worth more points the more palace guards a person has
                 case "Palace_Guard5":
                     //ability is in calculate point method
                     if (this.playerTurn == 0) {
@@ -1212,6 +1411,8 @@ public class GuillotineState extends GameState {
                     this.actionCardPlayed = false;
                     break;
 
+                    //noble worth -1 point for more grays
+                    //not implemented as is
                 case "Tragic_Figure":
                     //action is in calculate points method
                     break;
@@ -1276,6 +1477,7 @@ public class GuillotineState extends GameState {
                     this.actionCardPlayed = false;
                     break;
 
+                    //put cad in field and action cards that alter line cannot be played
                 case "Callous":
                     this.actionCardPlayed = true;
                     if (this.playerTurn == 0) {
