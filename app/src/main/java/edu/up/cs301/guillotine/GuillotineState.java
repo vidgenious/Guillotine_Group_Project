@@ -1096,6 +1096,7 @@ public class GuillotineState extends GameState {
                     this.actionCardPlayed = false;
                     break;
 
+                    //Draw additional action card
                 case "Lord":
                     this.actionCardPlayed = true;
                     if (this.playerTurn == 0) {
@@ -1121,6 +1122,7 @@ public class GuillotineState extends GameState {
                     this.actionCardPlayed = false;
                     break;
 
+                    //Palace guards are worth more points the more palace guards a person has
                 case "Palace_Guard1":
                     //ability is in calculate point method
                     if (this.playerTurn == 0) {
@@ -1129,7 +1131,8 @@ public class GuillotineState extends GameState {
                         p1PalaceGuard++;
                     }
                     break;
-            //test
+
+                //Palace guards are worth more points the more palace guards a person has
                 case "Palace_Guard2":
                     //ability is in calculate point method
                     if (this.playerTurn == 0) {
@@ -1139,6 +1142,7 @@ public class GuillotineState extends GameState {
                     }
                     break;
 
+                //Palace guards are worth more points the more palace guards a person has
                 case "Palace_Guard3":
                     //ability is in calculate point method
                     if (this.playerTurn == 0) {
@@ -1148,6 +1152,7 @@ public class GuillotineState extends GameState {
                     }
                     break;
 
+                //Palace guards are worth more points the more palace guards a person has
                 case "Palace_Guard4":
                     //ability is in calculate point method
                     if (this.playerTurn == 0) {
@@ -1157,6 +1162,7 @@ public class GuillotineState extends GameState {
                     }
                     break;
 
+                //Palace guards are worth more points the more palace guards a person has
                 case "Palace_Guard5":
                     //ability is in calculate point method
                     if (this.playerTurn == 0) {
@@ -1212,6 +1218,8 @@ public class GuillotineState extends GameState {
                     this.actionCardPlayed = false;
                     break;
 
+                    //noble worth -1 point for more grays
+                    //not implemented as is
                 case "Tragic_Figure":
                     //action is in calculate points method
                     break;
@@ -1276,6 +1284,7 @@ public class GuillotineState extends GameState {
                     this.actionCardPlayed = false;
                     break;
 
+                    //put cad in field and action cards that alter line cannot be played
                 case "Callous":
                     this.actionCardPlayed = true;
                     if (this.playerTurn == 0) {
