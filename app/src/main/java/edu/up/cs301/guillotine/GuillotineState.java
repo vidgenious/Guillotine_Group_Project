@@ -501,6 +501,12 @@ public class GuillotineState extends GameState {
                 if (this.turnPhase == 0) {
                     this.temp = (Card) hand.get(loc);
                     acknowledgeCardAbility(this.temp);
+                    for(int i = 0; i < nobleLine.size(); i ++){
+                        if(nobleLine.get(i).id.equals("Spy")){
+                            temp = nobleLine.get(i);
+                            acknowledgeCardAbility(temp);
+                        }
+                    }
                     this.turnPhase++;
                     return true;
                 } else {
@@ -1035,9 +1041,18 @@ public class GuillotineState extends GameState {
                     this.actionCardPlayed = false;
                     break;
 
+                    //moves masterSpy nobel to end of line if action card is played
+                    //iterates through noble line to find location of spy card
+                    //sets it to be last card in line
                 case "Spy":
                     this.actionCardPlayed = true;
-                    //need to add method and checks
+                    for(int i = 0; i < nobleLine.size(); i++){
+                        if(nobleLine.get(i).id.equals("Spy")){
+                            temp = nobleLine.get(i);
+                            nobleLine.remove(i);
+                            nobleLine.add(temp);
+                        }
+                    }
                     this.actionCardPlayed = false;
                     break;
 
