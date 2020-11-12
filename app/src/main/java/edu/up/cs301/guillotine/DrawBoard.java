@@ -53,7 +53,7 @@ public class DrawBoard extends FlashSurfaceView {
         canvas.drawText("Accept", 10.0f,930.0f, black);
 
         grey.setTextSize(50.0f);
-        canvas.drawText("P1: " + state.getP0Score(), 10.0f, 400.0f, grey);
+        canvas.drawText("P1: " + state.getP1Score(), 10.0f, 400.0f, grey);
         canvas.drawText("P0: " + state.getP0Score(), 10.0f, 500.0f, grey);
 
         //P0 Hand
