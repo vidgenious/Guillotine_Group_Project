@@ -14,6 +14,16 @@ import edu.up.cs301.game.R;
  * @author Maxwell McAtee
  */
 
+/**
+ * @author William Cloutier
+ * @author Moses Karemera
+ * @author Maxwell McAtee
+ * @version Alpha November 2020
+ */
+
+/**
+ * Main gamestate that houses most private vars and houses all the cards that our game uses
+ */
 public class GuillotineState extends GameState {
 
     // to satisfy Serializable interface

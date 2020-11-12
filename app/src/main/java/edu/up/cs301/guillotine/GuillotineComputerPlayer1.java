@@ -9,6 +9,16 @@ import edu.up.cs301.game.GameFramework.GameComputerPlayer;
 import edu.up.cs301.game.GameFramework.GameMainActivity;
 import edu.up.cs301.game.R;
 
+/**
+ * @author William Cloutier
+ * @author Moses Karemera
+ * @author Maxwell McAtee
+ * @version Alpha November 2020
+ */
+
+/**
+ * This class acts as the code for the dumb AI and relies on making random choices for functionality
+ */
 public class GuillotineComputerPlayer1 extends GameComputerPlayer {
     // the most recent game state, as given to us by the CounterLocalGame
     /**
