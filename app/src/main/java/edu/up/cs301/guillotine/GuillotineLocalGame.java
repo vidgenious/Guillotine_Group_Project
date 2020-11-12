@@ -1,4 +1,4 @@
-package edu.up.cs301.counter;
+package edu.up.cs301.guillotine;
 
 import edu.up.cs301.game.GameFramework.GamePlayer;
 import edu.up.cs301.game.GameFramework.LocalGame;
@@ -10,11 +10,11 @@ public class GuillotineLocalGame extends LocalGame {
 
     @Override
     protected boolean canMove(int playerIdx) {
-        return false;
+        return gameState.getPlayerTurn() == playerIdx;
     }
 
     public GuillotineLocalGame() {
-
+        this.gameState = new GuillotineState();
     }
 
     @Override
@@ -27,8 +27,26 @@ public class GuillotineLocalGame extends LocalGame {
         p.sendInfo(new GuillotineState(gameState));
     }
 
+    /**
+     * Check if the game is over
+     *
+     * @return
+     * 		a message that tells who has won the game, or null if the
+     * 		game is not over
+     */
     @Override
     protected String checkIfGameOver() {
-        return null;
+        String winner;
+
+        if(gameState.getDayNum() == 4){
+            if(gameState.getP0Score() > gameState.getP1Score()){
+                winner = this.playerNames[0];
+            }else{
+                winner = this.playerNames[1];
+            }
+            return winner + " is the winner!";
+        }else{
+            return null;
+        }
     }
 }

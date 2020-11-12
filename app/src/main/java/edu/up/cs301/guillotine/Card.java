@@ -1,4 +1,6 @@
-package edu.up.cs301.counter;
+package edu.up.cs301.guillotine;
+
+import android.graphics.Bitmap;
 
 /**
  * @author William Cloutier
@@ -17,14 +19,16 @@ public class Card {
     public int points;
     public String cardColor;
     public String id;
+    public int image;
 
     //Constructor for Card object
-    public Card(boolean isNoble, boolean hasEffect, int points, String cardColor,  String id){
+    public Card(boolean isNoble, boolean hasEffect, int points, String cardColor,  String id, int image){
         this.isNoble = isNoble;
         this.hasEffect = hasEffect;
         this.points = points;
         this.cardColor = cardColor;
         this.id = id;
+        this.image = image;
     }
 
     public String getId(){ return this.id;}
