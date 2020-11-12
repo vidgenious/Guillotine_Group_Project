@@ -27,8 +27,10 @@ public class DrawBoard extends FlashSurfaceView {
 
     @Override
     public void onDraw(Canvas canvas) {
-        this.state = new GuillotineState();
-        state.startGame();
+
+        if(state == null){
+            return;
+        }
 
         float left = 1700;
         Bitmap draw;
@@ -38,6 +40,8 @@ public class DrawBoard extends FlashSurfaceView {
             canvas.drawBitmap(draw, left, 800.0f, null);
             left -= 220;
         }
+
+
 
         left = 1800;
         for(int i = 0; i < state.getP0Field().size(); i++){
@@ -57,8 +61,5 @@ public class DrawBoard extends FlashSurfaceView {
 
 
 
-    }
-
-    private void drawHand(Canvas canvas) {
     }
 }
