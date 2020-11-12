@@ -931,12 +931,9 @@ public class GuillotineState extends GameState {
         }
     }
 
-//method to call on card ability
-    //checks if the card is noble and gets the id to play ability
-    //if not noble it gets id of action and plays ability
 
     /**
-     * this method calls on card ability. it checks if the card is noble and gets the id to play
+     * This method calls on card ability. it checks if the card is noble and gets the id to play
      * ability. if not it's not noble. it gets id of action card and plays ability.
      *
      * @param: card: Card: the card to be called on by this method.
@@ -953,7 +950,7 @@ public class GuillotineState extends GameState {
                     dealNoble();
                     this.actionCardPlayed = false;
                     break;
-
+                //
                 case "Count":
                     //needs to go in special calculate points
                     if(this.playerTurn == 0){
