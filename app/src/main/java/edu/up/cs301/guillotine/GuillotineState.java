@@ -839,7 +839,6 @@ public class GuillotineState extends GameState {
                     break;
 
                     //count affects point totals if the countess is present
-                    //this is a placeholder
                 case "Count":
                     if (this.playerTurn == 0) {
                         p0Count = true;
@@ -849,7 +848,6 @@ public class GuillotineState extends GameState {
                     break;
 
                     //affects point total if count is present
-                    //this is just a placeholder
                 case "Countess":
                     //need to go in calculate points statement
                     if (this.playerTurn == 0) {
@@ -859,6 +857,7 @@ public class GuillotineState extends GameState {
                     }
                     break;
 
+                    //collect another noble from front of line after collecting this noble
                 case "Fast_Noble":
                     this.actionCardPlayed = true;
                     if (this.playerTurn == 0) {
@@ -870,6 +869,7 @@ public class GuillotineState extends GameState {
 
                     break;
 
+                    //add another noble from the noble deck to the end of line after getting this noble
                 case "General":
                     this.actionCardPlayed = true;
 
@@ -891,6 +891,7 @@ public class GuillotineState extends GameState {
                     this.actionCardPlayed = false;
                     break;
 
+                    //draw additional action card
                 case "Lady":
                     this.actionCardPlayed = true;
                     if (this.playerTurn == 0) {
@@ -901,6 +902,7 @@ public class GuillotineState extends GameState {
                     this.actionCardPlayed = false;
                     break;
 
+                    //draw additional action card
                 case "Lady_Waiting":
                     this.actionCardPlayed = true;
                     if (this.playerTurn == 0) {
