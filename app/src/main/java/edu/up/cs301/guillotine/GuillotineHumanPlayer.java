@@ -11,6 +11,17 @@ import edu.up.cs301.game.GameFramework.GameMainActivity;
 import edu.up.cs301.game.GameFramework.infoMessage.GameInfo;
 import edu.up.cs301.game.R;
 
+/**
+ * @author William Cloutier
+ * @author Moses Karemera
+ * @author Maxwell McAtee
+ * @version Alpha November 2020
+ */
+
+/**
+ * This class is the human player class that is responsible for the actions that a human can take
+ */
+
 public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTouchListener {
     private GuillotineState state;
 

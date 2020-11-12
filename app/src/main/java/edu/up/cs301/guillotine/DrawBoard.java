@@ -12,6 +12,16 @@ import android.util.AttributeSet;
 import edu.up.cs301.game.GameFramework.utilities.FlashSurfaceView;
 import edu.up.cs301.game.R;
 
+/**
+ * @author William Cloutier
+ * @author Moses Karemera
+ * @author Maxwell McAtee
+ * @version Alpha November 2020
+ */
+
+/**
+ *  This class draws the gamebaord and acts as GUI creator
+ */
 public class DrawBoard extends FlashSurfaceView {
 
     private GuillotineState state;

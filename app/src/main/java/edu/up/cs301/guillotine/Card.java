@@ -6,11 +6,11 @@ import android.graphics.Bitmap;
  * @author William Cloutier
  * @author Moses Karemera
  * @author Maxwell McAtee
+ * @version Alpha November 2020
  */
 
-/*
- * This class is very bare bones and not in its final state. It only has the information
- * necessary for part d
+/**
+ * This class is responsible for acting as the constructor for every Guillotine card
  */
 public class Card {
     //Instance variables for a card object

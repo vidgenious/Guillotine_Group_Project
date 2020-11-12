@@ -5,6 +5,16 @@ import edu.up.cs301.game.GameFramework.LocalGame;
 import edu.up.cs301.game.GameFramework.actionMessage.GameAction;
 import edu.up.cs301.game.R;
 
+/**
+ * @author William Cloutier
+ * @author Moses Karemera
+ * @author Maxwell McAtee
+ * @version Alpha November 2020
+ */
+
+/**
+ * This class acts as the Local game and checks for things such as if the game is over
+ */
 public class GuillotineLocalGame extends LocalGame {
 
     private GuillotineState gameState;

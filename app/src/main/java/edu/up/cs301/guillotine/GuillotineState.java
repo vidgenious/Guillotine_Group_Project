@@ -9,6 +9,16 @@ import java.util.Collections;
 import edu.up.cs301.game.GameFramework.infoMessage.GameState;
 import edu.up.cs301.game.R;
 
+/**
+ * @author William Cloutier
+ * @author Moses Karemera
+ * @author Maxwell McAtee
+ * @version Alpha November 2020
+ */
+
+/**
+ * Main gamestate that houses most private vars and houses all the cards that our game uses
+ */
 public class GuillotineState extends GameState {
 
     // to satisfy Serializable interface
@@ -63,8 +73,15 @@ public class GuillotineState extends GameState {
         nobleLine.add(new Card(true, false, 5, "Purple", "Antoinette", R.drawable.marie_antoinette));
         p0Hand.add(new Card(false, true, 0, "actionCard", "Rain_Delay", R.drawable.rain_delay));
     }
-
     //Deep copy constructor
+    /**
+     * Deep Constructor. it copies the Guillotine game state.
+     *
+     * @param: origin: GuillotineState: the origin state of the Guillotine game.
+     *
+     * @return always return true because it has to be checked by another method.
+     */
+
     public GuillotineState(GuillotineState origin) {
         this.dayNum = origin.dayNum;
         this.playerTurn = origin.playerTurn;
@@ -128,7 +145,12 @@ public class GuillotineState extends GameState {
 
     }
 
-    //This initiates all of the noble cards ands places them into the deck unshuffled
+    /**
+     * This method initiates all of the noble cards ands places them into the deck unshuffled
+     * @param: None
+     *
+     * @return: This method does not return anything.
+     */
     public void initNobleDeck() {
         this.deckNoble.add(new Card(true, false, 4, "Blue", "Archbishop", R.drawable.archbishop));
         this.deckNoble.add(new Card(true, false, 3, "Blue", "Bad_Nun", R.drawable.bad_nun));
@@ -184,7 +206,12 @@ public class GuillotineState extends GameState {
 
     }
 
-    //This initiates all of the action cards ands places them into the deck unshuffled
+    /**
+     * This method initiates all of the noble cards ands places them into the deck unshuffled
+     * @param: None
+     *
+     * @return: This method does not return anything.
+     */
     private void initActionDeck() {
         this.deckAction.add(new Card(false, true, 0, "actionCard", "After_You", R.drawable.after_you));
         this.deckAction.add(new Card(false, true, 0, "actionCard", "Bribed", R.drawable.bribed_guards));
@@ -363,6 +390,11 @@ public class GuillotineState extends GameState {
 
     /*
     Methods that have one phase
+     */    /**
+     * This method starts the game
+     * @param: None
+     *
+     * @return always return true because it have to checked by another method
      */
     public boolean startGame() {
         this.gameStart = true;
@@ -374,7 +406,12 @@ public class GuillotineState extends GameState {
         //setPlayerTurn();
     }
 
-    //gets the noble from noble line and gives it to person
+    /**
+     * Gets the noble from noble line and gives it to person
+     * @param: Field: ArrayList of the cards in the field of the player.
+     *
+     * @return: return false because it has to be checked by another method.
+     */
     public boolean getNoble(ArrayList field) {
         if (this.turnPhase == 1 || this.actionCardPlayed) {
 
@@ -436,6 +473,12 @@ public class GuillotineState extends GameState {
     }
 
     //checks if decks have already been shuffled, then shuffles if false
+    /**
+     * This method checks if decks have already been shuffled, then shuffles if false
+     * @param: None
+     *
+     * @return always return false because it has to be checked by another method.
+     */
     public boolean shuffleDecks() {
         //code to shuffle all decks
         Collections.shuffle(this.deckAction);
@@ -443,7 +486,12 @@ public class GuillotineState extends GameState {
         return true;
     }
 
-    //deals all cards needed to be dealt at start of game
+    /**
+     * This method deals all cards needed to be dealt at start of game.
+     * @param: None
+     *
+     * @return always return false because it has to be checked by another method.
+     */
     public boolean dealStartingGameCards() {
         if (this.dayNum == 1 && this.turnPhase == 0) {
             for (int i = 0; i < 5; i++) {
@@ -464,7 +512,12 @@ public class GuillotineState extends GameState {
         return false;
     }
 
-    //deals action cards at end of turn
+    /**
+     * This method deals action cards at end of turn
+     * @param: hand: Arraylist of all the actions cards that needs to be shuffled.
+     *
+     * @return always return false because it has to be checked by another method.
+     */
     public boolean dealActionCard(ArrayList hand) {
         if (scarletInPlay && !this.actionCardPlayed) {
             hand.add(this.deckAction.get(0));
@@ -486,9 +539,15 @@ public class GuillotineState extends GameState {
             }
         }
         return false;
-        //basically how ever the action cards are stored, the player will have their action
-        //cards gain the first action card of the actioncard deck.
+
     }
+
+    /**
+     * This method deals action cards at end of turn
+     * @param: This method takes no parameters.
+     *
+     * @return always return false because it has to be checked by another method.
+     */
 
     public boolean dealNoble() {
 
@@ -499,6 +558,12 @@ public class GuillotineState extends GameState {
     }
 
     //lets user skip action card play
+    /**
+     * This method lets the player skip the action
+     * @param: This method takes no parameters.
+     *
+     * @return always return false because it has to be checked by another method.
+     */
     public boolean skipAction() {
         if (this.turnPhase == 0) {
             this.turnPhase++;
@@ -510,30 +575,60 @@ public class GuillotineState extends GameState {
         return false;
     }
 
-    //lets user play actioncard
+    /**
+     * This method lets the user play an action card they wish to play in the game.
+     *
+     * @param: hand: Arraylist of all the actions cards that needs to be shuffled.
+     *
+     * @return always return false because it has to be checked by another method.
+     */
     public boolean playAction(ArrayList hand, int loc) {
+        //checks if another action card is preventing the player from playing a new action card
         if (!this.noAction) {
             if (!this.nobleLine.get(0).getId().equals("Judge1") || !this.nobleLine.get(0).getId().equals("Judge2")) {
                 if (this.turnPhase == 0) {
+
+                    //searches the line for the noble spy card and activates that card if it is found
+                    for(int i = 0; i < nobleLine.size(); i ++){
+                        if(nobleLine.get(i).id.equals("Spy")){
+                            temp = nobleLine.get(i);
+                            acknowledgeCardAbility(temp);
+                        }
+                    }
+
+                    //activates the action card being played
                     this.temp = (Card) hand.get(loc);
                     acknowledgeCardAbility(this.temp);
                     this.turnPhase++;
 
                     return true;
-                } else {
+                }
+                else {
                     return false;
                 }
-            } else {
+            }
+            else {
                 return false;
             }
-        } else {
+
+        }
+
+        //if playAction is not true, then skip action is called
+        else {
             this.noAction = false;
             skipAction();
             return false;
         }
     }
 
-    //ends player turn
+
+    /**
+     * This method ends the player's turn.
+     *
+     * @param: None
+     *
+     * @return always return false because it has to be checked by another method.
+     */
     public boolean endTurn() {
         if (this.playerTurn == 0) {
             this.playerTurn++;
@@ -546,7 +641,14 @@ public class GuillotineState extends GameState {
         }
     }
 
-    //ends day when no nobles exist
+
+    /**
+     * This method ends the day when the are no nobles left in the noble field.
+     *
+     * @param: None
+     *
+     * @return always return false because it has to be checked by another method.
+     */
     public boolean endDay() {
         if (this.dayNum == 3) {
             //this is commented out so that nothing extra is printed for tests
@@ -560,6 +662,13 @@ public class GuillotineState extends GameState {
         //end the day
 
     }
+    /**
+     * This method reverse the order of the noble card in the line of noble cards.
+     *
+     * @param: None
+     *
+     * @return always return false because it has to be checked by another method.
+     */
 
     public boolean reverseLineOrder() {
         if (!this.nobleLine.isEmpty()) {
@@ -570,6 +679,13 @@ public class GuillotineState extends GameState {
         return false;
     }
 
+    /**
+     * This method let the player discard the remaining nobles of the player.
+     *
+     * @param: None
+     *
+     * @return always return false because it has to be checked by another method.
+     */
     public boolean discardRemainingNobles() {
         if (!this.nobleLine.isEmpty()) {
             //go through nobleline list and discard each one
@@ -583,6 +699,13 @@ public class GuillotineState extends GameState {
         return false;
     }
 
+    /**
+     * This method let the player discard the remaining nobles of the player.
+     *
+     * @param: None
+     *
+     * @return always return true because it has to be checked by another method.
+     */
     public boolean placeClown(ArrayList reciever, Card card) {
 
         reciever.add(card);
@@ -590,12 +713,30 @@ public class GuillotineState extends GameState {
 
     }
 
+
+    /**
+     * This method lets players trade eah other the cards they have in hands.
+     *
+     * @param: p1: Arraylist of cards of player 1
+     * @param: p1: Arraylist of cards of player 2
+     *
+     * @return always return false because it has to be checked by another method.
+     */
     public boolean tradeHands(ArrayList p1, ArrayList p2) {
         if (this.turnPhase == 0) {
 
         }
         return false;
     }
+
+
+    /**
+     * This method gets the card that the user clicks and keeps it.
+     *
+     * @param: user: Arraylist of user hand of cards
+     *      *
+     * @return always return false because it has to be checked by another method.
+     */
 
     public boolean rearrangeFirstFour() {
         if (this.nobleLine.size() > 5) {
@@ -614,10 +755,16 @@ public class GuillotineState extends GameState {
         return false;
     }
 
-    /*
-    Multi-phase methods
+
+    /**
+     * This method removes the desired card from enemy player and puts it in the player who called this method
+     *
+     * @param: taker: Arraylist of cards of the player who called this method.
+     * @param: victim: Arraylist of cards of enemy player
+     * @param: desiredcard: a card a player who called this method wants to pick from the enemy player deck
+     *
+     * @return always return false because it has to be checked by another method.
      */
-    //removes the desired card from enemy player and puts it in the player who called this method
     public boolean takeNoble(ArrayList taker, ArrayList victim, Card desiredcard) {
         if (victim.contains(desiredcard)) {
             victim.remove(desiredcard);
@@ -626,6 +773,14 @@ public class GuillotineState extends GameState {
         }
         return false;
     }
+
+    /**
+     * This method gets the card that the user clicks and keeps it.
+     *
+     * @param: user: Arraylist of user hand of cards
+     *      *
+     * @return always return false because it has to be checked by another method.
+     */
 
     public boolean takeDiscardCard(ArrayList user) {
         if (!this.deckDiscard.isEmpty()) {
@@ -636,9 +791,15 @@ public class GuillotineState extends GameState {
         return false;
     }
 
-    /*
-    Don't know right now, Maybe useless
+    /**
+     * This method lets the player discard an action card from they hand.
+     *
+     * @param: hand: Arraylist of the card of the player who wants to discard an action card.
+     * @param: int: the location the card that needs to be discarded.
+     *
+     * @return always return false because it has to be checked by another method.
      */
+
     public boolean discardActionCard(ArrayList hand, int loc) {
         if (hand.size() > loc) {
             //discard  actioncard from player
@@ -649,41 +810,238 @@ public class GuillotineState extends GameState {
         return false;
     }
 
-    /**
-     * For this method, you must add all the noble points together. It takes in the user's field and
-     * that turn number of the user
-     * I would suggest adding all the noble cards that are not dependant on other cards first
-     * WARNING: action cards are in this field if the action card manipulates the points, so check if the card is noble first
-     * Then, I would add any noble card point that has an action of it's own.
-     * I have some instance vars that will tell you important information (such as how many palace guards a user has)
-     * Use those vars (you will most likely have to make your own for I think I am missing some) to find the new point values
-     * I would also add a local counter for each card color. (Red, Blue, Green, Purple, and Grey)
-     * Then check each card in field and count how many cards of certain colors exist
-     * Use this information to find the point value of all cards that are dependent of number of certain colors
+    /** This method adds all the noble points of each player at the end of each day.
+            *
+            * @param: hand: Arraylist of the noble cards of the player at the end of each day.
+            * @param: User: int: a number that represent a player. Player 0 and player 1.
+            *
+            * @return always return true because it has to be checked by another method.
      */
+
+
     public boolean calculatePoints(ArrayList<Card> field, int user) {
         boolean end = false;
+        int hasTragic = -1;
+        int churchSupport = -1;
+        int civicSupport = -1;
+        int indifferent = -1;
+        int militarySupport = -1;
+
+        //checks who the user is
+        //checks to see if they have specialty cards like count or countess
+        //adds the noble card points into score
         if (user == 0) {
+            //checks to see if this is last time this method will be called
+            if(dayNum != 4){
+
+                //goes through field to see if special card is present
+                for (int k = 0; k < field.size(); k++){
+                    if(field.get(k).id.equals("Indifferent")){
+                        indifferent = 0;
+                    }
+                }
+
+                //goes through field to see all noble cards
             for (int i = 0; i < field.size(); i++) {
 
-                if (field.get(i).isNoble) {
-                    this.p0Score += field.get(i).points;
+                if (field.get(i).id.equals("Count")) {
+                    this.p0Count = true;
+                }
+                else if (field.get(i).id.equals("Countess")) {
+                    this.p0Countess = true;
+                }
+                else if (field.get(i).isNoble) {
+                    if(field.get(i).cardColor.equals("Grey") && indifferent == 0){
+                        this.p0Score ++;
+                    }
+                    else {
+                        this.p0Score += field.get(i).points;
+                    }
                 }
 
             }
+            }
+            //finally counts all special cards that change values based off of other cards
+            else {
+                for (int i = 0; i < field.size(); i++) {
 
-        } else {
-            for (int i = 0; i < field.size(); i++) {
+                    if(field.get(i).id.equals("Church_Support")){
+                        churchSupport = 0;
+                    }
 
-                if (field.get(i).isNoble) {
-                    this.p1Score += field.get(i).points;
+                    if(field.get(i).id.equals("Civic_Support")){
+                        civicSupport = 0;
+                    }
+
+                    if(field.get(i).id.equals("Military_Support")){
+                        militarySupport = 0;
+                    }
+
+                    if(field.get(i).id.equals("Tough_Crowd")){
+                        this.p0Score-= 2;
+                    }
+
+                    if(field.get(i).id.equals("Fountain")){
+                        this.p0Score+= 2;
+                    }
+
+                    if(churchSupport == 0){
+                        if(field.get(i).cardColor.equals("Blue")){
+                            this.p0Score++;
+                        }
+                    }
+
+                    if(civicSupport == 0){
+                        if(field.get(i).cardColor.equals("Green")){
+                            this.p0Score++;
+                        }
+                    }
+
+                    if(militarySupport == 0){
+                        if(field.get(i).cardColor.equals("Red")){
+                            this.p0Score++;
+                        }
+                    }
+
+                    if (field.get(i).id.contains("Palace_Guard")) {
+                        this.p0PalaceGuard++;
+                    }
+
+                    if (field.get(i).id.equals("Tragic_Figure")) {
+                        hasTragic = 0;
+                    }
+
+                    if (hasTragic == 0) {
+                        if (field.get(i).cardColor.equals("Gray")) {
+                            this.p0Score--;
+                        }
+                    }
+                }
+
+                //adding special cards to p0score
+                this.p0Score+=this.p0PalaceGuard * this.p0PalaceGuard;
+                if(p0Count && p0Countess){
+                    this.p0Score+=8;
+                }
+                else if (p0Countess || p0Count){
+                    this.p0Score+= 2;
                 }
 
             }
         }
 
+        //same exact code as p0, except it is for p1
+        else {
+             //checks to see if this is last time this method will be called
+                if(dayNum != 4){
+
+                    //goes through field to see if special card is present
+                    for (int k = 0; k < field.size(); k++){
+                        if(field.get(k).id.equals("Indifferent")){
+                            indifferent = 1;
+                        }
+                    }
+
+                    //goes through field to see all noble cards
+                    for (int i = 0; i < field.size(); i++) {
+
+                        if (field.get(i).id.equals("Count")) {
+                            this.p1Count = true;
+                        }
+                        else if (field.get(i).id.equals("Countess")) {
+                            this.p1Countess = true;
+                        }
+                        else if (field.get(i).isNoble) {
+                            if(field.get(i).cardColor.equals("Grey") && indifferent == 1){
+                                this.p1Score ++;
+                            }
+                            else {
+                                this.p1Score += field.get(i).points;
+                            }
+                        }
+
+                    }
+                }
+                //finally counts all special cards that change values based off of other cards
+                else {
+                    for (int i = 0; i < field.size(); i++) {
+
+                        if(field.get(i).id.equals("Church_Support")){
+                            churchSupport = 1;
+                        }
+
+                        if(field.get(i).id.equals("Civic_Support")){
+                            civicSupport = 1;
+                        }
+
+                        if(field.get(i).id.equals("Military_Support")){
+                            militarySupport = 1;
+                        }
+
+                        if(field.get(i).id.equals("Tough_Crowd")){
+                            this.p1Score-= 2;
+                        }
+
+                        if(field.get(i).id.equals("Fountain")){
+                            this.p1Score+= 2;
+                        }
+
+                        if(churchSupport == 0){
+                            if(field.get(i).cardColor.equals("Blue")){
+                                this.p1Score++;
+                            }
+                        }
+
+                        if(civicSupport == 0){
+                            if(field.get(i).cardColor.equals("Green")){
+                                this.p1Score++;
+                            }
+                        }
+
+                        if(militarySupport == 0){
+                            if(field.get(i).cardColor.equals("Red")){
+                                this.p1Score++;
+                            }
+                        }
+
+                        if (field.get(i).id.contains("Palace_Guard")) {
+                            this.p1PalaceGuard++;
+                        }
+
+                        if (field.get(i).id.equals("Tragic_Figure")) {
+                            hasTragic = 1;
+                        }
+
+                        if (hasTragic == 1) {
+                            if (field.get(i).cardColor.equals("Gray")) {
+                                this.p1Score--;
+                            }
+                        }
+                    }
+
+                    //adding special cards to p0score
+                    this.p1Score+=this.p1PalaceGuard * this.p1PalaceGuard;
+                    if(p1Count && p0Countess){
+                        this.p1Score+=8;
+                    }
+                    else if (p0Countess || p0Count){
+                        this.p1Score+= 2;
+                    }
+
+                }
+        }
+
         return true;
     }
+
+
+    /**
+     * This method rearrange the five noble cards on the line
+     *
+     * @param: None
+     *
+     * @return always return false because it has to be checked by another method.
+     */
 
     public boolean rearrangeFives() {
         if (this.nobleLine.size() > 5) {
@@ -701,6 +1059,15 @@ public class GuillotineState extends GameState {
         return false;
     }
 
+    /**
+     * This method lets user see enemy hand, chosen card then gets added to user's hand and removed from enemy hand
+     *
+     * @param: Phand: Arraylist of user hand of cards
+     * @param: enemyhand: Arraylist  of enemy player hand of cards
+     * @param : card: card to be choosen from the enemy player hand
+     *
+     * @return always return false because it has to be checked by another method.
+     */
     public boolean chooseCard(ArrayList Phand, ArrayList enemyhand, Card card) {
         if (enemyhand.contains(card)) {
             //lets user see enemy hand, chosen card then gets added to user's hand and removed from enemy hand
@@ -710,6 +1077,16 @@ public class GuillotineState extends GameState {
         }
         return false;
     }
+
+
+    /**
+     * This method puts 3 noble cards in user field in pos 0, 1, 2
+     * user then selects the one they want and the others are put in back in deck
+     *
+     * @param: user: Arraylist of user hand of cards
+     *
+     * @return always return false because it has to be checked by another method.
+     */
 
     public boolean topThreeCards(ArrayList user) {
         //puts 3 noble cards in user field in pos 0, 1, 2
@@ -724,8 +1101,13 @@ public class GuillotineState extends GameState {
         return false;
     }
 
-    //gets the card that the user clicks and keeps it.
-    //idk how to implement this with onclick
+    /**
+     * This method gets the card that the user clicks and keeps it.
+     *
+     * @param: user: Arraylist of user hand of cards
+     *
+     * @return always return false because it has to be checked by another method.
+     */
     public boolean chooseCard(ArrayList user) {
         if (choice1 == 0) {
             user.remove(2);
@@ -746,6 +1128,14 @@ public class GuillotineState extends GameState {
         return false;
     }
 
+    /**
+     * This method checks if player has the card, if they do, it removes the card
+     *
+     * @param: hand: Arraylist of user hand of cards
+     * @param : card: card to be choosen from the enemy player hand
+     *
+     * @return always return false because it has to be checked by another method.
+     */
     public boolean discardNoble(ArrayList hand, Card card) {
         if (hand.contains(card)) {
             hand.remove(card);
@@ -754,6 +1144,14 @@ public class GuillotineState extends GameState {
         return false;
     }
 
+
+    /**
+     * This method place the noble card from the noble line and place it in the player's field.
+     *
+     * @param: playerField: Arraylist of cards in the player's field
+     *
+     * @return always return true because it has to be checked by another method.
+     */
     public boolean placeNoble(ArrayList playerField) {
         //check if card is first noble, then check if player exists
         //add card to player's hand
@@ -763,6 +1161,17 @@ public class GuillotineState extends GameState {
         return true;
 
     }
+
+
+    /**
+     * This method removes card from array of cards, then make everycard's location in bewteen
+     * nobleCardLocation and newLocation have their location +1, then put the card in newLocation
+     *
+     * @param: nobleCardLocation: int: the location of the noble card.
+     * @param: newLocation: int: the new location where the noble card will be moved too.
+     *
+     * @return always return true because it has to be checked by another method.
+     */
 
     public boolean moveNoble(int nobleCardLocation, int choice1ation) {
         if (this.nobleLine.size() > nobleCardLocation && this.nobleLine.size() > choice1ation) {
@@ -778,9 +1187,6 @@ public class GuillotineState extends GameState {
         }
     }
 
-//method to call on card ability
-    //checks if the card is noble and gets the id to play ability
-    //if not noble it gets id of action and plays ability
 
 
     //Variables for executing the cards properly
@@ -790,17 +1196,14 @@ public class GuillotineState extends GameState {
     private int choice1 = -1;
     private int choice2 = -1;
 
-
-    /**
-     * this can be more effective, but i did the best I could in the time I had
-     * There are not that many checks for certain cards to see if they are valid
-     * Some methods have errors since they require the index of the card that the user chose in onCLick
-     * I believe I have a comment for each card to give a short description
-     * If you have any question on the specifics of the code I will try my best to get back to you
-     * I believe the majority of it isnt too complex to understand
-     * https://guillotine-card-translations.github.io/cards/
-     * ^^^ Use this to help you with looking at the cards
+    /** this method calls on card ability. it checks if the card is noble and gets the id to play
+     * ability. if not it's not noble. it gets id of action card and plays ability.
+     *
+     * @param: card: Card: the card to be called on by this method.
+     *
+     * @return always return true because it has to be checked by another method.
      */
+
     public boolean acknowledgeCardAbility(Card card) {
         if (card.isNoble) {
             switch (card.getId()) {
@@ -812,8 +1215,8 @@ public class GuillotineState extends GameState {
                     this.actionCardPlayed = false;
                     break;
 
+                    //count affects point totals if the countess is present
                 case "Count":
-                    //needs to go in special calculate points
                     if (this.playerTurn == 0) {
                         p0Count = true;
                     } else {
@@ -821,6 +1224,7 @@ public class GuillotineState extends GameState {
                     }
                     break;
 
+                    //affects point total if count is present
                 case "Countess":
                     //need to go in calculate points statement
                     if (this.playerTurn == 0) {
@@ -830,6 +1234,7 @@ public class GuillotineState extends GameState {
                     }
                     break;
 
+                    //collect another noble from front of line after collecting this noble
                 case "Fast_Noble":
                     this.actionCardPlayed = true;
                     if (this.playerTurn == 0) {
@@ -841,6 +1246,7 @@ public class GuillotineState extends GameState {
 
                     break;
 
+                    //add another noble from the noble deck to the end of line after getting this noble
                 case "General":
                     this.actionCardPlayed = true;
 
@@ -862,6 +1268,7 @@ public class GuillotineState extends GameState {
                     this.actionCardPlayed = false;
                     break;
 
+                    //draw additional action card
                 case "Lady":
                     this.actionCardPlayed = true;
                     if (this.playerTurn == 0) {
@@ -872,6 +1279,7 @@ public class GuillotineState extends GameState {
                     this.actionCardPlayed = false;
                     break;
 
+                    //draw additional action card
                 case "Lady_Waiting":
                     this.actionCardPlayed = true;
                     if (this.playerTurn == 0) {
@@ -882,6 +1290,7 @@ public class GuillotineState extends GameState {
                     this.actionCardPlayed = false;
                     break;
 
+                    //Draw additional action card
                 case "Lord":
                     this.actionCardPlayed = true;
                     if (this.playerTurn == 0) {
@@ -892,12 +1301,22 @@ public class GuillotineState extends GameState {
                     this.actionCardPlayed = false;
                     break;
 
+                    //moves masterSpy nobel to end of line if action card is played
+                    //iterates through noble line to find location of spy card
+                    //sets it to be last card in line
                 case "Spy":
                     this.actionCardPlayed = true;
-                    //need to add method and checks
+                    for(int i = 0; i < nobleLine.size(); i++){
+                        if(nobleLine.get(i).id.equals("Spy")){
+                            temp = nobleLine.get(i);
+                            nobleLine.remove(i);
+                            nobleLine.add(temp);
+                        }
+                    }
                     this.actionCardPlayed = false;
                     break;
 
+                    //Palace guards are worth more points the more palace guards a person has
                 case "Palace_Guard1":
                     //ability is in calculate point method
                     if (this.playerTurn == 0) {
@@ -907,6 +1326,7 @@ public class GuillotineState extends GameState {
                     }
                     break;
 
+                //Palace guards are worth more points the more palace guards a person has
                 case "Palace_Guard2":
                     //ability is in calculate point method
                     if (this.playerTurn == 0) {
@@ -916,6 +1336,7 @@ public class GuillotineState extends GameState {
                     }
                     break;
 
+                //Palace guards are worth more points the more palace guards a person has
                 case "Palace_Guard3":
                     //ability is in calculate point method
                     if (this.playerTurn == 0) {
@@ -925,6 +1346,7 @@ public class GuillotineState extends GameState {
                     }
                     break;
 
+                //Palace guards are worth more points the more palace guards a person has
                 case "Palace_Guard4":
                     //ability is in calculate point method
                     if (this.playerTurn == 0) {
@@ -934,6 +1356,7 @@ public class GuillotineState extends GameState {
                     }
                     break;
 
+                //Palace guards are worth more points the more palace guards a person has
                 case "Palace_Guard5":
                     //ability is in calculate point method
                     if (this.playerTurn == 0) {
@@ -943,6 +1366,7 @@ public class GuillotineState extends GameState {
                     }
                     break;
 
+                //collect top noble of noble deck after collecting this deck
                 case "Rival1":
                     this.actionCardPlayed = true;
                     if (this.playerTurn == 0) {
@@ -955,6 +1379,7 @@ public class GuillotineState extends GameState {
                     this.actionCardPlayed = false;
                     break;
 
+                    //collect top noble of noble deck after collecting this deck
                 case "Rival2":
                     this.actionCardPlayed = true;
                     if (this.playerTurn == 0) {
@@ -967,12 +1392,14 @@ public class GuillotineState extends GameState {
                     this.actionCardPlayed = false;
                     break;
 
+                    //after this card is played, the day ends and all noble in line are discarded
                 case "Robespierre":
                     this.actionCardPlayed = true;
                     discardRemainingNobles();
                     this.actionCardPlayed = false;
                     break;
 
+                    //when this noble is collected, it is placed into another players score pile
                 case "Clown":
                     this.actionCardPlayed = true;
                     if (this.playerTurn == 0) {
@@ -985,6 +1412,8 @@ public class GuillotineState extends GameState {
                     this.actionCardPlayed = false;
                     break;
 
+                    //noble worth -1 point for more grays
+                    //not implemented as is
                 case "Tragic_Figure":
                     //action is in calculate points method
                     break;
@@ -1049,6 +1478,7 @@ public class GuillotineState extends GameState {
                     this.actionCardPlayed = false;
                     break;
 
+                    //put cad in field and action cards that alter line cannot be played
                 case "Callous":
                     this.actionCardPlayed = true;
                     if (this.playerTurn == 0) {

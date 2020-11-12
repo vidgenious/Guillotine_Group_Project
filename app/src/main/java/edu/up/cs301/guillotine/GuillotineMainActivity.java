@@ -8,6 +8,17 @@ import edu.up.cs301.game.GameFramework.LocalGame;
 import edu.up.cs301.game.GameFramework.gameConfiguration.GameConfig;
 import edu.up.cs301.game.GameFramework.gameConfiguration.GamePlayerType;
 
+/**
+ * @author William Cloutier
+ * @author Moses Karemera
+ * @author Maxwell McAtee
+ * @version Alpha November 2020
+ */
+
+
+/**
+ * Main activity class that creates the default configurations of our game (the settings basically)
+ */
 public class GuillotineMainActivity extends GameMainActivity {
     // the port number that this game will use when playing over the network
     private static final int PORT_NUMBER = 2234;
