@@ -1021,10 +1021,10 @@ public class GuillotineState extends GameState {
 
                     //adding special cards to p0score
                     this.p1Score+=this.p1PalaceGuard * this.p1PalaceGuard;
-                    if(p1Count && p0Countess){
+                    if(p1Count && p1Countess){
                         this.p1Score+=8;
                     }
-                    else if (p0Countess || p0Count){
+                    else if (p1Countess || p1Count){
                         this.p1Score+= 2;
                     }
 
