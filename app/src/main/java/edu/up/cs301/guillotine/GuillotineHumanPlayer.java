@@ -29,10 +29,30 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
 
     private DrawBoard board;
 
+    /**
+     * constructor
+     *
+     * @param name
+     * 		the player's name
+     */
     public GuillotineHumanPlayer(String name) {super(name);}
 
+    /**
+     * returns the GUI's top view
+     *
+     * @return
+     * 		the GUI's top view
+     */
     public View getTopView() { return myActivity.findViewById(R.id.top_gui_layout);}
 
+    /**
+     * callback method when the screen it touched. We're
+     * looking for a screen touch (which we'll detect on
+     * the "up" movement" onto a tic-tac-tie square
+     *
+     * @param event
+     * 		the motion event that was detected
+     */
     @Override
     public boolean onTouch(View view, MotionEvent event) {
         if (event.getAction() != MotionEvent.ACTION_UP) return true;
@@ -74,6 +94,12 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
         return true;
     }
 
+    /**
+     * Callback method, called when player gets a message
+     *
+     * @param info
+     * 		the message
+     */
     @Override
     public void receiveInfo(GameInfo info) {
         if (!(info instanceof GuillotineState)) {
@@ -86,6 +112,9 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
         board.invalidate();
     }
 
+    /**
+     * sets the current player as the activity's GUI
+     */
     @Override
     public void setAsGui(GameMainActivity activity) {
         myActivity = activity;
