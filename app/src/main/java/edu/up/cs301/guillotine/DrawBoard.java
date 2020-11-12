@@ -39,6 +39,8 @@ public class DrawBoard extends FlashSurfaceView {
             left -= 220;
         }
 
+
+
         left = 1800;
         for(int i = 0; i < state.getP0Field().size(); i++){
             draw = BitmapFactory.decodeResource(getResources(), state.getP0Field().get(i).image);

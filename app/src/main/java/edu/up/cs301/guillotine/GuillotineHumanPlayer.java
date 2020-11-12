@@ -1,6 +1,7 @@
 package edu.up.cs301.guillotine;
 
 import android.graphics.Point;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
@@ -27,8 +28,15 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
 
         int x = (int) event.getX();
         int y = (int) event.getY();
+        int cardPos = handCard(x, y);
 
-        PlayAction action = new PlayAction(this, handCard(x, y));
+        Log.w("X:", Integer.toString(x));
+        Log.w("Y:", Integer.toString(y));
+
+        if(cardPos < 0 || cardPos + 1 >= state.getP0Hand().size() ) {
+            return false;
+        }
+        PlayAction action = new PlayAction(this, cardPos);
         game.sendAction(action);
         board.invalidate();
 
@@ -59,8 +67,22 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
     }
 
     private int handCard(int x, int y){
-        if(x > 1700 && x < 1800 && y > 800 && y < 1080){
+        if(x > 1700 && x < 1900 && y > 800 && y < 1080){
             return 0;
+        }else if(x > 1480 && x < 1680 && y > 800 && y < 1080){
+            return 1;
+        }else if(x > 1260 && x < 1460 && y > 800 && y < 1080){
+            return 2;
+        }else if(x > 1240 && x < 1440 && y > 800 && y < 1080){
+            return 3;
+        }else if(x > 1020 && x < 1220 && y > 800 && y < 1080){
+            return 4;
+        }else if(x > 800 && x < 1000 && y > 800 && y < 1080){
+            return 5;
+        }else if(x > 580 && x < 780 && y > 800 && y < 1080){
+            return 6;
+        }else if(x > 360 && x < 560 && y > 800 && y < 1080) {
+            return 7;
         }
         return -1;
     }

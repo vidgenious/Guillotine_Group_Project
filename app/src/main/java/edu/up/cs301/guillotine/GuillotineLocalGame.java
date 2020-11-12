@@ -19,6 +19,11 @@ public class GuillotineLocalGame extends LocalGame {
 
     @Override
     protected boolean makeMove(GameAction action){
+
+        if(action instanceof PlayAction) {
+            gameState.getP0Hand().remove(((PlayAction) action).getPos());
+            return true;
+        }
         return false;
     }
 
