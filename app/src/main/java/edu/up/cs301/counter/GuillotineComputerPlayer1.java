@@ -10,6 +10,7 @@ import edu.up.cs301.game.R;
 public class GuillotineComputerPlayer1 extends GameComputerPlayer {
     // the most recent game state, as given to us by the CounterLocalGame
     private GuillotineState currentGameState = null;
+    private GuillotineGameActions gameActions = null;
      /**
      * Constructor for objects of class CounterComputerPlayer1
      *
@@ -47,16 +48,13 @@ public class GuillotineComputerPlayer1 extends GameComputerPlayer {
     protected void determineAction() {
         if(currentGameState.playerTurn == 1){
         int locp1 = (int)(Math.random()*currentGameState.p1Hand.size());
-        if(Math.random() < .5){
-            game.sendAction(new playAction(currentGameState.p1Hand.get(locp1),locp1 );
+
+        if(Math.random() < .5) {
+            game.sendAction(gameActions.playAction(currentGameState.p1Hand, locp1);
         }
+
         }
-        if(currentGameState.playerTurn == 2){
-                int locp0 = (int)(Math.random()*currentGameState.p0Hand.size());
-                if(Math.random() < .5){
-                    game.sendAction(new playAction(currentGameState.p0Hand.get(locp0),locp0 );
-                }
-        }
+
         else{
             game.sendAction(new SkipAction);
         }

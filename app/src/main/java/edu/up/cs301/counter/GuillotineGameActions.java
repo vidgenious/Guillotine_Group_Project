@@ -141,7 +141,7 @@ public class GuillotineGameActions extends GameAction {
             if (!gameState.nobleLine.get(0).getId().equals("Judge1") || !gameState.nobleLine.get(0).getId().equals("Judge2")) {
                 if (gameState.turnPhase == 0) {
                     this.temp = (Card) hand.get(loc);
-                    //acknowledgeCardAbility(this.temp);
+                    //acknowledgeCardAbility(this.temp, card0, card1);
                     gameState.turnPhase++;
                     return true;
                 } else {
