@@ -60,6 +60,8 @@ public class GuillotineState extends GameState {
         this.actionCardPlayed = false;
 
         startGame();
+        nobleLine.add(new Card(true, false, 5, "Purple", "Antoinette", R.drawable.marie_antoinette));
+        p0Hand.add(new Card(false, true, 0, "actionCard", "After_You", R.drawable.after_you));
     }
 
     //Deep copy constructor
@@ -513,6 +515,7 @@ public class GuillotineState extends GameState {
                     this.temp = (Card) hand.get(loc);
                     acknowledgeCardAbility(this.temp);
                     this.turnPhase++;
+
                     return true;
                 } else {
                     return false;
@@ -1245,7 +1248,7 @@ public class GuillotineState extends GameState {
                     }
                     this.actionCardPlayed = true;
                     if (this.playerTurn == 0) {
-                        getNoble(this.p0Hand);
+                        getNoble(this.p0Field);
                         for (int i = 0; i < this.p0Hand.size(); i++) {
                             if (this.p0Hand.get(i).getId().equals("Double_Feature1")) {
                                 this.deckDiscard.add(this.p0Hand.get(i));
@@ -1253,7 +1256,7 @@ public class GuillotineState extends GameState {
                             }
                         }
                     } else {
-                        getNoble(this.p1Hand);
+                        getNoble(this.p1Field);
                         for (int i = 0; i < this.p1Hand.size(); i++) {
                             if (this.p1Hand.get(i).getId().equals("Double_Feature1")) {
                                 this.deckDiscard.add(this.p1Hand.get(i));
@@ -1272,7 +1275,7 @@ public class GuillotineState extends GameState {
                     }
                     this.actionCardPlayed = true;
                     if (this.playerTurn == 0) {
-                        getNoble(this.p0Hand);
+                        getNoble(this.p0Field);
                         for (int i = 0; i < this.p0Hand.size(); i++) {
                             if (this.p0Hand.get(i).getId().equals("Double_Feature2")) {
                                 this.deckDiscard.add(this.p0Hand.get(i));
@@ -1280,7 +1283,7 @@ public class GuillotineState extends GameState {
                             }
                         }
                     } else {
-                        getNoble(this.p1Hand);
+                        getNoble(this.p1Field);
                         for (int i = 0; i < this.p1Hand.size(); i++) {
                             if (this.p1Hand.get(i).getId().equals("Double_Feature2")) {
                                 this.deckDiscard.add(this.p1Hand.get(i));

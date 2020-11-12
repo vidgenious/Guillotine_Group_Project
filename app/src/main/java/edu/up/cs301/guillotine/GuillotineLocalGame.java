@@ -3,6 +3,7 @@ package edu.up.cs301.guillotine;
 import edu.up.cs301.game.GameFramework.GamePlayer;
 import edu.up.cs301.game.GameFramework.LocalGame;
 import edu.up.cs301.game.GameFramework.actionMessage.GameAction;
+import edu.up.cs301.game.R;
 
 public class GuillotineLocalGame extends LocalGame {
 
@@ -20,14 +21,31 @@ public class GuillotineLocalGame extends LocalGame {
     @Override
     protected boolean makeMove(GameAction action){
 
+
         if(action instanceof PlayAction) {
             if(gameState.getPlayerTurn() == 0){
-                gameState.getP0Hand().remove(((PlayAction) action).getPos());
-                gameState.setPlayerTurn(1);
+                int cardPlayed = -1;
+                for(int i = 0; i < gameState.getP0Hand().size(); i++){
+                    if(i == ((PlayAction) action).getPos()){
+                        cardPlayed = i;
+                    }
+                }
+                gameState.playAction(gameState.getP0Hand(), cardPlayed);
             }else{
                 gameState.getP1Hand().remove(((PlayAction) action).getPos());
-                gameState.setPlayerTurn(0);
             }
+            return true;
+        }else if(action instanceof SkipAction) {
+            gameState.setTurnPhase(1);
+            return true;
+        }else if(action instanceof NobleAction){
+            if(gameState.getPlayerTurn()==0) {
+                gameState.getNoble(gameState.getP0Field());
+            }else if(gameState.getPlayerTurn() == 1){
+                gameState.getNoble(gameState.getP1Field());
+            }
+            return true;
+        }else if(action instanceof  NullAction){
             return true;
         }
         return false;

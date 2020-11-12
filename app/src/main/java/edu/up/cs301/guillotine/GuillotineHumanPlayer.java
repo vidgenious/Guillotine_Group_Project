@@ -26,19 +26,29 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
     public boolean onTouch(View view, MotionEvent event) {
         if (event.getAction() != MotionEvent.ACTION_UP) return true;
 
-        int x = (int) event.getX();
-        int y = (int) event.getY();
-        int cardPos = handCard(x, y);
+        if(state.getPlayerTurn() == 0) {
+            int x = (int) event.getX();
+            int y = (int) event.getY();
 
-        Log.w("X:", Integer.toString(x));
-        Log.w("Y:", Integer.toString(y));
+            if (state.getTurnPhase() == 0) {
+                int cardPos = handCard(x, y);
 
-        if(cardPos < 0 || cardPos + 1 > state.getP0Hand().size() ) {
-            return false;
+                if (cardPos < 0 || cardPos + 1 > state.getP0Hand().size()) {
+                    return false;
+                }
+                PlayAction action = new PlayAction(this, cardPos);
+                game.sendAction(action);
+                state.setTurnPhase(1);
+            } else if (state.getTurnPhase() == 1) {
+                boolean select = acceptButton(x, y);
+                if (select) {
+                    NobleAction action = new NobleAction(this);
+                    game.sendAction(action);
+                    state.setTurnPhase(2);
+                }
+            }
+            board.invalidate();
         }
-        PlayAction action = new PlayAction(this, cardPos);
-        game.sendAction(action);
-        board.invalidate();
 
         return true;
     }
@@ -87,5 +97,12 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
             return 7;
         }
         return -1;
+    }
+
+    private boolean acceptButton(int x, int y){
+        if(x > 10 && x < 160 && y > 860 && y < 960){
+            return true;
+        }
+        return false;
     }
 }
