@@ -50,9 +50,13 @@ public class GuillotineLocalGame extends LocalGame {
                 }
                 gameState.playAction(gameState.getP1Hand(), cardPlayed);
             }
+            gameState.calculatePoints(gameState.getP0Field(), 0);
+            gameState.calculatePoints(gameState.getP1Field(), 1);
             return true;
         } else if (action instanceof SkipAction) {
             gameState.setTurnPhase(1);
+            gameState.calculatePoints(gameState.getP0Field(), 0);
+            gameState.calculatePoints(gameState.getP1Field(), 1);
             return true;
         } else if (action instanceof NobleAction) {
             if (gameState.getPlayerTurn() == 0) {
@@ -67,6 +71,8 @@ public class GuillotineLocalGame extends LocalGame {
                 gameState.setDayNum(gameState.getDayNum()+1);
                 gameState.setTurnPhase(0);
             }
+            gameState.calculatePoints(gameState.getP0Field(), 0);
+            gameState.calculatePoints(gameState.getP1Field(), 1);
             return true;
         } else if (action instanceof DrawAction) {
             if (gameState.getPlayerTurn() == 0) {
@@ -76,6 +82,8 @@ public class GuillotineLocalGame extends LocalGame {
                 gameState.dealActionCard(gameState.getP1Hand());
                 gameState.setPlayerTurn(0);
             }
+            gameState.calculatePoints(gameState.getP0Field(), 0);
+            gameState.calculatePoints(gameState.getP1Field(), 1);
             return true;
         } else if(action instanceof  NullAction){
             return true;
