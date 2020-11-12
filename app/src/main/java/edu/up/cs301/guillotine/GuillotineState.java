@@ -809,11 +809,11 @@ public class GuillotineState extends GameState {
     }
 
     /** This method adds all the noble points of each player at the end of each day.
-            *
-            * @param: hand: Arraylist of the noble cards of the player at the end of each day.
-            * @param: User: int: a number that represent a player. Player 0 and player 1.
-            *
-            * @return always return true because it has to be checked by another method.
+     *
+     * @param: hand: Arraylist of the noble cards of the player at the end of each day.
+     * @param: User: int: a number that represent a player. Player 0 and player 1.
+     *
+     * @return always return true because it has to be checked by another method.
      */
     public boolean calculatePoints(ArrayList<Card> field, int user) {
         boolean end = false;
