@@ -19,33 +19,55 @@ public class GuillotineLocalGame extends LocalGame {
     }
 
     @Override
-    protected boolean makeMove(GameAction action){
+    protected boolean makeMove(GameAction action) {
 
 
-        if(action instanceof PlayAction) {
-            if(gameState.getPlayerTurn() == 0){
+        if (action instanceof PlayAction) {
+            if (gameState.getPlayerTurn() == 0) {
                 int cardPlayed = -1;
-                for(int i = 0; i < gameState.getP0Hand().size(); i++){
-                    if(i == ((PlayAction) action).getPos()){
+                for (int i = 0; i < gameState.getP0Hand().size(); i++) {
+                    if (i == ((PlayAction) action).getPos()) {
                         cardPlayed = i;
                     }
                 }
                 gameState.playAction(gameState.getP0Hand(), cardPlayed);
-            }else{
-                gameState.getP1Hand().remove(((PlayAction) action).getPos());
+            } else {
+                int cardPlayed = -1;
+                for (int i = 0; i < gameState.getP1Hand().size(); i++) {
+                    if (i == ((PlayAction) action).getPos()) {
+                        cardPlayed = i;
+                    }
+                }
+                gameState.playAction(gameState.getP1Hand(), cardPlayed);
             }
             return true;
-        }else if(action instanceof SkipAction) {
+        } else if (action instanceof SkipAction) {
             gameState.setTurnPhase(1);
             return true;
-        }else if(action instanceof NobleAction){
-            if(gameState.getPlayerTurn()==0) {
+        } else if (action instanceof NobleAction) {
+            if (gameState.getPlayerTurn() == 0) {
                 gameState.getNoble(gameState.getP0Field());
-            }else if(gameState.getPlayerTurn() == 1){
+            } else if (gameState.getPlayerTurn() == 1) {
                 gameState.getNoble(gameState.getP1Field());
             }
+            if(gameState.getNobleLine().size() < 1){
+                for(int i = 0; i < 12; i++) {
+                    gameState.dealNoble();
+                }
+                gameState.setDayNum(gameState.getDayNum()+1);
+                gameState.setTurnPhase(0);
+            }
             return true;
-        }else if(action instanceof  NullAction){
+        } else if (action instanceof DrawAction) {
+            if (gameState.getPlayerTurn() == 0) {
+                gameState.dealActionCard(gameState.getP0Hand());
+                gameState.setPlayerTurn(1);
+            } else if (gameState.getPlayerTurn() == 1) {
+                gameState.dealActionCard(gameState.getP1Hand());
+                gameState.setPlayerTurn(0);
+            }
+            return true;
+        } else if(action instanceof  NullAction){
             return true;
         }
         return false;

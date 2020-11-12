@@ -62,12 +62,21 @@ public class DrawBoard extends FlashSurfaceView {
         }
 
         //Noble line
-        left = 1500;
+        left = 1700;
         for(int i = 0; i < state.getNobleLine().size(); i++){
             draw = BitmapFactory.decodeResource(getResources(), state.getNobleLine().get(i).image);
             draw = Bitmap.createScaledBitmap(draw, 200, 280, true);
             canvas.drawBitmap(draw, left, 350.0f, null);
             left -= 100;
+        }
+
+        //P1 field
+        left = 1800;
+        for(int i = 0; i < state.getP1Field().size(); i++){
+            draw = BitmapFactory.decodeResource(getResources(), state.getP1Field().get(i).image);
+            draw = Bitmap.createScaledBitmap(draw, 100, 140, true);
+            canvas.drawBitmap(draw, left, 150.0f, null);
+            left -= 120;
         }
 
 
