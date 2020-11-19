@@ -19,15 +19,35 @@ public class GuillotineLocalGame extends LocalGame {
 
     private GuillotineState gameState;
 
+    /**
+     * Tell whether the given player is allowed to make a move at the
+     * present point in the game.
+     *
+     * @param playerIdx
+     * 		the player's player-number (ID)
+     * @return
+     * 		true iff the player is allowed to move
+     */
     @Override
     protected boolean canMove(int playerIdx) {
         return gameState.getPlayerTurn() == playerIdx;
     }
 
+    /**
+     * Constructor for the TTTLocalGame.
+     */
     public GuillotineLocalGame() {
         this.gameState = new GuillotineState();
     }
 
+    /**
+     * Makes a move on behalf of a player.
+     *
+     * @param action
+     * 			The move that the player has sent to the game
+     * @return
+     * 			Tells whether the move was a legal one.
+     */
     @Override
     protected boolean makeMove(GameAction action) {
 
@@ -91,6 +111,15 @@ public class GuillotineLocalGame extends LocalGame {
         return false;
     }
 
+    /**
+     * Notify the given player that its state has changed. This should involve sending
+     * a GameInfo object to the player. If the game is not a perfect-information game
+     * this method should remove any information from the game that the player is not
+     * allowed to know.
+     *
+     * @param p
+     * 			the player to notify
+     */
     @Override
     protected void sendUpdatedStateTo(GamePlayer p) {
         p.sendInfo(new GuillotineState(gameState));
