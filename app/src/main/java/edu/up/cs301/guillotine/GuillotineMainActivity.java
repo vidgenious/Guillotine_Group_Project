@@ -45,13 +45,13 @@ public class GuillotineMainActivity extends GameMainActivity {
             }});
 
         // a computer player type (player type 1)
-        playerTypes.add(new GamePlayerType("Computer Player") {
+        playerTypes.add(new GamePlayerType("Dumb AI Computer") {
             public GamePlayer createPlayer(String name) {
                 return new GuillotineComputerPlayer1(name);
             }});
 
         // a computer player type (player type 2)
-        playerTypes.add(new GamePlayerType("Computer Player (GUI)") {
+        playerTypes.add(new GamePlayerType("Smart AI Computer") {
             public GamePlayer createPlayer(String name) {
                 return new GuillotineComputerPlayer2(name);
             }});
@@ -66,7 +66,7 @@ public class GuillotineMainActivity extends GameMainActivity {
 
         // Add the default players to the configuration
         defaultConfig.addPlayer("Human", 0); // player 1: a human player
-        defaultConfig.addPlayer("Computer", 1); // player 2: a computer player
+        defaultConfig.addPlayer("Dumb Computer", 1); // player 2: a computer player
 
         // Set the default remote-player setup:
         // - player name: "Remote Player"

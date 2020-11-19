@@ -827,13 +827,14 @@ public class GuillotineState extends GameState {
         int indifferent = -1;
         int militarySupport = -1;
 
+
         //checks who the user is
         //checks to see if they have specialty cards like count or countess
         //adds the noble card points into score
         if (user == 0) {
             //checks to see if this is last time this method will be called
             if(dayNum != 4){
-
+                p0Score = 0;
                 //goes through field to see if special card is present
                 for (int k = 0; k < field.size(); k++){
                     if(field.get(k).id.equals("Indifferent")){
@@ -932,9 +933,11 @@ public class GuillotineState extends GameState {
 
         //same exact code as p0, except it is for p1
         else {
-             //checks to see if this is last time this method will be called
-                if(dayNum != 4){
 
+
+            //checks to see if this is last time this method will be called
+                if(dayNum != 4){
+                    p1Score = 0;
                     //goes through field to see if special card is present
                     for (int k = 0; k < field.size(); k++){
                         if(field.get(k).id.equals("Indifferent")){
@@ -1021,10 +1024,10 @@ public class GuillotineState extends GameState {
 
                     //adding special cards to p0score
                     this.p1Score+=this.p1PalaceGuard * this.p1PalaceGuard;
-                    if(p1Count && p0Countess){
+                    if(p1Count && p1Countess){
                         this.p1Score+=8;
                     }
-                    else if (p0Countess || p0Count){
+                    else if (p1Countess || p1Count){
                         this.p1Score+= 2;
                     }
 
