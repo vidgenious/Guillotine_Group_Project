@@ -14,7 +14,7 @@ import android.graphics.Bitmap;
  */
 public class Card {
     //Instance variables for a card object
-    public boolean isNoble;
+    public int  type;
     public boolean hasEffect;
     public int points;
     public String cardColor;
@@ -22,8 +22,8 @@ public class Card {
     public int image;
 
     //Constructor for Card object
-    public Card(boolean isNoble, boolean hasEffect, int points, String cardColor,  String id, int image){
-        this.isNoble = isNoble;
+    public Card(int type, boolean hasEffect, int points, String cardColor,  String id, int image){
+        this.type = type;
         this.hasEffect = hasEffect;
         this.points = points;
         this.cardColor = cardColor;

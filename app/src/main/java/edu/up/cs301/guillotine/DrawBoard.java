@@ -93,7 +93,5 @@ public class DrawBoard extends FlashSurfaceView {
             left -= 120;
         }
 
-
-
     }
 }

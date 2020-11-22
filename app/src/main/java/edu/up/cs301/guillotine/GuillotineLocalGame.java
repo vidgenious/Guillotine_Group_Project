@@ -51,50 +51,80 @@ public class GuillotineLocalGame extends LocalGame {
     @Override
     protected boolean makeMove(GameAction action) {
 
-
+        //If the action is a play card action
         if (action instanceof PlayAction) {
+
+            //If the turn is 0
             if (gameState.getPlayerTurn() == 0) {
                 int cardPlayed = -1;
+
+                //For loop to find the card selected in the hand
                 for (int i = 0; i < gameState.getP0Hand().size(); i++) {
                     if (i == ((PlayAction) action).getPos()) {
                         cardPlayed = i;
                     }
                 }
+
+                //Calls the play action method in the state
                 gameState.playAction(gameState.getP0Hand(), cardPlayed);
+
+             //If the turn is 1
             } else {
                 int cardPlayed = -1;
+
+                //For loop to find the card selected in the hand
                 for (int i = 0; i < gameState.getP1Hand().size(); i++) {
                     if (i == ((PlayAction) action).getPos()) {
                         cardPlayed = i;
                     }
                 }
+                //Calls the play action method in the state
                 gameState.playAction(gameState.getP1Hand(), cardPlayed);
             }
+
+            //Calculates the points of both players after the phase has ended
             gameState.calculatePoints(gameState.getP0Field(), 0);
             gameState.calculatePoints(gameState.getP1Field(), 1);
             return true;
+
+         //If the action is a skip play action
         } else if (action instanceof SkipAction) {
-            gameState.setTurnPhase(1);
+            gameState.skipAction();
+
             gameState.calculatePoints(gameState.getP0Field(), 0);
             gameState.calculatePoints(gameState.getP1Field(), 1);
             return true;
+
+         //If the action is a collect noble action
         } else if (action instanceof NobleAction) {
+
+            //Depending on which player it is, that player gets the noble card
             if (gameState.getPlayerTurn() == 0) {
                 gameState.getNoble(gameState.getP0Field());
             } else if (gameState.getPlayerTurn() == 1) {
                 gameState.getNoble(gameState.getP1Field());
             }
+
+            //if the noble line is empty, the day is over
             if(gameState.getNobleLine().size() < 1){
                 for(int i = 0; i < 12; i++) {
                     gameState.dealNoble();
                 }
+
+                //NOT DONE
                 gameState.setDayNum(gameState.getDayNum()+1);
                 gameState.setTurnPhase(0);
             }
+
+            //Calculating points
             gameState.calculatePoints(gameState.getP0Field(), 0);
             gameState.calculatePoints(gameState.getP1Field(), 1);
             return true;
+
+         //If the action is a draw card action
         } else if (action instanceof DrawAction) {
+
+            //Depending on player, that player get a new action card
             if (gameState.getPlayerTurn() == 0) {
                 gameState.dealActionCard(gameState.getP0Hand());
                 gameState.setPlayerTurn(1);
@@ -105,6 +135,8 @@ public class GuillotineLocalGame extends LocalGame {
             gameState.calculatePoints(gameState.getP0Field(), 0);
             gameState.calculatePoints(gameState.getP1Field(), 1);
             return true;
+
+         //If it a null action, due to a turn not being complete
         } else if(action instanceof  NullAction){
             return true;
         }

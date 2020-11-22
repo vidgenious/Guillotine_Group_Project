@@ -41,7 +41,6 @@ public class GuillotineState extends GameState {
     private ArrayList<Card> deckDiscard;
     private ArrayList<Card> deckAction;
     private ArrayList<Card> deckNoble;
-    //private String[] playerNames;
     private boolean actionCardPlayed;
 
     // constructor to init all variables
@@ -54,7 +53,6 @@ public class GuillotineState extends GameState {
         this.currFirstPlayer = 0;
         this.turnPhase = 0;
         this.begun = false;
-        //this.playerNames = new String[2];
         this.p1Hand = new ArrayList<Card>();
         this.p0Hand = new ArrayList<Card>();
         this.p1Field = new ArrayList<Card>();
@@ -70,8 +68,7 @@ public class GuillotineState extends GameState {
         this.actionCardPlayed = false;
 
         startGame();
-        nobleLine.add(new Card(true, false, 5, "Purple", "Antoinette", R.drawable.marie_antoinette));
-        p0Hand.add(new Card(false, true, 0, "actionCard", "Rain_Delay", R.drawable.rain_delay));
+        p0Hand.add(new Card(1, true, 0, "actionCard", "Fled", R.drawable.fled_to_england));
     }
     //Deep copy constructor
     /**
@@ -137,12 +134,6 @@ public class GuillotineState extends GameState {
         for (Card c : origin.deckNoble) {
             this.deckNoble.add(c);
         }
-
-        /*this.playerNames = new String[2];
-        for(String n : origin.playerNames){
-            this.playerNames = origin.playerNames;
-        }*/
-
     }
 
     /**
@@ -152,57 +143,57 @@ public class GuillotineState extends GameState {
      * @return: This method does not return anything.
      */
     public void initNobleDeck() {
-        this.deckNoble.add(new Card(true, false, 4, "Blue", "Archbishop", R.drawable.archbishop));
-        this.deckNoble.add(new Card(true, false, 3, "Blue", "Bad_Nun", R.drawable.bad_nun));
-        this.deckNoble.add(new Card(true, false, 3, "Purple", "Baron", R.drawable.baron));
-        this.deckNoble.add(new Card(true, false, 2, "Blue", "Bishop", R.drawable.bishop));
-        this.deckNoble.add(new Card(true, true, 2, "Red", "Capt_Guard", R.drawable.captain_of_the_guard));
-        this.deckNoble.add(new Card(true, false, 5, "Blue", "Cardinal", R.drawable.cardinal));
-        this.deckNoble.add(new Card(true, false, 1, "Purple", "Coiffeur", R.drawable.coiffeur));
-        this.deckNoble.add(new Card(true, false, 3, "Red", "Colonel", R.drawable.colonel));
-        this.deckNoble.add(new Card(true, false, 3, "Green", "Councilman", R.drawable.councilman));
-        this.deckNoble.add(new Card(true, true, 2, "Purple", "Count", R.drawable.count));
-        this.deckNoble.add(new Card(true, true, 2, "Purple", "Countess", R.drawable.countess));
-        this.deckNoble.add(new Card(true, false, 3, "Purple", "Duke", R.drawable.duke));
-        this.deckNoble.add(new Card(true, true, 2, "Purple", "Fast_Noble", R.drawable.fast_noble));
-        this.deckNoble.add(new Card(true, true, 4, "Red", "General", R.drawable.general));
-        this.deckNoble.add(new Card(true, false, 4, "Green", "Governer", R.drawable.governer));
-        this.deckNoble.add(new Card(true, false, 2, "Blue", "Heretic", R.drawable.heretic));
-        this.deckNoble.add(new Card(true, false, -3, "Grey", "Hero_People", R.drawable.hero_of_the_people));
-        this.deckNoble.add(new Card(true, true, -1, "Grey", "Innocent", R.drawable.innocent_vicitm));
-        this.deckNoble.add(new Card(true, false, 5, "Purple", "King_Louis", R.drawable.king_louis));
-        this.deckNoble.add(new Card(true, true, 2, "Purple", "Lady", R.drawable.lady));
-        this.deckNoble.add(new Card(true, true, 1, "Purple", "Lady_Waiting", R.drawable.lady_in_waiting));
-        this.deckNoble.add(new Card(true, false, 2, "Green", "Land_Lord", R.drawable.land_lord));
-        this.deckNoble.add(new Card(true, false, 2, "Red", "Lieutenant1", R.drawable.lieutenant));
-        this.deckNoble.add(new Card(true, false, 2, "Red", "Lieutenant2", R.drawable.lieutenant));
-        this.deckNoble.add(new Card(true, true, 2, "Purple", "Lord", R.drawable.lord));
-        this.deckNoble.add(new Card(true, false, 5, "Purple", "Antoinette", R.drawable.marie_antoinette));
-        this.deckNoble.add(new Card(true, false, -1, "Grey", "Martyr1", R.drawable.martyr));
-        this.deckNoble.add(new Card(true, false, -1, "Grey", "Martyr2", R.drawable.martyr));
-        this.deckNoble.add(new Card(true, false, -1, "Grey", "Martyr3", R.drawable.martyr));
-        this.deckNoble.add(new Card(true, true, 4, "Red", "Spy", R.drawable.master_spy));
-        this.deckNoble.add(new Card(true, false, 3, "Green", "Mayor", R.drawable.mayor));
-        this.deckNoble.add(new Card(true, true, 0, "Red", "Palace_Guard1", R.drawable.palace_guard));
-        this.deckNoble.add(new Card(true, true, 0, "Red", "Palace_Guard2", R.drawable.palace_guard));
-        this.deckNoble.add(new Card(true, true, 0, "Red", "Palace_Guard3", R.drawable.palace_guard));
-        this.deckNoble.add(new Card(true, true, 0, "Red", "Palace_Guard4", R.drawable.palace_guard));
-        this.deckNoble.add(new Card(true, true, 0, "Red", "Palace_Guard5", R.drawable.palace_guard));
-        this.deckNoble.add(new Card(true, false, 1, "Purple", "Piss_Boy", R.drawable.piss_boy));
-        this.deckNoble.add(new Card(true, false, 4, "Purple", "Regent", R.drawable.regent));
-        this.deckNoble.add(new Card(true, true, 1, "Green", "Rival1", R.drawable.rival_executioner));
-        this.deckNoble.add(new Card(true, true, 1, "Green", "Rival2", R.drawable.rival_executioner));
-        this.deckNoble.add(new Card(true, true, 3, "Purple", "Robespierre", R.drawable.robespierre));
-        this.deckNoble.add(new Card(true, false, 1, "Purple", "Cartographer", R.drawable.royal_cartographer));
-        this.deckNoble.add(new Card(true, false, 1, "Green", "Sheriff1", R.drawable.sheriff));
-        this.deckNoble.add(new Card(true, false, 1, "Green", "Sheriff2", R.drawable.sheriff));
-        this.deckNoble.add(new Card(true, false, 2, "Green", "Tax_Collector", R.drawable.tax_collector));
-        this.deckNoble.add(new Card(true, true, -2, "Grey", "Clown", R.drawable.the_clown));
-        this.deckNoble.add(new Card(true, true, 0, "Grey", "Tragic_Figure", R.drawable.tragic_figure));
-        this.deckNoble.add(new Card(true, true, 2, "Green", "Judge1", R.drawable.unpopular_judge));
-        this.deckNoble.add(new Card(true, true, 2, "Green", "Judge2", R.drawable.unpopular_judge));
-        this.deckNoble.add(new Card(true, false, 1, "Blue", "Wealthy_Priest1", R.drawable.wealthy_priest));
-        this.deckNoble.add(new Card(true, false, 1, "Blue", "Wealthy_Priest2", R.drawable.wealthy_priest));
+        this.deckNoble.add(new Card(0, false, 4, "Blue", "Archbishop", R.drawable.archbishop));
+        this.deckNoble.add(new Card(0, false, 3, "Blue", "Bad_Nun", R.drawable.bad_nun));
+        this.deckNoble.add(new Card(0, false, 3, "Purple", "Baron", R.drawable.baron));
+        this.deckNoble.add(new Card(0, false, 2, "Blue", "Bishop", R.drawable.bishop));
+        this.deckNoble.add(new Card(0, true, 2, "Red", "Capt_Guard", R.drawable.captain_of_the_guard));
+        this.deckNoble.add(new Card(0, false, 5, "Blue", "Cardinal", R.drawable.cardinal));
+        this.deckNoble.add(new Card(0, false, 1, "Purple", "Coiffeur", R.drawable.coiffeur));
+        this.deckNoble.add(new Card(0, false, 3, "Red", "Colonel", R.drawable.colonel));
+        this.deckNoble.add(new Card(0, false, 3, "Green", "Councilman", R.drawable.councilman));
+        this.deckNoble.add(new Card(0, true, 2, "Purple", "Count", R.drawable.count));
+        this.deckNoble.add(new Card(0, true, 2, "Purple", "Countess", R.drawable.countess));
+        this.deckNoble.add(new Card(0, false, 3, "Purple", "Duke", R.drawable.duke));
+        this.deckNoble.add(new Card(0, true, 2, "Purple", "Fast_Noble", R.drawable.fast_noble));
+        this.deckNoble.add(new Card(0, true, 4, "Red", "General", R.drawable.general));
+        this.deckNoble.add(new Card(0, false, 4, "Green", "Governer", R.drawable.governer));
+        this.deckNoble.add(new Card(0, false, 2, "Blue", "Heretic", R.drawable.heretic));
+        this.deckNoble.add(new Card(0, false, -3, "Grey", "Hero_People", R.drawable.hero_of_the_people));
+        this.deckNoble.add(new Card(0, true, -1, "Grey", "Innocent", R.drawable.innocent_vicitm));
+        this.deckNoble.add(new Card(0, false, 5, "Purple", "King_Louis", R.drawable.king_louis));
+        this.deckNoble.add(new Card(0, true, 2, "Purple", "Lady", R.drawable.lady));
+        this.deckNoble.add(new Card(0, true, 1, "Purple", "Lady_Waiting", R.drawable.lady_in_waiting));
+        this.deckNoble.add(new Card(0, false, 2, "Green", "Land_Lord", R.drawable.land_lord));
+        this.deckNoble.add(new Card(0, false, 2, "Red", "Lieutenant1", R.drawable.lieutenant));
+        this.deckNoble.add(new Card(0, false, 2, "Red", "Lieutenant2", R.drawable.lieutenant));
+        this.deckNoble.add(new Card(0, true, 2, "Purple", "Lord", R.drawable.lord));
+        this.deckNoble.add(new Card(0, false, 5, "Purple", "Antoinette", R.drawable.marie_antoinette));
+        this.deckNoble.add(new Card(0, false, -1, "Grey", "Martyr1", R.drawable.martyr));
+        this.deckNoble.add(new Card(0, false, -1, "Grey", "Martyr2", R.drawable.martyr));
+        this.deckNoble.add(new Card(0, false, -1, "Grey", "Martyr3", R.drawable.martyr));
+        this.deckNoble.add(new Card(0, true, 4, "Red", "Spy", R.drawable.master_spy));
+        this.deckNoble.add(new Card(0, false, 3, "Green", "Mayor", R.drawable.mayor));
+        this.deckNoble.add(new Card(0, true, 0, "Red", "Palace_Guard1", R.drawable.palace_guard));
+        this.deckNoble.add(new Card(0, true, 0, "Red", "Palace_Guard2", R.drawable.palace_guard));
+        this.deckNoble.add(new Card(0, true, 0, "Red", "Palace_Guard3", R.drawable.palace_guard));
+        this.deckNoble.add(new Card(0, true, 0, "Red", "Palace_Guard4", R.drawable.palace_guard));
+        this.deckNoble.add(new Card(0, true, 0, "Red", "Palace_Guard5", R.drawable.palace_guard));
+        this.deckNoble.add(new Card(0, false, 1, "Purple", "Piss_Boy", R.drawable.piss_boy));
+        this.deckNoble.add(new Card(0, false, 4, "Purple", "Regent", R.drawable.regent));
+        this.deckNoble.add(new Card(0, true, 1, "Green", "Rival1", R.drawable.rival_executioner));
+        this.deckNoble.add(new Card(0, true, 1, "Green", "Rival2", R.drawable.rival_executioner));
+        this.deckNoble.add(new Card(0, true, 3, "Purple", "Robespierre", R.drawable.robespierre));
+        this.deckNoble.add(new Card(0, false, 1, "Purple", "Cartographer", R.drawable.royal_cartographer));
+        this.deckNoble.add(new Card(0, false, 1, "Green", "Sheriff1", R.drawable.sheriff));
+        this.deckNoble.add(new Card(0, false, 1, "Green", "Sheriff2", R.drawable.sheriff));
+        this.deckNoble.add(new Card(0, false, 2, "Green", "Tax_Collector", R.drawable.tax_collector));
+        this.deckNoble.add(new Card(0, true, -2, "Grey", "Clown", R.drawable.the_clown));
+        this.deckNoble.add(new Card(0, true, 0, "Grey", "Tragic_Figure", R.drawable.tragic_figure));
+        this.deckNoble.add(new Card(0, true, 2, "Green", "Judge1", R.drawable.unpopular_judge));
+        this.deckNoble.add(new Card(0, true, 2, "Green", "Judge2", R.drawable.unpopular_judge));
+        this.deckNoble.add(new Card(0, false, 1, "Blue", "Wealthy_Priest1", R.drawable.wealthy_priest));
+        this.deckNoble.add(new Card(0, false, 1, "Blue", "Wealthy_Priest2", R.drawable.wealthy_priest));
 
     }
 
@@ -213,62 +204,62 @@ public class GuillotineState extends GameState {
      * @return: This method does not return anything.
      */
     private void initActionDeck() {
-        this.deckAction.add(new Card(false, true, 0, "actionCard", "After_You", R.drawable.after_you));
-        this.deckAction.add(new Card(false, true, 0, "actionCard", "Bribed", R.drawable.bribed_guards));
+        this.deckAction.add(new Card(1, true, 0, "actionCard", "After_You", R.drawable.after_you));
+        this.deckAction.add(new Card(1, true, 0, "actionCard", "Bribed", R.drawable.bribed_guards));
         //this.deckAction.add(new Card(false, true, 0, "actionCard", "Callous", R.drawable.callous_guards));
-        this.deckAction.add(new Card(false, true, 0, "actionCard", "Church_Support", R.drawable.church_support));
+        this.deckAction.add(new Card(1, true, 0, "actionCard", "Church_Support", R.drawable.church_support));
         //this.deckAction.add(new Card(false, true, 0, "actionCard", "Civic_Pride", R.drawable.civic_pride));
-        this.deckAction.add(new Card(false, true, 0, "actionCard", "Civic_Support", R.drawable.civic_support));
+        this.deckAction.add(new Card(1, true, 0, "actionCard", "Civic_Support", R.drawable.civic_support));
         //this.deckAction.add(new Card(false, true, 0, "actionCard", "Clerical_Error", R.drawable.clerical_error));
         //this.deckAction.add(new Card(false, true, 0, "actionCard", "Clothing_Swap", R.drawable.clothing_swap));
-        this.deckAction.add(new Card(false, true, 0, "actionCard", "Confusion", R.drawable.confusion_in_line));
-        this.deckAction.add(new Card(false, true, 0, "actionCard", "Double_Feature1", R.drawable.double_feature));
-        this.deckAction.add(new Card(false, true, 0, "actionCard", "Double_Feature2", R.drawable.double_feature));
-        this.deckAction.add(new Card(false, true, 0, "actionCard", "Escape", R.drawable.escape));
-        this.deckAction.add(new Card(false, true, 0, "actionCard", "Extra_Cart1", R.drawable.extra_cart));
-        this.deckAction.add(new Card(false, true, 0, "actionCard", "Extra_Cart2", R.drawable.extra_cart));
+        this.deckAction.add(new Card(1, true, 0, "actionCard", "Confusion", R.drawable.confusion_in_line));
+        this.deckAction.add(new Card(1, true, 0, "actionCard", "Double_Feature1", R.drawable.double_feature));
+        this.deckAction.add(new Card(1, true, 0, "actionCard", "Double_Feature2", R.drawable.double_feature));
+        this.deckAction.add(new Card(1, true, 0, "actionCard", "Escape", R.drawable.escape));
+        this.deckAction.add(new Card(1, true, 0, "actionCard", "Extra_Cart1", R.drawable.extra_cart));
+        this.deckAction.add(new Card(1, true, 0, "actionCard", "Extra_Cart2", R.drawable.extra_cart));
         //this.deckAction.add(new Card(false, true, 0, "actionCard", "Fainting", R.drawable.fainting_spell));
-        //this.deckAction.add(new Card(false, true, 0, "actionCard", "Fled", R.drawable.fled_to_england));
-        this.deckAction.add(new Card(false, true, 0, "actionCard", "Forced_Break", R.drawable.forced_break));
+        this.deckAction.add(new Card(2, true, 0, "actionCard", "Fled", R.drawable.fled_to_england));
+        this.deckAction.add(new Card(1, true, 0, "actionCard", "Forced_Break", R.drawable.forced_break));
         //this.deckAction.add(new Card(false, true, 0, "actionCard", "Foreign_Support", R.drawable.foreign_support));
-        this.deckAction.add(new Card(false, true, 0, "actionCard", "Forward_March", R.drawable.forward_march));
-        this.deckAction.add(new Card(false, true, 0, "actionCard", "Fountain", R.drawable.fountain_of_blood));
+        this.deckAction.add(new Card(1, true, 0, "actionCard", "Forward_March", R.drawable.forward_march));
+        this.deckAction.add(new Card(1, true, 0, "actionCard", "Fountain", R.drawable.fountain_of_blood));
         //this.deckAction.add(new Card(false, true, 0, "actionCard", "Friend_Queen1", R.drawable.friend_of_the_queen));
         //this.deckAction.add(new Card(false, true, 0, "actionCard", "Friend_Queen2", R.drawable.friend_of_the_queen));
         //this.deckAction.add(new Card(false, true, 0, "actionCard", "Idiot1", R.drawable.idiot));
         //this.deckAction.add(new Card(false, true, 0, "actionCard", "Idiot2", R.drawable.idiot));
         //this.deckAction.add(new Card(false, true, 0, "actionCard", "Ignoble1", R.drawable.ignoble_noble));
         //this.deckAction.add(new Card(false, true, 0, "actionCard", "Ignoble2", R.drawable.ignoble_noble));
-        this.deckAction.add(new Card(false, true, 0, "actionCard", "Indifferent", R.drawable.indifferent_public));
+        this.deckAction.add(new Card(1, true, 0, "actionCard", "Indifferent", R.drawable.indifferent_public));
         //this.deckAction.add(new Card(false, true, 0, "actionCard", "Infighting", R.drawable.infighting));
         //this.deckAction.add(new Card(false, true, 0, "actionCard", "Info_Exchange", R.drawable.information_exchange));
-        this.deckAction.add(new Card(false, true, 0, "actionCard", "Lack_Faith", R.drawable.lack_of_faith));
+        this.deckAction.add(new Card(1, true, 0, "actionCard", "Lack_Faith", R.drawable.lack_of_faith));
         //this.deckAction.add(new Card(false, true, 0, "actionCard", "Lack_Support", R.drawable.lack_of_support));
         //this.deckAction.add(new Card(false, true, 0, "actionCard", "Late_Arrival", R.drawable.late_arrival));
-        this.deckAction.add(new Card(false, true, 0, "actionCard", "Let_Cake", R.drawable.let_them_eat_cake));
+        this.deckAction.add(new Card(1, true, 0, "actionCard", "Let_Cake", R.drawable.let_them_eat_cake));
         //this.deckAction.add(new Card(false, true, 0, "actionCard", "Majesty", R.drawable.majesty));
-        this.deckAction.add(new Card(false, true, 0, "actionCard", "Mass_Confusion", R.drawable.mass_confusion));
+        this.deckAction.add(new Card(1, true, 0, "actionCard", "Mass_Confusion", R.drawable.mass_confusion));
         //this.deckAction.add(new Card(false, true, 0, "actionCard", "Military_Might", R.drawable.military_might));
-        this.deckAction.add(new Card(false, true, 0, "actionCard", "Military_Support", R.drawable.military_support));
-        this.deckAction.add(new Card(false, true, 0, "actionCard", "Milling1", R.drawable.milling_in_line));
-        this.deckAction.add(new Card(false, true, 0, "actionCard", "Milling2", R.drawable.milling_in_line));
+        this.deckAction.add(new Card(1, true, 0, "actionCard", "Military_Support", R.drawable.military_support));
+        this.deckAction.add(new Card(1, true, 0, "actionCard", "Milling1", R.drawable.milling_in_line));
+        this.deckAction.add(new Card(1, true, 0, "actionCard", "Milling2", R.drawable.milling_in_line));
         //this.deckAction.add(new Card(false, true, 0, "actionCard", "Missed", R.drawable.missed));
-        this.deckAction.add(new Card(false, true, 0, "actionCard", "Missing_Heads", R.drawable.missing_heads));
+        this.deckAction.add(new Card(1, true, 0, "actionCard", "Missing_Heads", R.drawable.missing_heads));
         //this.deckAction.add(new Card(false, true, 0, "actionCard", "Opinionated", R.drawable.opinionated_guards));
-        this.deckAction.add(new Card(false, true, 0, "actionCard", "Political_Influence1", R.drawable.political_influence));
-        this.deckAction.add(new Card(false, true, 0, "actionCard", "Political_Influence2", R.drawable.political_influence));
+        this.deckAction.add(new Card(1, true, 0, "actionCard", "Political_Influence1", R.drawable.political_influence));
+        this.deckAction.add(new Card(1, true, 0, "actionCard", "Political_Influence2", R.drawable.political_influence));
         //this.deckAction.add(new Card(false, true, 0, "actionCard", "Public_Demand", R.drawable.public_demand));
         //this.deckAction.add(new Card(false, true, 0, "actionCard", "Pushed1", R.drawable.pushed));
         //this.deckAction.add(new Card(false, true, 0, "actionCard", "Pushed2", R.drawable.pushed));
-        this.deckAction.add(new Card(false, true, 0, "actionCard", "Rain_Delay", R.drawable.rain_delay));
+        this.deckAction.add(new Card(1, true, 0, "actionCard", "Rain_Delay", R.drawable.rain_delay));
         //this.deckAction.add(new Card(false, true, 0, "actionCard", "Rat_Break", R.drawable.rat_break));
         //this.deckAction.add(new Card(false, true, 0, "actionCard", "Rush_Job", R.drawable.rush_job));
         //this.deckAction.add(new Card(false, true, 0, "actionCard", "Scarlet", R.drawable.scarlet_pimpernel));
         //this.deckAction.add(new Card(false, true, 0, "actionCard", "Stumble1", R.drawable.stumble));
         //this.deckAction.add(new Card(false, true, 0, "actionCard", "Stumble2", R.drawable.stumble));
-        this.deckAction.add(new Card(false, true, 0, "actionCard", "Long_Walk", R.drawable.the_long_walk));
+        this.deckAction.add(new Card(1, true, 0, "actionCard", "Long_Walk", R.drawable.the_long_walk));
         //this.deckAction.add(new Card(false, true, 0, "actionCard", "Better_Thing", R.drawable.tis_far_better));
-        this.deckAction.add(new Card(false, true, 0, "actionCard", "Tough_Crowd", R.drawable.tough_crowd));
+        this.deckAction.add(new Card(1, true, 0, "actionCard", "Tough_Crowd", R.drawable.tough_crowd));
         //this.deckAction.add(new Card(false, true, 0, "actionCard", "Trip1", R.drawable.trip));
         //this.deckAction.add(new Card(false, true, 0, "actionCard", "Trip2", R.drawable.trip));
         //this.deckAction.add(new Card(false, true, 0, "actionCard", "Twist_Fate", R.drawable.twist_of_fate));
@@ -566,7 +557,7 @@ public class GuillotineState extends GameState {
      */
     public boolean skipAction() {
         if (this.turnPhase == 0) {
-            this.turnPhase++;
+            this.turnPhase = 1;
 
             return true;
 
@@ -596,10 +587,15 @@ public class GuillotineState extends GameState {
                         }
                     }
 
-                    //activates the action card being played
                     this.temp = (Card) hand.get(loc);
-                    acknowledgeCardAbility(this.temp);
-                    this.turnPhase++;
+
+                    if(temp.type == 1) {
+                        //activates the action card being played
+                        acknowledgeCardAbility(this.temp);
+                        this.turnPhase = 1;
+                    }else if(temp.type == 2) {
+                        acknowledgeCardAbility(this.temp);
+                    }
 
                     return true;
                 }
@@ -850,7 +846,7 @@ public class GuillotineState extends GameState {
                 else if (field.get(i).id.equals("Countess")) {
                     this.p0Countess = true;
                 }
-                else if (field.get(i).isNoble) {
+                else if (field.get(i).type == 0) {
                     if(field.get(i).cardColor.equals("Grey") && indifferent == 0){
                         this.p0Score ++;
                     }
@@ -951,7 +947,7 @@ public class GuillotineState extends GameState {
                         else if (field.get(i).id.equals("Countess")) {
                             this.p1Countess = true;
                         }
-                        else if (field.get(i).isNoble) {
+                        else if (field.get(i).type == 0) {
                             if(field.get(i).cardColor.equals("Grey") && indifferent == 1){
                                 this.p1Score ++;
                             }
@@ -1205,7 +1201,7 @@ public class GuillotineState extends GameState {
      */
 
     public boolean acknowledgeCardAbility(Card card) {
-        if (card.isNoble) {
+        if (card.type == 0) {
             switch (card.getId()) {
 
                 //add noble from deck to end of card line after collecting this noble
@@ -1855,7 +1851,13 @@ public class GuillotineState extends GameState {
                     }
                     this.actionCardPlayed = true;
 
-                    this.nobleLine.remove(choice1);
+                    if(this.turnPhase == 0){
+                        this.turnPhase = 3;
+                    }else if(this.turnPhase == 3){
+                        this.nobleLine.remove(choice1);
+                        this.turnPhase = 1;
+                    }
+
 
                     if (this.playerTurn == 0) {
                         for (int i = 0; i < this.p0Hand.size(); i++) {
@@ -2557,7 +2559,7 @@ public class GuillotineState extends GameState {
                             if (this.p0Hand.get(i).getId().equals("Missed")) {
                                 length = this.p1Field.size() - 1;
                                 while (notFound) {
-                                    if (this.p1Field.get(length).isNoble) {
+                                    if (this.p1Field.get(length).type == 0) {
                                         this.nobleLine.add(this.p1Field.get(length));
                                         this.p1Field.remove(length);
                                         notFound = false;
@@ -2574,7 +2576,7 @@ public class GuillotineState extends GameState {
                             if (this.p1Hand.get(i).getId().equals("Missed")) {
                                 length = this.p0Field.size() - 1;
                                 while (notFound) {
-                                    if (this.p0Field.get(length).isNoble) {
+                                    if (this.p0Field.get(length).type == 0) {
                                         this.nobleLine.add(this.p0Field.get(length));
                                         this.p0Field.remove(length);
                                         notFound = false;
@@ -2842,7 +2844,7 @@ public class GuillotineState extends GameState {
                     if (this.playerTurn == 0) {
                         for (int i = 0; i < this.p0Hand.size(); i++) {
                             if (this.p0Hand.get(i).getId().equals("Rat_Break")) {
-                                if (!this.deckDiscard.get(choice1).isNoble) {
+                                if (this.deckDiscard.get(choice1).type != 0) {
                                     this.p0Hand.add(this.deckDiscard.get(choice1));
                                     this.deckDiscard.remove(choice1);
                                 }
@@ -2853,7 +2855,7 @@ public class GuillotineState extends GameState {
                     } else {
                         for (int i = 0; i < this.p1Hand.size(); i++) {
                             if (this.p1Hand.get(i).getId().equals("Rat_Break")) {
-                                if (!this.deckDiscard.get(choice1).isNoble) {
+                                if (this.deckDiscard.get(choice1).type != 0) {
                                     this.p1Hand.add(this.deckDiscard.get(choice1));
                                     this.deckDiscard.remove(choice1);
                                 }
@@ -3126,7 +3128,7 @@ public class GuillotineState extends GameState {
                     if (this.playerTurn == 0) {
                         for (int i = 0; i < this.p0Hand.size(); i++) {
                             if (this.p0Hand.get(i).getId().equals("Twist_Fate")) {
-                                if (!this.p1Field.get(choice1).isNoble) {
+                                if (this.p1Field.get(choice1).type != 0) {
                                     this.deckDiscard.add(this.p1Field.get(choice1));
                                     this.p1Field.remove(choice1);
                                 }
@@ -3137,7 +3139,7 @@ public class GuillotineState extends GameState {
                     } else {
                         for (int i = 0; i < this.p1Hand.size(); i++) {
                             if (this.p1Hand.get(i).getId().equals("Twist_Fate")) {
-                                if (!this.p0Field.get(choice1).isNoble) {
+                                if (this.p0Field.get(choice1).type != 0) {
                                     this.deckDiscard.add(this.p0Field.get(choice1));
                                     this.p0Field.remove(choice1);
                                 }

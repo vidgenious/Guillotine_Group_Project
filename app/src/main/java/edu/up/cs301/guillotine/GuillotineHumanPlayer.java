@@ -57,37 +57,68 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
     public boolean onTouch(View view, MotionEvent event) {
         if (event.getAction() != MotionEvent.ACTION_UP) return true;
 
+        //If statement for if the turn is correct
         if(state.getPlayerTurn() == 0) {
+
+            //Defining the coordinates of the touch
             int x = (int) event.getX();
             int y = (int) event.getY();
 
+            //if it is the play action/skip phase
             if (state.getTurnPhase() == 0) {
+
+                //Methods for determining which card/button is pressed
                 int cardPos = handCard(x, y);
                 boolean skip = skipButton(x, y);
 
+                //If skip button is pressed
                 if(skip){
                     game.sendAction(new SkipAction(this));
+
+                 //If an invalid place on the screen is touched
                 }else if (cardPos < 0 || cardPos + 1 > state.getP0Hand().size()) {
                     return false;
                 }
                 PlayAction action = new PlayAction(this, cardPos);
+
+                //Sends whichever action is the result
                 game.sendAction(action);
-                state.setTurnPhase(1);
+
+
+
+            } else if(state.getTurnPhase() == 3){
+                
+
+             //If it is the get noble phase
             } else if (state.getTurnPhase() == 1) {
+
+                //Method for determining if the accept button was pressed
                 boolean select = acceptButton(x, y);
+
+                //If accept button pressed
                 if (select) {
                     NobleAction action = new NobleAction(this);
                     game.sendAction(action);
+
+                    //moving to draw card phase
                     state.setTurnPhase(2);
                 }
+
+             //If it is the draw card phase
             }else if (state.getTurnPhase() == 2){
+
+                //Method for if accept button pressed
                 boolean select = acceptButton(x, y);
+
+                //if accept is pressed
                 if (select) {
                     DrawAction action = new DrawAction(this);
                     game.sendAction(action);
                     state.setTurnPhase(0);
                 }
             }
+
+            //Whatever action is taken, the board invalidates.
             board.invalidate();
         }
 
