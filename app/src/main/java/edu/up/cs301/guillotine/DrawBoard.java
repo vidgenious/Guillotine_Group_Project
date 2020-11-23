@@ -32,7 +32,7 @@ public class DrawBoard extends FlashSurfaceView {
     public DrawBoard(Context context, AttributeSet attrs) {
         super(context, attrs);
         setWillNotDraw(false);
-        grey.setColor(Color.WHITE);
+        grey.setColor(Color.GRAY);
         black.setColor(Color.BLACK);
         black.setTextSize(50.0f);
         choice.setColor(Color.RED);
