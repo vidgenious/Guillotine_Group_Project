@@ -32,11 +32,12 @@ public class DrawBoard extends FlashSurfaceView {
     public DrawBoard(Context context, AttributeSet attrs) {
         super(context, attrs);
         setWillNotDraw(false);
-        grey.setColor(Color.GRAY);
+        grey.setColor(Color.WHITE);
         black.setColor(Color.BLACK);
         black.setTextSize(50.0f);
         choice.setColor(Color.RED);
         choice.setTextSize(400.0f);
+
     }
 
     public void setState(GuillotineState state) {
@@ -49,50 +50,54 @@ public class DrawBoard extends FlashSurfaceView {
         if(state == null){
             return;
         }
-
-        canvas.drawRect(10.0f, 970.0f, 160.0f, 1070.0f, grey);
+       //canvas.setBackgroundColor()
+        canvas.drawRect(10.0f, 970.0f, 170.0f, 1070.0f, grey);
         canvas.drawText("Skip", 30.0f,1030.0f, black);
-        canvas.drawRect(10.0f, 860.0f, 160.0f, 960.0f, grey);
+        canvas.drawRect(10.0f, 860.0f, 170.0f, 960.0f, grey);
         canvas.drawText("Accept", 10.0f,930.0f, black);
 
         grey.setTextSize(50.0f);
-        canvas.drawText("P1: " + state.getP1Score(), 10.0f, 400.0f, grey);
-        canvas.drawText("P0: " + state.getP0Score(), 10.0f, 500.0f, grey);
+        canvas.drawText("Player 1: " + state.getP1Score(), 10.0f, 400.0f, grey);
+        canvas.drawText("Player 0: " + state.getP0Score(), 10.0f, 500.0f, grey);
 
-        //P0 Hand
+        grey.setTextSize(50.0f);
+        canvas.drawText("GUILLOTINE GAME ", 10.0f, 100.0f, grey);
+
+
+        //P0 Hand 200,  280
         float left = 1700;
         Bitmap draw;
         for(int i = 0; i < state.getP0Hand().size(); i++){
             draw = BitmapFactory.decodeResource(getResources(), state.getP0Hand().get(i).image);
-            draw = Bitmap.createScaledBitmap(draw, 200, 280, true);
-            canvas.drawBitmap(draw, left, 800.0f, null);
+            draw = Bitmap.createScaledBitmap(draw, 300, 420, true);
+            canvas.drawBitmap(draw, left, 900.0f, null); //800
             left -= 220;
         }
 
-        //P0 field
+        //P0 field 100 140
         left = 1800;
         for(int i = 0; i < state.getP0Field().size(); i++){
             draw = BitmapFactory.decodeResource(getResources(), state.getP0Field().get(i).image);
-            draw = Bitmap.createScaledBitmap(draw, 100, 140, true);
-            canvas.drawBitmap(draw, left, 650.0f, null);
+            draw = Bitmap.createScaledBitmap(draw, 150, 210, true);
+            canvas.drawBitmap(draw, left, 675.0f, null); // 650
             left -= 120;
         }
 
-        //Noble line
+        //Noble line 200 280
         left = 1700;
         for(int i = 0; i < state.getNobleLine().size(); i++){
             draw = BitmapFactory.decodeResource(getResources(), state.getNobleLine().get(i).image);
-            draw = Bitmap.createScaledBitmap(draw, 200, 280, true);
-            canvas.drawBitmap(draw, left, 350.0f, null);
+            draw = Bitmap.createScaledBitmap(draw, 300, 420, true);
+            canvas.drawBitmap(draw, left, 250.0f, null); //350
             left -= 100;
         }
 
-        //P1 field
+        //P1 field 100   140
         left = 1800;
         for(int i = 0; i < state.getP1Field().size(); i++){
             draw = BitmapFactory.decodeResource(getResources(), state.getP1Field().get(i).image);
-            draw = Bitmap.createScaledBitmap(draw, 100, 140, true);
-            canvas.drawBitmap(draw, left, 150.0f, null);
+            draw = Bitmap.createScaledBitmap(draw, 150, 210, true);
+            canvas.drawBitmap(draw, left, 35.0f, null); //150
             left -= 120;
         }
 
