@@ -860,6 +860,7 @@ public class GuillotineState extends GameState {
                 }
 
             }
+            
             }
             //finally counts all special cards that change values based off of other cards
             else {
