@@ -86,8 +86,26 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
 
 
 
-            } else if(state.getTurnPhase() == 3){
-                
+            } else if(state.getTurnPhase() == 3) {
+
+                int cardPos = lineCard(x, y);
+
+                if (cardPos > -1 && !(cardPos + 1 > state.getNobleLine().size())) {
+                    ChooseAction action = new ChooseAction(this, cardPos, 1);
+                    game.sendAction(action);
+                }
+
+            } else if(state.getTurnPhase() == 4) {
+                int cardPos = twoChoice(x, y);
+
+                ChooseAction action = new ChooseAction(this, cardPos, 2);
+                game.sendAction(action);
+
+            } else if(state.getTurnPhase() == 5) {
+                int cardPos = threeChoice(x, y);
+
+                ChooseAction action = new ChooseAction(this, cardPos, 2);
+                game.sendAction(action);
 
              //If it is the get noble phase
             } else if (state.getTurnPhase() == 1) {
@@ -180,6 +198,35 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
         return -1;
     }
 
+    private int lineCard(int x, int y){
+        if(x > 1800 && x < 1900 && y > 350 && y < 630){
+            return 0;
+        } else if(x > 1700 && x < 1800 && y > 350 && y < 630){
+            return 1;
+        } else if(x > 1600 && x < 1700 && y > 350 && y < 630){
+            return 2;
+        } else if(x > 1500 && x < 1600 && y > 350 && y < 630){
+            return 3;
+        } else if(x > 1400 && x < 1500 && y > 350 && y < 630){
+            return 4;
+        } else if(x > 1300 && x < 1400 && y > 350 && y < 630){
+            return 5;
+        } else if(x > 1200 && x < 1300 && y > 350 && y < 630){
+            return 6;
+        } else if(x > 1100 && x < 1200 && y > 350 && y < 630){
+            return 7;
+        } else if(x > 1000 && x < 1100 && y > 350 && y < 630){
+            return 8;
+        } else if(x > 900 && x < 1000 && y > 350 && y < 630){
+            return 9;
+        } else if(x > 800 && x < 900 && y > 350 && y < 630){
+            return 10;
+        } else if(x > 700 && x < 800 && y > 350 && y < 630){
+            return 11;
+        }
+        return -1;
+    }
+
     private boolean acceptButton(int x, int y){
         if(x > 10 && x < 160 && y > 860 && y < 960){
             return true;
@@ -192,5 +239,26 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
             return true;
         }
         return false;
+    }
+
+    private int twoChoice(int x, int y){
+        if(x > 0 && x < 1000 && y > 0 && y < 1100){
+            return 1;
+        }else if(x > 1000 && x < 2000 && y > 0 && y < 1100){
+            return 2;
+        }
+        return -1;
+    }
+
+    private int threeChoice(int x, int y){
+        if(x > 0 && x < 667 && y > 0 && y < 1100){
+            return 1;
+        }else if(x > 667 && x < 1325 && y > 0 && y < 1100){
+            return 2;
+        }else if(x > 1325 && x < 2000 && y > 0 && y < 1100){
+            return 3;
+        }
+
+        return -1;
     }
 }

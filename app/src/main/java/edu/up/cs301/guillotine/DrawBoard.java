@@ -27,6 +27,7 @@ public class DrawBoard extends FlashSurfaceView {
     private GuillotineState state;
     private Paint grey = new Paint();
     private Paint black = new Paint();
+    private Paint choice = new Paint();
 
     public DrawBoard(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -34,6 +35,8 @@ public class DrawBoard extends FlashSurfaceView {
         grey.setColor(Color.GRAY);
         black.setColor(Color.BLACK);
         black.setTextSize(50.0f);
+        choice.setColor(Color.RED);
+        choice.setTextSize(400.0f);
     }
 
     public void setState(GuillotineState state) {
@@ -91,6 +94,17 @@ public class DrawBoard extends FlashSurfaceView {
             draw = Bitmap.createScaledBitmap(draw, 100, 140, true);
             canvas.drawBitmap(draw, left, 150.0f, null);
             left -= 120;
+        }
+
+        if(state.getTurnPhase() == 4){
+            canvas.drawText("1", 50.0f, 400.0f, choice);
+            canvas.drawText("2", 1050.0f, 400.0f, choice);
+        }
+
+        if(state.getTurnPhase() == 5){
+            canvas.drawText("1", 50.0f, 400.0f, choice);
+            canvas.drawText("2", 720.0f, 400.0f, choice);
+            canvas.drawText("3", 1375.0f, 400.0f, choice);
         }
 
     }

@@ -17,6 +17,8 @@ import edu.up.cs301.game.R;
  */
 public class GuillotineLocalGame extends LocalGame {
 
+    Card temp;
+
     private GuillotineState gameState;
 
     /**
@@ -62,6 +64,7 @@ public class GuillotineLocalGame extends LocalGame {
                 for (int i = 0; i < gameState.getP0Hand().size(); i++) {
                     if (i == ((PlayAction) action).getPos()) {
                         cardPlayed = i;
+                        this.temp = gameState.getP0Hand().get(i);
                     }
                 }
 
@@ -76,6 +79,7 @@ public class GuillotineLocalGame extends LocalGame {
                 for (int i = 0; i < gameState.getP1Hand().size(); i++) {
                     if (i == ((PlayAction) action).getPos()) {
                         cardPlayed = i;
+                        this.temp = gameState.getP1Hand().get(i);
                     }
                 }
                 //Calls the play action method in the state
@@ -88,6 +92,15 @@ public class GuillotineLocalGame extends LocalGame {
             return true;
 
          //If the action is a skip play action
+        }else if(action instanceof ChooseAction) {
+            if(((ChooseAction) action).getChoice() == 1) {
+                gameState.setChoice1(((ChooseAction) action).getPos());
+            }else if(((ChooseAction) action).getChoice() == 2){
+                gameState.setChoice2(((ChooseAction) action).getPos());
+            }
+            gameState.acknowledgeCardAbility(temp);
+            return true;
+
         } else if (action instanceof SkipAction) {
             gameState.skipAction();
 

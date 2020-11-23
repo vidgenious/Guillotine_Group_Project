@@ -46,12 +46,13 @@ public class GuillotineComputerPlayer1 extends GameComputerPlayer {
             return;
         }
 
+        Random rand = new Random();
 
         GuillotineState gameState = (GuillotineState) info;
 
         if(gameState.getPlayerTurn() == 1) {
             if(gameState.getTurnPhase() == 0) {
-                Random rand = new Random();
+
                 int play = rand.nextInt(2);
 
                 int pos = rand.nextInt(gameState.getP1Hand().size());
@@ -64,6 +65,11 @@ public class GuillotineComputerPlayer1 extends GameComputerPlayer {
                 } else {
                     game.sendAction(new SkipAction(this));
                 }
+            }else if(gameState.getTurnPhase() == 3) {
+                int pos = rand.nextInt(gameState.getNobleLine().size());
+
+                ChooseAction action = new ChooseAction(this, pos, 1);
+
             }else if(gameState.getTurnPhase() == 1){
                 game.sendAction(new NobleAction(this));
                 gameState.setTurnPhase(2);

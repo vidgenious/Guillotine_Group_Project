@@ -43,6 +43,11 @@ public class GuillotineState extends GameState {
     private ArrayList<Card> deckNoble;
     private boolean actionCardPlayed;
 
+    private int choice1;
+    private int choice2;
+
+    private int choiceType;
+
     // constructor to init all variables
     public GuillotineState() {
         this.dayNum = 1;
@@ -68,7 +73,7 @@ public class GuillotineState extends GameState {
         this.actionCardPlayed = false;
 
         startGame();
-        p0Hand.add(new Card(1, true, 0, "actionCard", "Fled", R.drawable.fled_to_england));
+        p0Hand.add(new Card(2, true, 0, "actionCard", "Clothing_Swap", R.drawable.clothing_swap));
     }
     //Deep copy constructor
     /**
@@ -208,28 +213,28 @@ public class GuillotineState extends GameState {
         this.deckAction.add(new Card(1, true, 0, "actionCard", "Bribed", R.drawable.bribed_guards));
         //this.deckAction.add(new Card(false, true, 0, "actionCard", "Callous", R.drawable.callous_guards));
         this.deckAction.add(new Card(1, true, 0, "actionCard", "Church_Support", R.drawable.church_support));
-        //this.deckAction.add(new Card(false, true, 0, "actionCard", "Civic_Pride", R.drawable.civic_pride));
+        this.deckAction.add(new Card(2, true, 0, "actionCard", "Civic_Pride", R.drawable.civic_pride));
         this.deckAction.add(new Card(1, true, 0, "actionCard", "Civic_Support", R.drawable.civic_support));
         //this.deckAction.add(new Card(false, true, 0, "actionCard", "Clerical_Error", R.drawable.clerical_error));
-        //this.deckAction.add(new Card(false, true, 0, "actionCard", "Clothing_Swap", R.drawable.clothing_swap));
+        this.deckAction.add(new Card(2, true, 0, "actionCard", "Clothing_Swap", R.drawable.clothing_swap));
         this.deckAction.add(new Card(1, true, 0, "actionCard", "Confusion", R.drawable.confusion_in_line));
         this.deckAction.add(new Card(1, true, 0, "actionCard", "Double_Feature1", R.drawable.double_feature));
         this.deckAction.add(new Card(1, true, 0, "actionCard", "Double_Feature2", R.drawable.double_feature));
         this.deckAction.add(new Card(1, true, 0, "actionCard", "Escape", R.drawable.escape));
         this.deckAction.add(new Card(1, true, 0, "actionCard", "Extra_Cart1", R.drawable.extra_cart));
         this.deckAction.add(new Card(1, true, 0, "actionCard", "Extra_Cart2", R.drawable.extra_cart));
-        //this.deckAction.add(new Card(false, true, 0, "actionCard", "Fainting", R.drawable.fainting_spell));
+        this.deckAction.add(new Card(2, true, 0, "actionCard", "Fainting", R.drawable.fainting_spell));
         this.deckAction.add(new Card(2, true, 0, "actionCard", "Fled", R.drawable.fled_to_england));
         this.deckAction.add(new Card(1, true, 0, "actionCard", "Forced_Break", R.drawable.forced_break));
         //this.deckAction.add(new Card(false, true, 0, "actionCard", "Foreign_Support", R.drawable.foreign_support));
         this.deckAction.add(new Card(1, true, 0, "actionCard", "Forward_March", R.drawable.forward_march));
         this.deckAction.add(new Card(1, true, 0, "actionCard", "Fountain", R.drawable.fountain_of_blood));
-        //this.deckAction.add(new Card(false, true, 0, "actionCard", "Friend_Queen1", R.drawable.friend_of_the_queen));
-        //this.deckAction.add(new Card(false, true, 0, "actionCard", "Friend_Queen2", R.drawable.friend_of_the_queen));
-        //this.deckAction.add(new Card(false, true, 0, "actionCard", "Idiot1", R.drawable.idiot));
-        //this.deckAction.add(new Card(false, true, 0, "actionCard", "Idiot2", R.drawable.idiot));
-        //this.deckAction.add(new Card(false, true, 0, "actionCard", "Ignoble1", R.drawable.ignoble_noble));
-        //this.deckAction.add(new Card(false, true, 0, "actionCard", "Ignoble2", R.drawable.ignoble_noble));
+        this.deckAction.add(new Card(2, true, 0, "actionCard", "Friend_Queen1", R.drawable.friend_of_the_queen));
+        this.deckAction.add(new Card(2, true, 0, "actionCard", "Friend_Queen2", R.drawable.friend_of_the_queen));
+        this.deckAction.add(new Card(2, true, 0, "actionCard", "Idiot1", R.drawable.idiot));
+        this.deckAction.add(new Card(2, true, 0, "actionCard", "Idiot2", R.drawable.idiot));
+        this.deckAction.add(new Card(2, true, 0, "actionCard", "Ignoble1", R.drawable.ignoble_noble));
+        this.deckAction.add(new Card(2, true, 0, "actionCard", "Ignoble2", R.drawable.ignoble_noble));
         this.deckAction.add(new Card(1, true, 0, "actionCard", "Indifferent", R.drawable.indifferent_public));
         //this.deckAction.add(new Card(false, true, 0, "actionCard", "Infighting", R.drawable.infighting));
         //this.deckAction.add(new Card(false, true, 0, "actionCard", "Info_Exchange", R.drawable.information_exchange));
@@ -237,9 +242,9 @@ public class GuillotineState extends GameState {
         //this.deckAction.add(new Card(false, true, 0, "actionCard", "Lack_Support", R.drawable.lack_of_support));
         //this.deckAction.add(new Card(false, true, 0, "actionCard", "Late_Arrival", R.drawable.late_arrival));
         this.deckAction.add(new Card(1, true, 0, "actionCard", "Let_Cake", R.drawable.let_them_eat_cake));
-        //this.deckAction.add(new Card(false, true, 0, "actionCard", "Majesty", R.drawable.majesty));
+        this.deckAction.add(new Card(2, true, 0, "actionCard", "Majesty", R.drawable.majesty));
         this.deckAction.add(new Card(1, true, 0, "actionCard", "Mass_Confusion", R.drawable.mass_confusion));
-        //this.deckAction.add(new Card(false, true, 0, "actionCard", "Military_Might", R.drawable.military_might));
+        this.deckAction.add(new Card(2, true, 0, "actionCard", "Military_Might", R.drawable.military_might));
         this.deckAction.add(new Card(1, true, 0, "actionCard", "Military_Support", R.drawable.military_support));
         this.deckAction.add(new Card(1, true, 0, "actionCard", "Milling1", R.drawable.milling_in_line));
         this.deckAction.add(new Card(1, true, 0, "actionCard", "Milling2", R.drawable.milling_in_line));
@@ -248,22 +253,22 @@ public class GuillotineState extends GameState {
         //this.deckAction.add(new Card(false, true, 0, "actionCard", "Opinionated", R.drawable.opinionated_guards));
         this.deckAction.add(new Card(1, true, 0, "actionCard", "Political_Influence1", R.drawable.political_influence));
         this.deckAction.add(new Card(1, true, 0, "actionCard", "Political_Influence2", R.drawable.political_influence));
-        //this.deckAction.add(new Card(false, true, 0, "actionCard", "Public_Demand", R.drawable.public_demand));
-        //this.deckAction.add(new Card(false, true, 0, "actionCard", "Pushed1", R.drawable.pushed));
-        //this.deckAction.add(new Card(false, true, 0, "actionCard", "Pushed2", R.drawable.pushed));
+        this.deckAction.add(new Card(2, true, 0, "actionCard", "Public_Demand", R.drawable.public_demand));
+        this.deckAction.add(new Card(2, true, 0, "actionCard", "Pushed1", R.drawable.pushed));
+        this.deckAction.add(new Card(2, true, 0, "actionCard", "Pushed2", R.drawable.pushed));
         this.deckAction.add(new Card(1, true, 0, "actionCard", "Rain_Delay", R.drawable.rain_delay));
         //this.deckAction.add(new Card(false, true, 0, "actionCard", "Rat_Break", R.drawable.rat_break));
         //this.deckAction.add(new Card(false, true, 0, "actionCard", "Rush_Job", R.drawable.rush_job));
         //this.deckAction.add(new Card(false, true, 0, "actionCard", "Scarlet", R.drawable.scarlet_pimpernel));
-        //this.deckAction.add(new Card(false, true, 0, "actionCard", "Stumble1", R.drawable.stumble));
-        //this.deckAction.add(new Card(false, true, 0, "actionCard", "Stumble2", R.drawable.stumble));
+        this.deckAction.add(new Card(2, true, 0, "actionCard", "Stumble1", R.drawable.stumble));
+        this.deckAction.add(new Card(2, true, 0, "actionCard", "Stumble2", R.drawable.stumble));
         this.deckAction.add(new Card(1, true, 0, "actionCard", "Long_Walk", R.drawable.the_long_walk));
-        //this.deckAction.add(new Card(false, true, 0, "actionCard", "Better_Thing", R.drawable.tis_far_better));
+        this.deckAction.add(new Card(2, true, 0, "actionCard", "Better_Thing", R.drawable.tis_far_better));
         this.deckAction.add(new Card(1, true, 0, "actionCard", "Tough_Crowd", R.drawable.tough_crowd));
-        //this.deckAction.add(new Card(false, true, 0, "actionCard", "Trip1", R.drawable.trip));
-        //this.deckAction.add(new Card(false, true, 0, "actionCard", "Trip2", R.drawable.trip));
+        this.deckAction.add(new Card(2, true, 0, "actionCard", "Trip1", R.drawable.trip));
+        this.deckAction.add(new Card(2, true, 0, "actionCard", "Trip2", R.drawable.trip));
         //this.deckAction.add(new Card(false, true, 0, "actionCard", "Twist_Fate", R.drawable.twist_of_fate));
-        //this.deckAction.add(new Card(false, true, 0, "actionCard", "Was_Name", R.drawable.was_that_my_name));
+        this.deckAction.add(new Card(2, true, 0, "actionCard", "Was_Name", R.drawable.was_that_my_name));
     }
 
     public int getDayNum() {
@@ -358,6 +363,10 @@ public class GuillotineState extends GameState {
     }
 
     public void setBegun(boolean begun){ this.begun = begun;}
+
+    public void setChoice1(int choice){ this.choice1 = choice;}
+
+    public void setChoice2(int choice){ this.choice2 = choice;}
 
     //Variables that are not used outside of a single call
     private boolean gameStart = false;
@@ -823,13 +832,14 @@ public class GuillotineState extends GameState {
         int indifferent = -1;
         int militarySupport = -1;
 
+
         //checks who the user is
         //checks to see if they have specialty cards like count or countess
         //adds the noble card points into score
         if (user == 0) {
             //checks to see if this is last time this method will be called
             if(dayNum != 4){
-
+                p0Score = 0;
                 //goes through field to see if special card is present
                 for (int k = 0; k < field.size(); k++){
                     if(field.get(k).id.equals("Indifferent")){
@@ -928,9 +938,11 @@ public class GuillotineState extends GameState {
 
         //same exact code as p0, except it is for p1
         else {
-             //checks to see if this is last time this method will be called
-                if(dayNum != 4){
 
+
+            //checks to see if this is last time this method will be called
+                if(dayNum != 4){
+                    p1Score = 0;
                     //goes through field to see if special card is present
                     for (int k = 0; k < field.size(); k++){
                         if(field.get(k).id.equals("Indifferent")){
@@ -1169,12 +1181,11 @@ public class GuillotineState extends GameState {
      * @return always return true because it has to be checked by another method.
      */
 
-    public boolean moveNoble(int nobleCardLocation, int choice1ation) {
-        if (this.nobleLine.size() > nobleCardLocation && this.nobleLine.size() > choice1ation) {
-            this.deckDiscard.add(0, this.nobleLine.get(nobleCardLocation));
-            this.nobleLine.remove(nobleCardLocation);
-            this.nobleLine.add(choice1ation, this.deckDiscard.get(0));
-            this.deckDiscard.remove(0);
+    public boolean moveNoble(int first, int second) {
+        if (this.nobleLine.size() > first && this.nobleLine.size() > second) {
+            Card t = this.nobleLine.get(first);
+            this.nobleLine.remove(first);
+            this.nobleLine.add(second, t);
             //code to remove card from array of cards, then make everycard's location inbewteen nobleCardLocation and choice1ation have their
             //location +1, then put the card in choice1ation
             return true;
@@ -1189,8 +1200,7 @@ public class GuillotineState extends GameState {
     private int phase1 = -1;
     private int phase2 = -1;
     private int phase3 = -1;
-    private int choice1 = -1;
-    private int choice2 = -1;
+
 
     /** this method calls on card ability. it checks if the card is noble and gets the id to play
      * ability. if not it's not noble. it gets id of action card and plays ability.
@@ -1529,8 +1539,22 @@ public class GuillotineState extends GameState {
                         break;
                     }
                     this.actionCardPlayed = true;
-                    if (this.nobleLine.get(choice1).cardColor.equals("Green")) {
-                        moveNoble(choice1, choice2);
+
+                    if(this.turnPhase == 0){
+                        this.turnPhase = 3;
+                    }else if(this.turnPhase == 3){
+
+                        if (this.nobleLine.get(choice1).cardColor.equals("Green")) {
+                            this.turnPhase = 4;
+                        } else {
+                            this.turnPhase = 1;
+                        }
+
+                    }else if(this.turnPhase == 4){
+                        if(choice1 - 1 >= 0) {
+                            moveNoble(choice1, choice1 - choice2);
+                        }
+                        turnPhase = 1;
                     }
 
 
@@ -1610,11 +1634,16 @@ public class GuillotineState extends GameState {
                         break;
                     }
                     this.actionCardPlayed = true;
-                    this.deckDiscard.add(this.nobleLine.get(choice1));
-                    this.nobleLine.remove(choice1);
-                    this.nobleLine.add(choice1, this.deckNoble.get(0));
-                    this.deckNoble.remove(0);
-                    this.actionCardPlayed = false;
+                    if(this.turnPhase == 0){
+                        this.turnPhase = 3;
+                    }else if(this.turnPhase == 3){
+                        this.deckDiscard.add(this.nobleLine.get(choice1));
+                        this.nobleLine.remove(choice1);
+                        this.nobleLine.add(choice1, this.deckNoble.get(0));
+                        this.deckNoble.remove(0);
+                        this.actionCardPlayed = false;
+                    }
+
 
 
                     if (this.playerTurn == 0) {
@@ -1819,10 +1848,18 @@ public class GuillotineState extends GameState {
                         break;
                     }
                     this.actionCardPlayed = true;
-                    if (choice2 - choice1 > 3) {
-                        this.nobleLine.add(choice1, this.nobleLine.get(choice1));
-                        this.nobleLine.remove(choice1);
+
+                    if(this.turnPhase == 0){
+                        this.turnPhase = 3;
+                    }else if(this.turnPhase == 3){
+                        this.turnPhase = 5;
+                    }else if(this.turnPhase == 5){
+                        if(choice1 != this.nobleLine.size() - 1) {
+                            moveNoble(choice1, choice1 + choice2);
+                        }
+                        turnPhase = 1;
                     }
+
 
                     if (this.playerTurn == 0) {
                         for (int i = 0; i < this.p0Hand.size(); i++) {
@@ -2006,9 +2043,20 @@ public class GuillotineState extends GameState {
                         break;
                     }
                     this.actionCardPlayed = true;
-                    if (choice2 - choice1 < 3) {
-                        moveNoble(choice2, choice1);
+
+
+                    if(this.turnPhase == 0){
+                        this.turnPhase = 3;
+                    }else if(this.turnPhase == 3){
+                        this.turnPhase = 4;
+                    }else if(this.turnPhase == 4){
+                        if(choice1 != this.nobleLine.size() - 1) {
+                            moveNoble(choice1, choice1 + choice2);
+                        }
+                        turnPhase = 1;
                     }
+
+
                     if (this.playerTurn == 0) {
                         for (int i = 0; i < this.p0Hand.size(); i++) {
                             if (this.p0Hand.get(i).getId().equals("Friend_Queen1")) {
@@ -2034,9 +2082,20 @@ public class GuillotineState extends GameState {
                         break;
                     }
                     this.actionCardPlayed = true;
-                    if (choice2 - choice1 < 3) {
-                        moveNoble(choice1, choice2);
+
+
+                    if(this.turnPhase == 0){
+                        this.turnPhase = 3;
+                    }else if(this.turnPhase == 3){
+                        this.turnPhase = 4;
+                    }else if(this.turnPhase == 4){
+                        if(choice1 != this.nobleLine.size() - 1) {
+                            moveNoble(choice1, choice1 + choice2);
+                        }
+                        turnPhase = 1;
                     }
+
+
                     if (this.playerTurn == 0) {
                         for (int i = 0; i < this.p0Hand.size(); i++) {
                             if (this.p0Hand.get(i).getId().equals("Friend_Queen2")) {
@@ -2063,9 +2122,18 @@ public class GuillotineState extends GameState {
                     }
                     this.actionCardPlayed = true;
 
-                    if (choice2 - choice1 < 3 && choice1 - choice2 >= 0) {
-                        moveNoble(choice2, choice1);
+                    if(this.turnPhase == 0){
+                        this.turnPhase = 3;
+                    }else if(this.turnPhase == 3){
+                        this.turnPhase = 4;
+                    }else if(this.turnPhase == 4){
+                        if(choice1 - 1 >= 0) {
+                            moveNoble(choice1, choice1 - choice2);
+                        }
+                        turnPhase = 1;
                     }
+
+
                     if (this.playerTurn == 0) {
                         for (int i = 0; i < this.p0Hand.size(); i++) {
                             if (this.p0Hand.get(i).getId().equals("Idiot1")) {
@@ -2091,9 +2159,18 @@ public class GuillotineState extends GameState {
                         break;
                     }
                     this.actionCardPlayed = true;
-                    if (choice2 - choice1 < 3 && choice2 - choice1 >= 0) {
-                        moveNoble(choice1, choice2);
+
+                    if(this.turnPhase == 0){
+                        this.turnPhase = 3;
+                    }else if(this.turnPhase == 3){
+                        this.turnPhase = 4;
+                    }else if(this.turnPhase == 4){
+                        if(choice1 - 1 >= 0) {
+                            moveNoble(choice1, choice1 - choice2);
+                        }
+                        turnPhase = 1;
                     }
+
                     if (this.playerTurn == 0) {
                         for (int i = 0; i < this.p0Hand.size(); i++) {
                             if (this.p0Hand.get(i).getId().equals("Idiot2")) {
@@ -2120,9 +2197,18 @@ public class GuillotineState extends GameState {
                         break;
                     }
                     this.actionCardPlayed = true;
-                    if (choice1 - 4 >= 0) {
-                        moveNoble(choice1, choice1 - 4);
+
+                    if(turnPhase == 0){
+                        this.turnPhase = 3;
+                    } else if(turnPhase == 3){
+                        if (choice1 - 4 >= 0) {
+                            moveNoble(choice1, choice1 - 4);
+                        }
+
+                        turnPhase = 1;
                     }
+
+
                     if (this.playerTurn == 0) {
                         for (int i = 0; i < this.p0Hand.size(); i++) {
                             if (this.p0Hand.get(i).getId().equals("Ignoble1")) {
@@ -2149,9 +2235,18 @@ public class GuillotineState extends GameState {
                         break;
                     }
                     this.actionCardPlayed = true;
-                    if (choice1 - 4 >= 0) {
-                        moveNoble(choice1, choice1 - 4);
+
+                    if(turnPhase == 0){
+                        this.turnPhase = 3;
+                    } else if(turnPhase == 3){
+                        if (choice1 - 4 >= 0) {
+                            moveNoble(choice1, choice1 - 4);
+                        }
+
+                        turnPhase = 1;
                     }
+
+
                     if (this.playerTurn == 0) {
                         for (int i = 0; i < this.p0Hand.size(); i++) {
                             if (this.p0Hand.get(i).getId().equals("Ignoble2")) {
@@ -2374,10 +2469,21 @@ public class GuillotineState extends GameState {
                     }
                     this.actionCardPlayed = true;
 
-                    if (this.nobleLine.get(choice1).cardColor.equals("Purple")) {
-                        if (choice1 - choice2 < 3) {
-                            moveNoble(choice1, choice2);
+                    if(this.turnPhase == 0){
+                        this.turnPhase = 3;
+                    }else if(this.turnPhase == 3){
+
+                        if (this.nobleLine.get(choice1).cardColor.equals("Purple")) {
+                            this.turnPhase = 4;
+                        } else {
+                            this.turnPhase = 1;
                         }
+
+                    }else if(this.turnPhase == 4){
+                        if(choice1 - 1 >= 0) {
+                            moveNoble(choice1, choice1 - choice2);
+                        }
+                        turnPhase = 1;
                     }
 
                     if (this.playerTurn == 0) {
@@ -2442,11 +2548,23 @@ public class GuillotineState extends GameState {
                     }
                     this.actionCardPlayed = true;
 
-                    if (this.nobleLine.get(choice1).cardColor.equals("Red")) {
-                        if (choice1 - choice2 < 3) {
-                            moveNoble(choice1, choice2);
+                    if(this.turnPhase == 0){
+                        this.turnPhase = 3;
+                    }else if(this.turnPhase == 3){
+
+                        if (this.nobleLine.get(choice1).cardColor.equals("Red")) {
+                            this.turnPhase = 4;
+                        } else {
+                            this.turnPhase = 1;
                         }
+
+                    }else if(this.turnPhase == 4){
+                        if(choice1 - 1 >= 0) {
+                            moveNoble(choice1, choice1 - choice2);
+                        }
+                        turnPhase = 1;
                     }
+
 
                     if (this.playerTurn == 0) {
                         for (int i = 0; i < this.p0Hand.size(); i++) {
@@ -2714,7 +2832,14 @@ public class GuillotineState extends GameState {
                 //requires on click
                 case "Public_Demand":
                     this.actionCardPlayed = true;
-                    moveNoble(choice1, 0);
+
+                    if(this.turnPhase == 0){
+                        this.turnPhase = 3;
+                    } else if(this.turnPhase == 3){
+                        moveNoble(choice1, 0);
+                        this.turnPhase = 1;
+                    }
+
 
                     if (this.playerTurn == 0) {
                         for (int i = 0; i < this.p0Hand.size(); i++) {
@@ -2743,10 +2868,14 @@ public class GuillotineState extends GameState {
                     }
                     this.actionCardPlayed = true;
 
-                    if (choice1 - 2 >= 0) {
-                        moveNoble(choice1, choice1 - 2);
-                    } else {
-                        moveNoble(choice1, 0);
+                    if(turnPhase == 0){
+                        this.turnPhase = 3;
+                    } else if(turnPhase == 3){
+                        if (choice1 - 2 >= 0) {
+                            moveNoble(choice1, choice1 - 2);
+                        }
+
+                        turnPhase = 1;
                     }
 
                     if (this.playerTurn == 0) {
@@ -2775,10 +2904,15 @@ public class GuillotineState extends GameState {
                         break;
                     }
                     this.actionCardPlayed = true;
-                    if (choice1 - 2 >= 0) {
-                        moveNoble(choice1, choice1 - 2);
-                    } else {
-                        moveNoble(choice1, 0);
+
+                    if(turnPhase == 0){
+                        this.turnPhase = 3;
+                    } else if(turnPhase == 3){
+                        if (choice1 - 2 >= 0) {
+                            moveNoble(choice1, choice1 - 2);
+                        }
+
+                        turnPhase = 1;
                     }
 
                     if (this.playerTurn == 0) {
@@ -2924,8 +3058,14 @@ public class GuillotineState extends GameState {
                     }
                     this.actionCardPlayed = true;
 
-                    if (choice1 != 0) {
-                        moveNoble(choice1, choice1 - 1);
+                    if(turnPhase == 0){
+                        this.turnPhase = 3;
+                    } else if(turnPhase == 3){
+                        if (choice1 - 1 >= 0) {
+                            moveNoble(choice1, choice1 - 1);
+                        }
+
+                        turnPhase = 1;
                     }
 
                     if (this.playerTurn == 0) {
@@ -2953,8 +3093,15 @@ public class GuillotineState extends GameState {
                         break;
                     }
                     this.actionCardPlayed = true;
-                    if (choice1 != 0) {
-                        moveNoble(choice1, choice1 - 1);
+
+                    if(turnPhase == 0){
+                        this.turnPhase = 3;
+                    } else if(turnPhase == 3){
+                        if (choice1 - 1 >= 0) {
+                            moveNoble(choice1, choice1 - 1);
+                        }
+
+                        turnPhase = 1;
                     }
 
                     if (this.playerTurn == 0) {
@@ -3008,11 +3155,17 @@ public class GuillotineState extends GameState {
                         break;
                     }
                     this.actionCardPlayed = true;
-                    if (choice1 - 3 >= 0) {
-                        moveNoble(choice1, choice1 - 3);
-                    } else {
-                        moveNoble(choice1, 0);
+
+                    if(turnPhase == 0){
+                        this.turnPhase = 3;
+                    } else if(turnPhase == 3){
+                        if (choice1 - 3 >= 0) {
+                            moveNoble(choice1, choice1 - 3);
+                        }
+
+                        turnPhase = 1;
                     }
+
                     if (this.playerTurn == 0) {
                         for (int i = 0; i < this.p0Hand.size(); i++) {
                             if (this.p0Hand.get(i).getId().equals("Better_Thing")) {
@@ -3064,10 +3217,15 @@ public class GuillotineState extends GameState {
                         break;
                     }
                     this.actionCardPlayed = true;
-                    this.turnPhase--;
 
-                    if (choice1 != this.nobleLine.size() - 1) {
-                        moveNoble(choice1, choice1 + 1);
+                    if(turnPhase == 0){
+                        this.turnPhase = 3;
+                    } else if(turnPhase == 3){
+                        if (choice1 != this.nobleLine.size() - 1) {
+                            moveNoble(choice1, choice1 + 1);
+                        }
+
+                        turnPhase = 0;
                     }
 
                     if (this.playerTurn == 0) {
@@ -3096,10 +3254,15 @@ public class GuillotineState extends GameState {
                         break;
                     }
                     this.actionCardPlayed = true;
-                    this.turnPhase--;
 
-                    if (choice1 != this.nobleLine.size() - 1) {
-                        moveNoble(choice1, choice1 + 1);
+                    if(turnPhase == 0){
+                        this.turnPhase = 3;
+                    } else if(turnPhase == 3){
+                        if (choice1 != this.nobleLine.size() - 1) {
+                            moveNoble(choice1, choice1 + 1);
+                        }
+
+                        turnPhase = 0;
                     }
 
                     if (this.playerTurn == 0) {
@@ -3160,10 +3323,15 @@ public class GuillotineState extends GameState {
                     }
                     this.actionCardPlayed = true;
 
-                    if (choice1 - choice1 >= 0) {
-                        moveNoble(choice1, choice1);
-                    } else {
-                        moveNoble(choice1, 0);
+                    if(this.turnPhase == 0){
+                        this.turnPhase = 3;
+                    }else if(this.turnPhase == 3){
+                         this.turnPhase = 5;
+                    }else if(this.turnPhase == 5){
+                        if(choice1 - 1 >= 0) {
+                            moveNoble(choice1, choice1 - choice2);
+                        }
+                        turnPhase = 1;
                     }
 
                     if (this.playerTurn == 0) {
