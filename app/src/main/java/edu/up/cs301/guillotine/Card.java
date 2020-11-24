@@ -6,7 +6,7 @@ import android.graphics.Bitmap;
  * @author William Cloutier
  * @author Moses Karemera
  * @author Maxwell McAtee
- * @version Alpha November 2020
+ * @version Beta November 2020
  */
 
 /**
