@@ -15,7 +15,12 @@ import edu.up.cs301.game.R;
  * @author Maxwell McAtee
  * @version Beta November 2020
  */
-
+/**
+ *External Citation  Date:    23 November 2020
+ * Problem:     Could not find an efficient way to swap the contents of two arrayLists
+ * Resource:    https://www.geeksforgeeks.org/arraylist-clone-method-in-java-with-examples/
+ * Solution:    Followed the steps from this source to use the clone method for arrayLists
+ * */
 /**
  * Main gamestate that houses most private vars and houses all the cards that our game uses
  */
