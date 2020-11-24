@@ -13,7 +13,7 @@ import edu.up.cs301.game.R;
  * @author William Cloutier
  * @author Moses Karemera
  * @author Maxwell McAtee
- * @version Alpha November 2020
+ * @version Beta November 2020
  */
 
 /**
@@ -53,8 +53,8 @@ public class GuillotineComputerPlayer1 extends GameComputerPlayer {
         if(gameState.getPlayerTurn() == 1) {
             if(gameState.getTurnPhase() == 0) {
 
+                //AI randomly either plays an action card or skips
                 int play = rand.nextInt(2);
-
                 int pos = rand.nextInt(gameState.getP1Hand().size());
                 if (play == 1) {
 
@@ -64,20 +64,33 @@ public class GuillotineComputerPlayer1 extends GameComputerPlayer {
                     gameState.setTurnPhase(1);
                 } else {
                     game.sendAction(new SkipAction(this));
+                    gameState.setTurnPhase(1);
+
                 }
-            }else if(gameState.getTurnPhase() == 3) {
+            }
+
+            //ai picks a second card
+            else if(gameState.getTurnPhase() == 3) {
                 int pos = rand.nextInt(gameState.getNobleLine().size());
 
                 ChooseAction action = new ChooseAction(this, pos, 1);
+                game.sendAction(action);
 
-            }else if(gameState.getTurnPhase() == 1){
+            }
+
+            //plays a noble action
+            else if(gameState.getTurnPhase() == 1){
                 game.sendAction(new NobleAction(this));
                 gameState.setTurnPhase(2);
-            }else if(gameState.getTurnPhase() == 2){
+            }
+            //ai draws a card
+            else if(gameState.getTurnPhase() == 2){
                 game.sendAction(new DrawAction(this));
                 gameState.setTurnPhase(0);
             }
-        }else{
+
+        }
+        else{
             game.sendAction(new NullAction(this));
         }
     }

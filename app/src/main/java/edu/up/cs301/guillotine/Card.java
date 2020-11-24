@@ -6,7 +6,7 @@ import android.graphics.Bitmap;
  * @author William Cloutier
  * @author Moses Karemera
  * @author Maxwell McAtee
- * @version Alpha November 2020
+ * @version Beta November 2020
  */
 
 /**
@@ -15,6 +15,7 @@ import android.graphics.Bitmap;
 public class Card {
     //Instance variables for a card object
     public int  type;
+    public boolean affectsLine;
     public boolean hasEffect;
     public int points;
     public String cardColor;
@@ -22,8 +23,9 @@ public class Card {
     public int image;
 
     //Constructor for Card object
-    public Card(int type, boolean hasEffect, int points, String cardColor,  String id, int image){
+    public Card(int type, boolean affectsLine, boolean hasEffect, int points, String cardColor,  String id, int image){
         this.type = type;
+        this.affectsLine = affectsLine;
         this.hasEffect = hasEffect;
         this.points = points;
         this.cardColor = cardColor;
