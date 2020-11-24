@@ -82,7 +82,8 @@ public class GuillotineState extends GameState {
         this.actionCardPlayed = false;
 
         startGame();
-        p0Hand.add(new Card(2, true,true, 0, "actionCard", "Clothing_Swap", R.drawable.clothing_swap));
+        p0Hand.add(new Card(1, false, true, 0, "actionCard", "Info_Exchange", R.drawable.information_exchange));
+        p0Hand.add(new Card(1, true,true, 0, "actionCard", "Political_Influence1", R.drawable.political_influence));
     }
     //Deep copy constructor
     /**
@@ -738,9 +739,7 @@ public class GuillotineState extends GameState {
      */
     public boolean tradeHands(ArrayList p1, ArrayList p2) {
 
-        tempList = (ArrayList)p1.clone();
-        p1 = (ArrayList)p2.clone();
-        p2 = (ArrayList)tempList.clone();
+
 
         return true;
     }
@@ -2382,7 +2381,10 @@ public class GuillotineState extends GameState {
                 //trade user hands
                 case "Info_Exchange":
                     this.actionCardPlayed = true;
-                    tradeHands(this.p0Hand, this.p1Hand);
+
+                    tempList = (ArrayList)p0Hand.clone();
+                    p0Hand = (ArrayList)p1Hand.clone();
+                    p1Hand = (ArrayList)tempList.clone();
 
                     if (this.playerTurn == 0) {
                         for (int i = 0; i < this.p0Hand.size(); i++) {
@@ -2862,7 +2864,8 @@ public class GuillotineState extends GameState {
                     this.actionCardPlayed = true;
                     if (this.playerTurn == 0) {
                         for (int i = 0; i < this.p0Hand.size(); i++) {
-                            if (this.p0Hand.get(i).getId().equals("Political_Influence1")) {
+                            if (this.p0Hand.get(i).getId().equals("Political_Influence2")) {
+                                dealActionCard(this.p0Hand);
                                 dealActionCard(this.p0Hand);
                                 dealActionCard(this.p0Hand);
                                 this.deckDiscard.add(this.p0Hand.get(i));
@@ -2871,7 +2874,8 @@ public class GuillotineState extends GameState {
                         }
                     } else {
                         for (int i = 0; i < this.p1Hand.size(); i++) {
-                            if (this.p1Hand.get(i).getId().equals("Political_Influence1")) {
+                            if (this.p1Hand.get(i).getId().equals("Political_Influence2")) {
+                                dealActionCard(this.p1Hand);
                                 dealActionCard(this.p1Hand);
                                 dealActionCard(this.p1Hand);
                                 this.deckDiscard.add(this.p1Hand.get(i));
@@ -2880,7 +2884,7 @@ public class GuillotineState extends GameState {
                         }
 
                     }
-                    this.turnPhase++;
+                    this.turnPhase = 2;
                     this.actionCardPlayed = false;
                     break;
 
@@ -2891,6 +2895,8 @@ public class GuillotineState extends GameState {
                         for (int i = 0; i < this.p0Hand.size(); i++) {
                             if (this.p0Hand.get(i).getId().equals("Political_Influence2")) {
                                 dealActionCard(this.p0Hand);
+                                dealActionCard(this.p0Hand);
+                                dealActionCard(this.p0Hand);
                                 this.deckDiscard.add(this.p0Hand.get(i));
                                 this.p0Hand.remove(i);
                             }
@@ -2899,13 +2905,15 @@ public class GuillotineState extends GameState {
                         for (int i = 0; i < this.p1Hand.size(); i++) {
                             if (this.p1Hand.get(i).getId().equals("Political_Influence2")) {
                                 dealActionCard(this.p1Hand);
+                                dealActionCard(this.p1Hand);
+                                dealActionCard(this.p1Hand);
                                 this.deckDiscard.add(this.p1Hand.get(i));
                                 this.p1Hand.remove(i);
                             }
                         }
 
                     }
-                    this.turnPhase++;
+                    this.turnPhase = 2;
                     this.actionCardPlayed = false;
                     break;
 
