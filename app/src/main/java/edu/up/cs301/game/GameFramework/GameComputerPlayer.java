@@ -16,15 +16,14 @@ import edu.up.cs301.game.GameFramework.utilities.Tickable;
 import android.os.Handler;
 import android.os.Looper;
 
-/**
- * An abstract computerized game player player. This is an abstract class, that
- * should be sub-classed to implement different AIs. The subclass must implement
- * the {@link #receiveInfo} method.
- *
- * @author Steven R. Vegdahl
- * @author Andrew Nuxoll
- * @version July 2013
+
+ /**
+ * @author William Cloutier
+ * @author Moses Karemera
+ * @author Maxwell McAtee
+ * @version Beta November 2020
  */
+
 public abstract class GameComputerPlayer implements GamePlayer, Tickable {
     //Tag for logging
     private static final String TAG = "GameComputerPlayer";
