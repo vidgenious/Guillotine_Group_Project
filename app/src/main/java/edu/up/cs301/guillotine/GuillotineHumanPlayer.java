@@ -140,6 +140,8 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
             board.invalidate();
         }
 
+
+
         return true;
     }
 

@@ -68,6 +68,7 @@ public class GuillotineMainActivity extends GameMainActivity {
         defaultConfig.addPlayer("Human", 0); // player 1: a human player
         defaultConfig.addPlayer("Dumb Computer", 1); // player 2: a computer player
 
+
         // Set the default remote-player setup:
         // - player name: "Remote Player"
         // - IP code: (empty string)
