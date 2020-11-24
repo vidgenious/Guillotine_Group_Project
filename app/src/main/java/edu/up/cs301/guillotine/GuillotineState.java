@@ -1682,6 +1682,7 @@ public class GuillotineState extends GameState {
                         this.nobleLine.add(choice1, this.deckNoble.get(0));
                         this.deckNoble.remove(0);
                         this.actionCardPlayed = false;
+                        this.turnPhase = 1;
                     }
 
 
