@@ -124,7 +124,7 @@ public class GuillotineLocalGame extends LocalGame {
                     gameState.dealNoble();
                 }
 
-                //NOT DONE
+                gameState.setTurnPhase(0);
                 gameState.setDayNum(gameState.getDayNum()+1);
                 gameState.setTurnPhase(0);
             }
