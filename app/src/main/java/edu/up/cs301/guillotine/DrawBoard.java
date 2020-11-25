@@ -78,17 +78,17 @@ public class DrawBoard extends FlashSurfaceView {
         }
 
         //p0field arrow
-        if(state.getP0Field().size() > 13){
+        if(state.getP0Field().size() > 12){
             draw = BitmapFactory.decodeResource(getResources(), R.drawable.left_arrow_transparent);
             draw = Bitmap.createScaledBitmap(draw, 50, 50, true);
-            canvas.drawBitmap(draw, 250.0f, 675.0f, null);
+            canvas.drawBitmap(draw, 300.0f, 675.0f, null);
         }
 
         //p1field arrow
-        if(state.getP1Field().size() > 13){
+        if(state.getP1Field().size() > 12){
             draw = BitmapFactory.decodeResource(getResources(), R.drawable.left_arrow_transparent);
             draw = Bitmap.createScaledBitmap(draw, 50, 50, true);
-            canvas.drawBitmap(draw, 250.0f, 175.0f, null);
+            canvas.drawBitmap(draw, 300.0f, 175.0f, null);
         }
 
         //P0 Hand
