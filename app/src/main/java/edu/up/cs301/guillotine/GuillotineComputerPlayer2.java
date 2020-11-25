@@ -22,7 +22,10 @@ public class GuillotineComputerPlayer2 extends GameComputerPlayer {
     private boolean hasTwo = false;
     private int pos = 0;
 
+    public String playerName;
+
     public GuillotineComputerPlayer2(String name) {
+
         super(name);
     }
 
