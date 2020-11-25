@@ -70,10 +70,25 @@ public class DrawBoard extends FlashSurfaceView {
         grey.setTextSize(50.0f);
         canvas.drawText("GUILLOTINE GAME ", 10.0f, 100.0f, grey);
 
+        //Hand Arrow
         if(state.getP0Hand().size() > 7){
             draw = BitmapFactory.decodeResource(getResources(), R.drawable.left_arrow_transparent);
             draw = Bitmap.createScaledBitmap(draw, 100, 100, true);
             canvas.drawBitmap(draw, 250.0f, 890.0f, null);
+        }
+
+        //p0field arrow
+        if(state.getP0Field().size() > 13){
+            draw = BitmapFactory.decodeResource(getResources(), R.drawable.left_arrow_transparent);
+            draw = Bitmap.createScaledBitmap(draw, 50, 50, true);
+            canvas.drawBitmap(draw, 250.0f, 675.0f, null);
+        }
+
+        //p1field arrow
+        if(state.getP1Field().size() > 13){
+            draw = BitmapFactory.decodeResource(getResources(), R.drawable.left_arrow_transparent);
+            draw = Bitmap.createScaledBitmap(draw, 50, 50, true);
+            canvas.drawBitmap(draw, 250.0f, 175.0f, null);
         }
 
         //P0 Hand
@@ -87,7 +102,7 @@ public class DrawBoard extends FlashSurfaceView {
 
         //P0 field
         left = 1800;
-        for(int i = 0; i < state.getP0Field().size(); i++){
+        for(int i = 0; i < state.getP0Field().size() && i < 13; i++){
             draw = BitmapFactory.decodeResource(getResources(), state.getP0Field().get(i).image);
             draw = Bitmap.createScaledBitmap(draw, 100, 140, true);
             canvas.drawBitmap(draw, left, 650.0f, null); // 650
@@ -105,7 +120,7 @@ public class DrawBoard extends FlashSurfaceView {
 
         //P1 field
         left = 1800;
-        for(int i = 0; i < state.getP1Field().size(); i++){
+        for(int i = 0; i < state.getP1Field().size() && i < 13; i++){
             draw = BitmapFactory.decodeResource(getResources(), state.getP1Field().get(i).image);
             draw = Bitmap.createScaledBitmap(draw, 100, 140, true);
             canvas.drawBitmap(draw, left, 150.0f, null); //150
