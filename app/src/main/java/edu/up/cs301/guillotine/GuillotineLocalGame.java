@@ -19,6 +19,7 @@ public class GuillotineLocalGame extends LocalGame {
 
     Card temp;
 
+
     private GuillotineState gameState;
 
     /**
@@ -72,7 +73,8 @@ public class GuillotineLocalGame extends LocalGame {
                 gameState.playAction(gameState.getP0Hand(), cardPlayed);
 
              //If the turn is 1
-            } else {
+            }
+            else {
                 int cardPlayed = -1;
 
                 //For loop to find the card selected in the hand
@@ -92,7 +94,8 @@ public class GuillotineLocalGame extends LocalGame {
             return true;
 
          //If the action is a skip play action
-        }else if(action instanceof ChooseAction) {
+        }
+        else if(action instanceof ChooseAction) {
             if(((ChooseAction) action).getChoice() == 1) {
                 gameState.setChoice1(((ChooseAction) action).getPos());
             }else if(((ChooseAction) action).getChoice() == 2){
@@ -101,7 +104,8 @@ public class GuillotineLocalGame extends LocalGame {
             gameState.acknowledgeCardAbility(temp);
             return true;
 
-        } else if (action instanceof SkipAction) {
+        }
+        else if (action instanceof SkipAction) {
             gameState.skipAction();
 
             gameState.calculatePoints(gameState.getP0Field(), 0);
@@ -109,7 +113,8 @@ public class GuillotineLocalGame extends LocalGame {
             return true;
 
          //If the action is a collect noble action
-        } else if (action instanceof NobleAction) {
+        }
+        else if (action instanceof NobleAction) {
 
             //Depending on which player it is, that player gets the noble card
             if (gameState.getPlayerTurn() == 0) {
@@ -135,7 +140,8 @@ public class GuillotineLocalGame extends LocalGame {
             return true;
 
          //If the action is a draw card action
-        } else if (action instanceof DrawAction) {
+        }
+        else if (action instanceof DrawAction) {
 
             //Depending on player, that player get a new action card
             if (gameState.getPlayerTurn() == 0) {
@@ -150,7 +156,8 @@ public class GuillotineLocalGame extends LocalGame {
             return true;
 
          //If it a null action, due to a turn not being complete
-        } else if(action instanceof  NullAction){
+        }
+        else if(action instanceof  NullAction){
             return true;
         }
         return false;
@@ -176,6 +183,7 @@ public class GuillotineLocalGame extends LocalGame {
      * @return
      * 		a message that tells who has won the game, or null if the
      * 		game is not over
+     *
      */
     @Override
     protected String checkIfGameOver() {
@@ -184,12 +192,16 @@ public class GuillotineLocalGame extends LocalGame {
         if(gameState.getDayNum() == 4){
             if(gameState.getP0Score() > gameState.getP1Score()){
                 winner = this.playerNames[0];
-            }else{
+            }
+            else{
                 winner = this.playerNames[1];
             }
             return winner + " is the winner!";
         }else{
             return null;
         }
+
+
+
     }
 }

@@ -51,6 +51,9 @@ public class GuillotineState extends GameState {
     private int choice1;
     private int choice2;
 
+    private String p1Name;
+    private  String p0Name;
+
     private int tempTurn;
 
     private Card tempCard;
@@ -103,6 +106,8 @@ public class GuillotineState extends GameState {
         this.currFirstPlayer = origin.currFirstPlayer;
         this.turnPhase = origin.turnPhase;
         this.begun = origin.begun;
+        this.p1Name = origin.p1Name;
+        this.p0Name = origin.p0Name;
 
         this.p1Hand = new ArrayList<Card>();
         for (Card c : origin.p1Hand) {
@@ -298,6 +303,10 @@ public class GuillotineState extends GameState {
     }
 
     public boolean getBegun() { return this.begun;}
+
+    public String getP1Name(){return this.p1Name;}
+    public String getP0Name(){return this.p0Name;}
+
 
     public int getLastFirstPlayer() {
         return this.lastFirstPlayer;
