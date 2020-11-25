@@ -86,7 +86,7 @@ public class GuillotineState extends GameState {
         startGame();
         p0Hand.add(new Card(1, false, true, 0, "actionCard", "Info_Exchange", R.drawable.information_exchange));
         p0Hand.add(new Card(1, true,true, 0, "actionCard", "Political_Influence1", R.drawable.political_influence));
-        nobleLine.add(0, (new Card(0, false,true, 2, "Green", "Judge1", R.drawable.unpopular_judge)));
+        nobleLine.add(0, (new Card(0, false,true, 3, "Purple", "Robespierre", R.drawable.robespierre)));
 
     }
     //Deep copy constructor
@@ -473,9 +473,16 @@ public class GuillotineState extends GameState {
 
                 }
                 else {
-                    field.add(this.nobleLine.get(0));
-                    acknowledgeCardAbility((Card) field.get(field.size()-1));
-                    this.nobleLine.remove(0);
+                    if(this.nobleLine.get(0).id.equals("Robespierre")){
+                        field.add(this.nobleLine.get(0));
+                        this.nobleLine.remove(0);
+                        acknowledgeCardAbility((Card) field.get(field.size()-1));
+                    }
+                    else {
+                        field.add(this.nobleLine.get(0));
+                        acknowledgeCardAbility((Card) field.get(field.size() - 1));
+                        this.nobleLine.remove(0);
+                    }
                 }
             }
 
@@ -527,7 +534,8 @@ public class GuillotineState extends GameState {
             }
 
             return true;
-        } else {
+        }
+        else {
             for (int k = 0; k < 12; k++) {
                 dealNoble();
                 return true;
@@ -574,11 +582,15 @@ public class GuillotineState extends GameState {
      */
 
     public boolean dealNoble() {
+        if(!this.deckNoble.isEmpty()) {
+            this.nobleLine.add(this.deckNoble.get(0));
+            this.deckNoble.remove(0);
 
-        this.nobleLine.add(this.deckNoble.get(0));
-        this.deckNoble.remove(0);
-
-        return true;
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     //lets user skip action card play
@@ -717,16 +729,12 @@ public class GuillotineState extends GameState {
      * @return always return false because it has to be checked by another method.
      */
     public boolean discardRemainingNobles() {
-        if (!this.nobleLine.isEmpty()) {
             //go through nobleline list and discard each one
             while (!this.nobleLine.isEmpty()) {
                 this.deckDiscard.add(this.nobleLine.get(0));
                 this.nobleLine.remove(0);
             }
-            endDay();
             return true;
-        }
-        return false;
     }
 
     /**
