@@ -204,7 +204,7 @@ public class GuillotineLocalGame extends LocalGame {
             }else{
                 winner = this.playerNames[1];
             }
-            return winner + " is the winner!";
+            return winner + " is the winner! ";
         }else{
             return null;
         }

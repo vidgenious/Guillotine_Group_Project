@@ -132,6 +132,23 @@ public class GuillotineComputerPlayer2 extends GameComputerPlayer {
                 game.sendAction(action);
             }
 
+            //choose claus
+            else if(gameState.getTurnPhase() == 4){
+                int chos = rand.nextInt(2) + 1;
+
+                ChooseAction action = new ChooseAction(this, chos, 2);
+                game.sendAction(action);
+
+            }
+
+            //choose claus
+            else if (gameState.getTurnPhase() == 5){
+                int chos = rand.nextInt(3) + 1;
+
+                ChooseAction action = new ChooseAction(this, chos, 2);
+                game.sendAction(action);
+
+            }
             else {
                 game.sendAction(new NullAction(this));
             }

@@ -886,6 +886,14 @@ public class GuillotineState extends GameState {
                     if(field.get(k).id.equals("Indifferent")){
                         indifferent = 0;
                     }
+
+                    if(field.get(k).id.equals("Tough_Crowd")){
+                        this.p0Score-= 2;
+                    }
+
+                    if(field.get(k).id.equals("Fountain")){
+                        this.p0Score+= 2;
+                    }
                 }
 
                 //goes through field to see all noble cards
@@ -925,13 +933,6 @@ public class GuillotineState extends GameState {
                         militarySupport = 0;
                     }
 
-                    if(field.get(i).id.equals("Tough_Crowd")){
-                        this.p0Score-= 2;
-                    }
-
-                    if(field.get(i).id.equals("Fountain")){
-                        this.p0Score+= 2;
-                    }
 
                     if(churchSupport == 0){
                         if(field.get(i).cardColor.equals("Blue")){
@@ -990,6 +991,13 @@ public class GuillotineState extends GameState {
                         if(field.get(k).id.equals("Indifferent")){
                             indifferent = 1;
                         }
+                        if(field.get(k).id.equals("Tough_Crowd")){
+                            this.p1Score-= 2;
+                        }
+
+                        if(field.get(k).id.equals("Fountain")){
+                            this.p1Score+= 2;
+                        }
                     }
 
                     //goes through field to see all noble cards
@@ -1028,13 +1036,6 @@ public class GuillotineState extends GameState {
                             militarySupport = 1;
                         }
 
-                        if(field.get(i).id.equals("Tough_Crowd")){
-                            this.p1Score-= 2;
-                        }
-
-                        if(field.get(i).id.equals("Fountain")){
-                            this.p1Score+= 2;
-                        }
 
                         if(churchSupport == 0){
                             if(field.get(i).cardColor.equals("Blue")){
