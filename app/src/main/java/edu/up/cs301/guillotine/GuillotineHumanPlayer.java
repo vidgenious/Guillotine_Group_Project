@@ -57,6 +57,7 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
     public boolean onTouch(View view, MotionEvent event) {
         if (event.getAction() != MotionEvent.ACTION_UP) return true;
 
+
         //If statement for if the turn is correct
         if(state.getPlayerTurn() == 0) {
 
@@ -71,20 +72,24 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
 
             //check if hand arrow is pressed
             if(handArrow){
-
+                HandMoveAction action = new HandMoveAction(this);
+                game.sendAction(action);
             }
 
             //check if p0 arrow is pressed
             if(p0Arrow){
-
+                P0MoveAction action = new P0MoveAction(this);
+                game.sendAction(action);
             }
 
             //check if p1 arrow is pressed
             if(p1Arrow){
-
+                P1MoveAction action = new P1MoveAction(this);
+                game.sendAction(action);
             }
 
             //see if discard button is pressed
+            //Not used right now
             if(discardCall){
                 
             }
@@ -217,10 +222,8 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
             return 4;
         }else if(x > 600 && x < 800 && y > 800 && y < 1080){
             return 5;
-        }else if(x > 380 && x < 580 && y > 800 && y < 1080){
+        }else if(x > 380 && x < 580 && y > 800 && y < 1080) {
             return 6;
-        }else if(x > 160 && x < 360 && y > 800 && y < 1080) {
-            return 7;
         }
         return -1;
     }
@@ -255,21 +258,21 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
     }
 
     private boolean handArrow(int x, int y){
-        if(x > 100 && x < 250 && y > 100 && y < 890){
+        if(x > 240 && x < 310 && y > 880 && y < 950){
             return true;
         }
         return false;
     }
 
     private boolean p0FieldArrow(int x, int y){
-        if(x > 50 && x < 250 && y > 50 && y < 675){
+        if(x > 250 && x < 300 && y > 675 && y < 725){
             return true;
         }
         return false;
     }
 
     private boolean p1FieldArrow(int x, int y){
-        if(x > 50 && x < 250 && y > 50 && y < 175){
+        if(x > 250 && x < 300 && y > 175 && y < 225){
             return true;
         }
         return false;
@@ -318,7 +321,4 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
         return -1;
     }
 
-    private boolean leftArrow(int x, int y){
-        return false;
-    }
 }

@@ -53,9 +53,16 @@ public class DrawBoard extends FlashSurfaceView {
             return;
         }
 
-        canvas.drawRect(10.0f, 670.0f, 200.0f, 770.0f, grey);
-        canvas.drawText("Discard", 10.0f,715.0f, black);
-        canvas.drawText("Callous", 10.0f,766.0f, black);
+        for (int i = 0; i < state.getP0Field().size(); i++) {
+            if (state.getP0Field().get(i).getId().equals("Callous")) {
+                canvas.drawRect(10.0f, 670.0f, 200.0f, 770.0f, grey);
+                canvas.drawText("Discard", 10.0f,715.0f, black);
+                canvas.drawText("Callous", 10.0f,766.0f, black);
+            }
+        }
+
+
+
         canvas.drawRect(10.0f, 970.0f, 170.0f, 1070.0f, grey);
         canvas.drawText("Skip", 30.0f,1030.0f, black);
         canvas.drawRect(10.0f, 860.0f, 170.0f, 960.0f, grey);
@@ -78,14 +85,14 @@ public class DrawBoard extends FlashSurfaceView {
         }
 
         //p0field arrow
-        if(state.getP0Field().size() > 13){
+        if(state.getP0Field().size() > 12){
             draw = BitmapFactory.decodeResource(getResources(), R.drawable.left_arrow_transparent);
             draw = Bitmap.createScaledBitmap(draw, 50, 50, true);
             canvas.drawBitmap(draw, 250.0f, 675.0f, null);
         }
 
         //p1field arrow
-        if(state.getP1Field().size() > 13){
+        if(state.getP1Field().size() > 12){
             draw = BitmapFactory.decodeResource(getResources(), R.drawable.left_arrow_transparent);
             draw = Bitmap.createScaledBitmap(draw, 50, 50, true);
             canvas.drawBitmap(draw, 250.0f, 175.0f, null);
@@ -102,7 +109,7 @@ public class DrawBoard extends FlashSurfaceView {
 
         //P0 field
         left = 1800;
-        for(int i = 0; i < state.getP0Field().size() && i < 13; i++){
+        for(int i = 0; i < state.getP0Field().size() && i < 12; i++){
             draw = BitmapFactory.decodeResource(getResources(), state.getP0Field().get(i).image);
             draw = Bitmap.createScaledBitmap(draw, 100, 140, true);
             canvas.drawBitmap(draw, left, 650.0f, null); // 650
@@ -120,7 +127,7 @@ public class DrawBoard extends FlashSurfaceView {
 
         //P1 field
         left = 1800;
-        for(int i = 0; i < state.getP1Field().size() && i < 13; i++){
+        for(int i = 0; i < state.getP1Field().size() && i < 12; i++){
             draw = BitmapFactory.decodeResource(getResources(), state.getP1Field().get(i).image);
             draw = Bitmap.createScaledBitmap(draw, 100, 140, true);
             canvas.drawBitmap(draw, left, 150.0f, null); //150

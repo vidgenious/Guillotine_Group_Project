@@ -166,7 +166,17 @@ public class GuillotineLocalGame extends LocalGame {
             gameState.calculatePoints(gameState.getP1Field(), 1);
             return true;
 
-         //If it a null action, due to a turn not being complete
+
+        }else if(action instanceof HandMoveAction) {
+            gameState.moveThroughHand();
+
+        }else if(action instanceof P0MoveAction) {
+            gameState.moveThroughP0Field();
+
+        } else if(action instanceof P1MoveAction) {
+            gameState.moveThroughP1Field();
+
+            //If it a null action, due to a turn not being complete
         } else if(action instanceof  NullAction){
             return true;
         }

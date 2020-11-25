@@ -85,7 +85,6 @@ public class GuillotineState extends GameState {
 
         startGame();
 
-        p0Hand.add(new Card(1, false,true, 0, "actionCard", "Double_Feature1", R.drawable.double_feature));
     }
     //Deep copy constructor
     /**
@@ -232,7 +231,7 @@ public class GuillotineState extends GameState {
     private void initActionDeck() {
         this.deckAction.add(new Card(1, true,true, 0, "actionCard", "After_You", R.drawable.after_you));
         this.deckAction.add(new Card(1, true,true, 0, "actionCard", "Bribed", R.drawable.bribed_guards));
-        this.deckAction.add(new Card(1, false,true, 0,"actionCard", "Callous", R.drawable.callous_guards));
+        //this.deckAction.add(new Card(1, false,true, 0,"actionCard", "Callous", R.drawable.callous_guards));
         this.deckAction.add(new Card(1, false,true, 0, "actionCard", "Church_Support", R.drawable.church_support));
         this.deckAction.add(new Card(2, true,true, 0, "actionCard", "Civic_Pride", R.drawable.civic_pride));
         this.deckAction.add(new Card(1, false,true, 0, "actionCard", "Civic_Support", R.drawable.civic_support));
@@ -835,6 +834,40 @@ public class GuillotineState extends GameState {
             return true;
         }
         return false;
+    }
+
+    /**
+     * This method goes through the p0 hand
+     *
+     *
+     * @return always return true
+     */
+    public boolean moveThroughHand(){
+        p0Hand.add(p0Hand.get(0));
+        p0Hand.remove(0);
+        return true;
+    }
+
+    /**
+     * This method goes through the p0field
+     *
+     * @return always returns true
+     */
+    public boolean moveThroughP0Field(){
+        p0Field.add(p0Field.get(0));
+        p0Field.remove(0);
+        return true;
+    }
+
+    /**
+     * This method goes through the p1field
+     *
+     * @return always returns true
+     */
+    public boolean moveThroughP1Field(){
+        p1Field.add(p1Field.get(0));
+        p1Field.remove(0);
+        return true;
     }
 
     /**
