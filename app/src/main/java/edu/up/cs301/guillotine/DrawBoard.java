@@ -128,27 +128,27 @@ public class DrawBoard extends FlashSurfaceView {
         }
 
         if(state.getTurnPhase() == 0){
-            canvas.drawText("Action Card Phase", 500.0f, 50.0f, grey);
+            canvas.drawText("Action Card Phase", 800.0f, 50.0f, grey);
         }
 
         if(state.getTurnPhase() == 1){
-            canvas.drawText("Take Noble Phase", 500.0f, 50.0f, grey);
+            canvas.drawText("Take Noble Phase", 800.0f, 50.0f, grey);
         }
         if(state.getTurnPhase() == 2){
-            canvas.drawText("Draw card Phase", 500.0f, 50.0f, grey );
+            canvas.drawText("Draw card Phase", 800.0f, 50.0f, grey );
         }
         if(state.getTurnPhase() == 3){
-            canvas.drawText("Select Noble in Line", 500.0f, 50.0f, grey);
+            canvas.drawText("Select Noble in Line", 800.0f, 50.0f, grey);
         }
 
         if(state.getTurnPhase() == 4){
-            canvas.drawText("Select ", 500.0f, 50.0f, grey);
+            canvas.drawText("Select ", 800.0f, 50.0f, grey);
             canvas.drawText("1", 50.0f, 400.0f, choice);
             canvas.drawText("2", 1050.0f, 400.0f, choice);
         }
 
         if(state.getTurnPhase() == 5){
-            canvas.drawText("Select", 500.0f, 50.0f, grey);
+            canvas.drawText("Select", 800.0f, 50.0f, grey);
             if(state.getArrival()){
                 left = 50.0f;
                 for(int i = 0; i < state.getDeckNoble().size() && i < 3; i++){
@@ -165,7 +165,7 @@ public class DrawBoard extends FlashSurfaceView {
         }
 
         if(state.getTurnPhase() == 6){
-            canvas.drawText("Select Card in Hand", 500.0f, 50.0f, grey);
+            canvas.drawText("Select Card in Hand", 800.0f, 50.0f, grey);
         }
 
 
