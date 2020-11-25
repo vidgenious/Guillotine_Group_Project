@@ -84,9 +84,6 @@ public class GuillotineState extends GameState {
         this.actionCardPlayed = false;
 
         startGame();
-        p0Hand.add(new Card(1, true,true, 0, "actionCard", "Political_Influence1", R.drawable.political_influence));
-        nobleLine.add(0, (new Card(0, false,true, 3, "Purple", "Robespierre", R.drawable.robespierre)));
-
     }
     //Deep copy constructor
     /**
