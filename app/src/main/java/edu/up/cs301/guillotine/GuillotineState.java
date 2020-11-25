@@ -84,6 +84,8 @@ public class GuillotineState extends GameState {
         this.actionCardPlayed = false;
 
         startGame();
+
+        p0Hand.add(new Card(1, false,true, 0, "actionCard", "Double_Feature1", R.drawable.double_feature));
     }
     //Deep copy constructor
     /**
@@ -237,8 +239,8 @@ public class GuillotineState extends GameState {
         //this.deckAction.add(new Card(2, false, true, 0, "actionCard", "Clerical_Error", R.drawable.clerical_error));
         this.deckAction.add(new Card(2, true,true, 0, "actionCard", "Clothing_Swap", R.drawable.clothing_swap));
         this.deckAction.add(new Card(1, true,true, 0, "actionCard", "Confusion", R.drawable.confusion_in_line));
-        this.deckAction.add(new Card(2, false,true, 0, "actionCard", "Double_Feature1", R.drawable.double_feature));
-        this.deckAction.add(new Card(2, false,true, 0, "actionCard", "Double_Feature2", R.drawable.double_feature));
+        this.deckAction.add(new Card(1, false,true, 0, "actionCard", "Double_Feature1", R.drawable.double_feature));
+        this.deckAction.add(new Card(1, false,true, 0, "actionCard", "Double_Feature2", R.drawable.double_feature));
         this.deckAction.add(new Card(1, true,true, 0, "actionCard", "Escape", R.drawable.escape));
         this.deckAction.add(new Card(1, true,true, 0, "actionCard", "Extra_Cart1", R.drawable.extra_cart));
         this.deckAction.add(new Card(1, true,true, 0, "actionCard", "Extra_Cart2", R.drawable.extra_cart));
@@ -489,7 +491,10 @@ public class GuillotineState extends GameState {
                     }
                 }
             }
-            turnPhase = 2;
+
+            if(turnPhase == 1){
+                turnPhase = 2;
+            }
 
 //            if (this.nobleLine.isEmpty()) {
 //                endDay();
@@ -1816,8 +1821,6 @@ public class GuillotineState extends GameState {
                     }
                     this.actionCardPlayed = true;
 
-                    this.turnPhase = 1;
-
                     if (this.playerTurn == 0) {
                         getNoble(this.p0Field);
                         for (int i = 0; i < this.p0Hand.size(); i++) {
@@ -1852,8 +1855,6 @@ public class GuillotineState extends GameState {
                         }
                     }
                     this.actionCardPlayed = true;
-
-                    this.turnPhase = 2;
 
                     if (this.playerTurn == 0) {
                         getNoble(this.p0Field);
