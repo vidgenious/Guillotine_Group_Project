@@ -2663,6 +2663,7 @@ public class GuillotineState extends GameState {
                         nobleLine.add(tempList.get(choice2 - 1));
                         deckNoble.remove(choice2);
                         turnPhase = 1;
+                        arrival = false;
                     }
 
                     this.actionCardPlayed = true;
