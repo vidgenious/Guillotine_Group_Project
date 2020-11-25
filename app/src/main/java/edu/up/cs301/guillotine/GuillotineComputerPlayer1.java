@@ -77,13 +77,15 @@ public class GuillotineComputerPlayer1 extends GameComputerPlayer {
                 ChooseAction action = new ChooseAction(this, pos, 1);
                 game.sendAction(action);
 
-            } else if(gameState.getTurnPhase() == 4){
+            }
+            else if(gameState.getTurnPhase() == 4){
                 int chos = rand.nextInt(2) + 1;
 
                 ChooseAction action = new ChooseAction(this, chos, 2);
                 game.sendAction(action);
 
-            } else if (gameState.getTurnPhase() == 5){
+            }
+            else if (gameState.getTurnPhase() == 5){
                 int chos = rand.nextInt(3) + 1;
 
                 ChooseAction action = new ChooseAction(this, chos, 2);
