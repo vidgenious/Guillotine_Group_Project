@@ -188,13 +188,13 @@ public class GuillotineLocalGame extends LocalGame {
     protected String checkIfGameOver() {
         String winner;
 
-        if(gameState.getDayNum() == 3  ){
+        if(gameState.getDayNum() == 4){
             if(gameState.getP0Score() > gameState.getP1Score()){
                 winner = this.playerNames[0];
             }else{
                 winner = this.playerNames[1];
             }
-            return winner + " is the winner!";
+            return winner + " is the winner! ";
         }else{
             return null;
         }
