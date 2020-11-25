@@ -265,14 +265,14 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
     }
 
     private boolean p0FieldArrow(int x, int y){
-        if(x > 50 && x < 250 && y > 50 && y < 675){
+        if(x > 250 && x < 300 && y > 50 && y < 675){
             return true;
         }
         return false;
     }
 
     private boolean p1FieldArrow(int x, int y){
-        if(x > 50 && x < 250 && y > 50 && y < 175){
+        if(x > 250 && x < 300 && y > 50 && y < 175){
             return true;
         }
         return false;
