@@ -63,13 +63,22 @@ public class GuillotineComputerPlayer1 extends GameComputerPlayer {
                     game.sendAction(new PlayAction(this, pos));
 
                     gameState.setTurnPhase(1);
-                } else {
+                }
+                else {
                     game.sendAction(new SkipAction(this));
                     gameState.setTurnPhase(1);
 
                 }
             }
 
+            //plays a noble action
+            else if(gameState.getTurnPhase() == 1){
+                game.sendAction(new NobleAction(this));
+            }
+            //ai draws a card
+            else if(gameState.getTurnPhase() == 2){
+                game.sendAction(new DrawAction(this));
+            }
             //ai picks a second card
             else if(gameState.getTurnPhase() == 3) {
                 int pos = rand.nextInt(gameState.getNobleLine().size());
@@ -91,16 +100,6 @@ public class GuillotineComputerPlayer1 extends GameComputerPlayer {
                 ChooseAction action = new ChooseAction(this, chos, 2);
                 game.sendAction(action);
 
-            }
-            //plays a noble action
-            else if(gameState.getTurnPhase() == 1){
-                game.sendAction(new NobleAction(this));
-                gameState.setTurnPhase(2);
-            }
-            //ai draws a card
-            else if(gameState.getTurnPhase() == 2){
-                game.sendAction(new DrawAction(this));
-                gameState.setTurnPhase(0);
             }
 
         }
