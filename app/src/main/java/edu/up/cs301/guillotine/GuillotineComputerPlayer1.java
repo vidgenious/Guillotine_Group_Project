@@ -50,6 +50,7 @@ public class GuillotineComputerPlayer1 extends GameComputerPlayer {
 
         GuillotineState gameState = (GuillotineState) info;
 
+        //code for if AI is player 1
         if(gameState.getPlayerTurn() == 1) {
             if(gameState.getTurnPhase() == 0) {
 
@@ -90,6 +91,8 @@ public class GuillotineComputerPlayer1 extends GameComputerPlayer {
             }
 
         }
+
+
         else{
             game.sendAction(new NullAction(this));
         }

@@ -72,7 +72,8 @@ public class GuillotineLocalGame extends LocalGame {
                 gameState.playAction(gameState.getP0Hand(), cardPlayed);
 
              //If the turn is 1
-            } else {
+            }
+            else {
                 int cardPlayed = -1;
 
                 //For loop to find the card selected in the hand
@@ -92,7 +93,8 @@ public class GuillotineLocalGame extends LocalGame {
             return true;
 
          //If the action is a skip play action
-        }else if(action instanceof ChooseAction) {
+        }
+        else if(action instanceof ChooseAction) {
             if(((ChooseAction) action).getChoice() == 1) {
                 gameState.setChoice1(((ChooseAction) action).getPos());
             }else if(((ChooseAction) action).getChoice() == 2){
@@ -101,7 +103,8 @@ public class GuillotineLocalGame extends LocalGame {
             gameState.acknowledgeCardAbility(temp);
             return true;
 
-        } else if (action instanceof SkipAction) {
+        }
+        else if (action instanceof SkipAction) {
             gameState.skipAction();
 
             gameState.calculatePoints(gameState.getP0Field(), 0);
@@ -109,7 +112,8 @@ public class GuillotineLocalGame extends LocalGame {
             return true;
 
          //If the action is a collect noble action
-        } else if (action instanceof NobleAction) {
+        }
+        else if (action instanceof NobleAction) {
 
 
 
@@ -137,7 +141,8 @@ public class GuillotineLocalGame extends LocalGame {
             return true;
 
          //If the action is a draw card action
-        } else if (action instanceof DrawAction) {
+        }
+        else if (action instanceof DrawAction) {
 
             //Depending on player, that player get a new action card
             if (gameState.getPlayerTurn() == 0) {
