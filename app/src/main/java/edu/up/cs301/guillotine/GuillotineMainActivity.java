@@ -13,6 +13,22 @@ import edu.up.cs301.game.GameFramework.gameConfiguration.GamePlayerType;
  * @author Moses Karemera
  * @author Maxwell McAtee
  * @version Beta November 2020
+ *
+ * For the Beta we are fully functional except for some action cards that haven't been implemented yet.
+ * The other thing that we have not completed for the rubric is making the players interchangeable.
+ * Currently the only functional way to play is to have human player as the first player and the
+ * computer player as the second player.
+ *
+ * For the cards, the problem ended up being that we did not have a clear plan from the beginning.
+ * We had not made plans about how each card would function for the GUI and for onTouch events.
+ * This could have been avoided by making a solid plan from the beginning.
+ *
+ * For the interchangeable users, the problem is that the system was not built from the ground up
+ * with that functionality in mind. If we had planned from the beginning to make that work properly
+ * we would not be in the state we are now, where we have to retroactively fix the program so that
+ * it has that functionality.
+ *
+ * Overall better planning would have the game further on in production than it is right now.
  */
 
 
