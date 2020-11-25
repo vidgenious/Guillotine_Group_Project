@@ -47,12 +47,10 @@ public class GuillotineState extends GameState {
     private ArrayList<Card> deckAction;
     private ArrayList<Card> deckNoble;
     private boolean actionCardPlayed;
+    private int ID;
 
     private int choice1;
     private int choice2;
-
-    private String p1Name;
-    private  String p0Name;
 
     private int tempTurn;
 
@@ -77,6 +75,7 @@ public class GuillotineState extends GameState {
         this.nobleLine = new ArrayList<Card>();
         this.deckDiscard = new ArrayList<Card>();
         this.deckAction = new ArrayList<Card>();
+        this.ID = 0;
         initActionDeck();
 
         this.deckNoble = new ArrayList<Card>();
@@ -85,8 +84,6 @@ public class GuillotineState extends GameState {
         this.actionCardPlayed = false;
 
         startGame();
-        p0Hand.add(new Card(1, false, true, 0, "actionCard", "Info_Exchange", R.drawable.information_exchange));
-        p0Hand.add(new Card(1, true,true, 0, "actionCard", "Political_Influence1", R.drawable.political_influence));
     }
     //Deep copy constructor
     /**
@@ -106,8 +103,8 @@ public class GuillotineState extends GameState {
         this.currFirstPlayer = origin.currFirstPlayer;
         this.turnPhase = origin.turnPhase;
         this.begun = origin.begun;
-        this.p1Name = origin.p1Name;
-        this.p0Name = origin.p0Name;
+        this.arrival = origin.arrival;
+        this.ID = origin.ID;
 
         this.p1Hand = new ArrayList<Card>();
         for (Card c : origin.p1Hand) {
@@ -154,7 +151,14 @@ public class GuillotineState extends GameState {
         for (Card c : origin.deckNoble) {
             this.deckNoble.add(c);
         }
+
+        this.tempList = new ArrayList<>();
+        for (Card c : origin.tempList) {
+            this.tempList.add(c);
+        }
     }
+
+
 
     /**
      * This method initiates all of the noble cards ands places them into the deck unshuffled
@@ -230,18 +234,18 @@ public class GuillotineState extends GameState {
         this.deckAction.add(new Card(1, false,true, 0, "actionCard", "Church_Support", R.drawable.church_support));
         this.deckAction.add(new Card(2, true,true, 0, "actionCard", "Civic_Pride", R.drawable.civic_pride));
         this.deckAction.add(new Card(1, false,true, 0, "actionCard", "Civic_Support", R.drawable.civic_support));
-        this.deckAction.add(new Card(2, false, true, 0, "actionCard", "Clerical_Error", R.drawable.clerical_error));
+        //this.deckAction.add(new Card(2, false, true, 0, "actionCard", "Clerical_Error", R.drawable.clerical_error));
         this.deckAction.add(new Card(2, true,true, 0, "actionCard", "Clothing_Swap", R.drawable.clothing_swap));
         this.deckAction.add(new Card(1, true,true, 0, "actionCard", "Confusion", R.drawable.confusion_in_line));
-        this.deckAction.add(new Card(1, false,true, 0, "actionCard", "Double_Feature1", R.drawable.double_feature));
-        this.deckAction.add(new Card(1, false,true, 0, "actionCard", "Double_Feature2", R.drawable.double_feature));
+        //this.deckAction.add(new Card(2, false,true, 0, "actionCard", "Double_Feature1", R.drawable.double_feature));
+        //this.deckAction.add(new Card(2, false,true, 0, "actionCard", "Double_Feature2", R.drawable.double_feature));
         this.deckAction.add(new Card(1, true,true, 0, "actionCard", "Escape", R.drawable.escape));
         this.deckAction.add(new Card(1, true,true, 0, "actionCard", "Extra_Cart1", R.drawable.extra_cart));
         this.deckAction.add(new Card(1, true,true, 0, "actionCard", "Extra_Cart2", R.drawable.extra_cart));
         this.deckAction.add(new Card(2, true,true, 0, "actionCard", "Fainting", R.drawable.fainting_spell));
         this.deckAction.add(new Card(2, true,true, 0, "actionCard", "Fled", R.drawable.fled_to_england));
-        this.deckAction.add(new Card(1, false,true, 0, "actionCard", "Forced_Break", R.drawable.forced_break));
-        this.deckAction.add(new Card(1, false, true, 0, "actionCard", "Foreign_Support", R.drawable.foreign_support));
+        //this.deckAction.add(new Card(1, false,true, 0, "actionCard", "Forced_Break", R.drawable.forced_break));
+        //this.deckAction.add(new Card(1, false, true, 0, "actionCard", "Foreign_Support", R.drawable.foreign_support));
         this.deckAction.add(new Card(1, true,true, 0, "actionCard", "Forward_March", R.drawable.forward_march));
         this.deckAction.add(new Card(1, false,true, 0, "actionCard", "Fountain", R.drawable.fountain_of_blood));
         this.deckAction.add(new Card(2, true,true, 0, "actionCard", "Friend_Queen1", R.drawable.friend_of_the_queen));
@@ -251,10 +255,10 @@ public class GuillotineState extends GameState {
         this.deckAction.add(new Card(2, true,true, 0, "actionCard", "Ignoble1", R.drawable.ignoble_noble));
         this.deckAction.add(new Card(2, true,true, 0, "actionCard", "Ignoble2", R.drawable.ignoble_noble));
         this.deckAction.add(new Card(1, false,true, 0, "actionCard", "Indifferent", R.drawable.indifferent_public));
-        this.deckAction.add(new Card(2, false, true, 0, "actionCard", "Infighting", R.drawable.infighting));
+        //this.deckAction.add(new Card(2, false, true, 0, "actionCard", "Infighting", R.drawable.infighting));
         this.deckAction.add(new Card(1, false, true, 0, "actionCard", "Info_Exchange", R.drawable.information_exchange));
         this.deckAction.add(new Card(1, false,true, 0, "actionCard", "Lack_Faith", R.drawable.lack_of_faith));
-        this.deckAction.add(new Card(2, false, true, 0, "actionCard", "Lack_Support", R.drawable.lack_of_support));
+        //this.deckAction.add(new Card(2, false, true, 0, "actionCard", "Lack_Support", R.drawable.lack_of_support));
         this.deckAction.add(new Card(2, true, true, 0, "actionCard", "Late_Arrival", R.drawable.late_arrival));
         this.deckAction.add(new Card(1, true,true, 0, "actionCard", "Let_Cake", R.drawable.let_them_eat_cake));
         this.deckAction.add(new Card(2, true,true, 0, "actionCard", "Majesty", R.drawable.majesty));
@@ -265,16 +269,16 @@ public class GuillotineState extends GameState {
         this.deckAction.add(new Card(1, true,true, 0, "actionCard", "Milling2", R.drawable.milling_in_line));
         this.deckAction.add(new Card(1, true,true , 0, "actionCard", "Missed", R.drawable.missed));
         this.deckAction.add(new Card(1, true,true, 0, "actionCard", "Missing_Heads", R.drawable.missing_heads));
-        this.deckAction.add(new Card(2, true, true, 0, "actionCard", "Opinionated", R.drawable.opinionated_guards));
-        this.deckAction.add(new Card(1, true,true, 0, "actionCard", "Political_Influence1", R.drawable.political_influence));
-        this.deckAction.add(new Card(1, true,true, 0, "actionCard", "Political_Influence2", R.drawable.political_influence));
+        //this.deckAction.add(new Card(2, true, true, 0, "actionCard", "Opinionated", R.drawable.opinionated_guards));
+        //this.deckAction.add(new Card(1, true,true, 0, "actionCard", "Political_Influence1", R.drawable.political_influence));
+        //this.deckAction.add(new Card(1, true,true, 0, "actionCard", "Political_Influence2", R.drawable.political_influence));
         this.deckAction.add(new Card(2, true,true, 0, "actionCard", "Public_Demand", R.drawable.public_demand));
         this.deckAction.add(new Card(2, true,true, 0, "actionCard", "Pushed1", R.drawable.pushed));
         this.deckAction.add(new Card(2, true,true, 0, "actionCard", "Pushed2", R.drawable.pushed));
         this.deckAction.add(new Card(1, false,true, 0, "actionCard", "Rain_Delay", R.drawable.rain_delay));
-        this.deckAction.add(new Card(2, false, true, 0, "actionCard", "Rat_Break", R.drawable.rat_break));
+        //this.deckAction.add(new Card(2, false, true, 0, "actionCard", "Rat_Break", R.drawable.rat_break));
         this.deckAction.add(new Card(1, false, true, 0, "actionCard", "Rush_Job", R.drawable.rush_job));
-        this.deckAction.add(new Card(1, false,  true, 0, "actionCard", "Scarlet", R.drawable.scarlet_pimpernel));
+        //this.deckAction.add(new Card(1, false,  true, 0, "actionCard", "Scarlet", R.drawable.scarlet_pimpernel));
         this.deckAction.add(new Card(2, true,true, 0, "actionCard", "Stumble1", R.drawable.stumble));
         this.deckAction.add(new Card(2, true,true, 0, "actionCard", "Stumble2", R.drawable.stumble));
         this.deckAction.add(new Card(1, true,true, 0, "actionCard", "Long_Walk", R.drawable.the_long_walk));
@@ -282,7 +286,7 @@ public class GuillotineState extends GameState {
         this.deckAction.add(new Card(1, false,true, 0, "actionCard", "Tough_Crowd", R.drawable.tough_crowd));
         this.deckAction.add(new Card(2, true,true, 0, "actionCard", "Trip1", R.drawable.trip));
         this.deckAction.add(new Card(2, true,true, 0, "actionCard", "Trip2", R.drawable.trip));
-        this.deckAction.add(new Card(2, false, true, 0, "actionCard", "Twist_Fate", R.drawable.twist_of_fate));
+        //this.deckAction.add(new Card(2, false, true, 0, "actionCard", "Twist_Fate", R.drawable.twist_of_fate));
         this.deckAction.add(new Card(2, true,true, 0, "actionCard", "Was_Name", R.drawable.was_that_my_name));
     }
 
@@ -303,10 +307,6 @@ public class GuillotineState extends GameState {
     }
 
     public boolean getBegun() { return this.begun;}
-
-    public String getP1Name(){return this.p1Name;}
-    public String getP0Name(){return this.p0Name;}
-
 
     public int getLastFirstPlayer() {
         return this.lastFirstPlayer;
@@ -351,6 +351,8 @@ public class GuillotineState extends GameState {
     public ArrayList<Card> getDeckNoble() {
         return this.deckNoble;
     }
+
+    public boolean getArrival() {return this.arrival;}
 
     //Setters for variables that may need to be set
     public void setDayNum(int dayNum) {
@@ -441,7 +443,8 @@ public class GuillotineState extends GameState {
                     shuffle0 = false;
                 }
 
-            } else if (shuffle1) {
+            }
+            else if (shuffle1) {
                 if (this.playerTurn == 1) {
                     Collections.shuffle(this.nobleLine);
                     shuffle1 = false;
@@ -450,43 +453,56 @@ public class GuillotineState extends GameState {
 
             if (this.nobleLine.get(0).getId().equals("Clown")) {
                 if (this.playerTurn == 0) {
-                    placeClown(this.p0Field, this.nobleLine.get(0));
-                    this.nobleLine.remove(0);
-                } else {
                     placeClown(this.p1Field, this.nobleLine.get(0));
                     this.nobleLine.remove(0);
+                } else {
+                    placeClown(this.p0Field, this.nobleLine.get(0));
+                    this.nobleLine.remove(0);
                 }
-            } else {
+            }
+            else {
                 if (this.FS0 && this.playerTurn == 0) {
                     field.add(this.nobleLine.get(0));
                     this.nobleLine.remove(0);
                     if (this.p0Field.get(0).cardColor.equals("Purple")) {
                         dealActionCard(field);
                     }
-                } else if (this.FS1 && this.playerTurn == 1) {
+                }
+                else if (this.FS1 && this.playerTurn == 1) {
                     field.add(this.nobleLine.get(0));
                     this.nobleLine.remove(0);
                     if (this.p1Field.get(0).cardColor.equals("Purple")) {
                         dealActionCard(field);
                     }
 
-                } else {
-                    field.add(this.nobleLine.get(0));
-                    this.nobleLine.remove(0);
+                }
+                else {
+                    if(this.nobleLine.get(0).id.equals("Robespierre")){
+                        field.add(this.nobleLine.get(0));
+                        this.nobleLine.remove(0);
+                        acknowledgeCardAbility((Card) field.get(field.size()-1));
+                    }
+                    else {
+                        field.add(this.nobleLine.get(0));
+                        acknowledgeCardAbility((Card) field.get(field.size() - 1));
+                        this.nobleLine.remove(0);
+                    }
                 }
             }
+            turnPhase = 2;
 
-            if (this.nobleLine.isEmpty()) {
-                endDay();
-            } else {
-                if (this.actionCardPlayed) {
-                    return true;
-                } else {
-                    this.turnPhase++;
-                    return true;
-                }
-            }
+//            if (this.nobleLine.isEmpty()) {
+//                endDay();
+//            } else {
+//                if (this.actionCardPlayed) {
+//                    return true;
+//                } else {
+//                    this.turnPhase++;
+//                    return true;
+//                }
+//
         }
+
 
         return false;
     }
@@ -569,11 +585,15 @@ public class GuillotineState extends GameState {
      */
 
     public boolean dealNoble() {
+        if(!this.deckNoble.isEmpty()) {
+            this.nobleLine.add(this.deckNoble.get(0));
+            this.deckNoble.remove(0);
 
-        this.nobleLine.add(this.deckNoble.get(0));
-        this.deckNoble.remove(0);
-
-        return true;
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     //lets user skip action card play
@@ -604,16 +624,14 @@ public class GuillotineState extends GameState {
     public boolean playAction(ArrayList hand, int loc) {
         //checks if another action card is preventing the player from playing a new action card
         if (!this.noAction) {
-            if (!this.nobleLine.get(0).getId().equals("Judge1") || !this.nobleLine.get(0).getId().equals("Judge2")) {
-                if (this.turnPhase == 0) {
 
-                    //searches the line for the noble spy card and activates that card if it is found
-                    for(int i = 0; i < nobleLine.size(); i ++){
-                        if(nobleLine.get(i).id.equals("Spy")){
-                            temp = nobleLine.get(i);
-                            acknowledgeCardAbility(temp);
-                        }
-                    }
+            //if judge card is at front of the line, it skips turn
+            if (this.nobleLine.get(0).getId().equals("Judge1") || this.nobleLine.get(0).getId().equals("Judge2")) {
+                this.noAction = false;
+                skipAction();
+                return false;
+            }
+                if (this.turnPhase == 0) {
 
                     this.temp = (Card) hand.get(loc);
 
@@ -625,22 +643,25 @@ public class GuillotineState extends GameState {
                         acknowledgeCardAbility(this.temp);
                     }
 
+                    //searches the line for the noble spy card and activates that card if it is found
+                    for(int i = 0; i < nobleLine.size(); i ++){
+                        if(nobleLine.get(i).id.equals("Spy")){
+                            temp = nobleLine.get(i);
+                            acknowledgeCardAbility(temp);
+                        }
+                    }
+
                     return true;
                 }
                 else {
                     return false;
                 }
-            }
-            else {
-                return false;
-            }
-
         }
 
         //if playAction is not true, then skip action is called
         else {
             this.noAction = false;
-            skipAction();
+            turnPhase = 1;
             return false;
         }
     }
@@ -711,16 +732,12 @@ public class GuillotineState extends GameState {
      * @return always return false because it has to be checked by another method.
      */
     public boolean discardRemainingNobles() {
-        if (!this.nobleLine.isEmpty()) {
             //go through nobleline list and discard each one
             while (!this.nobleLine.isEmpty()) {
                 this.deckDiscard.add(this.nobleLine.get(0));
                 this.nobleLine.remove(0);
             }
-            endDay();
             return true;
-        }
-        return false;
     }
 
     /**
@@ -1263,13 +1280,18 @@ public class GuillotineState extends GameState {
                     //collect another noble from front of line after collecting this noble
                 case "Fast_Noble":
                     this.actionCardPlayed = true;
-                    if (this.playerTurn == 0) {
-                        getNoble(this.p0Field);
-                    } else {
-                        getNoble(this.p1Field);
+                    if(!this.nobleLine.isEmpty() && this.nobleLine.size() > 0) {
+                        if (this.playerTurn == 0) {
+                            p0Field.add(nobleLine.get(1));
+                            nobleLine.remove(1);
+                            acknowledgeCardAbility(p0Field.get(p0Field.size()-1));
+                        } else {
+                            p1Field.add(nobleLine.get(1));
+                            nobleLine.remove(1);
+                            acknowledgeCardAbility(p1Field.get(p1Field.size()-1));
+                        }
+                        this.actionCardPlayed = false;
                     }
-                    this.actionCardPlayed = false;
-
                     break;
 
                     //add another noble from the noble deck to the end of line after getting this noble
@@ -1298,9 +1320,9 @@ public class GuillotineState extends GameState {
                 case "Lady":
                     this.actionCardPlayed = true;
                     if (this.playerTurn == 0) {
-                        dealActionCard(this.p0Field);
+                        dealActionCard(this.p0Hand);
                     } else {
-                        dealActionCard(this.p1Field);
+                        dealActionCard(this.p1Hand);
                     }
                     this.actionCardPlayed = false;
                     break;
@@ -1309,9 +1331,9 @@ public class GuillotineState extends GameState {
                 case "Lady_Waiting":
                     this.actionCardPlayed = true;
                     if (this.playerTurn == 0) {
-                        dealActionCard(this.p0Field);
+                        dealActionCard(this.p0Hand);
                     } else {
-                        dealActionCard(this.p1Field);
+                        dealActionCard(this.p1Hand);
                     }
                     this.actionCardPlayed = false;
                     break;
@@ -1320,9 +1342,9 @@ public class GuillotineState extends GameState {
                 case "Lord":
                     this.actionCardPlayed = true;
                     if (this.playerTurn == 0) {
-                        dealActionCard(this.p0Field);
+                        dealActionCard(this.p0Hand);
                     } else {
-                        dealActionCard(this.p1Field);
+                        dealActionCard(this.p1Hand);
                     }
                     this.actionCardPlayed = false;
                     break;
@@ -1451,8 +1473,15 @@ public class GuillotineState extends GameState {
 
                 // put noble at front of line into other players field
                 case "After_You":
-                    if (this.p1Field.contains(card.id.equals("Callous")) || this.p0Field.contains(card.id.equals("Callous"))) {
-                        break;
+                    for (int i = 0; i < this.p0Field.size(); i++) {
+                        if (this.p0Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
+                    }
+                    for (int i = 0; i < this.p1Field.size(); i++) {
+                        if (this.p1Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
                     }
 
                     this.actionCardPlayed = true;
@@ -1479,11 +1508,20 @@ public class GuillotineState extends GameState {
 
                 //move noble at front of line to end of line
                 case "Bribed":
-                    if (this.p1Field.contains(card.id.equals("Callous")) || this.p0Field.contains(card.id.equals("Callous"))) {
-                        break;
+                    for (int i = 0; i < this.p0Field.size(); i++) {
+                        if (this.p0Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
+                    }
+                    for (int i = 0; i < this.p1Field.size(); i++) {
+                        if (this.p1Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
                     }
                     this.actionCardPlayed = true;
+
                     moveNoble(0, this.nobleLine.size() - 1);
+
                     if (this.playerTurn == 0) {
 
                         for (int i = 0; i < this.p0Hand.size(); i++) {
@@ -1555,8 +1593,15 @@ public class GuillotineState extends GameState {
                 //moves one green card to a different spot in the line
                 //gets the locations from the onclick, so i cant implement this
                 case "Civic_Pride":
-                    if (this.p1Field.contains(card.id.equals("Callous")) || this.p0Field.contains(card.id.equals("Callous"))) {
-                        break;
+                    for (int i = 0; i < this.p0Field.size(); i++) {
+                        if (this.p0Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
+                    }
+                    for (int i = 0; i < this.p1Field.size(); i++) {
+                        if (this.p1Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
                     }
                     this.actionCardPlayed = true;
 
@@ -1571,7 +1616,7 @@ public class GuillotineState extends GameState {
                         }
 
                     }else if(this.turnPhase == 4){
-                        if(choice1 - 1 >= 0) {
+                        if(choice1 - choice2 >= 0) {
                             moveNoble(choice1, choice1 - choice2);
                         }
                         turnPhase = 1;
@@ -1626,7 +1671,6 @@ public class GuillotineState extends GameState {
                 case "Clerical_Error":
                     this.actionCardPlayed = true;
 
-                    Card choice = null;
 
                     if(this.turnPhase == 0){
                         this.tempTurn = 0;
@@ -1678,10 +1722,18 @@ public class GuillotineState extends GameState {
 
                 //discard any noble in nobleline and replace it with card in Ndeck
                 case "Clothing_Swap":
-                    if (this.p1Field.contains(card.id.equals("Callous")) || this.p0Field.contains(card.id.equals("Callous"))) {
-                        break;
+                    for (int i = 0; i < this.p0Field.size(); i++) {
+                        if (this.p0Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
+                    }
+                    for (int i = 0; i < this.p1Field.size(); i++) {
+                        if (this.p1Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
                     }
                     this.actionCardPlayed = true;
+
                     if(this.turnPhase == 0){
                         this.turnPhase = 3;
                     }else if(this.turnPhase == 3){
@@ -1716,8 +1768,15 @@ public class GuillotineState extends GameState {
 
                 //shuffles noble line right before other player draws a noble
                 case "Confusion":
-                    if (this.p1Field.contains(card.id.equals("Callous")) || this.p0Field.contains(card.id.equals("Callous"))) {
-                        break;
+                    for (int i = 0; i < this.p0Field.size(); i++) {
+                        if (this.p0Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
+                    }
+                    for (int i = 0; i < this.p1Field.size(); i++) {
+                        if (this.p1Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
                     }
                     this.actionCardPlayed = true;
 
@@ -1745,10 +1804,20 @@ public class GuillotineState extends GameState {
 
                 //lets user collect additional noble from noble line
                 case "Double_Feature1":
-                    if (this.p1Field.contains(card.id.equals("Callous")) || this.p0Field.contains(card.id.equals("Callous"))) {
-                        break;
+                    for (int i = 0; i < this.p0Field.size(); i++) {
+                        if (this.p0Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
+                    }
+                    for (int i = 0; i < this.p1Field.size(); i++) {
+                        if (this.p1Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
                     }
                     this.actionCardPlayed = true;
+
+                    this.turnPhase = 1;
+
                     if (this.playerTurn == 0) {
                         getNoble(this.p0Field);
                         for (int i = 0; i < this.p0Hand.size(); i++) {
@@ -1772,10 +1841,20 @@ public class GuillotineState extends GameState {
 
                 //lets user collect additional noble from noble line
                 case "Double_Feature2":
-                    if (this.p1Field.contains(card.id.equals("Callous")) || this.p0Field.contains(card.id.equals("Callous"))) {
-                        break;
+                    for (int i = 0; i < this.p0Field.size(); i++) {
+                        if (this.p0Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
+                    }
+                    for (int i = 0; i < this.p1Field.size(); i++) {
+                        if (this.p1Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
                     }
                     this.actionCardPlayed = true;
+
+                    this.turnPhase = 2;
+
                     if (this.playerTurn == 0) {
                         getNoble(this.p0Field);
                         for (int i = 0; i < this.p0Hand.size(); i++) {
@@ -1798,10 +1877,18 @@ public class GuillotineState extends GameState {
                     break;
                 //discard two nobleline cards and then shuffle the nobleline deck
                 case "Escape":
-                    if (this.p1Field.contains(card.id.equals("Callous")) || this.p0Field.contains(card.id.equals("Callous"))) {
-                        break;
+                    for (int i = 0; i < this.p0Field.size(); i++) {
+                        if (this.p0Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
+                    }
+                    for (int i = 0; i < this.p1Field.size(); i++) {
+                        if (this.p1Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
                     }
                     this.actionCardPlayed = true;
+
                     if (this.playerTurn == 0) {
                         int rand1 = (int) (Math.random() * this.nobleLine.size());
                         this.deckDiscard.add(this.nobleLine.get(rand1));
@@ -1893,8 +1980,15 @@ public class GuillotineState extends GameState {
                 //move noble up to 3 card positions back
                 //locs from onclick
                 case "Fainting":
-                    if (this.p1Field.contains(card.id.equals("Callous")) || this.p0Field.contains(card.id.equals("Callous"))) {
-                        break;
+                    for (int i = 0; i < this.p0Field.size(); i++) {
+                        if (this.p0Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
+                    }
+                    for (int i = 0; i < this.p1Field.size(); i++) {
+                        if (this.p1Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
                     }
                     this.actionCardPlayed = true;
 
@@ -1903,8 +1997,11 @@ public class GuillotineState extends GameState {
                     }else if(this.turnPhase == 3){
                         this.turnPhase = 5;
                     }else if(this.turnPhase == 5){
-                        if(choice1 != this.nobleLine.size() - 1) {
+                        if(choice1 + choice2 < nobleLine.size()) {
                             moveNoble(choice1, choice1 + choice2);
+                        } else{
+                            turnPhase = 1;
+                            return false;
                         }
                         turnPhase = 1;
                     }
@@ -1932,8 +2029,15 @@ public class GuillotineState extends GameState {
                 //discard any noble in line
                 //needs onclick to select the noble
                 case "Fled":
-                    if (this.p1Field.contains(card.id.equals("Callous")) || this.p0Field.contains(card.id.equals("Callous"))) {
-                        break;
+                    for (int i = 0; i < this.p0Field.size(); i++) {
+                        if (this.p0Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
+                    }
+                    for (int i = 0; i < this.p1Field.size(); i++) {
+                        if (this.p1Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
                     }
                     this.actionCardPlayed = true;
 
@@ -2033,13 +2137,14 @@ public class GuillotineState extends GameState {
 
                     //going through line to find the first palace guard. Putting in discard
                     //so then I could get the card when readding it.
-                    for (int k = 0; k < this.nobleLine.size(); k++) {
-                        if (this.nobleLine.get(k).getId().contains("Palace_Guard")) {
-                            this.deckDiscard.add(0, this.nobleLine.get(k));
-                            this.nobleLine.remove(k);
+                    for (int i = 0; i < this.nobleLine.size(); i++) {
+                        if (this.nobleLine.get(i).getId().contains("Palace_Guard")) {
+                            this.deckDiscard.add(0, this.nobleLine.get(i));
+                            this.nobleLine.remove(i);
                             this.nobleLine.add(0, this.deckDiscard.get(0));
                             this.deckDiscard.remove(0);
-                            k = this.nobleLine.size();
+                            i = this.nobleLine.size();
+                            break;
                         }
                     }
 
@@ -2088,8 +2193,15 @@ public class GuillotineState extends GameState {
 
                 //move noble backwards up to 2 spaces
                 case "Friend_Queen1":
-                    if (this.p1Field.contains(card.id.equals("Callous")) || this.p0Field.contains(card.id.equals("Callous"))) {
-                        break;
+                    for (int i = 0; i < this.p0Field.size(); i++) {
+                        if (this.p0Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
+                    }
+                    for (int i = 0; i < this.p1Field.size(); i++) {
+                        if (this.p1Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
                     }
                     this.actionCardPlayed = true;
 
@@ -2099,7 +2211,7 @@ public class GuillotineState extends GameState {
                     }else if(this.turnPhase == 3){
                         this.turnPhase = 4;
                     }else if(this.turnPhase == 4){
-                        if(choice1 != this.nobleLine.size() - 1) {
+                        if(choice1 + choice2 < nobleLine.size()) {
                             moveNoble(choice1, choice1 + choice2);
                         }
                         turnPhase = 1;
@@ -2127,8 +2239,15 @@ public class GuillotineState extends GameState {
 
                 //move noble card 2 spaces back
                 case "Friend_Queen2":
-                    if (this.p1Field.contains(card.id.equals("Callous")) || this.p0Field.contains(card.id.equals("Callous"))) {
-                        break;
+                    for (int i = 0; i < this.p0Field.size(); i++) {
+                        if (this.p0Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
+                    }
+                    for (int i = 0; i < this.p1Field.size(); i++) {
+                        if (this.p1Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
                     }
                     this.actionCardPlayed = true;
 
@@ -2138,7 +2257,7 @@ public class GuillotineState extends GameState {
                     }else if(this.turnPhase == 3){
                         this.turnPhase = 4;
                     }else if(this.turnPhase == 4){
-                        if(choice1 != this.nobleLine.size() - 1) {
+                        if(choice1 + choice2 < nobleLine.size()) {
                             moveNoble(choice1, choice1 + choice2);
                         }
                         turnPhase = 1;
@@ -2166,8 +2285,15 @@ public class GuillotineState extends GameState {
 
                 //move noble up to two spaces
                 case "Idiot1":
-                    if (this.p1Field.contains(card.id.equals("Callous")) || this.p0Field.contains(card.id.equals("Callous"))) {
-                        break;
+                    for (int i = 0; i < this.p0Field.size(); i++) {
+                        if (this.p0Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
+                    }
+                    for (int i = 0; i < this.p1Field.size(); i++) {
+                        if (this.p1Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
                     }
                     this.actionCardPlayed = true;
 
@@ -2176,7 +2302,7 @@ public class GuillotineState extends GameState {
                     }else if(this.turnPhase == 3){
                         this.turnPhase = 4;
                     }else if(this.turnPhase == 4){
-                        if(choice1 - 1 >= 0) {
+                        if(choice1 - choice2 >= 0) {
                             moveNoble(choice1, choice1 - choice2);
                         }
                         turnPhase = 1;
@@ -2204,8 +2330,15 @@ public class GuillotineState extends GameState {
 
                 //move noble card up to 2 spaces
                 case "Idiot2":
-                    if (this.p1Field.contains(card.id.equals("Callous")) || this.p0Field.contains(card.id.equals("Callous"))) {
-                        break;
+                    for (int i = 0; i < this.p0Field.size(); i++) {
+                        if (this.p0Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
+                    }
+                    for (int i = 0; i < this.p1Field.size(); i++) {
+                        if (this.p1Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
                     }
                     this.actionCardPlayed = true;
 
@@ -2214,7 +2347,7 @@ public class GuillotineState extends GameState {
                     }else if(this.turnPhase == 3){
                         this.turnPhase = 4;
                     }else if(this.turnPhase == 4){
-                        if(choice1 - 1 >= 0) {
+                        if(choice1 - choice2 >= 0) {
                             moveNoble(choice1, choice1 - choice2);
                         }
                         turnPhase = 1;
@@ -2242,8 +2375,15 @@ public class GuillotineState extends GameState {
                 //move noble exactly four spaces
                 //need onclick location of card they choose
                 case "Ignoble1":
-                    if (this.p1Field.contains(card.id.equals("Callous")) || this.p0Field.contains(card.id.equals("Callous"))) {
-                        break;
+                    for (int i = 0; i < this.p0Field.size(); i++) {
+                        if (this.p0Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
+                    }
+                    for (int i = 0; i < this.p1Field.size(); i++) {
+                        if (this.p1Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
                     }
                     this.actionCardPlayed = true;
 
@@ -2280,8 +2420,15 @@ public class GuillotineState extends GameState {
                 //move noble exactly four spaces
                 //need onclick location of card they choose
                 case "Ignoble2":
-                    if (this.p1Field.contains(card.id.equals("Callous")) || this.p0Field.contains(card.id.equals("Callous"))) {
-                        break;
+                    for (int i = 0; i < this.p0Field.size(); i++) {
+                        if (this.p0Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
+                    }
+                    for (int i = 0; i < this.p1Field.size(); i++) {
+                        if (this.p1Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
                     }
                     this.actionCardPlayed = true;
 
@@ -2416,14 +2563,22 @@ public class GuillotineState extends GameState {
 
                 //move nearest blue noble to front of line
                 case "Lack_Faith":
-                    if (this.p1Field.contains(card.id.equals("Callous")) || this.p0Field.contains(card.id.equals("Callous"))) {
-                        break;
+                    for (int i = 0; i < this.p0Field.size(); i++) {
+                        if (this.p0Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
+                    }
+                    for (int i = 0; i < this.p1Field.size(); i++) {
+                        if (this.p1Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
                     }
                     this.actionCardPlayed = true;
 
-                    for (int k = 0; k < this.nobleLine.size(); k++) {
-                        if (this.nobleLine.get(k).cardColor.equals("Blue")) {
-                            moveNoble(k, 0);
+                    for (int i = 0; i < this.nobleLine.size(); i++) {
+                        if (this.nobleLine.get(i).cardColor.equals("Blue")) {
+                            moveNoble(i, 0);
+                            break;
                         }
                     }
 
@@ -2486,9 +2641,17 @@ public class GuillotineState extends GameState {
 
                 //look at top three cards of noble deck and add one to nobleLine
                 case "Late_Arrival":
-                    if (this.p1Field.contains(card.id.equals("Callous")) || this.p0Field.contains(card.id.equals("Callous"))) {
-                        break;
+                    for (int i = 0; i < this.p0Field.size(); i++) {
+                        if (this.p0Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
                     }
+                    for (int i = 0; i < this.p1Field.size(); i++) {
+                        if (this.p1Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
+                    }
+                    this.actionCardPlayed = true;
 
                     if(turnPhase == 0){
                         arrival = true;
@@ -2497,7 +2660,8 @@ public class GuillotineState extends GameState {
                         }
                         turnPhase = 5;
                     } else if(turnPhase == 5){
-                        nobleLine.add(tempList.get(choice1 - 1));
+                        nobleLine.add(tempList.get(choice2 - 1));
+                        deckNoble.remove(choice2);
                         turnPhase = 1;
                     }
 
@@ -2523,8 +2687,15 @@ public class GuillotineState extends GameState {
 
                 //if marie is in line, move her to front
                 case "Let_Cake":
-                    if (this.p1Field.contains(card.id.equals("Callous")) || this.p0Field.contains(card.id.equals("Callous"))) {
-                        break;
+                    for (int i = 0; i < this.p0Field.size(); i++) {
+                        if (this.p0Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
+                    }
+                    for (int i = 0; i < this.p1Field.size(); i++) {
+                        if (this.p1Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
                     }
                     this.actionCardPlayed = true;
 
@@ -2556,8 +2727,15 @@ public class GuillotineState extends GameState {
                 //move purple noble up to 2 spaces ahead
                 //needs onclick
                 case "Majesty":
-                    if (this.p1Field.contains(card.id.equals("Callous")) || this.p0Field.contains(card.id.equals("Callous"))) {
-                        break;
+                    for (int i = 0; i < this.p0Field.size(); i++) {
+                        if (this.p0Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
+                    }
+                    for (int i = 0; i < this.p1Field.size(); i++) {
+                        if (this.p1Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
                     }
                     this.actionCardPlayed = true;
 
@@ -2572,7 +2750,7 @@ public class GuillotineState extends GameState {
                         }
 
                     }else if(this.turnPhase == 4){
-                        if(choice1 - 1 >= 0) {
+                        if(choice1 - choice2 >= 0) {
                             moveNoble(choice1, choice1 - choice2);
                         }
                         turnPhase = 1;
@@ -2600,10 +2778,18 @@ public class GuillotineState extends GameState {
                 //put all noble cards in noble line back in noble deck, shuffle noble deck
                 //and redeal the same amount of noble cards that used to be in line
                 case "Mass_Confusion":
-                    if (this.p1Field.contains(card.id.equals("Callous")) || this.p0Field.contains(card.id.equals("Callous"))) {
-                        break;
+                    for (int i = 0; i < this.p0Field.size(); i++) {
+                        if (this.p0Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
+                    }
+                    for (int i = 0; i < this.p1Field.size(); i++) {
+                        if (this.p1Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
                     }
                     this.actionCardPlayed = true;
+
                     int var = this.nobleLine.size();
                     for (int k = 0; k < var; k++) {
                         this.deckNoble.add(this.nobleLine.get(0));
@@ -2635,8 +2821,15 @@ public class GuillotineState extends GameState {
 
                 //move red card up to two spaces forward
                 case "Military_Might":
-                    if (this.p1Field.contains(card.id.equals("Callous")) || this.p0Field.contains(card.id.equals("Callous"))) {
-                        break;
+                    for (int i = 0; i < this.p0Field.size(); i++) {
+                        if (this.p0Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
+                    }
+                    for (int i = 0; i < this.p1Field.size(); i++) {
+                        if (this.p1Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
                     }
                     this.actionCardPlayed = true;
 
@@ -2651,7 +2844,7 @@ public class GuillotineState extends GameState {
                         }
 
                     }else if(this.turnPhase == 4){
-                        if(choice1 - 1 >= 0) {
+                        if(choice1 - choice2 >= 0) {
                             moveNoble(choice1, choice1 - choice2);
                         }
                         turnPhase = 1;
@@ -2702,8 +2895,15 @@ public class GuillotineState extends GameState {
 
                 //randomly shuffle first 5 nobles in line
                 case "Milling1":
-                    if (this.p1Field.contains(card.id.equals("Callous")) || this.p0Field.contains(card.id.equals("Callous"))) {
-                        break;
+                    for (int i = 0; i < this.p0Field.size(); i++) {
+                        if (this.p0Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
+                    }
+                    for (int i = 0; i < this.p1Field.size(); i++) {
+                        if (this.p1Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
                     }
                     this.actionCardPlayed = true;
 
@@ -2730,8 +2930,15 @@ public class GuillotineState extends GameState {
 
                 //randomly shuffle first five nobles in line
                 case "Milling2":
-                    if (this.p1Field.contains(card.id.equals("Callous")) || this.p0Field.contains(card.id.equals("Callous"))) {
-                        break;
+                    for (int i = 0; i < this.p0Field.size(); i++) {
+                        if (this.p0Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
+                    }
+                    for (int i = 0; i < this.p1Field.size(); i++) {
+                        if (this.p1Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
                     }
                     this.actionCardPlayed = true;
 
@@ -2758,12 +2965,20 @@ public class GuillotineState extends GameState {
 
                 //other player places their last collected noble back in noble line
                 case "Missed":
-                    if (this.p1Field.contains(card.id.equals("Callous")) || this.p0Field.contains(card.id.equals("Callous"))) {
-                        break;
+                    for (int i = 0; i < this.p0Field.size(); i++) {
+                        if (this.p0Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
+                    }
+                    for (int i = 0; i < this.p1Field.size(); i++) {
+                        if (this.p1Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
                     }
                     boolean notFound = true;
                     int length;
                     this.actionCardPlayed = true;
+
                     if (this.playerTurn == 0) {
                         for (int i = 0; i < this.p0Hand.size(); i++) {
                             if (this.p0Hand.get(i).getId().equals("Missed")) {
@@ -2929,6 +3144,16 @@ public class GuillotineState extends GameState {
                 //move anynoble in line to front
                 //requires on click
                 case "Public_Demand":
+                    for (int i = 0; i < this.p0Field.size(); i++) {
+                        if (this.p0Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
+                    }
+                    for (int i = 0; i < this.p1Field.size(); i++) {
+                        if (this.p1Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
+                    }
                     this.actionCardPlayed = true;
 
                     if(this.turnPhase == 0){
@@ -2961,8 +3186,15 @@ public class GuillotineState extends GameState {
                 //move noble card exactly 2 spaces in line
                 //need on click listener
                 case "Pushed1":
-                    if (this.p1Field.contains(card.id.equals("Callous")) || this.p0Field.contains(card.id.equals("Callous"))) {
-                        break;
+                    for (int i = 0; i < this.p0Field.size(); i++) {
+                        if (this.p0Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
+                    }
+                    for (int i = 0; i < this.p1Field.size(); i++) {
+                        if (this.p1Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
                     }
                     this.actionCardPlayed = true;
 
@@ -2998,8 +3230,15 @@ public class GuillotineState extends GameState {
                 //move noble card exactly 2 spaces in line
                 //need on click listener
                 case "Pushed2":
-                    if (this.p1Field.contains(card.id.equals("Callous")) || this.p0Field.contains(card.id.equals("Callous"))) {
-                        break;
+                    for (int i = 0; i < this.p0Field.size(); i++) {
+                        if (this.p0Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
+                    }
+                    for (int i = 0; i < this.p1Field.size(); i++) {
+                        if (this.p1Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
                     }
                     this.actionCardPlayed = true;
 
@@ -3103,7 +3342,10 @@ public class GuillotineState extends GameState {
                 //other player cant play action on their next turn
                 case "Rush_Job":
                     this.actionCardPlayed = true;
+
                     noAction = true;
+                    turnPhase = 1;
+
                     if (this.playerTurn == 0) {
                         for (int i = 0; i < this.p0Hand.size(); i++) {
                             if (this.p0Hand.get(i).getId().equals("Rush_Job")) {
@@ -3129,7 +3371,9 @@ public class GuillotineState extends GameState {
                         break;
                     }
                     this.actionCardPlayed = true;
+
                     scarletInPlay = true;
+
                     if (this.playerTurn == 0) {
                         for (int i = 0; i < this.p0Hand.size(); i++) {
                             if (this.p0Hand.get(i).getId().equals("Scarlet")) {
@@ -3151,8 +3395,15 @@ public class GuillotineState extends GameState {
 
                 //move one noble card one spot forward
                 case "Stumble1":
-                    if (this.p1Field.contains(card.id.equals("Callous")) || this.p0Field.contains(card.id.equals("Callous"))) {
-                        break;
+                    for (int i = 0; i < this.p0Field.size(); i++) {
+                        if (this.p0Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
+                    }
+                    for (int i = 0; i < this.p1Field.size(); i++) {
+                        if (this.p1Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
                     }
                     this.actionCardPlayed = true;
 
@@ -3187,8 +3438,15 @@ public class GuillotineState extends GameState {
 
                 //move one noble card one spot forward
                 case "Stumble2":
-                    if (this.p1Field.contains(card.id.equals("Callous")) || this.p0Field.contains(card.id.equals("Callous"))) {
-                        break;
+                    for (int i = 0; i < this.p0Field.size(); i++) {
+                        if (this.p0Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
+                    }
+                    for (int i = 0; i < this.p1Field.size(); i++) {
+                        if (this.p1Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
                     }
                     this.actionCardPlayed = true;
 
@@ -3223,11 +3481,20 @@ public class GuillotineState extends GameState {
 
                 //reverse nobleline order
                 case "Long_Walk":
-                    if (this.p1Field.contains(card.id.equals("Callous")) || this.p0Field.contains(card.id.equals("Callous"))) {
-                        break;
+                    for (int i = 0; i < this.p0Field.size(); i++) {
+                        if (this.p0Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
+                    }
+                    for (int i = 0; i < this.p1Field.size(); i++) {
+                        if (this.p1Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
                     }
                     this.actionCardPlayed = true;
+
                     reverseLineOrder();
+
                     if (this.playerTurn == 0) {
                         for (int i = 0; i < this.p0Hand.size(); i++) {
                             if (this.p0Hand.get(i).getId().equals("Long_Walk")) {
@@ -3249,9 +3516,17 @@ public class GuillotineState extends GameState {
 
                 //move noble forward exactly 3 places
                 case "Better_Thing":
-                    if (this.p1Field.contains(card.id.equals("Callous")) || this.p0Field.contains(card.id.equals("Callous"))) {
-                        break;
+                    for (int i = 0; i < this.p0Field.size(); i++) {
+                        if (this.p0Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
                     }
+                    for (int i = 0; i < this.p1Field.size(); i++) {
+                        if (this.p1Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
+                    }
+
                     this.actionCardPlayed = true;
 
                     if(turnPhase == 0){
@@ -3311,15 +3586,22 @@ public class GuillotineState extends GameState {
                 //move noble card back one spot let user play another action
                 //i have no idea how to let the user play another action
                 case "Trip1":
-                    if (this.p1Field.contains(card.id.equals("Callous")) || this.p0Field.contains(card.id.equals("Callous"))) {
-                        break;
+                    for (int i = 0; i < this.p0Field.size(); i++) {
+                        if (this.p0Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
+                    }
+                    for (int i = 0; i < this.p1Field.size(); i++) {
+                        if (this.p1Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
                     }
                     this.actionCardPlayed = true;
 
                     if(turnPhase == 0){
                         this.turnPhase = 3;
                     } else if(turnPhase == 3){
-                        if (choice1 != this.nobleLine.size() - 1) {
+                        if (choice1 + 1 < this.nobleLine.size()) {
                             moveNoble(choice1, choice1 + 1);
                         }
 
@@ -3348,15 +3630,22 @@ public class GuillotineState extends GameState {
                 //move noble card back one spot let user play another action
                 //i have no idea how to let the user play another action
                 case "Trip2":
-                    if (this.p1Field.contains(card.id.equals("Callous")) || this.p0Field.contains(card.id.equals("Callous"))) {
-                        break;
+                    for (int i = 0; i < this.p0Field.size(); i++) {
+                        if (this.p0Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
+                    }
+                    for (int i = 0; i < this.p1Field.size(); i++) {
+                        if (this.p1Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
                     }
                     this.actionCardPlayed = true;
 
                     if(turnPhase == 0){
                         this.turnPhase = 3;
                     } else if(turnPhase == 3){
-                        if (choice1 != this.nobleLine.size() - 1) {
+                        if (choice1 + 1 < this.nobleLine.size()) {
                             moveNoble(choice1, choice1 + 1);
                         }
 
@@ -3416,8 +3705,15 @@ public class GuillotineState extends GameState {
                 //move any noble up to 3 spaces forward
                 //need onclick user loc and the new location
                 case "Was_Name":
-                    if (this.p1Field.contains(card.id.equals("Callous")) || this.p0Field.contains(card.id.equals("Callous"))) {
-                        break;
+                    for (int i = 0; i < this.p0Field.size(); i++) {
+                        if (this.p0Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
+                    }
+                    for (int i = 0; i < this.p1Field.size(); i++) {
+                        if (this.p1Field.get(i).getId().equals("Callous")) {
+                            return false;
+                        }
                     }
                     this.actionCardPlayed = true;
 
@@ -3426,7 +3722,7 @@ public class GuillotineState extends GameState {
                     }else if(this.turnPhase == 3){
                          this.turnPhase = 5;
                     }else if(this.turnPhase == 5){
-                        if(choice1 - 1 >= 0) {
+                        if(choice1 - choice2 >= 0) {
                             moveNoble(choice1, choice1 - choice2);
                         }
                         turnPhase = 1;

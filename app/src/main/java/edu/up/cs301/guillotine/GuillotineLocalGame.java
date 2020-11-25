@@ -19,7 +19,6 @@ public class GuillotineLocalGame extends LocalGame {
 
     Card temp;
 
-
     private GuillotineState gameState;
 
     /**
@@ -116,15 +115,10 @@ public class GuillotineLocalGame extends LocalGame {
         }
         else if (action instanceof NobleAction) {
 
-            //Depending on which player it is, that player gets the noble card
-            if (gameState.getPlayerTurn() == 0) {
-                gameState.getNoble(gameState.getP0Field());
-            } else if (gameState.getPlayerTurn() == 1) {
-                gameState.getNoble(gameState.getP1Field());
-            }
+
 
             //if the noble line is empty, the day is over
-            if(gameState.getNobleLine().size() < 1){
+            if(gameState.getNobleLine().size() == 0){
                 for(int i = 0; i < 12; i++) {
                     gameState.dealNoble();
                 }
@@ -132,6 +126,13 @@ public class GuillotineLocalGame extends LocalGame {
                 gameState.setTurnPhase(0);
                 gameState.setDayNum(gameState.getDayNum()+1);
                 gameState.setTurnPhase(0);
+            } else {
+                //Depending on which player it is, that player gets the noble card
+                if (gameState.getPlayerTurn() == 0) {
+                    gameState.getNoble(gameState.getP0Field());
+                } else if (gameState.getPlayerTurn() == 1) {
+                    gameState.getNoble(gameState.getP1Field());
+                }
             }
 
             //Calculating points
@@ -156,8 +157,7 @@ public class GuillotineLocalGame extends LocalGame {
             return true;
 
          //If it a null action, due to a turn not being complete
-        }
-        else if(action instanceof  NullAction){
+        } else if(action instanceof  NullAction){
             return true;
         }
         return false;
@@ -183,7 +183,6 @@ public class GuillotineLocalGame extends LocalGame {
      * @return
      * 		a message that tells who has won the game, or null if the
      * 		game is not over
-     *
      */
     @Override
     protected String checkIfGameOver() {
@@ -192,16 +191,12 @@ public class GuillotineLocalGame extends LocalGame {
         if(gameState.getDayNum() == 4){
             if(gameState.getP0Score() > gameState.getP1Score()){
                 winner = this.playerNames[0];
-            }
-            else{
+            }else{
                 winner = this.playerNames[1];
             }
             return winner + " is the winner!";
         }else{
             return null;
         }
-
-
-
     }
 }

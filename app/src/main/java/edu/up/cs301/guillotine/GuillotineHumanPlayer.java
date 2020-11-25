@@ -64,6 +64,11 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
             int x = (int) event.getX();
             int y = (int) event.getY();
 
+            boolean discardCall = DiscardButton(x,y);
+            if(discardCall){
+                
+            }
+
             //if it is the play action/skip phase
             if (state.getTurnPhase() == 0) {
 
@@ -139,6 +144,8 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
             //Whatever action is taken, the board invalidates.
             board.invalidate();
         }
+
+
 
         return true;
     }
@@ -227,15 +234,22 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
         return -1;
     }
 
+    private boolean DiscardButton(int x, int y){
+        if(x > 10 && x < 200 && y > 670 && y < 770){
+            return true;
+        }
+        return false;
+    }
+
     private boolean acceptButton(int x, int y){
-        if(x > 10 && x < 160 && y > 860 && y < 960){
+        if(x > 10 && x < 170 && y > 860 && y < 960){
             return true;
         }
         return false;
     }
 
     private boolean skipButton(int x, int y){
-        if(x > 10 && x < 160 && y > 970 && y < 1070){
+        if(x > 10 && x < 170 && y > 970 && y < 1070){
             return true;
         }
         return false;
@@ -260,5 +274,9 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
         }
 
         return -1;
+    }
+
+    private boolean leftArrow(int x, int y){
+        return false;
     }
 }
