@@ -65,6 +65,26 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
             int y = (int) event.getY();
 
             boolean discardCall = DiscardButton(x,y);
+            boolean handArrow = handArrow(x,y);
+            boolean p0Arrow = p0FieldArrow(x,y);
+            boolean p1Arrow = p1FieldArrow(x,y);
+
+            //check if hand arrow is pressed
+            if(handArrow){
+
+            }
+
+            //check if p0 arrow is pressed
+            if(p0Arrow){
+
+            }
+
+            //check if p1 arrow is pressed
+            if(p1Arrow){
+
+            }
+
+            //see if discard button is pressed
             if(discardCall){
                 
             }
@@ -233,6 +253,28 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
         }
         return -1;
     }
+
+    private boolean handArrow(int x, int y){
+        if(x > 100 && x < 250 && y > 100 && y < 890){
+            return true;
+        }
+        return false;
+    }
+
+    private boolean p0FieldArrow(int x, int y){
+        if(x > 50 && x < 250 && y > 50 && y < 675){
+            return true;
+        }
+        return false;
+    }
+
+    private boolean p1FieldArrow(int x, int y){
+        if(x > 50 && x < 250 && y > 50 && y < 175){
+            return true;
+        }
+        return false;
+    }
+
 
     private boolean DiscardButton(int x, int y){
         if(x > 10 && x < 200 && y > 670 && y < 770){
