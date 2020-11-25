@@ -51,6 +51,9 @@ public class DrawBoard extends FlashSurfaceView {
             return;
         }
 
+        canvas.drawRect(10.0f, 670.0f, 200.0f, 770.0f, grey);
+        canvas.drawText("Discard", 10.0f,715.0f, black);
+        canvas.drawText("Callous", 10.0f,766.0f, black);
         canvas.drawRect(10.0f, 970.0f, 170.0f, 1070.0f, grey);
         canvas.drawText("Skip", 30.0f,1030.0f, black);
         canvas.drawRect(10.0f, 860.0f, 170.0f, 960.0f, grey);
