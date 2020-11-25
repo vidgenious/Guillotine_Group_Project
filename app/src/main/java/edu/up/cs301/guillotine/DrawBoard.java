@@ -62,9 +62,10 @@ public class DrawBoard extends FlashSurfaceView {
         canvas.drawText("Accept", 10.0f,930.0f, black);
 
         grey.setTextSize(50.0f);
-        canvas.drawText("Player 1: " + state.getP1Score(), 10.0f, 200.0f, grey);
+        canvas.drawText("Day: " + state.getDayNum(), 10.0f, 400.0f, grey);
+        canvas.drawText("Player 1" + state.getP1Score(), 10.0f, 200.0f, grey);
         canvas.drawText("Player 0: " + state.getP0Score(), 10.0f, 300.0f, grey);
-        //canvas.drawText("Phase : " + state.getP0Score(), 10.0f, 400.0f, grey);
+
 
         grey.setTextSize(50.0f);
         canvas.drawText("GUILLOTINE GAME ", 10.0f, 100.0f, grey);
