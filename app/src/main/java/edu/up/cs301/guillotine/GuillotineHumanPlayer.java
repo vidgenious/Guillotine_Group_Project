@@ -257,6 +257,9 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
         return -1;
     }
 
+
+
+
     private boolean handArrow(int x, int y){
         if(x > 240 && x < 310 && y > 880 && y < 950){
             return true;
@@ -303,7 +306,8 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
     private int twoChoice(int x, int y){
         if(x > 0 && x < 1000 && y > 0 && y < 1100){
             return 1;
-        }else if(x > 1000 && x < 2000 && y > 0 && y < 1100){
+        }
+        else if(x > 1000 && x < 2000 && y > 0 && y < 1100){
             return 2;
         }
         return -1;
@@ -312,10 +316,29 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
     private int threeChoice(int x, int y){
         if(x > 0 && x < 667 && y > 0 && y < 1100){
             return 1;
-        }else if(x > 667 && x < 1325 && y > 0 && y < 1100){
+        }
+        else if(x > 667 && x < 1325 && y > 0 && y < 1100){
             return 2;
-        }else if(x > 1325 && x < 2000 && y > 0 && y < 1100){
+        }
+        else if(x > 1325 && x < 2000 && y > 0 && y < 1100){
             return 3;
+        }
+
+        return -1;
+    }
+
+    private int fourChoice(int x, int y){
+        if(x > 0 && x < 500 && y > 0 && y < 1100){
+            return 1;
+        }
+        else if(x > 500 && x < 1000 && y > 0 && y < 1100){
+            return 2;
+        }
+        else if(x > 1000 && x < 1500 && y > 0 && y < 1100){
+            return 3;
+        }
+        else if(x > 1500 && x < 2000 && y > 0 && y < 1100){
+            return 4;
         }
 
         return -1;
