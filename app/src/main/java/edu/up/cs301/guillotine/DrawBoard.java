@@ -47,6 +47,8 @@ public class DrawBoard extends FlashSurfaceView {
     @Override
     public void onDraw(Canvas canvas) {
 
+        Bitmap draw;
+
         if(state == null){
             return;
         }
@@ -64,11 +66,15 @@ public class DrawBoard extends FlashSurfaceView {
         grey.setTextSize(50.0f);
         canvas.drawText("GUILLOTINE GAME ", 10.0f, 100.0f, grey);
 
+        if(state.getP0Hand().size() > 7){
+            draw = BitmapFactory.decodeResource(getResources(), R.drawable.left_arrow_transparent);
+            draw = Bitmap.createScaledBitmap(draw, 100, 100, true);
+            canvas.drawBitmap(draw, 250.0f, 890.0f, null);
+        }
 
         //P0 Hand
         float left = 1700;
-        Bitmap draw;
-        for(int i = 0; i < state.getP0Hand().size(); i++){
+        for(int i = 0; i < state.getP0Hand().size() && i < 7; i++){
             draw = BitmapFactory.decodeResource(getResources(), state.getP0Hand().get(i).image);
             draw = Bitmap.createScaledBitmap(draw, 200, 280, true);
             canvas.drawBitmap(draw, left, 800.0f, null); //800
@@ -102,21 +108,6 @@ public class DrawBoard extends FlashSurfaceView {
             left -= 120;
         }
 
-
-
-        if(state.getTurnPhase() == 4){
-            canvas.drawText("1", 50.0f, 400.0f, choice);
-            canvas.drawText("2", 1050.0f, 400.0f, choice);
-        }
-
-        if(state.getTurnPhase() == 5){
-            canvas.drawText("1", 50.0f, 400.0f, choice);
-            canvas.drawText("2", 720.0f, 400.0f, choice);
-            canvas.drawText("3", 1375.0f, 400.0f, choice);
-        }
-
-        // display the phases on the screen
-
         if(state.getTurnPhase() == 0){
             canvas.drawText("Action Card Phase", 500.0f, 50.0f, grey);
         }
@@ -128,16 +119,34 @@ public class DrawBoard extends FlashSurfaceView {
             canvas.drawText("Draw card Phase", 500.0f, 50.0f, grey );
         }
         if(state.getTurnPhase() == 3){
-            canvas.drawText("Select Noble in Line Phase", 500.0f, 50.0f, grey);
+            canvas.drawText("Select Noble in Line", 500.0f, 50.0f, grey);
         }
+
         if(state.getTurnPhase() == 4){
             canvas.drawText("Select ", 500.0f, 50.0f, grey);
+            canvas.drawText("1", 50.0f, 400.0f, choice);
+            canvas.drawText("2", 1050.0f, 400.0f, choice);
         }
+
         if(state.getTurnPhase() == 5){
             canvas.drawText("Select", 500.0f, 50.0f, grey);
+            if(state.getArrival()){
+                left = 50.0f;
+                for(int i = 0; i < state.getDeckNoble().size() && i < 3; i++){
+                    draw = BitmapFactory.decodeResource(getResources(), state.getDeckNoble().get(i).image);
+                    draw = Bitmap.createScaledBitmap(draw, 400, 560, true);
+                    canvas.drawBitmap(draw, left, 120.0f, null); //800
+                    left += 700.0f;
+                }
+            } else {
+                canvas.drawText("1", 50.0f, 400.0f, choice);
+                canvas.drawText("2", 720.0f, 400.0f, choice);
+                canvas.drawText("3", 1375.0f, 400.0f, choice);
+            }
         }
+
         if(state.getTurnPhase() == 6){
-            canvas.drawText("Select from Opponent ", 500.0f, 50.0f, grey);
+            canvas.drawText("Select Card in Hand", 500.0f, 50.0f, grey);
         }
 
 

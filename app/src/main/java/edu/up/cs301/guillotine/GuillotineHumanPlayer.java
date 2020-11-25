@@ -261,4 +261,8 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
 
         return -1;
     }
+
+    private boolean leftArrow(int x, int y){
+        return false;
+    }
 }

@@ -111,15 +111,10 @@ public class GuillotineLocalGame extends LocalGame {
          //If the action is a collect noble action
         } else if (action instanceof NobleAction) {
 
-            //Depending on which player it is, that player gets the noble card
-            if (gameState.getPlayerTurn() == 0) {
-                gameState.getNoble(gameState.getP0Field());
-            } else if (gameState.getPlayerTurn() == 1) {
-                gameState.getNoble(gameState.getP1Field());
-            }
+
 
             //if the noble line is empty, the day is over
-            if(gameState.getNobleLine().size() < 1){
+            if(gameState.getNobleLine().size() == 0){
                 for(int i = 0; i < 12; i++) {
                     gameState.dealNoble();
                 }
@@ -127,6 +122,13 @@ public class GuillotineLocalGame extends LocalGame {
                 gameState.setTurnPhase(0);
                 gameState.setDayNum(gameState.getDayNum()+1);
                 gameState.setTurnPhase(0);
+            } else {
+                //Depending on which player it is, that player gets the noble card
+                if (gameState.getPlayerTurn() == 0) {
+                    gameState.getNoble(gameState.getP0Field());
+                } else if (gameState.getPlayerTurn() == 1) {
+                    gameState.getNoble(gameState.getP1Field());
+                }
             }
 
             //Calculating points
