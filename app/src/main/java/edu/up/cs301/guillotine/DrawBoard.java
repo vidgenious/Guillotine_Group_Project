@@ -118,7 +118,7 @@ public class DrawBoard extends FlashSurfaceView {
             left -= 120;
         }
 
-        // Draws the Noble line cars on UI
+        // Draws the Noble line cards on UI
         left = 1700;
         Collections.reverse(state.getNobleLine());
         for(int i = 0; i < state.getNobleLine().size(); i++){
