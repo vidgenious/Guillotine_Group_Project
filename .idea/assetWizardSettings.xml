@@ -112,9 +112,7 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="foregroundLayerName" value="king_louis_backGround" />
-                                      <entry key="outputName" value="Guillotine" />
-                                      <entry key="previewDensity" value="MEDIUM" />
+                                      <entry key="outputName" value="louis_card_image" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -278,11 +276,6 @@
                                           </PersistentState>
                                         </value>
                                       </entry>
-                                    </map>
-                                  </option>
-                                  <option name="values">
-                                    <map>
-                                      <entry key="previewDensity" value="MEDIUM" />
                                     </map>
                                   </option>
                                 </PersistentState>
