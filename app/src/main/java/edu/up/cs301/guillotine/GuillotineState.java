@@ -84,8 +84,6 @@ public class GuillotineState extends GameState {
         this.actionCardPlayed = false;
 
         startGame();
-
-        p0Hand.add(new Card(2, false, true, 0, "actionCard", "Lack_Support", R.drawable.lack_of_support));
     }
     //Deep copy constructor
     /**
@@ -159,7 +157,6 @@ public class GuillotineState extends GameState {
             this.tempList.add(c);
         }
     }
-
 
 
     /**
@@ -257,7 +254,7 @@ public class GuillotineState extends GameState {
         this.deckAction.add(new Card(1, false,true, 0, "actionCard", "Indifferent", R.drawable.indifferent_public));
         this.deckAction.add(new Card(1, false, true, 0, "actionCard", "Info_Exchange", R.drawable.information_exchange));
         this.deckAction.add(new Card(1, false,true, 0, "actionCard", "Lack_Faith", R.drawable.lack_of_faith));
-        //this.deckAction.add(new Card(2, false, true, 0, "actionCard", "Lack_Support", R.drawable.lack_of_support));
+        this.deckAction.add(new Card(2, false, true, 0, "actionCard", "Lack_Support", R.drawable.lack_of_support));
         this.deckAction.add(new Card(2, true, true, 0, "actionCard", "Late_Arrival", R.drawable.late_arrival));
         this.deckAction.add(new Card(1, true,true, 0, "actionCard", "Let_Cake", R.drawable.let_them_eat_cake));
         this.deckAction.add(new Card(2, true,true, 0, "actionCard", "Majesty", R.drawable.majesty));
@@ -268,15 +265,15 @@ public class GuillotineState extends GameState {
         this.deckAction.add(new Card(1, true,true, 0, "actionCard", "Milling2", R.drawable.milling_in_line));
         this.deckAction.add(new Card(1, true,true , 0, "actionCard", "Missed", R.drawable.missed));
         this.deckAction.add(new Card(1, true,true, 0, "actionCard", "Missing_Heads", R.drawable.missing_heads));
-        //this.deckAction.add(new Card(1, true,true, 0, "actionCard", "Political_Influence1", R.drawable.political_influence));
-        //this.deckAction.add(new Card(1, true,true, 0, "actionCard", "Political_Influence2", R.drawable.political_influence));
+        this.deckAction.add(new Card(2, true,true, 0, "actionCard", "Political_Influence1", R.drawable.political_influence));
+        this.deckAction.add(new Card(2, true,true, 0, "actionCard", "Political_Influence2", R.drawable.political_influence));
         this.deckAction.add(new Card(2, true,true, 0, "actionCard", "Public_Demand", R.drawable.public_demand));
         this.deckAction.add(new Card(2, true,true, 0, "actionCard", "Pushed1", R.drawable.pushed));
         this.deckAction.add(new Card(2, true,true, 0, "actionCard", "Pushed2", R.drawable.pushed));
         this.deckAction.add(new Card(1, false,true, 0, "actionCard", "Rain_Delay", R.drawable.rain_delay));
-        //this.deckAction.add(new Card(2, false, true, 0, "actionCard", "Rat_Break", R.drawable.rat_break));
+        this.deckAction.add(new Card(2, false, true, 0, "actionCard", "Rat_Break", R.drawable.rat_break));
         this.deckAction.add(new Card(1, false, true, 0, "actionCard", "Rush_Job", R.drawable.rush_job));
-        //this.deckAction.add(new Card(1, false,  true, 0, "actionCard", "Scarlet", R.drawable.scarlet_pimpernel));
+        this.deckAction.add(new Card(1, false,  true, 0, "actionCard", "Scarlet", R.drawable.scarlet_pimpernel));
         this.deckAction.add(new Card(2, true,true, 0, "actionCard", "Stumble1", R.drawable.stumble));
         this.deckAction.add(new Card(2, true,true, 0, "actionCard", "Stumble2", R.drawable.stumble));
         this.deckAction.add(new Card(1, true,true, 0, "actionCard", "Long_Walk", R.drawable.the_long_walk));
@@ -560,9 +557,18 @@ public class GuillotineState extends GameState {
     public boolean dealActionCard(ArrayList hand) {
         if (scarletInPlay && !this.actionCardPlayed) {
             hand.add(this.deckAction.get(0));
+            this.deckAction.remove(0);
             while (!this.nobleLine.isEmpty()) {
                 this.deckDiscard.add(this.nobleLine.get(0));
+                this.nobleLine.remove(0);
             }
+            for(int i = 0; i < 12; i++){
+                dealNoble();
+            }
+            dayNum++;
+            turnPhase = 0;
+            scarletInPlay = false;
+            return true;
         }
         if (this.gameStart || this.turnPhase == 2 || this.actionCardPlayed) {
             if(this.deckAction.size() == 0){
@@ -852,6 +858,34 @@ public class GuillotineState extends GameState {
             p1Hand.remove(0);
             return true;
         }
+    }
+
+    /**
+     * This method goes through the opponents field
+     *
+     * @return always return true
+     */
+    public boolean moveThroughLack(){
+        if(playerTurn == 1) {
+            p0Hand.add(p0Hand.get(0));
+            p0Hand.remove(0);
+            return true;
+        }else{
+            p1Hand.add(p1Hand.get(0));
+            p1Hand.remove(0);
+            return true;
+        }
+    }
+
+    /**
+     * This method goes throught the discard deck
+     *
+     * @return always returns true
+     */
+    public boolean moveThroughRat(){
+        deckDiscard.add(deckDiscard.get(0));
+        deckDiscard.remove(0);
+        return true;
     }
 
     /**
@@ -3130,7 +3164,7 @@ public class GuillotineState extends GameState {
                     this.actionCardPlayed = true;
                     if (this.playerTurn == 0) {
                         for (int i = 0; i < this.p0Hand.size(); i++) {
-                            if (this.p0Hand.get(i).getId().equals("Political_Influence2")) {
+                            if (this.p0Hand.get(i).getId().equals("Political_Influence1")) {
                                 dealActionCard(this.p0Hand);
                                 dealActionCard(this.p0Hand);
                                 dealActionCard(this.p0Hand);
@@ -3140,7 +3174,7 @@ public class GuillotineState extends GameState {
                         }
                     } else {
                         for (int i = 0; i < this.p1Hand.size(); i++) {
-                            if (this.p1Hand.get(i).getId().equals("Political_Influence2")) {
+                            if (this.p1Hand.get(i).getId().equals("Political_Influence1")) {
                                 dealActionCard(this.p1Hand);
                                 dealActionCard(this.p1Hand);
                                 dealActionCard(this.p1Hand);
@@ -3354,13 +3388,44 @@ public class GuillotineState extends GameState {
                 //need onclick
                 case "Rat_Break":
                     this.actionCardPlayed = true;
+
+                    if(turnPhase == 0){
+                        if(deckDiscard.size() > 0){
+                            turnPhase = 7;
+                        } else{
+                            turnPhase = 1;
+                        }
+                    } else if(turnPhase == 7){
+                        if(playerTurn == 0){
+                            p0Hand.add(deckDiscard.get(choice1));
+                            deckDiscard.remove(choice1);
+                        }else if(playerTurn == 1){
+                            p1Hand.add(deckDiscard.get(choice1));
+                            deckDiscard.remove(choice1);
+                        }
+
+                        if (this.playerTurn == 0) {
+                            for (int i = 0; i < this.p0Hand.size(); i++) {
+                                if (this.p0Hand.get(i).getId().equals("Rat_Break")) {
+                                    this.deckDiscard.add(this.p0Hand.get(i));
+                                    this.p0Hand.remove(i);
+                                }
+                            }
+                        } else {
+                            for (int i = 0; i < this.p1Hand.size(); i++) {
+                                if (this.p1Hand.get(i).getId().equals("Rat_Break")) {
+                                    this.deckDiscard.add(this.p1Hand.get(i));
+                                    this.p1Hand.remove(i);
+                                }
+                            }
+
+                        }
+                        turnPhase = 1;
+                    }
+
                     if (this.playerTurn == 0) {
                         for (int i = 0; i < this.p0Hand.size(); i++) {
                             if (this.p0Hand.get(i).getId().equals("Rat_Break")) {
-                                if (this.deckDiscard.get(choice1).type != 0) {
-                                    this.p0Hand.add(this.deckDiscard.get(choice1));
-                                    this.deckDiscard.remove(choice1);
-                                }
                                 this.deckDiscard.add(this.p0Hand.get(i));
                                 this.p0Hand.remove(i);
                             }
@@ -3368,10 +3433,6 @@ public class GuillotineState extends GameState {
                     } else {
                         for (int i = 0; i < this.p1Hand.size(); i++) {
                             if (this.p1Hand.get(i).getId().equals("Rat_Break")) {
-                                if (this.deckDiscard.get(choice1).type != 0) {
-                                    this.p1Hand.add(this.deckDiscard.get(choice1));
-                                    this.deckDiscard.remove(choice1);
-                                }
                                 this.deckDiscard.add(this.p1Hand.get(i));
                                 this.p1Hand.remove(i);
                             }

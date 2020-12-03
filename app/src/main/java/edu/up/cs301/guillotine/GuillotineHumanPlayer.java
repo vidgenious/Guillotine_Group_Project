@@ -65,7 +65,6 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
             int x = (int) event.getX();
             int y = (int) event.getY();
 
-            boolean discardCall = DiscardButton(x,y);
             boolean handArrow = handArrow(x,y);
             boolean p0Arrow = p0FieldArrow(x,y);
             boolean p1Arrow = p1FieldArrow(x,y);
@@ -88,11 +87,6 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
                 game.sendAction(action);
             }
 
-            //see if discard button is pressed
-            //Not used right now
-            if(discardCall){
-                
-            }
 
             //if it is the play action/skip phase
             if (state.getTurnPhase() == 0) {
@@ -141,8 +135,29 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
 
             } else if(state.getTurnPhase() == 6) {
                 int cardPos = fourChoice(x, y);
+
+                if (choiceArrow(x, y)) {
+                    LackMoveAction action = new LackMoveAction(this);
+                    game.sendAction(action);
+                }
+
+                if (cardPos != -1 && cardPos < state.getP1Hand().size()) {
                     ChooseAction action = new ChooseAction(this, cardPos, 1);
                     game.sendAction(action);
+                }
+
+            } else if(state.getTurnPhase() == 7) {
+                int cardPos = fourChoice(x, y);
+
+                if(choiceArrow(x, y)) {
+                    RatMoveAction action = new RatMoveAction(this);
+                    game.sendAction(action);
+                }
+
+                if (cardPos != -1 && cardPos < state.getDeckDiscard().size()) {
+                    ChooseAction action = new ChooseAction(this, cardPos, 1);
+                    game.sendAction(action);
+                }
 
 
              //If it is the get noble phase
@@ -290,8 +305,8 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
     }
 
 
-    private boolean DiscardButton(int x, int y){
-        if(x > 10 && x < 200 && y > 670 && y < 770){
+    private boolean choiceArrow(int x, int y){
+        if(x > 300 && x < 450 && y > 530 && y < 680){
             return true;
         }
         return false;
@@ -336,17 +351,17 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
     }
 
     private int fourChoice(int x, int y){
-        if(x > 0 && x < 500 && y > 0 && y < 1100){
+        if(x > 1570 && x < 1920 && y > 360 && y < 850){
+            return 0;
+        }
+        else if(x > 1200 && x < 1550 && y > 360 && y < 850){
             return 1;
         }
-        else if(x > 500 && x < 1000 && y > 0 && y < 1100){
+        else if(x > 830 && x < 1180 && y > 360 && y < 850){
             return 2;
         }
-        else if(x > 1000 && x < 1500 && y > 0 && y < 1100){
+        else if(x > 460 && x < 810 && y > 360 && y < 850){
             return 3;
-        }
-        else if(x > 1500 && x < 2000 && y > 0 && y < 1100){
-            return 4;
         }
 
         return -1;

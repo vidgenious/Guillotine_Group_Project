@@ -202,6 +202,21 @@ public class DrawBoard extends FlashSurfaceView {
             }
         }
 
+        if(state.getTurnPhase() == 7){
+            left = 1570;
+            for(int i = 0; i < state.getDeckDiscard().size() && i < 4; i++){
+                draw = BitmapFactory.decodeResource(getResources(), state.getDeckDiscard().get(i).image);
+                draw = Bitmap.createScaledBitmap(draw, 350, 490, true);
+                canvas.drawBitmap(draw, left, 360.0f, null);
+                left -= 370;
+            }
+            if(state.getDeckDiscard().size() > 4){
+                draw = BitmapFactory.decodeResource(getResources(), R.drawable.left_arrow_transparent);
+                draw = Bitmap.createScaledBitmap(draw, 150, 150, true);
+                canvas.drawBitmap(draw, 300.0f, 530.0f, null);
+            }
+        }
+
 
 
 
