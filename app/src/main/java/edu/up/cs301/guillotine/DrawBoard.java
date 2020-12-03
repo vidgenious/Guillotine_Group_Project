@@ -9,6 +9,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 
+import java.util.Collections;
+
 import edu.up.cs301.game.GameFramework.utilities.FlashSurfaceView;
 import edu.up.cs301.game.R;
 
@@ -98,7 +100,7 @@ public class DrawBoard extends FlashSurfaceView {
             canvas.drawBitmap(draw, 300.0f, 175.0f, null);
         }
 
-        //P0 Hand
+        //Draws the P0 Hand cards on the UI
         float left = 1700;
         for(int i = 0; i < state.getP0Hand().size() && i < 7; i++){
             draw = BitmapFactory.decodeResource(getResources(), state.getP0Hand().get(i).image);
@@ -107,7 +109,7 @@ public class DrawBoard extends FlashSurfaceView {
             left -= 220.0f;
         }
 
-        //P0 field
+        //Draws them P0 field cards on UI
         left = 1800;
         for(int i = 0; i < state.getP0Field().size() && i < 12; i++){
             draw = BitmapFactory.decodeResource(getResources(), state.getP0Field().get(i).image);
@@ -116,8 +118,9 @@ public class DrawBoard extends FlashSurfaceView {
             left -= 120;
         }
 
-        //Noble line
+        // Draws the Noble line cars on UI
         left = 1700;
+        Collections.reverse(state.getNobleLine());
         for(int i = 0; i < state.getNobleLine().size(); i++){
             draw = BitmapFactory.decodeResource(getResources(), state.getNobleLine().get(i).image);
             draw = Bitmap.createScaledBitmap(draw, 200, 280, true);
@@ -134,34 +137,66 @@ public class DrawBoard extends FlashSurfaceView {
             left -= 120;
         }
 
+        //Draws the Action Deck on the screen
+        left = 10;
+        for(int i = 0; i < state.getDeckAction().size(); i++){
+            draw = BitmapFactory.decodeResource(getResources(),R.drawable.action_card_back);
+            draw = Bitmap.createScaledBitmap(draw, 100, 140, true);
+            canvas.drawBitmap(draw, left, 710.0f, null);
+
+        }
+
+        //draws the discard deck on the screen
+        for(int i = 0; i < state.getDeckDiscard().size(); i++){
+            draw = BitmapFactory.decodeResource(getResources(), R.drawable.action_card_back);
+            draw = Bitmap.createScaledBitmap(draw, 100, 140, true);
+            canvas.drawBitmap(draw, left, 560.0f, null);
+
+        }
+       //draws the noble deck on the screen
+        for(int i = 0; i < state.getDeckNoble().size(); i++){
+            draw = BitmapFactory.decodeResource(getResources(), R.drawable.action_card_back);
+            draw = Bitmap.createScaledBitmap(draw, 100, 140, true);
+            canvas.drawBitmap(draw, left, 415.0f, null);
+
+        }
+
+        //Displays the information on the UI that tells the player what phase it is
+        //And what action to take in each phase.
         if(state.getTurnPhase() == 0){
             canvas.drawText("Action Card Phase", 800.0f, 50.0f, grey);
+            canvas.drawText("click action card", 700.0f, 90.0f, grey);
         }
 
         if(state.getTurnPhase() == 1){
             canvas.drawText("Take Noble Phase", 800.0f, 50.0f, grey);
+            canvas.drawText("Click accept", 700.0f, 90.0f, grey);
         }
         if(state.getTurnPhase() == 2){
             canvas.drawText("Draw card Phase", 800.0f, 50.0f, grey );
+            canvas.drawText("Click card from the deck", 700.0f, 90.0f, grey);
         }
         if(state.getTurnPhase() == 3){
             canvas.drawText("Select Noble in Line", 800.0f, 50.0f, grey);
+            canvas.drawText("click noble card", 700.0f, 90.0f, grey);
         }
 
         if(state.getTurnPhase() == 4){
             canvas.drawText("Select ", 800.0f, 50.0f, grey);
+            canvas.drawText("(Select 1 or 2 on the screen)", 700.0f, 40.0f, grey);
             canvas.drawText("1", 50.0f, 400.0f, choice);
             canvas.drawText("2", 1050.0f, 400.0f, choice);
         }
 
         if(state.getTurnPhase() == 5){
             canvas.drawText("Select", 800.0f, 50.0f, grey);
+            canvas.drawText("(Select 1 or 2 or 3 on the screen)", 700.0f, 40.0f, grey);
             if(state.getArrival()){
                 left = 50.0f;
                 for(int i = 0; i < state.getDeckNoble().size() && i < 3; i++){
                     draw = BitmapFactory.decodeResource(getResources(), state.getDeckNoble().get(i).image);
                     draw = Bitmap.createScaledBitmap(draw, 400, 560, true);
-                    canvas.drawBitmap(draw, left, 120.0f, null); //800
+                    canvas.drawBitmap(draw, left, 120.0f, null);
                     left += 700.0f;
                 }
             } else {
@@ -172,38 +207,9 @@ public class DrawBoard extends FlashSurfaceView {
         }
 
         if(state.getTurnPhase() == 6){
-            canvas.drawText("Select Card to Discard in Opponent's Hand", 800.0f, 50.0f, grey);
-            if(state.getPlayerTurn() == 0){
-                left = 1570;
-                for(int i = 0; i < state.getP1Hand().size() && i < 4; i++){
-                    draw = BitmapFactory.decodeResource(getResources(), state.getP1Hand().get(i).image);
-                    draw = Bitmap.createScaledBitmap(draw, 350, 490, true);
-                    canvas.drawBitmap(draw, left, 360.0f, null);
-                    left -= 370;
-                }
-                if(state.getP1Hand().size() > 4){
-                    draw = BitmapFactory.decodeResource(getResources(), R.drawable.left_arrow_transparent);
-                    draw = Bitmap.createScaledBitmap(draw, 150, 150, true);
-                    canvas.drawBitmap(draw, 300.0f, 530.0f, null);
-                }
-            } else{
-                left = 1570;
-                for(int i = 0; i < state.getP0Hand().size() && i < 4; i++){
-                    draw = BitmapFactory.decodeResource(getResources(), state.getP0Hand().get(i).image);
-                    draw = Bitmap.createScaledBitmap(draw, 350, 490, true);
-                    canvas.drawBitmap(draw, left, 360.0f, null);
-                    left -= 370;
-                }
-                if(state.getP0Hand().size() > 4){
-                    draw = BitmapFactory.decodeResource(getResources(), R.drawable.left_arrow_transparent);
-                    draw = Bitmap.createScaledBitmap(draw, 150, 150, true);
-                    canvas.drawBitmap(draw, 300.0f, 530.0f, null);
-                }
-            }
+            canvas.drawText("Select Card in Hand", 800.0f, 50.0f, grey);
+            canvas.drawText("(Click card in player's hand)", 800.0f, 40.0f, grey);
         }
-
-
-
 
 
     }

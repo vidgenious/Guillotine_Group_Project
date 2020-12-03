@@ -22,6 +22,7 @@ public class Card {
     public String id;
     public int image;
 
+
     //Constructor for Card object
     public Card(int type, boolean affectsLine, boolean hasEffect, int points, String cardColor,  String id, int image){
         this.type = type;
@@ -31,6 +32,7 @@ public class Card {
         this.cardColor = cardColor;
         this.id = id;
         this.image = image;
+
     }
 
     public String getId(){ return this.id;}
