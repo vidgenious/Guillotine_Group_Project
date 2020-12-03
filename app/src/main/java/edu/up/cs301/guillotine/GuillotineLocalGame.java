@@ -176,6 +176,11 @@ public class GuillotineLocalGame extends LocalGame {
         } else if(action instanceof P1MoveAction) {
             gameState.moveThroughP1Field();
 
+        } else if(action instanceof LackMoveAction) {
+            gameState.moveThroughLack();
+
+        } else if(action instanceof  RatMoveAction) {
+            gameState.moveThroughRat();
             //If it a null action, due to a turn not being complete
         } else if(action instanceof  NullAction){
             return true;

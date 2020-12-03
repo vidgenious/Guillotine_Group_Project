@@ -9,8 +9,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 
-import java.util.Collections;
-
 import edu.up.cs301.game.GameFramework.utilities.FlashSurfaceView;
 import edu.up.cs301.game.R;
 
@@ -120,7 +118,6 @@ public class DrawBoard extends FlashSurfaceView {
 
         // Draws the Noble line cards on UI
         left = 1700;
-        Collections.reverse(state.getNobleLine());
         for(int i = 0; i < state.getNobleLine().size(); i++){
             draw = BitmapFactory.decodeResource(getResources(), state.getNobleLine().get(i).image);
             draw = Bitmap.createScaledBitmap(draw, 200, 280, true);
@@ -136,6 +133,7 @@ public class DrawBoard extends FlashSurfaceView {
             canvas.drawBitmap(draw, left, 150.0f, null); //150
             left -= 120;
         }
+
 
         //Draws the Action Deck on the screen
         left = 10;
@@ -165,11 +163,12 @@ public class DrawBoard extends FlashSurfaceView {
         //And what action to take in each phase.
         if(state.getTurnPhase() == 0){
             canvas.drawText("Action Card Phase", 800.0f, 50.0f, grey);
-            canvas.drawText("click action card", 700.0f, 90.0f, grey);
+            canvas.drwText("click action card", 700.0f, 90.0f, grey);
         }
 
         if(state.getTurnPhase() == 1){
             canvas.drawText("Take Noble Phase", 800.0f, 50.0f, grey);
+
             canvas.drawText("Click accept", 700.0f, 90.0f, grey);
         }
         if(state.getTurnPhase() == 2){
@@ -183,14 +182,12 @@ public class DrawBoard extends FlashSurfaceView {
 
         if(state.getTurnPhase() == 4){
             canvas.drawText("Select ", 800.0f, 50.0f, grey);
-            canvas.drawText("(Select 1 or 2 on the screen)", 700.0f, 40.0f, grey);
             canvas.drawText("1", 50.0f, 400.0f, choice);
             canvas.drawText("2", 1050.0f, 400.0f, choice);
         }
 
         if(state.getTurnPhase() == 5){
             canvas.drawText("Select", 800.0f, 50.0f, grey);
-            canvas.drawText("(Select 1 or 2 or 3 on the screen)", 700.0f, 40.0f, grey);
             if(state.getArrival()){
                 left = 50.0f;
                 for(int i = 0; i < state.getDeckNoble().size() && i < 3; i++){
@@ -207,9 +204,54 @@ public class DrawBoard extends FlashSurfaceView {
         }
 
         if(state.getTurnPhase() == 6){
-            canvas.drawText("Select Card in Hand", 800.0f, 50.0f, grey);
-            canvas.drawText("(Click card in player's hand)", 800.0f, 40.0f, grey);
+            canvas.drawText("Select Card to Discard in Opponent's Hand", 800.0f, 50.0f, grey);
+            if(state.getPlayerTurn() == 0){
+                left = 1570;
+                for(int i = 0; i < state.getP1Hand().size() && i < 4; i++){
+                    draw = BitmapFactory.decodeResource(getResources(), state.getP1Hand().get(i).image);
+                    draw = Bitmap.createScaledBitmap(draw, 350, 490, true);
+                    canvas.drawBitmap(draw, left, 360.0f, null);
+                    left -= 370;
+                }
+                if(state.getP1Hand().size() > 4){
+                    draw = BitmapFactory.decodeResource(getResources(), R.drawable.left_arrow_transparent);
+                    draw = Bitmap.createScaledBitmap(draw, 150, 150, true);
+                    canvas.drawBitmap(draw, 300.0f, 530.0f, null);
+                }
+            } else{
+                left = 1570;
+                for(int i = 0; i < state.getP0Hand().size() && i < 4; i++){
+                    draw = BitmapFactory.decodeResource(getResources(), state.getP0Hand().get(i).image);
+                    draw = Bitmap.createScaledBitmap(draw, 350, 490, true);
+                    canvas.drawBitmap(draw, left, 360.0f, null);
+                    left -= 370;
+                }
+                if(state.getP0Hand().size() > 4){
+                    draw = BitmapFactory.decodeResource(getResources(), R.drawable.left_arrow_transparent);
+                    draw = Bitmap.createScaledBitmap(draw, 150, 150, true);
+                    canvas.drawBitmap(draw, 300.0f, 530.0f, null);
+                }
+            }
+
         }
+
+        if(state.getTurnPhase() == 7){
+            left = 1570;
+            for(int i = 0; i < state.getDeckDiscard().size() && i < 4; i++){
+                draw = BitmapFactory.decodeResource(getResources(), state.getDeckDiscard().get(i).image);
+                draw = Bitmap.createScaledBitmap(draw, 350, 490, true);
+                canvas.drawBitmap(draw, left, 360.0f, null);
+                left -= 370;
+            }
+            if(state.getDeckDiscard().size() > 4){
+                draw = BitmapFactory.decodeResource(getResources(), R.drawable.left_arrow_transparent);
+                draw = Bitmap.createScaledBitmap(draw, 150, 150, true);
+                canvas.drawBitmap(draw, 300.0f, 530.0f, null);
+            }
+        }
+
+
+
 
 
     }
