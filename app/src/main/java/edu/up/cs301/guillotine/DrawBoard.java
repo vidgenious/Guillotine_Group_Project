@@ -9,6 +9,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 
+import java.util.Collections;
+
 import edu.up.cs301.game.GameFramework.utilities.FlashSurfaceView;
 import edu.up.cs301.game.R;
 
@@ -118,6 +120,7 @@ public class DrawBoard extends FlashSurfaceView {
 
         //Noble line
         left = 1700;
+        Collections.reverse(state.getNobleLine());
         for(int i = 0; i < state.getNobleLine().size(); i++){
             draw = BitmapFactory.decodeResource(getResources(), state.getNobleLine().get(i).image);
             draw = Bitmap.createScaledBitmap(draw, 200, 280, true);
@@ -134,28 +137,59 @@ public class DrawBoard extends FlashSurfaceView {
             left -= 120;
         }
 
+        //Action Deck
+        left = 10;
+        for(int i = 0; i < state.getDeckAction().size(); i++){
+            draw = BitmapFactory.decodeResource(getResources(), state.getDeckAction().get(i).image);
+            draw = Bitmap.createScaledBitmap(draw, 100, 140, true);
+            canvas.drawBitmap(draw, left, 710.0f, null);
+            //left -= 10;
+        }
+
+        //discard deck
+        for(int i = 0; i < state.getDeckDiscard().size(); i++){
+            draw = BitmapFactory.decodeResource(getResources(), state.getDeckDiscard().get(i).image);
+            draw = Bitmap.createScaledBitmap(draw, 100, 140, true);
+            canvas.drawBitmap(draw, left, 575.0f, null);
+            //left -= 10;
+        }
+        //noble deck
+        for(int i = 0; i < state.getDeckNoble().size(); i++){
+            draw = BitmapFactory.decodeResource(getResources(), state.getDeckNoble().get(i).image);
+            draw = Bitmap.createScaledBitmap(draw, 100, 140, true);
+            canvas.drawBitmap(draw, left, 425.0f, null);
+            //left -= 100;
+        }
+
+
         if(state.getTurnPhase() == 0){
             canvas.drawText("Action Card Phase", 800.0f, 50.0f, grey);
+            canvas.drawText("Play an action card", 700.0f, 85.0f, grey);
         }
 
         if(state.getTurnPhase() == 1){
             canvas.drawText("Take Noble Phase", 800.0f, 50.0f, grey);
+            canvas.drawText("Take a noble card from noble line deck", 700.0f, 85.0f, grey);
         }
         if(state.getTurnPhase() == 2){
             canvas.drawText("Draw card Phase", 800.0f, 50.0f, grey );
+            canvas.drawText("Draw a card from the deck", 700.0f, 85.0f, grey);
         }
         if(state.getTurnPhase() == 3){
             canvas.drawText("Select Noble in Line", 800.0f, 50.0f, grey);
+            canvas.drawText("Select a noble card from the noble line", 700.0f, 85.0f, grey);
         }
 
         if(state.getTurnPhase() == 4){
             canvas.drawText("Select ", 800.0f, 50.0f, grey);
+            canvas.drawText("(Select 1 or 2 on the screen)", 700.0f, 40.0f, grey);
             canvas.drawText("1", 50.0f, 400.0f, choice);
             canvas.drawText("2", 1050.0f, 400.0f, choice);
         }
 
         if(state.getTurnPhase() == 5){
             canvas.drawText("Select", 800.0f, 50.0f, grey);
+            canvas.drawText("(Select 1 or 2 or 3 on the screen)", 700.0f, 40.0f, grey);
             if(state.getArrival()){
                 left = 50.0f;
                 for(int i = 0; i < state.getDeckNoble().size() && i < 3; i++){
@@ -173,10 +207,8 @@ public class DrawBoard extends FlashSurfaceView {
 
         if(state.getTurnPhase() == 6){
             canvas.drawText("Select Card in Hand", 800.0f, 50.0f, grey);
+            canvas.drawText("(Select a card in player's hand)", 800.0f, 40.0f, grey);
         }
-
-
-
 
 
     }
