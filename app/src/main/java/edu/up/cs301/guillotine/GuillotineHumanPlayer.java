@@ -57,41 +57,41 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
     public boolean onTouch(View view, MotionEvent event) {
         if (event.getAction() != MotionEvent.ACTION_UP) return true;
 
-
+        //checks if human is player 1 or 0
         //If statement for if the turn is correct
-        if(state.getPlayerTurn() == 0) {
+        if (state.getPlayerTurn() == 0) {
 
             //Defining the coordinates of the touch
             int x = (int) event.getX();
             int y = (int) event.getY();
 
-            boolean discardCall = DiscardButton(x,y);
-            boolean handArrow = handArrow(x,y);
-            boolean p0Arrow = p0FieldArrow(x,y);
-            boolean p1Arrow = p1FieldArrow(x,y);
+            boolean discardCall = DiscardButton(x, y);
+            boolean handArrow = handArrow(x, y);
+            boolean p0Arrow = p0FieldArrow(x, y);
+            boolean p1Arrow = p1FieldArrow(x, y);
 
             //check if hand arrow is pressed
-            if(handArrow){
+            if (handArrow) {
                 HandMoveAction action = new HandMoveAction(this);
                 game.sendAction(action);
             }
 
             //check if p0 arrow is pressed
-            if(p0Arrow){
+            if (p0Arrow) {
                 P0MoveAction action = new P0MoveAction(this);
                 game.sendAction(action);
             }
 
             //check if p1 arrow is pressed
-            if(p1Arrow){
+            if (p1Arrow) {
                 P1MoveAction action = new P1MoveAction(this);
                 game.sendAction(action);
             }
 
             //see if discard button is pressed
             //Not used right now
-            if(discardCall){
-                
+            if (discardCall) {
+
             }
 
             //if it is the play action/skip phase
@@ -102,11 +102,11 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
                 boolean skip = skipButton(x, y);
 
                 //If skip button is pressed
-                if(skip){
+                if (skip) {
                     game.sendAction(new SkipAction(this));
 
-                 //If an invalid place on the screen is touched
-                }else if (cardPos < 0 || cardPos + 1 > state.getP0Hand().size()) {
+                    //If an invalid place on the screen is touched
+                } else if (cardPos < 0 || cardPos + 1 > state.getP0Hand().size()) {
                     return false;
                 }
                 PlayAction action = new PlayAction(this, cardPos);
@@ -115,8 +115,7 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
                 game.sendAction(action);
 
 
-
-            } else if(state.getTurnPhase() == 3) {
+            } else if (state.getTurnPhase() == 3) {
 
                 int cardPos = lineCard(x, y);
 
@@ -125,19 +124,19 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
                     game.sendAction(action);
                 }
 
-            } else if(state.getTurnPhase() == 4) {
+            } else if (state.getTurnPhase() == 4) {
                 int cardPos = twoChoice(x, y);
 
                 ChooseAction action = new ChooseAction(this, cardPos, 2);
                 game.sendAction(action);
 
-            } else if(state.getTurnPhase() == 5) {
+            } else if (state.getTurnPhase() == 5) {
                 int cardPos = threeChoice(x, y);
 
                 ChooseAction action = new ChooseAction(this, cardPos, 2);
                 game.sendAction(action);
 
-             //If it is the get noble phase
+                //If it is the get noble phase
             } else if (state.getTurnPhase() == 1) {
 
                 //Method for determining if the accept button was pressed
@@ -152,8 +151,8 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
                     state.setTurnPhase(2);
                 }
 
-             //If it is the draw card phase
-            }else if (state.getTurnPhase() == 2){
+                //If it is the draw card phase
+            } else if (state.getTurnPhase() == 2) {
 
                 //Method for if accept button pressed
                 boolean select = acceptButton(x, y);
@@ -190,6 +189,7 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
 
         this.state = (GuillotineState)info;
         board.setState(state);
+        board.setHumanPlayerLoc(this.playerNum);
         board.invalidate();
     }
 
@@ -203,7 +203,6 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
         activity.setContentView(R.layout.guillotine_layout);
 
         board = (DrawBoard) myActivity.findViewById(R.id.guillotine_board);
-
         board.setOnTouchListener(this);
         board.setState(state);
 
