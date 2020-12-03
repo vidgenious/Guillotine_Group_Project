@@ -57,32 +57,33 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
     public boolean onTouch(View view, MotionEvent event) {
         if (event.getAction() != MotionEvent.ACTION_UP) return true;
 
-
+        //if human is position 0
+        if(this.playerNum == 0){
         //If statement for if the turn is correct
-        if(state.getPlayerTurn() == 0) {
+        if (state.getPlayerTurn() == 0) {
 
             //Defining the coordinates of the touch
             int x = (int) event.getX();
             int y = (int) event.getY();
 
-            boolean handArrow = handArrow(x,y);
-            boolean p0Arrow = p0FieldArrow(x,y);
-            boolean p1Arrow = p1FieldArrow(x,y);
+            boolean handArrow = handArrow(x, y);
+            boolean p0Arrow = p0FieldArrow(x, y);
+            boolean p1Arrow = p1FieldArrow(x, y);
 
             //check if hand arrow is pressed
-            if(handArrow){
+            if (handArrow) {
                 HandMoveAction action = new HandMoveAction(this);
                 game.sendAction(action);
             }
 
             //check if p0 arrow is pressed
-            if(p0Arrow){
+            if (p0Arrow) {
                 P0MoveAction action = new P0MoveAction(this);
                 game.sendAction(action);
             }
 
             //check if p1 arrow is pressed
-            if(p1Arrow){
+            if (p1Arrow) {
                 P1MoveAction action = new P1MoveAction(this);
                 game.sendAction(action);
             }
@@ -96,23 +97,22 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
                 boolean skip = skipButton(x, y);
 
                 //If skip button is pressed
-                if(skip){
+                if (skip) {
                     game.sendAction(new SkipAction(this));
 
-                 //If an invalid place on the screen is touched
+                    //If an invalid place on the screen is touched
                 }
-                if(state.getPlayerTurn() == 0)
-                if (cardPos < 0 || cardPos + 1 > state.getP0Hand().size()) {
-                    return false;
-                }
+                if (state.getPlayerTurn() == 0)
+                    if (cardPos < 0 || cardPos + 1 > state.getP0Hand().size()) {
+                        return false;
+                    }
                 PlayAction action = new PlayAction(this, cardPos);
 
                 //Sends whichever action is the result
                 game.sendAction(action);
 
 
-
-            } else if(state.getTurnPhase() == 3) {
+            } else if (state.getTurnPhase() == 3) {
 
                 int cardPos = lineCard(x, y);
 
@@ -121,19 +121,19 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
                     game.sendAction(action);
                 }
 
-            } else if(state.getTurnPhase() == 4) {
+            } else if (state.getTurnPhase() == 4) {
                 int cardPos = twoChoice(x, y);
 
                 ChooseAction action = new ChooseAction(this, cardPos, 2);
                 game.sendAction(action);
 
-            } else if(state.getTurnPhase() == 5) {
+            } else if (state.getTurnPhase() == 5) {
                 int cardPos = threeChoice(x, y);
 
                 ChooseAction action = new ChooseAction(this, cardPos, 2);
                 game.sendAction(action);
 
-            } else if(state.getTurnPhase() == 6) {
+            } else if (state.getTurnPhase() == 6) {
                 int cardPos = fourChoice(x, y);
 
                 if (choiceArrow(x, y)) {
@@ -146,10 +146,10 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
                     game.sendAction(action);
                 }
 
-            } else if(state.getTurnPhase() == 7) {
+            } else if (state.getTurnPhase() == 7) {
                 int cardPos = fourChoice(x, y);
 
-                if(choiceArrow(x, y)) {
+                if (choiceArrow(x, y)) {
                     RatMoveAction action = new RatMoveAction(this);
                     game.sendAction(action);
                 }
@@ -160,7 +160,7 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
                 }
 
 
-             //If it is the get noble phase
+                //If it is the get noble phase
             } else if (state.getTurnPhase() == 1) {
 
                 //Method for determining if the accept button was pressed
@@ -175,8 +175,8 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
                     state.setTurnPhase(2);
                 }
 
-             //If it is the draw card phase
-            }else if (state.getTurnPhase() == 2){
+                //If it is the draw card phase
+            } else if (state.getTurnPhase() == 2) {
 
                 //Method for if accept button pressed
                 boolean select = acceptButton(x, y);
@@ -192,7 +192,144 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
             //Whatever action is taken, the board invalidates.
             board.invalidate();
         }
+    }//end if player is position 0
 
+        //if human is position 1
+        else{
+            //If statement for if the turn is correct
+            if (state.getPlayerTurn() == 1) {
+
+                //Defining the coordinates of the touch
+                int x = (int) event.getX();
+                int y = (int) event.getY();
+
+                boolean handArrow = handArrow(x, y);
+                boolean p0Arrow = p0FieldArrow(x, y);
+                boolean p1Arrow = p1FieldArrow(x, y);
+
+                //check if hand arrow is pressed
+                if (handArrow) {
+                    HandMoveAction action = new HandMoveAction(this);
+                    game.sendAction(action);
+                }
+
+                //check if p0 arrow is pressed
+                if (p0Arrow) {
+                    P0MoveAction action = new P0MoveAction(this);
+                    game.sendAction(action);
+                }
+
+                //check if p1 arrow is pressed
+                if (p1Arrow) {
+                    P1MoveAction action = new P1MoveAction(this);
+                    game.sendAction(action);
+                }
+
+
+                //if it is the play action/skip phase
+                if (state.getTurnPhase() == 0) {
+
+                    //Methods for determining which card/button is pressed
+                    int cardPos = handCard(x, y);
+                    boolean skip = skipButton(x, y);
+
+                    //If skip button is pressed
+                    if (skip) {
+                        game.sendAction(new SkipAction(this));
+
+                        //If an invalid place on the screen is touched
+                    }
+                    if (state.getPlayerTurn() == 0)
+                        if (cardPos < 0 || cardPos + 1 > state.getP1Hand().size()) {
+                            return false;
+                        }
+                    PlayAction action = new PlayAction(this, cardPos);
+
+                    //Sends whichever action is the result
+                    game.sendAction(action);
+
+
+                } else if (state.getTurnPhase() == 3) {
+
+                    int cardPos = lineCard(x, y);
+
+                    if (cardPos > -1 && !(cardPos + 1 > state.getNobleLine().size())) {
+                        ChooseAction action = new ChooseAction(this, cardPos, 1);
+                        game.sendAction(action);
+                    }
+
+                } else if (state.getTurnPhase() == 4) {
+                    int cardPos = twoChoice(x, y);
+
+                    ChooseAction action = new ChooseAction(this, cardPos, 2);
+                    game.sendAction(action);
+
+                } else if (state.getTurnPhase() == 5) {
+                    int cardPos = threeChoice(x, y);
+
+                    ChooseAction action = new ChooseAction(this, cardPos, 2);
+                    game.sendAction(action);
+
+                } else if (state.getTurnPhase() == 6) {
+                    int cardPos = fourChoice(x, y);
+
+                    if (choiceArrow(x, y)) {
+                        LackMoveAction action = new LackMoveAction(this);
+                        game.sendAction(action);
+                    }
+
+                    if (cardPos != -1 && cardPos < state.getP0Hand().size()) {
+                        ChooseAction action = new ChooseAction(this, cardPos, 1);
+                        game.sendAction(action);
+                    }
+
+                } else if (state.getTurnPhase() == 7) {
+                    int cardPos = fourChoice(x, y);
+
+                    if (choiceArrow(x, y)) {
+                        RatMoveAction action = new RatMoveAction(this);
+                        game.sendAction(action);
+                    }
+
+                    if (cardPos != -1 && cardPos < state.getDeckDiscard().size()) {
+                        ChooseAction action = new ChooseAction(this, cardPos, 1);
+                        game.sendAction(action);
+                    }
+
+
+                    //If it is the get noble phase
+                } else if (state.getTurnPhase() == 1) {
+
+                    //Method for determining if the accept button was pressed
+                    boolean select = acceptButton(x, y);
+
+                    //If accept button pressed
+                    if (select) {
+                        NobleAction action = new NobleAction(this);
+                        game.sendAction(action);
+
+                        //moving to draw card phase
+                        state.setTurnPhase(2);
+                    }
+
+                    //If it is the draw card phase
+                } else if (state.getTurnPhase() == 2) {
+
+                    //Method for if accept button pressed
+                    boolean select = acceptButton(x, y);
+
+                    //if accept is pressed
+                    if (select) {
+                        DrawAction action = new DrawAction(this);
+                        game.sendAction(action);
+                        state.setTurnPhase(0);
+                    }
+                }
+
+                //Whatever action is taken, the board invalidates.
+                board.invalidate();
+            }
+        }//end else
 
 
         return true;
@@ -212,6 +349,7 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
         }
 
         this.state = (GuillotineState)info;
+        board.setPlayerHuman(this.playerNum);
         board.setState(state);
         board.invalidate();
     }
