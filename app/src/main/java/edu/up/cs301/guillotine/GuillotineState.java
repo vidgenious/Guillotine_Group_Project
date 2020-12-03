@@ -231,11 +231,9 @@ public class GuillotineState extends GameState {
     private void initActionDeck() {
         this.deckAction.add(new Card(1, true,true, 0, "actionCard", "After_You", R.drawable.after_you));
         this.deckAction.add(new Card(1, true,true, 0, "actionCard", "Bribed", R.drawable.bribed_guards));
-        //this.deckAction.add(new Card(1, false,true, 0,"actionCard", "Callous", R.drawable.callous_guards));
         this.deckAction.add(new Card(1, false,true, 0, "actionCard", "Church_Support", R.drawable.church_support));
         this.deckAction.add(new Card(2, true,true, 0, "actionCard", "Civic_Pride", R.drawable.civic_pride));
         this.deckAction.add(new Card(1, false,true, 0, "actionCard", "Civic_Support", R.drawable.civic_support));
-        //this.deckAction.add(new Card(2, false, true, 0, "actionCard", "Clerical_Error", R.drawable.clerical_error));
         this.deckAction.add(new Card(2, true,true, 0, "actionCard", "Clothing_Swap", R.drawable.clothing_swap));
         this.deckAction.add(new Card(1, true,true, 0, "actionCard", "Confusion", R.drawable.confusion_in_line));
         this.deckAction.add(new Card(1, false,true, 0, "actionCard", "Double_Feature1", R.drawable.double_feature));
@@ -245,7 +243,7 @@ public class GuillotineState extends GameState {
         this.deckAction.add(new Card(1, true,true, 0, "actionCard", "Extra_Cart2", R.drawable.extra_cart));
         this.deckAction.add(new Card(2, true,true, 0, "actionCard", "Fainting", R.drawable.fainting_spell));
         this.deckAction.add(new Card(2, true,true, 0, "actionCard", "Fled", R.drawable.fled_to_england));
-        //this.deckAction.add(new Card(1, false,true, 0, "actionCard", "Forced_Break", R.drawable.forced_break));
+        //this.deckAction.add(new Card(1, false, true, 0, "actionCard", "Forced_Break", R.drawable.forced_break));
         //this.deckAction.add(new Card(1, false, true, 0, "actionCard", "Foreign_Support", R.drawable.foreign_support));
         this.deckAction.add(new Card(1, true,true, 0, "actionCard", "Forward_March", R.drawable.forward_march));
         this.deckAction.add(new Card(1, false,true, 0, "actionCard", "Fountain", R.drawable.fountain_of_blood));

@@ -14,6 +14,18 @@ import edu.up.cs301.game.GameFramework.gameConfiguration.GamePlayerType;
  * @author Maxwell McAtee
  * @version Beta November 2020
  *
+ * Meeting 12/2/2020 with Professor Nuxoll
+ *      Granted 3-star status to guillotine game
+ *      Allowed to forgo implementation for 6 cards
+ *          Cards chosen:
+ *              Callous Guards
+ *              Clerical Error
+ *              Opinionated Guards
+ *              Twist of Fate
+ *              Infighting
+ *
+ *
+ * Beta:
  * For the Beta we are fully functional except for some action cards that haven't been implemented yet.
  * The other thing that we have not completed for the rubric is making the players interchangeable.
  * Currently the only functional way to play is to have human player as the first player and the
@@ -29,6 +41,9 @@ import edu.up.cs301.game.GameFramework.gameConfiguration.GamePlayerType;
  * it has that functionality.
  *
  * Overall better planning would have the game further on in production than it is right now.
+ *
+ * Full Release:
+ *
  */
 
 
