@@ -30,6 +30,7 @@ public class DrawBoard extends FlashSurfaceView {
     private Paint grey = new Paint();
     private Paint black = new Paint();
     private Paint choice = new Paint();
+    private int humanPlayerLoc;
 
     public DrawBoard(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -45,6 +46,12 @@ public class DrawBoard extends FlashSurfaceView {
     public void setState(GuillotineState state) {
         this.state = state;
     }
+
+    //sets the instance var to equal the human player number
+    public void setHumanPlayerLoc(int human){
+        this.humanPlayerLoc = human;
+    }
+
 
     @Override
     public void onDraw(Canvas canvas) {
@@ -79,137 +86,274 @@ public class DrawBoard extends FlashSurfaceView {
         grey.setTextSize(50.0f);
         canvas.drawText("GUILLOTINE GAME ", 10.0f, 100.0f, grey);
 
-        //Hand Arrow
-        if(state.getP0Hand().size() > 7){
-            draw = BitmapFactory.decodeResource(getResources(), R.drawable.left_arrow_transparent);
-            draw = Bitmap.createScaledBitmap(draw, 100, 100, true);
-            canvas.drawBitmap(draw, 250.0f, 890.0f, null);
-        }
+        //checks if human is player 0
+        if(humanPlayerLoc == 0) {
 
-        //p0field arrow
-        if(state.getP0Field().size() > 12){
-            draw = BitmapFactory.decodeResource(getResources(), R.drawable.left_arrow_transparent);
-            draw = Bitmap.createScaledBitmap(draw, 50, 50, true);
-            canvas.drawBitmap(draw, 300.0f, 675.0f, null);
-        }
-
-        //p1field arrow
-        if(state.getP1Field().size() > 12){
-            draw = BitmapFactory.decodeResource(getResources(), R.drawable.left_arrow_transparent);
-            draw = Bitmap.createScaledBitmap(draw, 50, 50, true);
-            canvas.drawBitmap(draw, 300.0f, 175.0f, null);
-        }
-
-        //P0 Hand
-        float left = 1700;
-        for(int i = 0; i < state.getP0Hand().size() && i < 7; i++){
-            draw = BitmapFactory.decodeResource(getResources(), state.getP0Hand().get(i).image);
-            draw = Bitmap.createScaledBitmap(draw, 200, 280, true);
-            canvas.drawBitmap(draw, left, 800.0f, null); //800
-            left -= 220.0f;
-        }
-
-        //P0 field
-        left = 1800;
-        for(int i = 0; i < state.getP0Field().size() && i < 12; i++){
-            draw = BitmapFactory.decodeResource(getResources(), state.getP0Field().get(i).image);
-            draw = Bitmap.createScaledBitmap(draw, 100, 140, true);
-            canvas.drawBitmap(draw, left, 650.0f, null); // 650
-            left -= 120;
-        }
-
-        //Noble line
-        left = 1700;
-        Collections.reverse(state.getNobleLine());
-        for(int i = 0; i < state.getNobleLine().size(); i++){
-            draw = BitmapFactory.decodeResource(getResources(), state.getNobleLine().get(i).image);
-            draw = Bitmap.createScaledBitmap(draw, 200, 280, true);
-            canvas.drawBitmap(draw, left, 350.0f, null); //350
-            left -= 100;
-        }
-
-        //P1 field
-        left = 1800;
-        for(int i = 0; i < state.getP1Field().size() && i < 12; i++){
-            draw = BitmapFactory.decodeResource(getResources(), state.getP1Field().get(i).image);
-            draw = Bitmap.createScaledBitmap(draw, 100, 140, true);
-            canvas.drawBitmap(draw, left, 150.0f, null); //150
-            left -= 120;
-        }
-
-        //Action Deck
-        left = 10;
-        for(int i = 0; i < state.getDeckAction().size(); i++){
-            draw = BitmapFactory.decodeResource(getResources(), state.getDeckAction().get(i).image);
-            draw = Bitmap.createScaledBitmap(draw, 100, 140, true);
-            canvas.drawBitmap(draw, left, 710.0f, null);
-            //left -= 10;
-        }
-
-        //discard deck
-        for(int i = 0; i < state.getDeckDiscard().size(); i++){
-            draw = BitmapFactory.decodeResource(getResources(), state.getDeckDiscard().get(i).image);
-            draw = Bitmap.createScaledBitmap(draw, 100, 140, true);
-            canvas.drawBitmap(draw, left, 575.0f, null);
-            //left -= 10;
-        }
-        //noble deck
-        for(int i = 0; i < state.getDeckNoble().size(); i++){
-            draw = BitmapFactory.decodeResource(getResources(), state.getDeckNoble().get(i).image);
-            draw = Bitmap.createScaledBitmap(draw, 100, 140, true);
-            canvas.drawBitmap(draw, left, 425.0f, null);
-            //left -= 100;
-        }
-
-
-        if(state.getTurnPhase() == 0){
-            canvas.drawText("Action Card Phase", 800.0f, 50.0f, grey);
-            canvas.drawText("Play an action card", 700.0f, 85.0f, grey);
-        }
-
-        if(state.getTurnPhase() == 1){
-            canvas.drawText("Take Noble Phase", 800.0f, 50.0f, grey);
-            canvas.drawText("Take a noble card from noble line deck", 700.0f, 85.0f, grey);
-        }
-        if(state.getTurnPhase() == 2){
-            canvas.drawText("Draw card Phase", 800.0f, 50.0f, grey );
-            canvas.drawText("Draw a card from the deck", 700.0f, 85.0f, grey);
-        }
-        if(state.getTurnPhase() == 3){
-            canvas.drawText("Select Noble in Line", 800.0f, 50.0f, grey);
-            canvas.drawText("Select a noble card from the noble line", 700.0f, 85.0f, grey);
-        }
-
-        if(state.getTurnPhase() == 4){
-            canvas.drawText("Select ", 800.0f, 50.0f, grey);
-            canvas.drawText("(Select 1 or 2 on the screen)", 700.0f, 40.0f, grey);
-            canvas.drawText("1", 50.0f, 400.0f, choice);
-            canvas.drawText("2", 1050.0f, 400.0f, choice);
-        }
-
-        if(state.getTurnPhase() == 5){
-            canvas.drawText("Select", 800.0f, 50.0f, grey);
-            canvas.drawText("(Select 1 or 2 or 3 on the screen)", 700.0f, 40.0f, grey);
-            if(state.getArrival()){
-                left = 50.0f;
-                for(int i = 0; i < state.getDeckNoble().size() && i < 3; i++){
-                    draw = BitmapFactory.decodeResource(getResources(), state.getDeckNoble().get(i).image);
-                    draw = Bitmap.createScaledBitmap(draw, 400, 560, true);
-                    canvas.drawBitmap(draw, left, 120.0f, null); //800
-                    left += 700.0f;
-                }
-            } else {
-                canvas.drawText("1", 50.0f, 400.0f, choice);
-                canvas.drawText("2", 720.0f, 400.0f, choice);
-                canvas.drawText("3", 1375.0f, 400.0f, choice);
+            //Hand Arrow
+            if (state.getP0Hand().size() > 7) {
+                draw = BitmapFactory.decodeResource(getResources(), R.drawable.left_arrow_transparent);
+                draw = Bitmap.createScaledBitmap(draw, 100, 100, true);
+                canvas.drawBitmap(draw, 250.0f, 890.0f, null);
             }
-        }
 
-        if(state.getTurnPhase() == 6){
-            canvas.drawText("Select Card in Hand", 800.0f, 50.0f, grey);
-            canvas.drawText("(Select a card in player's hand)", 800.0f, 40.0f, grey);
-        }
+            //p0field arrow
+            if (state.getP0Field().size() > 12) {
+                draw = BitmapFactory.decodeResource(getResources(), R.drawable.left_arrow_transparent);
+                draw = Bitmap.createScaledBitmap(draw, 50, 50, true);
+                canvas.drawBitmap(draw, 300.0f, 675.0f, null);
+            }
+
+            //p1field arrow
+            if (state.getP1Field().size() > 12) {
+                draw = BitmapFactory.decodeResource(getResources(), R.drawable.left_arrow_transparent);
+                draw = Bitmap.createScaledBitmap(draw, 50, 50, true);
+                canvas.drawBitmap(draw, 300.0f, 175.0f, null);
+            }
+
+            //P0 Hand
+            float left = 1700;
+            for (int i = 0; i < state.getP0Hand().size() && i < 7; i++) {
+                draw = BitmapFactory.decodeResource(getResources(), state.getP0Hand().get(i).image);
+                draw = Bitmap.createScaledBitmap(draw, 200, 280, true);
+                canvas.drawBitmap(draw, left, 800.0f, null); //800
+                left -= 220.0f;
+            }
+
+            //P0 field
+            left = 1800;
+            for (int i = 0; i < state.getP0Field().size() && i < 12; i++) {
+                draw = BitmapFactory.decodeResource(getResources(), state.getP0Field().get(i).image);
+                draw = Bitmap.createScaledBitmap(draw, 100, 140, true);
+                canvas.drawBitmap(draw, left, 650.0f, null); // 650
+                left -= 120;
+            }
+
+            //Noble line
+            left = 1700;
+            Collections.reverse(state.getNobleLine());
+            for (int i = 0; i < state.getNobleLine().size(); i++) {
+                draw = BitmapFactory.decodeResource(getResources(), state.getNobleLine().get(i).image);
+                draw = Bitmap.createScaledBitmap(draw, 200, 280, true);
+                canvas.drawBitmap(draw, left, 350.0f, null); //350
+                left -= 100;
+            }
+
+            //P1 field
+            left = 1800;
+            for (int i = 0; i < state.getP1Field().size() && i < 12; i++) {
+                draw = BitmapFactory.decodeResource(getResources(), state.getP1Field().get(i).image);
+                draw = Bitmap.createScaledBitmap(draw, 100, 140, true);
+                canvas.drawBitmap(draw, left, 150.0f, null); //150
+                left -= 120;
+            }
+
+            //Action Deck
+            left = 10;
+            for (int i = 0; i < state.getDeckAction().size(); i++) {
+                draw = BitmapFactory.decodeResource(getResources(), state.getDeckAction().get(i).image);
+                draw = Bitmap.createScaledBitmap(draw, 100, 140, true);
+                canvas.drawBitmap(draw, left, 710.0f, null);
+                //left -= 10;
+            }
+
+            //discard deck
+            for (int i = 0; i < state.getDeckDiscard().size(); i++) {
+                draw = BitmapFactory.decodeResource(getResources(), state.getDeckDiscard().get(i).image);
+                draw = Bitmap.createScaledBitmap(draw, 100, 140, true);
+                canvas.drawBitmap(draw, left, 575.0f, null);
+                //left -= 10;
+            }
+            //noble deck
+            for (int i = 0; i < state.getDeckNoble().size(); i++) {
+                draw = BitmapFactory.decodeResource(getResources(), state.getDeckNoble().get(i).image);
+                draw = Bitmap.createScaledBitmap(draw, 100, 140, true);
+                canvas.drawBitmap(draw, left, 425.0f, null);
+                //left -= 100;
+            }
 
 
+            if (state.getTurnPhase() == 0) {
+                canvas.drawText("Action Card Phase:", 800.0f, 50.0f, grey);
+                canvas.drawText("Play an action card", 800.0f, 115.0f, grey);
+            }
+
+            if (state.getTurnPhase() == 1) {
+                canvas.drawText("Take Noble Phase", 800.0f, 50.0f, grey);
+                canvas.drawText("Take a noble card from noble line deck", 800.0f, 115.0f, grey);
+            }
+            if (state.getTurnPhase() == 2) {
+                canvas.drawText("Draw card Phase", 800.0f, 50.0f, grey);
+                canvas.drawText("Draw a card from the deck", 800.0f, 115.0f, grey);
+            }
+            if (state.getTurnPhase() == 3) {
+                canvas.drawText("Select Noble in Line", 800.0f, 50.0f, grey);
+                canvas.drawText("Select a noble card from the noble line", 800.0f, 115.0f, grey);
+            }
+
+            if (state.getTurnPhase() == 4) {
+                canvas.drawText("Select ", 800.0f, 50.0f, grey);
+                canvas.drawText("(Select 1 or 2 on the screen)", 800.0f, 40.0f, grey);
+                canvas.drawText("1", 50.0f, 400.0f, choice);
+                canvas.drawText("2", 1050.0f, 400.0f, choice);
+            }
+
+            if (state.getTurnPhase() == 5) {
+                canvas.drawText("Select", 800.0f, 50.0f, grey);
+                canvas.drawText("(Select 1 or 2 or 3 on the screen)", 800.0f, 40.0f, grey);
+                if (state.getArrival()) {
+                    left = 50.0f;
+                    for (int i = 0; i < state.getDeckNoble().size() && i < 3; i++) {
+                        draw = BitmapFactory.decodeResource(getResources(), state.getDeckNoble().get(i).image);
+                        draw = Bitmap.createScaledBitmap(draw, 400, 560, true);
+                        canvas.drawBitmap(draw, left, 120.0f, null); //800
+                        left += 700.0f;
+                    }
+                } else {
+                    canvas.drawText("1", 50.0f, 400.0f, choice);
+                    canvas.drawText("2", 720.0f, 400.0f, choice);
+                    canvas.drawText("3", 1375.0f, 400.0f, choice);
+                }
+            }
+
+            if (state.getTurnPhase() == 6) {
+                canvas.drawText("Select Card in Hand", 800.0f, 50.0f, grey);
+                canvas.drawText("(Select a card in player's hand)", 800.0f, 30.0f, grey);
+            }
+        }//end check if human is player 0
+
+        //if human isnt player 0, then it must be player 1
+        else{
+
+                //Hand Arrow
+                if (state.getP1Hand().size() > 7) {
+                    draw = BitmapFactory.decodeResource(getResources(), R.drawable.left_arrow_transparent);
+                    draw = Bitmap.createScaledBitmap(draw, 100, 100, true);
+                    canvas.drawBitmap(draw, 250.0f, 890.0f, null);
+                }
+
+                //p1field arrow
+                if (state.getP1Field().size() > 12) {
+                    draw = BitmapFactory.decodeResource(getResources(), R.drawable.left_arrow_transparent);
+                    draw = Bitmap.createScaledBitmap(draw, 50, 50, true);
+                    canvas.drawBitmap(draw, 300.0f, 675.0f, null);
+                }
+
+                //p0field arrow
+                if (state.getP0Field().size() > 12) {
+                    draw = BitmapFactory.decodeResource(getResources(), R.drawable.left_arrow_transparent);
+                    draw = Bitmap.createScaledBitmap(draw, 50, 50, true);
+                    canvas.drawBitmap(draw, 300.0f, 175.0f, null);
+                }
+
+                //P0 Hand
+                float left = 1700;
+                for (int i = 0; i < state.getP1Hand().size() && i < 7; i++) {
+                    draw = BitmapFactory.decodeResource(getResources(), state.getP1Hand().get(i).image);
+                    draw = Bitmap.createScaledBitmap(draw, 200, 280, true);
+                    canvas.drawBitmap(draw, left, 800.0f, null); //800
+                    left -= 220.0f;
+                }
+
+                //P0 field
+                left = 1800;
+                for (int i = 0; i < state.getP1Field().size() && i < 12; i++) {
+                    draw = BitmapFactory.decodeResource(getResources(), state.getP1Field().get(i).image);
+                    draw = Bitmap.createScaledBitmap(draw, 100, 140, true);
+                    canvas.drawBitmap(draw, left, 650.0f, null); // 650
+                    left -= 120;
+                }
+
+                //Noble line
+                left = 1700;
+                Collections.reverse(state.getNobleLine());
+                for (int i = 0; i < state.getNobleLine().size(); i++) {
+                    draw = BitmapFactory.decodeResource(getResources(), state.getNobleLine().get(i).image);
+                    draw = Bitmap.createScaledBitmap(draw, 200, 280, true);
+                    canvas.drawBitmap(draw, left, 350.0f, null); //350
+                    left -= 100;
+                }
+
+                //P1 field
+                left = 1800;
+                for (int i = 0; i < state.getP0Field().size() && i < 12; i++) {
+                    draw = BitmapFactory.decodeResource(getResources(), state.getP0Field().get(i).image);
+                    draw = Bitmap.createScaledBitmap(draw, 100, 140, true);
+                    canvas.drawBitmap(draw, left, 150.0f, null); //150
+                    left -= 120;
+                }
+
+                //Action Deck
+                left = 10;
+                for (int i = 0; i < state.getDeckAction().size(); i++) {
+                    draw = BitmapFactory.decodeResource(getResources(), state.getDeckAction().get(i).image);
+                    draw = Bitmap.createScaledBitmap(draw, 100, 140, true);
+                    canvas.drawBitmap(draw, left, 710.0f, null);
+                    //left -= 10;
+                }
+
+                //discard deck
+                for (int i = 0; i < state.getDeckDiscard().size(); i++) {
+                    draw = BitmapFactory.decodeResource(getResources(), state.getDeckDiscard().get(i).image);
+                    draw = Bitmap.createScaledBitmap(draw, 100, 140, true);
+                    canvas.drawBitmap(draw, left, 575.0f, null);
+                    //left -= 10;
+                }
+                //noble deck
+                for (int i = 0; i < state.getDeckNoble().size(); i++) {
+                    draw = BitmapFactory.decodeResource(getResources(), state.getDeckNoble().get(i).image);
+                    draw = Bitmap.createScaledBitmap(draw, 100, 140, true);
+                    canvas.drawBitmap(draw, left, 425.0f, null);
+                    //left -= 100;
+                }
+
+
+                if (state.getTurnPhase() == 0) {
+                    canvas.drawText("Action Card Phase:", 800.0f, 50.0f, grey);
+                    canvas.drawText("Play an action card", 800.0f, 115.0f, grey);
+                }
+
+                if (state.getTurnPhase() == 1) {
+                    canvas.drawText("Take Noble Phase", 800.0f, 50.0f, grey);
+                    canvas.drawText("Take a noble card from noble line deck", 800.0f, 115.0f, grey);
+                }
+                if (state.getTurnPhase() == 2) {
+                    canvas.drawText("Draw card Phase", 800.0f, 50.0f, grey);
+                    canvas.drawText("Draw a card from the deck", 800.0f, 115.0f, grey);
+                }
+                if (state.getTurnPhase() == 3) {
+                    canvas.drawText("Select Noble in Line", 800.0f, 50.0f, grey);
+                    canvas.drawText("Select a noble card from the noble line", 800.0f, 115.0f, grey);
+                }
+
+                if (state.getTurnPhase() == 4) {
+                    canvas.drawText("Select ", 800.0f, 50.0f, grey);
+                    canvas.drawText("(Select 1 or 2 on the screen)", 800.0f, 40.0f, grey);
+                    canvas.drawText("1", 50.0f, 400.0f, choice);
+                    canvas.drawText("2", 1050.0f, 400.0f, choice);
+                }
+
+                if (state.getTurnPhase() == 5) {
+                    canvas.drawText("Select", 800.0f, 50.0f, grey);
+                    canvas.drawText("(Select 1 or 2 or 3 on the screen)", 800.0f, 40.0f, grey);
+                    if (state.getArrival()) {
+                        left = 50.0f;
+                        for (int i = 0; i < state.getDeckNoble().size() && i < 3; i++) {
+                            draw = BitmapFactory.decodeResource(getResources(), state.getDeckNoble().get(i).image);
+                            draw = Bitmap.createScaledBitmap(draw, 400, 560, true);
+                            canvas.drawBitmap(draw, left, 120.0f, null); //800
+                            left += 700.0f;
+                        }
+                    } else {
+                        canvas.drawText("1", 50.0f, 400.0f, choice);
+                        canvas.drawText("2", 720.0f, 400.0f, choice);
+                        canvas.drawText("3", 1375.0f, 400.0f, choice);
+                    }
+                }
+
+                if (state.getTurnPhase() == 6) {
+                    canvas.drawText("Select Card in Hand", 800.0f, 50.0f, grey);
+                    canvas.drawText("(Select a card in player's hand)", 800.0f, 30.0f, grey);
+                }
+        }//end else
     }
 }

@@ -87,10 +87,10 @@ public class GuillotineMainActivity extends GameMainActivity {
                 return new GuillotineComputerPlayer2(name);
             }});
 
-        // Create a game configuration class for Counter:
+        // Create a game configuration class for Guillotine:
         // - player types as given above
         // - from 1 to 2 players
-        // - name of game is "Counter Game"
+        // - name of game is "Guillotine Game"
         // - port number as defined above
         GameConfig defaultConfig = new GameConfig(playerTypes, 1, 2, "Guillotine",
                 PORT_NUMBER);
@@ -114,7 +114,7 @@ public class GuillotineMainActivity extends GameMainActivity {
      * create a local game
      *
      * @return
-     * 		the local game, a counter game
+     * 		the local game, a Guillotine game
      */
     @Override
     public LocalGame createLocalGame() {
