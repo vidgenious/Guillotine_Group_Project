@@ -287,18 +287,22 @@ public class GuillotineState extends GameState {
         this.deckAction.add(new Card(2, true,true, 0, "actionCard", "Was_Name", R.drawable.was_that_my_name));
     }
 
+    // Getter to return the value of the day.
     public int getDayNum() {
         return this.dayNum;
     }
 
+    // Getter to return the value the player's turn to determine who's turn it is.
     public int getPlayerTurn() {
         return this.playerTurn;
     }
 
+    //Getter to return player 0 score.
     public int getP0Score() {
         return this.p0Score;
     }
 
+    //Getter to return player 0 score.
     public int getP1Score() {
         return this.p1Score;
     }
@@ -313,26 +317,31 @@ public class GuillotineState extends GameState {
         return this.currFirstPlayer;
     }
 
+    //Getter to return the velue of the phase turn which determines the phase of the game.
     public int getTurnPhase() {
         return this.turnPhase;
     }
 
+    //Getter to return cards in Player 1 hand.
     public ArrayList<Card> getP1Hand() {
         return this.p1Hand;
     }
 
+    //Getter to return cards in Player 1 field.
     public ArrayList<Card> getP1Field() {
         return this.p1Field;
     }
-
+    //Getter to return cards in Player 0 hand.
     public ArrayList<Card> getP0Hand() {
         return this.p0Hand;
     }
 
+    //Getter to return cards in Player 1 field.
     public ArrayList<Card> getP0Field() {
         return this.p0Field;
     }
 
+    //Getter to return cards in noble line deck.
     public ArrayList<Card> getNobleLine() {
         return this.nobleLine;
     }
@@ -345,45 +354,55 @@ public class GuillotineState extends GameState {
         return this.deckAction;
     }
 
+    //Getter to return cards in noble line deck.
     public ArrayList<Card> getDeckNoble() {
         return this.deckNoble;
     }
 
     public boolean getArrival() {return this.arrival;}
 
-    //Setters for variables that may need to be set
+    //Setter to se the value of the Day
     public void setDayNum(int dayNum) {
         this.dayNum = dayNum;
     }
 
+    //Setters to set the player's turn
     public void setPlayerTurn(int playerTurn) {
         this.playerTurn = playerTurn;
     }
 
+    //sets player 0 score
     public void setP0Score(int p0Score) {
         this.p0Score = p0Score;
     }
 
+    //sets player 1 score
     public void setP1Score(int p1Score) {
         this.p1Score = p1Score;
     }
 
+    //sets the last first player who will play the next day.
     public void setLastFirstPlayer(int lastFirstPlayer) {
         this.lastFirstPlayer = lastFirstPlayer;
     }
 
+    //sets the current player of the day.
     public void setCurrFirstPlayer(int currFirstPlayer) {
         this.currFirstPlayer = currFirstPlayer;
     }
 
+    //sets the turn phase for the player
     public void setTurnPhase(int turnPhase) {
         this.turnPhase = turnPhase;
     }
 
+    //set the value of setbegun
     public void setBegun(boolean begun){ this.begun = begun;}
 
+    //sets the value of setChoice1 for collecting or moving nobles in noble line
     public void setChoice1(int choice){ this.choice1 = choice;}
 
+    //sets the value of setChoice2 for collecting or moving nobles in noble line
     public void setChoice2(int choice){ this.choice2 = choice;}
 
     //Variables that are not used outside of a single call
