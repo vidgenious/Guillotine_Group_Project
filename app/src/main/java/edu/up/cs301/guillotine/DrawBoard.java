@@ -172,7 +172,34 @@ public class DrawBoard extends FlashSurfaceView {
         }
 
         if(state.getTurnPhase() == 6){
-            canvas.drawText("Select Card in Hand", 800.0f, 50.0f, grey);
+            canvas.drawText("Select Card to Discard in Opponent's Hand", 800.0f, 50.0f, grey);
+            if(state.getPlayerTurn() == 0){
+                left = 1570;
+                for(int i = 0; i < state.getP1Hand().size() && i < 4; i++){
+                    draw = BitmapFactory.decodeResource(getResources(), state.getP1Hand().get(i).image);
+                    draw = Bitmap.createScaledBitmap(draw, 350, 490, true);
+                    canvas.drawBitmap(draw, left, 360.0f, null);
+                    left -= 370;
+                }
+                if(state.getP1Hand().size() > 4){
+                    draw = BitmapFactory.decodeResource(getResources(), R.drawable.left_arrow_transparent);
+                    draw = Bitmap.createScaledBitmap(draw, 150, 150, true);
+                    canvas.drawBitmap(draw, 300.0f, 530.0f, null);
+                }
+            } else {
+                left = 1570;
+                for(int i = 0; i < state.getP0Hand().size() && i < 4; i++){
+                    draw = BitmapFactory.decodeResource(getResources(), state.getP0Hand().get(i).image);
+                    draw = Bitmap.createScaledBitmap(draw, 350, 490, true);
+                    canvas.drawBitmap(draw, left, 360.0f, null);
+                    left -= 370;
+                }
+                if(state.getP0Hand().size() > 4){
+                    draw = BitmapFactory.decodeResource(getResources(), R.drawable.left_arrow_transparent);
+                    draw = Bitmap.createScaledBitmap(draw, 150, 150, true);
+                    canvas.drawBitmap(draw, 300.0f, 530.0f, null);
+                }
+            }
         }
 
 

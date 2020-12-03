@@ -106,7 +106,9 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
                     game.sendAction(new SkipAction(this));
 
                  //If an invalid place on the screen is touched
-                }else if (cardPos < 0 || cardPos + 1 > state.getP0Hand().size()) {
+                }
+                if(state.getPlayerTurn() == 0)
+                if (cardPos < 0 || cardPos + 1 > state.getP0Hand().size()) {
                     return false;
                 }
                 PlayAction action = new PlayAction(this, cardPos);
@@ -136,6 +138,12 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
 
                 ChooseAction action = new ChooseAction(this, cardPos, 2);
                 game.sendAction(action);
+
+            } else if(state.getTurnPhase() == 6) {
+                int cardPos = fourChoice(x, y);
+                    ChooseAction action = new ChooseAction(this, cardPos, 1);
+                    game.sendAction(action);
+
 
              //If it is the get noble phase
             } else if (state.getTurnPhase() == 1) {

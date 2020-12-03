@@ -85,6 +85,7 @@ public class GuillotineState extends GameState {
 
         startGame();
 
+        p0Hand.add(new Card(2, false, true, 0, "actionCard", "Lack_Support", R.drawable.lack_of_support));
     }
     //Deep copy constructor
     /**
@@ -243,8 +244,8 @@ public class GuillotineState extends GameState {
         this.deckAction.add(new Card(1, true,true, 0, "actionCard", "Extra_Cart2", R.drawable.extra_cart));
         this.deckAction.add(new Card(2, true,true, 0, "actionCard", "Fainting", R.drawable.fainting_spell));
         this.deckAction.add(new Card(2, true,true, 0, "actionCard", "Fled", R.drawable.fled_to_england));
-        //this.deckAction.add(new Card(1, false, true, 0, "actionCard", "Forced_Break", R.drawable.forced_break));
-        //this.deckAction.add(new Card(1, false, true, 0, "actionCard", "Foreign_Support", R.drawable.foreign_support));
+        this.deckAction.add(new Card(1, false, true, 0, "actionCard", "Forced_Break", R.drawable.forced_break));
+        this.deckAction.add(new Card(1, false, true, 0, "actionCard", "Foreign_Support", R.drawable.foreign_support));
         this.deckAction.add(new Card(1, true,true, 0, "actionCard", "Forward_March", R.drawable.forward_march));
         this.deckAction.add(new Card(1, false,true, 0, "actionCard", "Fountain", R.drawable.fountain_of_blood));
         this.deckAction.add(new Card(2, true,true, 0, "actionCard", "Friend_Queen1", R.drawable.friend_of_the_queen));
@@ -254,7 +255,6 @@ public class GuillotineState extends GameState {
         this.deckAction.add(new Card(2, true,true, 0, "actionCard", "Ignoble1", R.drawable.ignoble_noble));
         this.deckAction.add(new Card(2, true,true, 0, "actionCard", "Ignoble2", R.drawable.ignoble_noble));
         this.deckAction.add(new Card(1, false,true, 0, "actionCard", "Indifferent", R.drawable.indifferent_public));
-        //this.deckAction.add(new Card(2, false, true, 0, "actionCard", "Infighting", R.drawable.infighting));
         this.deckAction.add(new Card(1, false, true, 0, "actionCard", "Info_Exchange", R.drawable.information_exchange));
         this.deckAction.add(new Card(1, false,true, 0, "actionCard", "Lack_Faith", R.drawable.lack_of_faith));
         //this.deckAction.add(new Card(2, false, true, 0, "actionCard", "Lack_Support", R.drawable.lack_of_support));
@@ -268,7 +268,6 @@ public class GuillotineState extends GameState {
         this.deckAction.add(new Card(1, true,true, 0, "actionCard", "Milling2", R.drawable.milling_in_line));
         this.deckAction.add(new Card(1, true,true , 0, "actionCard", "Missed", R.drawable.missed));
         this.deckAction.add(new Card(1, true,true, 0, "actionCard", "Missing_Heads", R.drawable.missing_heads));
-        //this.deckAction.add(new Card(2, true, true, 0, "actionCard", "Opinionated", R.drawable.opinionated_guards));
         //this.deckAction.add(new Card(1, true,true, 0, "actionCard", "Political_Influence1", R.drawable.political_influence));
         //this.deckAction.add(new Card(1, true,true, 0, "actionCard", "Political_Influence2", R.drawable.political_influence));
         this.deckAction.add(new Card(2, true,true, 0, "actionCard", "Public_Demand", R.drawable.public_demand));
@@ -285,7 +284,6 @@ public class GuillotineState extends GameState {
         this.deckAction.add(new Card(1, false,true, 0, "actionCard", "Tough_Crowd", R.drawable.tough_crowd));
         this.deckAction.add(new Card(2, true,true, 0, "actionCard", "Trip1", R.drawable.trip));
         this.deckAction.add(new Card(2, true,true, 0, "actionCard", "Trip2", R.drawable.trip));
-        //this.deckAction.add(new Card(2, false, true, 0, "actionCard", "Twist_Fate", R.drawable.twist_of_fate));
         this.deckAction.add(new Card(2, true,true, 0, "actionCard", "Was_Name", R.drawable.was_that_my_name));
     }
 
@@ -463,15 +461,19 @@ public class GuillotineState extends GameState {
                 if (this.FS0 && this.playerTurn == 0) {
                     field.add(this.nobleLine.get(0));
                     this.nobleLine.remove(0);
-                    if (this.p0Field.get(0).cardColor.equals("Purple")) {
-                        dealActionCard(field);
+                    if (this.p0Field.get(p0Field.size() - 1).cardColor.equals("Purple")) {
+                        actionCardPlayed = true;
+                        dealActionCard(p0Hand);
+                        actionCardPlayed = false;
                     }
                 }
                 else if (this.FS1 && this.playerTurn == 1) {
-                    field.add(this.nobleLine.get(0));
+                    p1Field.add(this.nobleLine.get(0));
                     this.nobleLine.remove(0);
-                    if (this.p1Field.get(0).cardColor.equals("Purple")) {
-                        dealActionCard(field);
+                    if (this.p1Field.get(p1Field.size() - 1).cardColor.equals("Purple")) {
+                        actionCardPlayed = true;
+                        dealActionCard(p1Hand);
+                        actionCardPlayed = false;
                     }
 
                 }
@@ -841,9 +843,15 @@ public class GuillotineState extends GameState {
      * @return always return true
      */
     public boolean moveThroughHand(){
-        p0Hand.add(p0Hand.get(0));
-        p0Hand.remove(0);
-        return true;
+        if(playerTurn == 0) {
+            p0Hand.add(p0Hand.get(0));
+            p0Hand.remove(0);
+            return true;
+        }else{
+            p1Hand.add(p1Hand.get(0));
+            p1Hand.remove(0);
+            return true;
+        }
     }
 
     /**
@@ -2640,8 +2648,8 @@ public class GuillotineState extends GameState {
                     this.actionCardPlayed = true;
 
                     if(turnPhase == 0){
-                        turnPhase = 8;
-                    } else if(turnPhase == 8){
+                        turnPhase = 6;
+                    } else if(turnPhase == 6){
                         if(playerTurn == 1){
                             deckDiscard.add(p0Hand.get(choice1));
                             p0Hand.remove(choice1);
