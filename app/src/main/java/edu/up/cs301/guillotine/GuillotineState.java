@@ -676,13 +676,14 @@ public class GuillotineState extends GameState {
                     }
 
                     //searches the line for the noble spy card and activates that card if it is found
-                    for(int i = 0; i < nobleLine.size(); i ++){
-                        if(nobleLine.get(i).id.equals("Spy")){
-                            temp = nobleLine.get(i);
-                            acknowledgeCardAbility(temp);
+                    if(!nobleLine.isEmpty()) {
+                        for (int i = 0; i < nobleLine.size(); i++) {
+                            if (nobleLine.get(i).id.equals("Spy")) {
+                                temp = nobleLine.get(i);
+                                acknowledgeCardAbility(temp);
+                            }
                         }
                     }
-
                     return true;
                 }
                 else {
