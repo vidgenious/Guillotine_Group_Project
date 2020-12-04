@@ -99,7 +99,8 @@ public class GuillotineLocalGame extends LocalGame {
         else if(action instanceof ChooseAction) {
             if(((ChooseAction) action).getChoice() == 1) {
                 gameState.setChoice1(((ChooseAction) action).getPos());
-            }else if(((ChooseAction) action).getChoice() == 2){
+            }
+            else if(((ChooseAction) action).getChoice() == 2){
                 gameState.setChoice2(((ChooseAction) action).getPos());
             }
             gameState.acknowledgeCardAbility(temp);
@@ -132,7 +133,8 @@ public class GuillotineLocalGame extends LocalGame {
                 //Depending on which player it is, that player gets the noble card
                 if (gameState.getPlayerTurn() == 0) {
                     gameState.getNoble(gameState.getP0Field());
-                } else if (gameState.getPlayerTurn() == 1) {
+                }
+                else if (gameState.getPlayerTurn() == 1) {
                     gameState.getNoble(gameState.getP1Field());
                 }
             //if the noble line is empty, the day is over
@@ -160,7 +162,8 @@ public class GuillotineLocalGame extends LocalGame {
             if (gameState.getPlayerTurn() == 0) {
                 gameState.dealActionCard(gameState.getP0Hand());
                 gameState.setPlayerTurn(1);
-            } else if (gameState.getPlayerTurn() == 1) {
+            }
+            else if (gameState.getPlayerTurn() == 1) {
                 gameState.dealActionCard(gameState.getP1Hand());
                 gameState.setPlayerTurn(0);
             }
@@ -169,33 +172,41 @@ public class GuillotineLocalGame extends LocalGame {
             return true;
 
 
-        }else if(action instanceof HandMoveAction) {
+        }
+        else if(action instanceof HandMoveAction) {
             gameState.moveThroughHand();
 
-        }else if(action instanceof LackMoveAction) {
+        }
+        else if(action instanceof LackMoveAction) {
             gameState.moveThroughLack();
 
-        } else if(action instanceof  RatMoveAction) {
+        }
+        else if(action instanceof  RatMoveAction) {
             gameState.moveThroughRat();
 
-        } else if(action instanceof  LineMoveAction){
+        }
+        else if(action instanceof  LineMoveAction){
             gameState.moveThroughLine();
 
-        } else if(action instanceof ZoomAction) {
+        }
+        else if(action instanceof ZoomAction) {
             if(gameState.getTurnPhase() != 8 && ((ZoomAction) action).getSubject() == 0) {
                 tempPhase = gameState.getTurnPhase();
                 gameState.setTurnPhase(8);
                 gameState.setZoom(0);
-            } else if(gameState.getTurnPhase() != 8 && ((ZoomAction) action).getSubject() == 1){
+            }
+            else if(gameState.getTurnPhase() != 8 && ((ZoomAction) action).getSubject() == 1){
                 tempPhase = gameState.getTurnPhase();
                 gameState.setTurnPhase(8);
                 gameState.setZoom(1);
                 gameState.cloneLine();
-            } else if(gameState.getTurnPhase() == 8){
+            }
+            else if(gameState.getTurnPhase() == 8){
                 gameState.setTurnPhase(tempPhase);
             }
             //If it a null action, due to a turn not being complete
-        } else if(action instanceof  NullAction){
+        }
+        else if(action instanceof  NullAction){
             return true;
         }
         return false;
@@ -229,11 +240,13 @@ public class GuillotineLocalGame extends LocalGame {
         if(gameState.getDayNum() == 4){
             if(gameState.getP0Score() > gameState.getP1Score()){
                 winner = this.playerNames[0];
-            }else{
+            }
+            else{
                 winner = this.playerNames[1];
             }
             return winner + " is the winner! ";
-        }else{
+        }
+        else{
             return null;
         }
     }
