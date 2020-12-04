@@ -220,6 +220,8 @@ public class DrawBoard extends FlashSurfaceView {
             if (state.getTurnPhase() == 0) {
                 canvas.drawText("Action Card Phase", 800.0f, 50.0f, grey);
                 canvas.drawText("Touch an action card", 800.0f, 115.0f, grey);
+                canvas.drawText("Or touch skip button", 800.0f, 180.0f, grey);
+
             }
 
             if (state.getTurnPhase() == 1) {
@@ -434,6 +436,7 @@ public class DrawBoard extends FlashSurfaceView {
             if (state.getTurnPhase() == 0) {
                 canvas.drawText("Action Card Phase", 800.0f, 50.0f, grey);
                 canvas.drawText("Touch an action card", 800.0f, 115.0f, grey);
+                canvas.drawText("Or touch skip button", 800.0f, 180.0f, grey);
             }
 
             if (state.getTurnPhase() == 1) {
