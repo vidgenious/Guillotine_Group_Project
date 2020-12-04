@@ -49,7 +49,6 @@ public class GuillotineState extends GameState {
     private boolean actionCardPlayed; //checks if an action card was played
     private int choice1; //holds the first choice location
     private int choice2; //holds the second choice location
-    private int tempTurn; //holds the xyz
     private boolean arrival; //holds xyz
 
     //Variables that are not used outside of a single call
@@ -894,6 +893,7 @@ public class GuillotineState extends GameState {
         //adds the noble card points into score
         if (user == 0) {
                 p0Score = 0;
+                p0PalaceGuard = 0;
                 //goes through field to see if special card is present
                 for (int k = 0; k < field.size(); k++){
                     if(field.get(k).id.equals("Indifferent")){
@@ -992,6 +992,7 @@ public class GuillotineState extends GameState {
             //same exact code as p0, except it is for p1
              else {
                     p1Score = 0;
+                    p1PalaceGuard = 0;
                     //goes through field to see if special card is present
                     for (int k = 0; k < field.size(); k++){
                         if(field.get(k).id.equals("Indifferent")){
