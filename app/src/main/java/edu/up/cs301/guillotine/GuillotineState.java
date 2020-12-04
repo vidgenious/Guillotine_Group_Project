@@ -30,33 +30,46 @@ public class GuillotineState extends GameState {
     private static final long serialVersionUID = 7737393762469851826L;
 
     //These are public for ease of use in the GameActions.java
-    private int dayNum;
-    private int playerTurn;
-    private int p0Score;
-    private int p1Score;
-    private int lastFirstPlayer;
-    private int currFirstPlayer;
-    private int turnPhase;
-    private boolean begun;
-    private ArrayList<Card> p1Hand;
-    private ArrayList<Card> p1Field;
-    private ArrayList<Card> p0Hand;
-    private ArrayList<Card> p0Field;
-    private ArrayList<Card> nobleLine;
-    private ArrayList<Card> deckDiscard;
-    private ArrayList<Card> deckAction;
-    private ArrayList<Card> deckNoble;
-    private boolean actionCardPlayed;
-    private int ID;
+    private int dayNum; //holds what day it is
+    private int playerTurn; //holds what player's turn it is
+    private int p0Score; //holds the score of player 0
+    private int p1Score; //holds the score of player 1
+    private int lastFirstPlayer; //holds the player who went last
+    private int currFirstPlayer; //holds the player who went first
+    private int turnPhase; //holds the current turn phase
+    private boolean begun; //checks if ?
+    private ArrayList<Card> p1Hand; //holds the contents of player 1's hand
+    private ArrayList<Card> p1Field; //holds the contents of player 1's field
+    private ArrayList<Card> p0Hand; //holds the contents of player 0's hand
+    private ArrayList<Card> p0Field; //holds the contents of player 0's field
+    private ArrayList<Card> nobleLine; //holds the contents of the noble line
+    private ArrayList<Card> deckDiscard; //holds the contents of the discard deck
+    private ArrayList<Card> deckAction; //holds the contents of the action deck
+    private ArrayList<Card> deckNoble; //holds the contents of the noble deck
+    private boolean actionCardPlayed; //checks if an action card was played
+    private int choice1; //holds the first choice location
+    private int choice2; //holds the second choice location
+    private int tempTurn; //holds the xyz
+    private boolean arrival; //holds xyz
 
-    private int choice1;
-    private int choice2;
+    //Variables that are not used outside of a single call
+    private boolean gameStart = false; //checks if the game has started
+    private boolean shuffle0 = false; //checks if the action card that shuffles has been activated by player 0
+    private boolean shuffle1 = false; //checks if the action card that shuffles has been activated by player 1
+    private boolean FS0 = false; //checks if foreign support has been called by player 0
+    private boolean FS1 = false; //checks if foreign support has been called by player 1
+    private boolean noAction = false; //checks if an action card cannot be played
+    private boolean scarletInPlay = false; //checks if the scarlet card is in play
+    private Card temp; //temporary card that will be use for swapping elements
+    private ArrayList<Card> tempList = new ArrayList<Card>(); //temporary arraylist that is used for array list operations
 
-    private int tempTurn;
-
-    private Card tempCard;
-
-    private boolean arrival;
+    //point vars
+    private boolean p0Count = false; //checks if player 0 has the count noble card
+    private boolean p1Count = false; //checks if player 1 has the count noble card
+    private boolean p0Countess = false; //checks if player 0 has the countess noble card
+    private boolean p1Countess = false; //checks if player 1 has the countess noble card
+    private int p0PalaceGuard = 0; //checks how many palace guards player 0 has
+    private int p1PalaceGuard = 0; //checks how many palace guards player 1 has
 
     // constructor to init all variables
     public GuillotineState() {
@@ -75,7 +88,6 @@ public class GuillotineState extends GameState {
         this.nobleLine = new ArrayList<Card>();
         this.deckDiscard = new ArrayList<Card>();
         this.deckAction = new ArrayList<Card>();
-        this.ID = 0;
         initActionDeck();
 
         this.deckNoble = new ArrayList<Card>();
@@ -104,7 +116,6 @@ public class GuillotineState extends GameState {
         this.turnPhase = origin.turnPhase;
         this.begun = origin.begun;
         this.arrival = origin.arrival;
-        this.ID = origin.ID;
 
         this.p1Hand = new ArrayList<Card>();
         for (Card c : origin.p1Hand) {
@@ -284,128 +295,154 @@ public class GuillotineState extends GameState {
         this.deckAction.add(new Card(2, true,true, 0, "actionCard", "Was_Name", R.drawable.was_that_my_name));
     }
 
+    /**
+     * getter method for what day it is
+     * @return returns an int that says what day it is
+     */
     public int getDayNum() {
         return this.dayNum;
     }
 
+    /**
+     * getter method for whose turn it is
+     * @return returns an int that says if it is player 0 or player 1' turn
+     */
     public int getPlayerTurn() {
         return this.playerTurn;
     }
 
+    /**
+     * getter method for the score of player 0
+     * @return returns an int value that says what player 0's score is
+     */
     public int getP0Score() {
         return this.p0Score;
     }
 
+    /**
+     * getter method for the score of player 1
+     * @return returns an int value that says what player 1's score is
+     */
     public int getP1Score() {
         return this.p1Score;
     }
 
-    public boolean getBegun() { return this.begun;}
-
-    public int getLastFirstPlayer() {
-        return this.lastFirstPlayer;
-    }
-
-    public int getCurrFirstPlayer() {
-        return this.currFirstPlayer;
-    }
-
+    /**
+     * getter method for what turn phase it is
+     * @return returns an int value that says what turn phase it is
+     */
     public int getTurnPhase() {
         return this.turnPhase;
     }
 
+    /**
+     * getter method for player 1's hand
+     * @return returns the array list that is player 1's hand
+     */
     public ArrayList<Card> getP1Hand() {
         return this.p1Hand;
     }
 
+    /**
+     * getter method for player 1's field
+     * @return returns the array list that is player 1's field
+     */
     public ArrayList<Card> getP1Field() {
         return this.p1Field;
     }
 
+    /**
+     * getter method for player 0's hand
+     * @return returns the array list that is player 0's hand
+     */
     public ArrayList<Card> getP0Hand() {
         return this.p0Hand;
     }
 
+    /**
+     * getter method for player 1's field
+     * @return returns the array list that is player 1's field
+     */
     public ArrayList<Card> getP0Field() {
         return this.p0Field;
     }
 
+    /**
+     * getter method for the noble line
+     * @return returns the array list that is the noble line
+     */
     public ArrayList<Card> getNobleLine() {
         return this.nobleLine;
     }
 
+    /**
+     * getter method for the discard deck
+     * @return returns the array list that is the deck discard pile
+     */
     public ArrayList<Card> getDeckDiscard() {
         return this.deckDiscard;
     }
 
+    /**
+     * getter method for the action deck
+     * @return returns the array list that is the action deck
+     */
     public ArrayList<Card> getDeckAction() {
         return this.deckAction;
     }
 
+    /**
+     * getter method for the noble deck
+     * @return returns the array list that is the noble deck
+     */
     public ArrayList<Card> getDeckNoble() {
         return this.deckNoble;
     }
 
+
     public boolean getArrival() {return this.arrival;}
 
-    //Setters for variables that may need to be set
+    /**
+     * setter method for the number of days
+     * @param dayNum int value that represent the new game day
+     */
     public void setDayNum(int dayNum) {
         this.dayNum = dayNum;
     }
 
+    /**
+     * setter method for the player turn
+     * @param playerTurn int value that represent the new player turn
+     */
     public void setPlayerTurn(int playerTurn) {
         this.playerTurn = playerTurn;
     }
 
-    public void setP0Score(int p0Score) {
-        this.p0Score = p0Score;
-    }
-
-    public void setP1Score(int p1Score) {
-        this.p1Score = p1Score;
-    }
-
-    public void setLastFirstPlayer(int lastFirstPlayer) {
-        this.lastFirstPlayer = lastFirstPlayer;
-    }
-
-    public void setCurrFirstPlayer(int currFirstPlayer) {
-        this.currFirstPlayer = currFirstPlayer;
-    }
-
+    /**
+     * setter method for the turn phase
+     * @param turnPhase int value that represent the new turn phase
+     */
     public void setTurnPhase(int turnPhase) {
         this.turnPhase = turnPhase;
     }
 
-    public void setBegun(boolean begun){ this.begun = begun;}
-
+    /**
+     * setter method that will change the first choice instance variable
+     * @param choice int value that represents the first choice
+     */
     public void setChoice1(int choice){ this.choice1 = choice;}
 
+    /**
+     * setter method that will change the second choice instance variable
+     * @param choice int value that represents the second choice
+     */
     public void setChoice2(int choice){ this.choice2 = choice;}
-
-    //Variables that are not used outside of a single call
-    private boolean gameStart = false;
-    private boolean shuffle0 = false;
-    private boolean shuffle1 = false;
-    private boolean FS0 = false;
-    private boolean FS1 = false;
-    private boolean noAction = false;
-    private boolean scarletInPlay = false;
-    private Card temp;
-    private ArrayList<Card> tempList = new ArrayList<Card>();
-
-    //point vars
-    private boolean p0Count = false;
-    private boolean p1Count = false;
-    private boolean p0Countess = false;
-    private boolean p1Countess = false;
-    private int p0PalaceGuard = 0;
-    private int p1PalaceGuard = 0;
 
 
     /*
     Methods that have one phase
-     */    /**
+     */
+    /**
      * This method starts the game
      * @param: None
      *
@@ -418,7 +455,6 @@ public class GuillotineState extends GameState {
         this.turnPhase = 0;
         this.gameStart = false;
         return true;
-        //setPlayerTurn();
     }
 
     /**
@@ -491,24 +527,13 @@ public class GuillotineState extends GameState {
             if(turnPhase == 1){
                 turnPhase = 2;
             }
-
-//            if (this.nobleLine.isEmpty()) {
-//                endDay();
-//            } else {
-//                if (this.actionCardPlayed) {
-//                    return true;
-//                } else {
-//                    this.turnPhase++;
-//                    return true;
-//                }
-//
+            
         }
 
 
         return false;
     }
 
-    //checks if decks have already been shuffled, then shuffles if false
     /**
      * This method checks if decks have already been shuffled, then shuffles if false
      * @param: None
@@ -516,7 +541,6 @@ public class GuillotineState extends GameState {
      * @return always return false because it has to be checked by another method.
      */
     public boolean shuffleDecks() {
-        //code to shuffle all decks
         Collections.shuffle(this.deckAction);
         Collections.shuffle(this.deckNoble);
         return true;
@@ -593,7 +617,6 @@ public class GuillotineState extends GameState {
      *
      * @return always return false because it has to be checked by another method.
      */
-
     public boolean dealNoble() {
         if(!this.deckNoble.isEmpty()) {
             this.nobleLine.add(this.deckNoble.get(0));
@@ -606,7 +629,6 @@ public class GuillotineState extends GameState {
         }
     }
 
-    //lets user skip action card play
     /**
      * This method lets the player skip the action
      * @param: This method takes no parameters.
@@ -676,47 +698,6 @@ public class GuillotineState extends GameState {
         }
     }
 
-
-    /**
-     * This method ends the player's turn.
-     *
-     * @param: None
-     *
-     * @return always return false because it has to be checked by another method.
-     */
-    public boolean endTurn() {
-        if (this.playerTurn == 0) {
-            this.playerTurn++;
-            this.turnPhase = 0;
-            return true;
-        } else {
-            this.playerTurn--;
-            this.turnPhase = 0;
-            return true;
-        }
-    }
-
-
-    /**
-     * This method ends the day when the are no nobles left in the noble field.
-     *
-     * @param: None
-     *
-     * @return always return false because it has to be checked by another method.
-     */
-    public boolean endDay() {
-        if (this.dayNum == 3) {
-            //this is commented out so that nothing extra is printed for tests
-            //quitGame();
-            return true;
-        } else {
-            this.dayNum++;
-            dealStartingGameCards();
-            return true;
-        }
-        //end the day
-
-    }
     /**
      * This method reverse the order of the noble card in the line of noble cards.
      *
@@ -724,10 +705,8 @@ public class GuillotineState extends GameState {
      *
      * @return always return false because it has to be checked by another method.
      */
-
     public boolean reverseLineOrder() {
         if (!this.nobleLine.isEmpty()) {
-            //for command that goes through the list/array and swaps the first and last posoitions, stops when one counter reaches halfway
             Collections.reverse(this.nobleLine);
             return true;
         }
@@ -768,18 +747,21 @@ public class GuillotineState extends GameState {
     /**
      * This method lets players trade eah other the cards they have in hands.
      *
+     * @param: p0: Arraylist of cards of player 0
      * @param: p1: Arraylist of cards of player 1
-     * @param: p1: Arraylist of cards of player 2
      *
-     * @return always return false because it has to be checked by another method.
+     * @return returns false if a hand is null, returns true otherwise
      */
-    public boolean tradeHands(ArrayList p1, ArrayList p2) {
+    public boolean tradeHands(ArrayList p0, ArrayList p1) {
+        if(p0 != null && p1 != null) {
+            tempList = (ArrayList) p0.clone();
+            p0 = (ArrayList) p1.clone();
+            p1 = (ArrayList) tempList.clone();
 
-
-
-        return true;
+            return true;
+        }
+        return false;
     }
-
 
     /**
      * This method gets the card that the user clicks and keeps it.
@@ -788,7 +770,6 @@ public class GuillotineState extends GameState {
      *      *
      * @return always return false because it has to be checked by another method.
      */
-
     public boolean rearrangeFirstFour() {
         if (this.nobleLine.size() > 5) {
             //again idk what system we are using so finding the first 5 cards will be different for lists or arrays
@@ -832,7 +813,6 @@ public class GuillotineState extends GameState {
      *      *
      * @return always return false because it has to be checked by another method.
      */
-
     public boolean takeDiscardCard(ArrayList user) {
         if (!this.deckDiscard.isEmpty()) {
             //enlarge one card, let user switch inebtween which one is enlarged and they can click a button to get that card
@@ -844,7 +824,6 @@ public class GuillotineState extends GameState {
 
     /**
      * This method goes through the p0 hand
-     *
      *
      * @return always return true
      */
@@ -918,10 +897,8 @@ public class GuillotineState extends GameState {
      *
      * @return always return false because it has to be checked by another method.
      */
-
     public boolean discardActionCard(ArrayList hand, int loc) {
         if (hand.size() > loc) {
-            //discard  actioncard from player
             this.deckDiscard.add((Card) hand.get(loc));
             hand.remove(loc);
             return true;
@@ -936,7 +913,6 @@ public class GuillotineState extends GameState {
      *
      * @return always return true because it has to be checked by another method.
      */
-
 
     public boolean calculatePoints(ArrayList<Card> field, int user) {
         boolean end = false;
@@ -1158,7 +1134,6 @@ public class GuillotineState extends GameState {
         return true;
     }
 
-
     /**
      * This method rearrange the five noble cards on the line
      *
@@ -1166,10 +1141,8 @@ public class GuillotineState extends GameState {
      *
      * @return always return false because it has to be checked by another method.
      */
-
     public boolean rearrangeFives() {
         if (this.nobleLine.size() > 5) {
-            //again idk what system we are using so finding the first 5 cards will be different for lists or arrays
             for (int i = 0; i < 5 ; i++) {
                 tempList.add(this.nobleLine.get(i));
             }
@@ -1201,7 +1174,6 @@ public class GuillotineState extends GameState {
         }
         return false;
     }
-
 
     /**
      * This method puts 3 noble cards in user field in pos 0, 1, 2
@@ -1296,27 +1268,17 @@ public class GuillotineState extends GameState {
      *
      * @return always return true because it has to be checked by another method.
      */
-
     public boolean moveNoble(int first, int second) {
         if (this.nobleLine.size() > first && this.nobleLine.size() > second) {
             Card t = this.nobleLine.get(first);
             this.nobleLine.remove(first);
             this.nobleLine.add(second, t);
-            //code to remove card from array of cards, then make everycard's location inbewteen nobleCardLocation and choice1ation have their
-            //location +1, then put the card in choice1ation
             return true;
-        } else {
+        }
+        else {
             return false;
         }
     }
-
-
-
-    //Variables for executing the cards properly
-    private int phase1 = -1;
-    private int phase2 = -1;
-    private int phase3 = -1;
-
 
     /** this method calls on card ability. it checks if the card is noble and gets the id to play
      * ability. if not it's not noble. it gets id of action card and plays ability.
@@ -1325,7 +1287,6 @@ public class GuillotineState extends GameState {
      *
      * @return always return true because it has to be checked by another method.
      */
-
     public boolean acknowledgeCardAbility(Card card) {
         if (card.type == 0) {
             switch (card.getId()) {
@@ -2613,9 +2574,7 @@ public class GuillotineState extends GameState {
                 case "Info_Exchange":
                     this.actionCardPlayed = true;
 
-                    tempList = (ArrayList)p0Hand.clone();
-                    p0Hand = (ArrayList)p1Hand.clone();
-                    p1Hand = (ArrayList)tempList.clone();
+                    tradeHands(p0Hand, p1Hand);
 
                     if (this.playerTurn == 0) {
                         for (int i = 0; i < this.p0Hand.size(); i++) {
