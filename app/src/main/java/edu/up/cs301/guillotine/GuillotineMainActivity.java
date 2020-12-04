@@ -45,6 +45,19 @@ import edu.up.cs301.game.GameFramework.gameConfiguration.GamePlayerType;
  * Full Release:
  *
  */
+/**
+ * Dumb AI: Everything it does is random
+ * Smart AI:
+ * 1) Checks if it has a game ending card and checks to see if the conditions are right before using that card
+ * Those conditions are based off of both players score and what day it is.
+ * 2) Checks to see if the first card is a bad card (determined off of points and if the noble card has an action)
+ * if it is bad, the AI will try to play an action card to either swap that noble with another card
+ * 3) Checks to see if the second card in noble line is a good card. If it is a good card
+ * the AI will play an action card to specifically swap that card with another card. If the AI does not have a specific
+ * action card
+ * if the AI does not have specific cards, it will play a random action card to change the line
+ * everything else it does it random
+ */
 
 
 /**

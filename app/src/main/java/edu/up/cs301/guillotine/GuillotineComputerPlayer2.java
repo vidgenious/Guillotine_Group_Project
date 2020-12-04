@@ -63,7 +63,7 @@ public class GuillotineComputerPlayer2 extends GameComputerPlayer {
                 }
 
                 //checks if first card in noble line is bad, if so, change it if possible
-                else if (gameState.getNobleLine().get(0).points < 3 && !gameState.getNobleLine().get(0).hasEffect) {
+                else if ((!gameState.getNobleLine().isEmpty()) && gameState.getNobleLine().get(0).points < 3 && !gameState.getNobleLine().get(0).hasEffect) {
                     for(int i = 0; i < gameState.getP1Hand().size(); i++){
                         if(gameState.getP1Hand().get(i).affectsLine){
                             actionPos = i;
@@ -91,7 +91,7 @@ public class GuillotineComputerPlayer2 extends GameComputerPlayer {
 
 
                 //AI randomly either plays an action card or skips
-               else if (play == 1) {
+               else if (play == 1 && gameState.getNobleLine().get(0).points < 3 && !gameState.getNobleLine().get(0).hasEffect) {
 
 
                     game.sendAction(new PlayAction(this, pos));
