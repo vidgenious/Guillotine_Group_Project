@@ -52,6 +52,25 @@ public class GuillotineState extends GameState {
     private int tempTurn; //holds the xyz
     private boolean arrival; //holds xyz
 
+    //Variables that are not used outside of a single call
+    private boolean gameStart = false; //checks if the game has started
+    private boolean shuffle0 = false; //checks if the action card that shuffles has been activated by player 0
+    private boolean shuffle1 = false; //checks if the action card that shuffles has been activated by player 1
+    private boolean FS0 = false; //checks if foreign support has been called by player 0
+    private boolean FS1 = false; //checks if foreign support has been called by player 1
+    private boolean noAction = false; //checks if an action card cannot be played
+    private boolean scarletInPlay = false; //checks if the scarlet card is in play
+    private Card temp; //temporary card that will be use for swapping elements
+    private ArrayList<Card> tempList = new ArrayList<Card>(); //temporary arraylist that is used for array list operations
+
+    //point vars
+    private boolean p0Count = false; //checks if player 0 has the count noble card
+    private boolean p1Count = false; //checks if player 1 has the count noble card
+    private boolean p0Countess = false; //checks if player 0 has the countess noble card
+    private boolean p1Countess = false; //checks if player 1 has the countess noble card
+    private int p0PalaceGuard = 0; //checks how many palace guards player 0 has
+    private int p1PalaceGuard = 0; //checks how many palace guards player 1 has
+
     // constructor to init all variables
     public GuillotineState() {
         this.dayNum = 1;
@@ -419,29 +438,11 @@ public class GuillotineState extends GameState {
      */
     public void setChoice2(int choice){ this.choice2 = choice;}
 
-    //Variables that are not used outside of a single call
-    private boolean gameStart = false; //checks if the game has started
-    private boolean shuffle0 = false; //checks if the action card that shuffles has been activated by player 0
-    private boolean shuffle1 = false; //checks if the action card that shuffles has been activated by player 1
-    private boolean FS0 = false; //checks if foreign support has been called by player 0
-    private boolean FS1 = false; //checks if foreign support has been called by player 1
-    private boolean noAction = false; //checks if an action card cannot be played
-    private boolean scarletInPlay = false; //checks if the scarlet card is in play
-    private Card temp; //temporary card that will be use for swapping elements
-    private ArrayList<Card> tempList = new ArrayList<Card>(); //temporary arraylist that is used for array list operations
-
-    //point vars
-    private boolean p0Count = false; //checks if player 0 has the count noble card
-    private boolean p1Count = false; //checks if player 1 has the count noble card
-    private boolean p0Countess = false; //checks if player 0 has the countess noble card
-    private boolean p1Countess = false; //checks if player 1 has the countess noble card
-    private int p0PalaceGuard = 0; //checks how many palace guards player 0 has
-    private int p1PalaceGuard = 0; //checks how many palace guards player 1 has
-
 
     /*
     Methods that have one phase
-     */    /**
+     */
+    /**
      * This method starts the game
      * @param: None
      *
