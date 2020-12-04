@@ -82,6 +82,21 @@ public class DrawBoard extends FlashSurfaceView {
 
         //check if human is player 0
         if(playerHuman == 0) {
+            if(state.getTurnPhase() == 0 || state.getTurnPhase() == 1 || state.getTurnPhase() == 2){
+                //Maximize Hand Symbol
+                draw = BitmapFactory.decodeResource(getResources(), R.drawable.plus);
+                draw = Bitmap.createScaledBitmap(draw, 150, 150, true);
+                canvas.drawText("Zoom Hand", 1550.0f, 40.0f, black);
+                canvas.drawBitmap(draw, 1600.0f, 40.0f, null);
+            } else if (state.getTurnPhase() == 8){
+                //Minimize Hand Symbol
+                draw = BitmapFactory.decodeResource(getResources(), R.drawable.minus);
+                draw = Bitmap.createScaledBitmap(draw, 150, 150, true);
+                canvas.drawText("Zoom Hand", 1550.0f, 40.0f, black);
+                canvas.drawBitmap(draw, 1600.0f, 40.0f, null);
+            }
+
+
             //Hand Arrow
             if (state.getP0Hand().size() > 7) {
                 draw = BitmapFactory.decodeResource(getResources(), R.drawable.left_arrow_transparent);
@@ -135,7 +150,7 @@ public class DrawBoard extends FlashSurfaceView {
             for (int i = 0; i < state.getP1Field().size() && i < 12; i++) {
                 draw = BitmapFactory.decodeResource(getResources(), state.getP1Field().get(i).image);
                 draw = Bitmap.createScaledBitmap(draw, 100, 140, true);
-                canvas.drawBitmap(draw, left, 150.0f, null); //150
+                canvas.drawBitmap(draw, left, 200.0f, null); //150
                 left -= 120;
             }
 
@@ -255,11 +270,40 @@ public class DrawBoard extends FlashSurfaceView {
                 }
             }
 
+            if (state.getTurnPhase() == 8){
+                left = 1570;
+                for (int i = 0; i < state.getP0Hand().size() && i < 4; i++) {
+                    draw = BitmapFactory.decodeResource(getResources(), state.getP0Hand().get(i).image);
+                    draw = Bitmap.createScaledBitmap(draw, 350, 490, true);
+                    canvas.drawBitmap(draw, left, 360.0f, null);
+                    left -= 370;
+                }
+                if (state.getP0Hand().size() > 4) {
+                    draw = BitmapFactory.decodeResource(getResources(), R.drawable.left_arrow_transparent);
+                    draw = Bitmap.createScaledBitmap(draw, 150, 150, true);
+                    canvas.drawBitmap(draw, 300.0f, 530.0f, null);
+                }
+            }
+
 
         }//end check if human is player 0
 
         //for when human is player 1
         else{
+            if(state.getTurnPhase() == 0 || state.getTurnPhase() == 1 || state.getTurnPhase() == 2){
+                //Maximize Hand Symbol
+                draw = BitmapFactory.decodeResource(getResources(), R.drawable.plus);
+                draw = Bitmap.createScaledBitmap(draw, 150, 150, true);
+                canvas.drawText("Zoom Hand", 1550.0f, 40.0f, black);
+                canvas.drawBitmap(draw, 1600.0f, 40.0f, null);
+            } else if (state.getTurnPhase() == 8){
+                //Minimize Hand Symbol
+                draw = BitmapFactory.decodeResource(getResources(), R.drawable.minus);
+                draw = Bitmap.createScaledBitmap(draw, 150, 150, true);
+                canvas.drawText("Zoom Hand", 1550.0f, 40.0f, black);
+                canvas.drawBitmap(draw, 1600.0f, 40.0f, null);
+            }
+
             //Hand Arrow
             if (state.getP1Hand().size() > 7) {
                 draw = BitmapFactory.decodeResource(getResources(), R.drawable.left_arrow_transparent);
@@ -313,7 +357,7 @@ public class DrawBoard extends FlashSurfaceView {
             for (int i = 0; i < state.getP0Field().size() && i < 12; i++) {
                 draw = BitmapFactory.decodeResource(getResources(), state.getP0Field().get(i).image);
                 draw = Bitmap.createScaledBitmap(draw, 100, 140, true);
-                canvas.drawBitmap(draw, left, 150.0f, null); //150
+                canvas.drawBitmap(draw, left, 200.0f, null); //150
                 left -= 120;
             }
 
@@ -427,6 +471,21 @@ public class DrawBoard extends FlashSurfaceView {
                     left -= 370;
                 }
                 if (state.getDeckDiscard().size() > 4) {
+                    draw = BitmapFactory.decodeResource(getResources(), R.drawable.left_arrow_transparent);
+                    draw = Bitmap.createScaledBitmap(draw, 150, 150, true);
+                    canvas.drawBitmap(draw, 300.0f, 530.0f, null);
+                }
+            }
+
+            if (state.getTurnPhase() == 8){
+                left = 1570;
+                for (int i = 0; i < state.getP1Hand().size() && i < 4; i++) {
+                    draw = BitmapFactory.decodeResource(getResources(), state.getP1Hand().get(i).image);
+                    draw = Bitmap.createScaledBitmap(draw, 350, 490, true);
+                    canvas.drawBitmap(draw, left, 360.0f, null);
+                    left -= 370;
+                }
+                if (state.getP1Hand().size() > 4) {
                     draw = BitmapFactory.decodeResource(getResources(), R.drawable.left_arrow_transparent);
                     draw = Bitmap.createScaledBitmap(draw, 150, 150, true);
                     canvas.drawBitmap(draw, 300.0f, 530.0f, null);

@@ -88,6 +88,14 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
                 game.sendAction(action);
             }
 
+            if(state.getTurnPhase() == 0 || state.getTurnPhase() == 1 || state.getTurnPhase() == 2){
+                if(zoom(x, y)){
+                    ZoomAction action = new ZoomAction(this);
+                    game.sendAction(action);
+                    return true;
+                }
+            }
+
 
             //if it is the play action/skip phase
             if (state.getTurnPhase() == 0) {
@@ -159,6 +167,16 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
                     game.sendAction(action);
                 }
 
+            } else if (state.getTurnPhase() == 8){
+                if(zoom(x, y)){
+                    ZoomAction action = new ZoomAction(this);
+                    game.sendAction(action);
+                }
+                if(choiceArrow(x, y)){
+                    HandMoveAction action = new HandMoveAction(this);
+                    game.sendAction(action);
+                }
+
 
                 //If it is the get noble phase
             } else if (state.getTurnPhase() == 1) {
@@ -215,16 +233,23 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
 
                 //check if p0 arrow is pressed
                 if (p0Arrow) {
-                    P0MoveAction action = new P0MoveAction(this);
+                    P1MoveAction action = new P1MoveAction(this);
                     game.sendAction(action);
                 }
 
                 //check if p1 arrow is pressed
                 if (p1Arrow) {
-                    P1MoveAction action = new P1MoveAction(this);
+                    P0MoveAction action = new P0MoveAction(this);
                     game.sendAction(action);
                 }
 
+                if(state.getTurnPhase() == 0 || state.getTurnPhase() == 1 || state.getTurnPhase() == 2){
+                    if(zoom(x, y)){
+                        ZoomAction action = new ZoomAction(this);
+                        game.sendAction(action);
+                        return true;
+                    }
+                }
 
                 //if it is the play action/skip phase
                 if (state.getTurnPhase() == 0) {
@@ -293,6 +318,16 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
 
                     if (cardPos != -1 && cardPos < state.getDeckDiscard().size()) {
                         ChooseAction action = new ChooseAction(this, cardPos, 1);
+                        game.sendAction(action);
+                    }
+
+                } else if (state.getTurnPhase() == 8){
+                    if(zoom(x, y)){
+                        ZoomAction action = new ZoomAction(this);
+                        game.sendAction(action);
+                    }
+                    if(choiceArrow(x, y)){
+                        HandMoveAction action = new HandMoveAction(this);
                         game.sendAction(action);
                     }
 
@@ -442,13 +477,21 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
         return false;
     }
 
-
     private boolean choiceArrow(int x, int y){
         if(x > 300 && x < 450 && y > 530 && y < 680){
             return true;
         }
         return false;
     }
+
+    private boolean zoom(int x, int y){
+        if(x > 1550.0f && x < 1800.0f && y > 40 && y < 190){
+            return true;
+        }
+
+        return false;
+    }
+
 
     private boolean acceptButton(int x, int y){
         if(x > 10 && x < 170 && y > 860 && y < 960){

@@ -17,7 +17,8 @@ import edu.up.cs301.game.R;
  */
 public class GuillotineLocalGame extends LocalGame {
 
-    Card temp;
+    private Card temp;
+    private int tempPhase;
 
     private GuillotineState gameState;
 
@@ -181,6 +182,14 @@ public class GuillotineLocalGame extends LocalGame {
 
         } else if(action instanceof  RatMoveAction) {
             gameState.moveThroughRat();
+
+        } else if(action instanceof ZoomAction) {
+            if(gameState.getTurnPhase() != 8){
+                tempPhase = gameState.getTurnPhase();
+                gameState.setTurnPhase(8);
+            } else if(gameState.getTurnPhase() == 8){
+                gameState.setTurnPhase(tempPhase);
+            }
             //If it a null action, due to a turn not being complete
         } else if(action instanceof  NullAction){
             return true;
