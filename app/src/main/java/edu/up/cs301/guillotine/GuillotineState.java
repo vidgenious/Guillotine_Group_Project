@@ -893,8 +893,6 @@ public class GuillotineState extends GameState {
         //checks to see if they have specialty cards like count or countess
         //adds the noble card points into score
         if (user == 0) {
-            //checks to see if this is last time this method will be called
-            if(dayNum != 4){
                 p0Score = 0;
                 //goes through field to see if special card is present
                 for (int k = 0; k < field.size(); k++){
@@ -909,7 +907,7 @@ public class GuillotineState extends GameState {
                     if(field.get(k).id.equals("Fountain")){
                         this.p0Score+= 2;
                     }
-                }
+                }//end loop
 
                 //goes through field to see all noble cards
             for (int i = 0; i < field.size(); i++) {
@@ -929,12 +927,10 @@ public class GuillotineState extends GameState {
                     }
                 }
 
-            }
-            
-            }
+            }//end field loop
+
             //finally counts all special cards that change values based off of other cards
-            else {
-                for (int i = 0; i < field.size(); i++) {
+            for (int i = 0; i < field.size(); i++) {
 
                     if(field.get(i).id.equals("Church_Support")){
                         churchSupport = 0;
@@ -980,7 +976,7 @@ public class GuillotineState extends GameState {
                             this.p0Score--;
                         }
                     }
-                }
+                }//end special card loop
 
                 //adding special cards to p0score
                 this.p0Score+=this.p0PalaceGuard * this.p0PalaceGuard;
@@ -991,15 +987,10 @@ public class GuillotineState extends GameState {
                     this.p0Score+= 2;
                 }
 
-            }
-        }
+        }//end if user = 0
 
-        //same exact code as p0, except it is for p1
-        else {
-
-
-            //checks to see if this is last time this method will be called
-                if(dayNum != 4){
+            //same exact code as p0, except it is for p1
+             else {
                     p1Score = 0;
                     //goes through field to see if special card is present
                     for (int k = 0; k < field.size(); k++){
@@ -1013,7 +1004,7 @@ public class GuillotineState extends GameState {
                         if(field.get(k).id.equals("Fountain")){
                             this.p1Score+= 2;
                         }
-                    }
+                    }//end for loop
 
                     //goes through field to see all noble cards
                     for (int i = 0; i < field.size(); i++) {
@@ -1025,80 +1016,77 @@ public class GuillotineState extends GameState {
                             this.p1Countess = true;
                         }
                         else if (field.get(i).type == 0) {
-                            if(field.get(i).cardColor.equals("Grey") && indifferent == 1){
-                                this.p1Score ++;
+                            if (field.get(i).cardColor.equals("Grey") && indifferent == 1) {
+                                this.p1Score++;
                             }
                             else {
                                 this.p1Score += field.get(i).points;
                             }
                         }
-
-                    }
-                }
-                //finally counts all special cards that change values based off of other cards
-                else {
-                    for (int i = 0; i < field.size(); i++) {
-
-                        if(field.get(i).id.equals("Church_Support")){
-                            churchSupport = 1;
-                        }
-
-                        if(field.get(i).id.equals("Civic_Support")){
-                            civicSupport = 1;
-                        }
-
-                        if(field.get(i).id.equals("Military_Support")){
-                            militarySupport = 1;
-                        }
+                    }//end field loop
 
 
-                        if(churchSupport == 0){
-                            if(field.get(i).cardColor.equals("Blue")){
-                                this.p1Score++;
+                        //finally counts all special cards that change values based off of other cards
+                        for (int i = 0; i < field.size(); i++) {
+
+                            if (field.get(i).id.equals("Church_Support")) {
+                                churchSupport = 1;
                             }
-                        }
 
-                        if(civicSupport == 0){
-                            if(field.get(i).cardColor.equals("Green")){
-                                this.p1Score++;
+                            if (field.get(i).id.equals("Civic_Support")) {
+                                civicSupport = 1;
                             }
-                        }
 
-                        if(militarySupport == 0){
-                            if(field.get(i).cardColor.equals("Red")){
-                                this.p1Score++;
+                            if (field.get(i).id.equals("Military_Support")) {
+                                militarySupport = 1;
                             }
-                        }
 
-                        if (field.get(i).id.contains("Palace_Guard")) {
-                            this.p1PalaceGuard++;
-                        }
 
-                        if (field.get(i).id.equals("Tragic_Figure")) {
-                            hasTragic = 1;
-                        }
-
-                        if (hasTragic == 1) {
-                            if (field.get(i).cardColor.equals("Gray")) {
-                                this.p1Score--;
+                            if (churchSupport == 0) {
+                                if (field.get(i).cardColor.equals("Blue")) {
+                                    this.p1Score++;
+                                }
                             }
+
+                            if (civicSupport == 0) {
+                                if (field.get(i).cardColor.equals("Green")) {
+                                    this.p1Score++;
+                                }
+                            }
+
+                            if (militarySupport == 0) {
+                                if (field.get(i).cardColor.equals("Red")) {
+                                    this.p1Score++;
+                                }
+                            }
+
+                            if (field.get(i).id.contains("Palace_Guard")) {
+                                this.p1PalaceGuard++;
+                            }
+
+                            if (field.get(i).id.equals("Tragic_Figure")) {
+                                hasTragic = 1;
+                            }
+
+                            if (hasTragic == 1) {
+                                if (field.get(i).cardColor.equals("Gray")) {
+                                    this.p1Score--;
+                                }
+                            }
+                        }//end special card loop
+
+                        //adding special cards to p0score
+                        this.p1Score += this.p1PalaceGuard * this.p1PalaceGuard;
+                        if (p1Count && p1Countess) {
+                            this.p1Score += 8;
                         }
-                    }
-
-                    //adding special cards to p0score
-                    this.p1Score+=this.p1PalaceGuard * this.p1PalaceGuard;
-                    if(p1Count && p1Countess){
-                        this.p1Score+=8;
-                    }
-                    else if (p1Countess || p1Count){
-                        this.p1Score+= 2;
-                    }
-
-                }
-        }
+                        else if (p1Countess || p1Count) {
+                            this.p1Score += 2;
+                        }
+                    }//end else
 
         return true;
-    }
+    }//end calculate points
 
     /**
      * This method rearrange the five noble cards on the line
@@ -1257,11 +1245,13 @@ public class GuillotineState extends GameState {
                     //sets it to be last card in line
                 case "Spy":
                     this.actionCardPlayed = true;
-                    for(int i = 0; i < nobleLine.size(); i++){
-                        if(nobleLine.get(i).id.equals("Spy") && i != 0){
-                            temp = nobleLine.get(i);
-                            nobleLine.remove(i);
-                            nobleLine.add(temp);
+                    if(!nobleLine.isEmpty()) {
+                        for (int i = 0; i < nobleLine.size(); i++) {
+                            if (nobleLine.get(i).id.equals("Spy") && i != 0) {
+                                temp = nobleLine.get(i);
+                                nobleLine.remove(i);
+                                nobleLine.add(temp);
+                            }
                         }
                     }
                     this.actionCardPlayed = false;
@@ -1402,7 +1392,9 @@ public class GuillotineState extends GameState {
                 case "Bribed":
                     this.actionCardPlayed = true;
 
-                    moveNoble(0, this.nobleLine.size() - 1);
+                    if(!nobleLine.isEmpty() || nobleLine.size() < 1) {
+                        moveNoble(0, this.nobleLine.size() - 1);
+                    }
 
                     if (this.playerTurn == 0) {
 
@@ -1630,7 +1622,7 @@ public class GuillotineState extends GameState {
                 case "Escape":
                     this.actionCardPlayed = true;
 
-                    if (this.playerTurn == 0) {
+                    if (this.playerTurn == 0 && !nobleLine.isEmpty()) {
                         int rand1 = (int) (Math.random() * this.nobleLine.size());
                         this.deckDiscard.add(this.nobleLine.get(rand1));
                         this.nobleLine.remove(rand1);
