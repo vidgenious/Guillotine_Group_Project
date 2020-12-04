@@ -435,7 +435,7 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
      * dimentions of the line card on the screen
      *
      * @param int x: position of the card
-     *            int y: position of the card
+     *            @param int y: position of the card
      */
     private int lineCard(int x, int y){
         if(x > 1700 && x < 1900 && y > 350 && y < 630){

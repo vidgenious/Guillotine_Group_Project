@@ -67,6 +67,11 @@ import edu.up.cs301.game.GameFramework.gameConfiguration.GamePlayerType;
  * Extra Functionality:
  *      Ability to zoom in on the hand
  *      Ability to zoom in on the noble line
+ *
+ * Bug:
+ *      Sometimes if there is only one card in the noble line,there is a crash
+ *      We have no idea what is causing this.
+ *      May happen because the last noble has an ability.
  */
 
 

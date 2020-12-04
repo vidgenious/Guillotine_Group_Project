@@ -1,6 +1,7 @@
 package edu.up.cs301.guillotine;
 
 import android.graphics.BitmapFactory;
+import android.util.Log;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -671,6 +672,8 @@ public class GuillotineState extends GameState {
     public boolean playAction(ArrayList hand, int loc) {
         //checks if another action card is preventing the player from playing a new action card
         if (!this.noAction) {
+
+            Log.d("action card played", ((Card) hand.get(loc)).getId());
 
             //if judge card is at front of the line, it skips turn
             if (this.nobleLine.get(0).getId().equals("Judge1") || this.nobleLine.get(0).getId().equals("Judge2")) {

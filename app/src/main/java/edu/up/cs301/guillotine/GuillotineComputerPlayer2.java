@@ -37,14 +37,17 @@ public class GuillotineComputerPlayer2 extends GameComputerPlayer {
         //check if player is position 1
         if(this.playerNum == 1){
 
-        for (int k = 0; k < gameState.getP1Hand().size(); k++) {
-            if (gameState.getP1Hand().get(k).getId().equals("Scarlet")) {
-                this.hasScarlet = true;
-            }
-        }
 
         //code for if AI is player 1
         if (gameState.getPlayerTurn() == 1) {
+
+            for (int k = 0; k < gameState.getP1Hand().size(); k++) {
+                if (gameState.getP1Hand().get(k).getId().equals("Scarlet")) {
+                    this.hasScarlet = true;
+                }
+            }
+
+
             if (gameState.getTurnPhase() == 0) {
 
 
@@ -78,16 +81,18 @@ public class GuillotineComputerPlayer2 extends GameComputerPlayer {
 
 
                 //checks if next card in line is good, if so, change it if possible so next player cant get a good card
-                else if (gameState.getNobleLine().size() > 0 && (gameState.getNobleLine().get(1).points > 3 || gameState.getNobleLine().get(1).hasEffect)) {
-                    for (int i = 0; i < gameState.getP1Hand().size(); i++) {
-                        if (gameState.getP1Hand().get(i).affectsLine) {
-                            actionPos = i;
+                else if (gameState.getNobleLine().size() > 1) {
+                    if ((gameState.getNobleLine().get(1).points > 3 || gameState.getNobleLine().get(1).hasEffect)) {
+                        for (int i = 0; i < gameState.getP1Hand().size(); i++) {
+                            if (gameState.getP1Hand().get(i).affectsLine) {
+                                actionPos = i;
 
+                            }
                         }
+                        this.pos = 1;
+                        game.sendAction(new PlayAction(this, actionPos));
+                        gameState.setTurnPhase(1);
                     }
-                    this.pos = 1;
-                    game.sendAction(new PlayAction(this, actionPos));
-                    gameState.setTurnPhase(1);
                 }
 
 
@@ -206,16 +211,18 @@ public class GuillotineComputerPlayer2 extends GameComputerPlayer {
 
 
                     //checks if next card in line is good, if so, change it if possible so next player cant get a good card
-                    else if (gameState.getNobleLine().size() > 0 && (gameState.getNobleLine().get(1).points > 3 || gameState.getNobleLine().get(1).hasEffect)) {
-                        for (int i = 0; i < gameState.getP0Hand().size(); i++) {
-                            if (gameState.getP0Hand().get(i).affectsLine) {
-                                actionPos = i;
+                    else if (gameState.getNobleLine().size() > 1) {
+                        if ( (gameState.getNobleLine().get(1).points > 3 || gameState.getNobleLine().get(1).hasEffect)) {
+                            for (int i = 0; i < gameState.getP1Hand().size(); i++) {
+                                if (gameState.getP1Hand().get(i).affectsLine) {
+                                    actionPos = i;
 
+                                }
                             }
+                            this.pos = 1;
+                            game.sendAction(new PlayAction(this, actionPos));
+                            gameState.setTurnPhase(1);
                         }
-                        this.pos = 1;
-                        game.sendAction(new PlayAction(this, actionPos));
-                        gameState.setTurnPhase(1);
                     }
 
 
