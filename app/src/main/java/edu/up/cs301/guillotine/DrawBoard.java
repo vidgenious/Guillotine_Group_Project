@@ -74,16 +74,6 @@ public class DrawBoard extends FlashSurfaceView {
             return;
         }
 
-        for (int i = 0; i < state.getP0Field().size(); i++) {
-            if (state.getP0Field().get(i).getId().equals("Callous")) {
-                canvas.drawRect(10.0f, 670.0f, 200.0f, 770.0f, grey);
-                canvas.drawText("Discard", 10.0f,715.0f, black);
-                canvas.drawText("Callous", 10.0f,766.0f, black);
-            }
-        }
-
-
-
         canvas.drawRect(10.0f, 970.0f, 170.0f, 1070.0f, grey);
         canvas.drawText("Skip", 30.0f,1030.0f, black);
         canvas.drawRect(10.0f, 860.0f, 170.0f, 960.0f, grey);
@@ -175,7 +165,7 @@ public class DrawBoard extends FlashSurfaceView {
 
             //Draws the Action Deck on the screen
             left = 10;
-            for (int i = 0; i < state.getDeckAction().size(); i++) {
+            if (!(state.getDeckAction().isEmpty())) {
                 draw = BitmapFactory.decodeResource(getResources(), R.drawable.action_card_back);
                 draw = Bitmap.createScaledBitmap(draw, 100, 140, true);
                 canvas.drawBitmap(draw, left, 710.0f, null);
@@ -183,15 +173,16 @@ public class DrawBoard extends FlashSurfaceView {
             }
 
             //draws the discard deck on the screen
-            for (int i = 0; i < state.getDeckDiscard().size(); i++) {
+            if (!(state.getDeckDiscard().isEmpty())) {
                 draw = BitmapFactory.decodeResource(getResources(), R.drawable.action_card_back);
                 draw = Bitmap.createScaledBitmap(draw, 100, 140, true);
                 canvas.drawBitmap(draw, left, 560.0f, null);
 
             }
+
             //draws the noble deck on the screen
-            for (int i = 0; i < state.getDeckNoble().size(); i++) {
-                draw = BitmapFactory.decodeResource(getResources(), R.drawable.action_card_back);
+            if (!(state.getDeckNoble().isEmpty())){
+                draw = BitmapFactory.decodeResource(getResources(), R.drawable.noble_card_back);
                 draw = Bitmap.createScaledBitmap(draw, 100, 140, true);
                 canvas.drawBitmap(draw, left, 415.0f, null);
 
@@ -382,7 +373,7 @@ public class DrawBoard extends FlashSurfaceView {
 
             //Draws the Action Deck on the screen
             left = 10;
-            for (int i = 0; i < state.getDeckAction().size(); i++) {
+            if (!(state.getDeckAction().isEmpty())) {
                 draw = BitmapFactory.decodeResource(getResources(), R.drawable.action_card_back);
                 draw = Bitmap.createScaledBitmap(draw, 100, 140, true);
                 canvas.drawBitmap(draw, left, 710.0f, null);
@@ -390,15 +381,16 @@ public class DrawBoard extends FlashSurfaceView {
             }
 
             //draws the discard deck on the screen
-            for (int i = 0; i < state.getDeckDiscard().size(); i++) {
+            if (!(state.getDeckDiscard().isEmpty())) {
                 draw = BitmapFactory.decodeResource(getResources(), R.drawable.action_card_back);
                 draw = Bitmap.createScaledBitmap(draw, 100, 140, true);
                 canvas.drawBitmap(draw, left, 560.0f, null);
 
             }
+
             //draws the noble deck on the screen
-            for (int i = 0; i < state.getDeckNoble().size(); i++) {
-                draw = BitmapFactory.decodeResource(getResources(), R.drawable.action_card_back);
+            if (!(state.getDeckNoble().isEmpty())){
+                draw = BitmapFactory.decodeResource(getResources(), R.drawable.noble_card_back);
                 draw = Bitmap.createScaledBitmap(draw, 100, 140, true);
                 canvas.drawBitmap(draw, left, 415.0f, null);
 
