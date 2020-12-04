@@ -131,6 +131,19 @@ public class DrawBoard extends FlashSurfaceView {
                 canvas.drawBitmap(draw, 1600.0f, 40.0f, null);
             }
 
+            if(state.getTurnPhase() == 0 || state.getTurnPhase() == 1 || state.getTurnPhase() == 2){
+                //Maximize Line Symbol
+                draw = BitmapFactory.decodeResource(getResources(), R.drawable.plus);
+                draw = Bitmap.createScaledBitmap(draw, 150, 150, true);
+                canvas.drawText("Zoom Line", 1300.0f, 40.0f, black);
+                canvas.drawBitmap(draw, 1350.0f, 40.0f, null);
+            } else if (state.getTurnPhase() == 8){
+                //Minimize Line Symbol
+                draw = BitmapFactory.decodeResource(getResources(), R.drawable.minus);
+                draw = Bitmap.createScaledBitmap(draw, 150, 150, true);
+                canvas.drawText("Zoom Line", 1300.0f, 40.0f, black);
+                canvas.drawBitmap(draw, 1350.0f, 40.0f, null);
+            }
 
             //Hand Arrow
             if (state.getP0Hand().size() > 7) {
@@ -172,12 +185,12 @@ public class DrawBoard extends FlashSurfaceView {
             }
 
             // Draws the Noble line cards on UI
-            left = 1700;
-            for (int i = 0; i < state.getNobleLine().size(); i++) {
+            left = 1700 - (100 * (state.getNobleLine().size() - 1));
+            for (int i = state.getNobleLine().size() - 1; i >= 0; i--) {
                 draw = BitmapFactory.decodeResource(getResources(), state.getNobleLine().get(i).image);
                 draw = Bitmap.createScaledBitmap(draw, 200, 280, true);
                 canvas.drawBitmap(draw, left, 350.0f, null); //350
-                left -= 100;
+                left += 100;
             }
 
             //P1 field
@@ -309,18 +322,37 @@ public class DrawBoard extends FlashSurfaceView {
             }
 
             if (state.getTurnPhase() == 8){
-                left = 1570;
-                for (int i = 0; i < state.getP0Hand().size() && i < 4; i++) {
-                    draw = BitmapFactory.decodeResource(getResources(), state.getP0Hand().get(i).image);
-                    draw = Bitmap.createScaledBitmap(draw, 350, 490, true);
-                    canvas.drawBitmap(draw, left, 360.0f, null);
-                    left -= 370;
+                if(state.getZoom() == 0) {
+                    left = 1570;
+                    for (int i = 0; i < state.getP0Hand().size() && i < 4; i++) {
+                        draw = BitmapFactory.decodeResource(getResources(), state.getP0Hand().get(i).image);
+                        draw = Bitmap.createScaledBitmap(draw, 350, 490, true);
+                        canvas.drawBitmap(draw, left, 360.0f, null);
+                        left -= 370;
+                    }
+
+                    if (state.getP0Hand().size() > 4) {
+                        draw = BitmapFactory.decodeResource(getResources(), R.drawable.left_arrow_transparent);
+                        draw = Bitmap.createScaledBitmap(draw, 150, 150, true);
+                        canvas.drawBitmap(draw, 300.0f, 530.0f, null);
+                    }
+                } else if(state.getZoom() == 1){
+                    left = 1570;
+                    for (int i = 0; i < state.getTempList().size() && i < 4; i++) {
+                        draw = BitmapFactory.decodeResource(getResources(), state.getTempList().get(i).image);
+                        draw = Bitmap.createScaledBitmap(draw, 350, 490, true);
+                        canvas.drawBitmap(draw, left, 360.0f, null);
+                        left -= 370;
+                    }
+
+                    if (state.getTempList().size() > 4) {
+                        draw = BitmapFactory.decodeResource(getResources(), R.drawable.left_arrow_transparent);
+                        draw = Bitmap.createScaledBitmap(draw, 150, 150, true);
+                        canvas.drawBitmap(draw, 300.0f, 530.0f, null);
+                    }
                 }
-                if (state.getP0Hand().size() > 4) {
-                    draw = BitmapFactory.decodeResource(getResources(), R.drawable.left_arrow_transparent);
-                    draw = Bitmap.createScaledBitmap(draw, 150, 150, true);
-                    canvas.drawBitmap(draw, 300.0f, 530.0f, null);
-                }
+
+
             }
 
 
@@ -346,6 +378,20 @@ public class DrawBoard extends FlashSurfaceView {
                 draw = Bitmap.createScaledBitmap(draw, 150, 150, true);
                 canvas.drawText("Zoom Hand", 1550.0f, 40.0f, grey);
                 canvas.drawBitmap(draw, 1600.0f, 40.0f, null);
+            }
+
+            if(state.getTurnPhase() == 0 || state.getTurnPhase() == 1 || state.getTurnPhase() == 2){
+                //Maximize Line Symbol
+                draw = BitmapFactory.decodeResource(getResources(), R.drawable.plus);
+                draw = Bitmap.createScaledBitmap(draw, 150, 150, true);
+                canvas.drawText("Zoom Line", 1300.0f, 40.0f, black);
+                canvas.drawBitmap(draw, 1350.0f, 40.0f, null);
+            } else if (state.getTurnPhase() == 8){
+                //Minimize Line Symbol
+                draw = BitmapFactory.decodeResource(getResources(), R.drawable.minus);
+                draw = Bitmap.createScaledBitmap(draw, 150, 150, true);
+                canvas.drawText("Zoom Line", 1300.0f, 40.0f, black);
+                canvas.drawBitmap(draw, 1350.0f, 40.0f, null);
             }
 
             //Hand Arrow
@@ -388,12 +434,12 @@ public class DrawBoard extends FlashSurfaceView {
             }
 
             // Draws the Noble line cards on UI
-            left = 1700;
-            for (int i = 0; i < state.getNobleLine().size(); i++) {
+            left = 1700 - (100 * (state.getNobleLine().size() - 1));
+            for (int i = state.getNobleLine().size() - 1; i >= 0; i--) {
                 draw = BitmapFactory.decodeResource(getResources(), state.getNobleLine().get(i).image);
                 draw = Bitmap.createScaledBitmap(draw, 200, 280, true);
                 canvas.drawBitmap(draw, left, 350.0f, null); //350
-                left -= 100;
+                left += 100;
             }
 
             //P0 field
@@ -524,17 +570,34 @@ public class DrawBoard extends FlashSurfaceView {
             }
 
             if (state.getTurnPhase() == 8){
-                left = 1570;
-                for (int i = 0; i < state.getP1Hand().size() && i < 4; i++) {
-                    draw = BitmapFactory.decodeResource(getResources(), state.getP1Hand().get(i).image);
-                    draw = Bitmap.createScaledBitmap(draw, 350, 490, true);
-                    canvas.drawBitmap(draw, left, 360.0f, null);
-                    left -= 370;
-                }
-                if (state.getP1Hand().size() > 4) {
-                    draw = BitmapFactory.decodeResource(getResources(), R.drawable.left_arrow_transparent);
-                    draw = Bitmap.createScaledBitmap(draw, 150, 150, true);
-                    canvas.drawBitmap(draw, 300.0f, 530.0f, null);
+                if(state.getZoom() == 0) {
+                    left = 1570;
+                    for (int i = 0; i < state.getP0Hand().size() && i < 4; i++) {
+                        draw = BitmapFactory.decodeResource(getResources(), state.getP0Hand().get(i).image);
+                        draw = Bitmap.createScaledBitmap(draw, 350, 490, true);
+                        canvas.drawBitmap(draw, left, 360.0f, null);
+                        left -= 370;
+                    }
+
+                    if (state.getP0Hand().size() > 4) {
+                        draw = BitmapFactory.decodeResource(getResources(), R.drawable.left_arrow_transparent);
+                        draw = Bitmap.createScaledBitmap(draw, 150, 150, true);
+                        canvas.drawBitmap(draw, 300.0f, 530.0f, null);
+                    }
+                } else if(state.getZoom() == 1){
+                    left = 1570;
+                    for (int i = 0; i < state.getTempList().size() && i < 4; i++) {
+                        draw = BitmapFactory.decodeResource(getResources(), state.getTempList().get(i).image);
+                        draw = Bitmap.createScaledBitmap(draw, 350, 490, true);
+                        canvas.drawBitmap(draw, left, 360.0f, null);
+                        left -= 370;
+                    }
+
+                    if (state.getTempList().size() > 4) {
+                        draw = BitmapFactory.decodeResource(getResources(), R.drawable.left_arrow_transparent);
+                        draw = Bitmap.createScaledBitmap(draw, 150, 150, true);
+                        canvas.drawBitmap(draw, 300.0f, 530.0f, null);
+                    }
                 }
             }
         }

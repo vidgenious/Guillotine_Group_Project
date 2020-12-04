@@ -62,6 +62,7 @@ public class GuillotineState extends GameState {
     private boolean scarletInPlay = false; //checks if the scarlet card is in play
     private Card temp; //temporary card that will be use for swapping elements
     private ArrayList<Card> tempList = new ArrayList<Card>(); //temporary arraylist that is used for array list operations
+    private int zoom;
 
     //point vars
     private boolean p0Count = false; //checks if player 0 has the count noble card
@@ -116,6 +117,7 @@ public class GuillotineState extends GameState {
         this.turnPhase = origin.turnPhase;
         this.begun = origin.begun;
         this.arrival = origin.arrival;
+        this.zoom = origin.zoom;
 
         this.p1Hand = new ArrayList<Card>();
         for (Card c : origin.p1Hand) {
@@ -402,6 +404,12 @@ public class GuillotineState extends GameState {
 
     public boolean getArrival() {return this.arrival;}
 
+    public int getZoom() {return this.zoom;}
+
+    public ArrayList<Card> getTempList() {
+        return this.tempList;
+    }
+
     /**
      * setter method for the number of days
      * @param dayNum int value that represent the new game day
@@ -437,6 +445,8 @@ public class GuillotineState extends GameState {
      * @param choice int value that represents the second choice
      */
     public void setChoice2(int choice){ this.choice2 = choice;}
+
+    public void setZoom(int zoom){this.zoom = zoom;}
 
 
     /*
@@ -808,6 +818,12 @@ public class GuillotineState extends GameState {
         return true;
     }
 
+    public boolean moveThroughLine(){
+        tempList.add(tempList.get(0));
+        tempList.remove(0);
+        return true;
+    }
+
     /**
      * This method goes through the p0field
      *
@@ -827,6 +843,15 @@ public class GuillotineState extends GameState {
     public boolean moveThroughP1Field(){
         p1Field.add(p1Field.get(0));
         p1Field.remove(0);
+        return true;
+    }
+
+    /**
+     * Clones the noble line into a temp
+     * @return always returns true
+     */
+    public boolean cloneLine() {
+        tempList = (ArrayList<Card>) nobleLine.clone();
         return true;
     }
 
