@@ -1151,7 +1151,7 @@ public class GuillotineState extends GameState {
                     //collect another noble from front of line after collecting this noble
                 case "Fast_Noble":
                     this.actionCardPlayed = true;
-                    if(!this.nobleLine.isEmpty() && this.nobleLine.size() > 1) {
+                    if((!this.nobleLine.isEmpty()) && this.nobleLine.size() > 1) {
                         if (this.playerTurn == 0) {
                             p0Field.add(nobleLine.get(1));
                             nobleLine.remove(1);
@@ -1225,7 +1225,7 @@ public class GuillotineState extends GameState {
                     //sets it to be last card in line
                 case "Spy":
                     this.actionCardPlayed = true;
-                    if(!nobleLine.isEmpty()) {
+                    if(nobleLine.size() > 0) {
                         for (int i = 0; i < nobleLine.size(); i++) {
                             if (nobleLine.get(i).id.equals("Spy") && i != 0) {
                                 temp = nobleLine.get(i);
@@ -1316,7 +1316,9 @@ public class GuillotineState extends GameState {
                     //after this card is played, the day ends and all noble in line are discarded
                 case "Robespierre":
                     this.actionCardPlayed = true;
-                    discardRemainingNobles();
+                    if(nobleLine.size() > 1) {
+                        discardRemainingNobles();
+                    }
                     this.actionCardPlayed = false;
                     break;
 
@@ -1341,7 +1343,8 @@ public class GuillotineState extends GameState {
 
 
             }
-        } else {
+        }
+        else {
             switch (card.getId()) {
 
                 // put noble at front of line into other players field
@@ -1355,7 +1358,8 @@ public class GuillotineState extends GameState {
                                 this.p0Hand.remove(i);
                             }
                         }
-                    } else {
+                    }
+                    else {
                         getNoble(this.p0Field);
                         for (int i = 0; i < this.p1Hand.size(); i++) {
                             if (this.p1Hand.get(i).getId().equals("After_You")) {
@@ -2145,13 +2149,14 @@ public class GuillotineState extends GameState {
                 case "Lack_Faith":
                     this.actionCardPlayed = true;
 
-                    for (int i = 0; i < this.nobleLine.size(); i++) {
-                        if (this.nobleLine.get(i).cardColor.equals("Blue")) {
-                            moveNoble(i, 0);
-                            break;
+                    if(nobleLine.size() > 0) {
+                        for (int i = 0; i < this.nobleLine.size(); i++) {
+                            if (this.nobleLine.get(i).cardColor.equals("Blue")) {
+                                moveNoble(i, 0);
+                                break;
+                            }
                         }
                     }
-
                     if (this.playerTurn == 0) {
                         for (int i = 0; i < this.p0Hand.size(); i++) {
                             if (this.p0Hand.get(i).getId().equals("Lack_Faith")) {
