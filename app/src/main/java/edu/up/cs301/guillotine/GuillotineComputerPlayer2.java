@@ -36,17 +36,15 @@ public class GuillotineComputerPlayer2 extends GameComputerPlayer {
 
         //check if player is position 1
         if(this.playerNum == 1){
-
-        for (int k = 0; k < gameState.getP1Hand().size(); k++) {
-            if (gameState.getP1Hand().get(k).getId().equals("Scarlet")) {
-                this.hasScarlet = true;
-            }
-        }
-
         //code for if AI is player 1
         if (gameState.getPlayerTurn() == 1) {
             if (gameState.getTurnPhase() == 0) {
 
+                for (int k = 0; k < gameState.getP1Hand().size(); k++) {
+                    if (gameState.getP1Hand().get(k).getId().equals("Scarlet")) {
+                        this.hasScarlet = true;
+                    }
+                }
 
                 int actionPos = 0;
                 int play = rand.nextInt(2);
@@ -167,17 +165,15 @@ public class GuillotineComputerPlayer2 extends GameComputerPlayer {
 
         //for when AI is position 0
         else{
-            for (int k = 0; k < gameState.getP0Hand().size(); k++) {
-                if (gameState.getP0Hand().get(k).getId().equals("Scarlet")) {
-                    this.hasScarlet = true;
-                }
-            }
-
             //code for if AI is player 0
             if (gameState.getPlayerTurn() == 0) {
                 if (gameState.getTurnPhase() == 0) {
 
-
+                    for (int k = 0; k < gameState.getP0Hand().size(); k++) {
+                        if (gameState.getP0Hand().get(k).getId().equals("Scarlet")) {
+                            this.hasScarlet = true;
+                        }
+                    }
                     int actionPos = 0;
                     int play = rand.nextInt(2);
                     int pos = rand.nextInt(gameState.getP0Hand().size());

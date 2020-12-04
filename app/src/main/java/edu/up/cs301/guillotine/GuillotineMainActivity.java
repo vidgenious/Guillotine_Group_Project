@@ -67,6 +67,12 @@ import edu.up.cs301.game.GameFramework.gameConfiguration.GamePlayerType;
  * Extra Functionality:
  *      Ability to zoom in on the hand
  *      Ability to zoom in on the noble line
+ *
+ * Bugs:
+ *      There is a chance that the game crashes when it is the smart AI's turn to grab the last noble card
+ *      This has been seen to happen when last noble has an action
+ *      Some parameter changes have been implemented to stop this, but it is hard to know if
+ *      the bug fix fully worked. So far, the bug has not been recreated, but there is still a possibility it exists
  */
 
 
