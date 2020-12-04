@@ -117,9 +117,7 @@ public class GuillotineLocalGame extends LocalGame {
          //If the action is a collect noble action
         }
         else if (action instanceof NobleAction) {
-
-
-
+            
             //if the noble line is empty, the day is over
             if(gameState.getNobleLine().size() == 0){
                 for(int i = 0; i < 12; i++) {

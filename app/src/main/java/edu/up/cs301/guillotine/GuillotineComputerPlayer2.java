@@ -54,6 +54,7 @@ public class GuillotineComputerPlayer2 extends GameComputerPlayer {
                 int actionPos = 0;
                 int play = rand.nextInt(2);
                 int pos = rand.nextInt(gameState.getP1Hand().size());
+
                 //checks if it has the scarlet card and plays it if it has more points or if day is 3
                 if (hasScarlet && (gameState.getP1Score() - 5 > gameState.getP0Score() || gameState.getP1Score() > gameState.getP0Score() && gameState.getDayNum() == 3)) {
                     for (int k = 0; k < gameState.getP1Hand().size(); k++) {
@@ -97,13 +98,14 @@ public class GuillotineComputerPlayer2 extends GameComputerPlayer {
 
 
                 //AI randomly either plays an action card or skips
-                else if (play == 1 && gameState.getNobleLine().get(0).points < 3 && !gameState.getNobleLine().get(0).hasEffect && gameState.getNobleLine().size() > 0) {
+                else if (gameState.getNobleLine().size() > 0 && play == 1 && gameState.getNobleLine().get(0).points < 3 && !gameState.getNobleLine().get(0).hasEffect) {
 
 
                     game.sendAction(new PlayAction(this, pos));
 
                     gameState.setTurnPhase(1);
                 }
+
                 else {
                     game.sendAction(new SkipAction(this));
                     gameState.setTurnPhase(1);
@@ -227,7 +229,7 @@ public class GuillotineComputerPlayer2 extends GameComputerPlayer {
 
 
                     //AI randomly either plays an action card or skips
-                    else if (play == 1 && gameState.getNobleLine().get(0).points < 3 && !gameState.getNobleLine().get(0).hasEffect) {
+                    else if (gameState.getNobleLine().size() > 0 && play == 1 && gameState.getNobleLine().get(0).points < 3 && !gameState.getNobleLine().get(0).hasEffect) {
 
 
                         game.sendAction(new PlayAction(this, pos));
