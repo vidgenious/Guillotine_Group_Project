@@ -527,17 +527,7 @@ public class GuillotineState extends GameState {
             if(turnPhase == 1){
                 turnPhase = 2;
             }
-
-//            if (this.nobleLine.isEmpty()) {
-//                endDay();
-//            } else {
-//                if (this.actionCardPlayed) {
-//                    return true;
-//                } else {
-//                    this.turnPhase++;
-//                    return true;
-//                }
-//
+            
         }
 
 
