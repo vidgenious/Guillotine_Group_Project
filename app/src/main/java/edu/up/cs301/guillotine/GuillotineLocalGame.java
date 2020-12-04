@@ -128,6 +128,8 @@ public class GuillotineLocalGame extends LocalGame {
                 gameState.setDayNum(gameState.getDayNum()+1);
                 gameState.setTurnPhase(0);
             }
+
+
                 //Depending on which player it is, that player gets the noble card
                 if (gameState.getPlayerTurn() == 0) {
                     gameState.getNoble(gameState.getP0Field());
@@ -135,6 +137,8 @@ public class GuillotineLocalGame extends LocalGame {
                 else if (gameState.getPlayerTurn() == 1) {
                     gameState.getNoble(gameState.getP1Field());
                 }
+
+
             //if the noble line is empty, the day is over
             if(gameState.getNobleLine().size() == 0){
                 for(int i = 0; i < 12; i++) {
