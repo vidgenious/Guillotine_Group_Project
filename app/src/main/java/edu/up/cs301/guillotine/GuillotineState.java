@@ -37,7 +37,7 @@ public class GuillotineState extends GameState {
     private int lastFirstPlayer; //holds the player who went last
     private int currFirstPlayer; //holds the player who went first
     private int turnPhase; //holds the current turn phase
-    private boolean begun; //checks if ?
+    private boolean begun; //checks if game has begun
     private ArrayList<Card> p1Hand; //holds the contents of player 1's hand
     private ArrayList<Card> p1Field; //holds the contents of player 1's field
     private ArrayList<Card> p0Hand; //holds the contents of player 0's hand
@@ -49,7 +49,8 @@ public class GuillotineState extends GameState {
     private boolean actionCardPlayed; //checks if an action card was played
     private int choice1; //holds the first choice location
     private int choice2; //holds the second choice location
-    private boolean arrival; //holds xyz
+    private int tempTurn; //holds temporary turn
+    private boolean arrival; //holds whether late_arrival has been played
 
     //Variables that are not used outside of a single call
     private boolean gameStart = false; //checks if the game has started
@@ -820,28 +821,6 @@ public class GuillotineState extends GameState {
     public boolean moveThroughLine(){
         tempList.add(tempList.get(0));
         tempList.remove(0);
-        return true;
-    }
-
-    /**
-     * This method goes through the p0field
-     *
-     * @return always returns true
-     */
-    public boolean moveThroughP0Field(){
-        p0Field.add(p0Field.get(0));
-        p0Field.remove(0);
-        return true;
-    }
-
-    /**
-     * This method goes through the p1field
-     *
-     * @return always returns true
-     */
-    public boolean moveThroughP1Field(){
-        p1Field.add(p1Field.get(0));
-        p1Field.remove(0);
         return true;
     }
 

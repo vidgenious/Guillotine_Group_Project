@@ -172,13 +172,7 @@ public class GuillotineLocalGame extends LocalGame {
         }else if(action instanceof HandMoveAction) {
             gameState.moveThroughHand();
 
-        }else if(action instanceof P0MoveAction) {
-            gameState.moveThroughP0Field();
-
-        } else if(action instanceof P1MoveAction) {
-            gameState.moveThroughP1Field();
-
-        } else if(action instanceof LackMoveAction) {
+        }else if(action instanceof LackMoveAction) {
             gameState.moveThroughLack();
 
         } else if(action instanceof  RatMoveAction) {
