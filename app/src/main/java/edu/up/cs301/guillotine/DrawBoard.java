@@ -580,8 +580,8 @@ public class DrawBoard extends FlashSurfaceView {
                         draw = Bitmap.createScaledBitmap(draw, 150, 150, true);
                         canvas.drawBitmap(draw, 300.0f, 530.0f, null);
                     }
-                }
-            }
-        }
-    }
-}
+                }//end else if zoom == 1
+            }//end if turnphase is 8
+        }//end else for if human is player 1
+    }//end onDraw
+}//end class
