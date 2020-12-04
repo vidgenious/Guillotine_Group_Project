@@ -753,7 +753,6 @@ public class GuillotineState extends GameState {
 
     }
 
-
     /**
      * This method lets players trade eah other the cards they have in hands.
      *
@@ -768,65 +767,6 @@ public class GuillotineState extends GameState {
             p0 = (ArrayList) p1.clone();
             p1 = (ArrayList) tempList.clone();
 
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * This method gets the card that the user clicks and keeps it.
-     *
-     * @param: user: Arraylist of user hand of cards
-     *      *
-     * @return always return false because it has to be checked by another method.
-     */
-    public boolean rearrangeFirstFour() {
-        if (this.nobleLine.size() > 5) {
-            //again idk what system we are using so finding the first 5 cards will be different for lists or arrays
-            for (int i = 0; i < 4; i++) {
-                tempList.add(this.nobleLine.get(0));
-                this.nobleLine.remove(0);
-            }
-            Collections.shuffle(tempList);
-            for (int k = 0; k < 4; k++) {
-                this.nobleLine.add(tempList.get(0));
-                tempList.remove(0);
-            }
-            return true;
-        }
-        return false;
-    }
-
-
-    /**
-     * This method removes the desired card from enemy player and puts it in the player who called this method
-     *
-     * @param: taker: Arraylist of cards of the player who called this method.
-     * @param: victim: Arraylist of cards of enemy player
-     * @param: desiredcard: a card a player who called this method wants to pick from the enemy player deck
-     *
-     * @return always return false because it has to be checked by another method.
-     */
-    public boolean takeNoble(ArrayList taker, ArrayList victim, Card desiredcard) {
-        if (victim.contains(desiredcard)) {
-            victim.remove(desiredcard);
-            taker.add(desiredcard);
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * This method gets the card that the user clicks and keeps it.
-     *
-     * @param: user: Arraylist of user hand of cards
-     *      *
-     * @return always return false because it has to be checked by another method.
-     */
-    public boolean takeDiscardCard(ArrayList user) {
-        if (!this.deckDiscard.isEmpty()) {
-            //enlarge one card, let user switch inebtween which one is enlarged and they can click a button to get that card
-            //noidea
             return true;
         }
         return false;
@@ -1182,109 +1122,6 @@ public class GuillotineState extends GameState {
     }
 
     /**
-     * This method lets user see enemy hand, chosen card then gets added to user's hand and removed from enemy hand
-     *
-     * @param: Phand: Arraylist of user hand of cards
-     * @param: enemyhand: Arraylist  of enemy player hand of cards
-     * @param : card: card to be choosen from the enemy player hand
-     *
-     * @return always return false because it has to be checked by another method.
-     */
-    public boolean chooseCard(ArrayList Phand, ArrayList enemyhand, Card card) {
-        if (enemyhand.contains(card)) {
-            //lets user see enemy hand, chosen card then gets added to user's hand and removed from enemy hand
-            enemyhand.remove(card);
-            Phand.add(card);
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * This method puts 3 noble cards in user field in pos 0, 1, 2
-     * user then selects the one they want and the others are put in back in deck
-     *
-     * @param: user: Arraylist of user hand of cards
-     *
-     * @return always return false because it has to be checked by another method.
-     */
-
-    public boolean topThreeCards(ArrayList user) {
-        //puts 3 noble cards in user field in pos 0, 1, 2
-        //user then selects the one they want and the others are put in back in deck
-        if (!this.deckNoble.isEmpty()) {
-            user.add(0, this.deckNoble.get(0));
-            user.add(1, this.deckNoble.get(1));
-            user.add(2, this.deckNoble.get(2));
-            chooseCard(user);
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * This method gets the card that the user clicks and keeps it.
-     *
-     * @param: user: Arraylist of user hand of cards
-     *
-     * @return always return false because it has to be checked by another method.
-     */
-    public boolean chooseCard(ArrayList user) {
-        if (choice1 == 0) {
-            user.remove(2);
-            user.remove(1);
-            this.deckDiscard.add(this.deckNoble.get(0));
-            this.deckNoble.remove(0);
-        } else if (choice2 == 1) {
-            user.remove(2);
-            user.remove(0);
-            this.deckDiscard.add(this.deckNoble.get(1));
-            this.deckNoble.remove(1);
-        } else {
-            user.remove(1);
-            user.remove(2);
-            this.deckDiscard.add(this.deckNoble.get(2));
-            this.deckNoble.remove(2);
-        }
-        return false;
-    }
-
-    /**
-     * This method checks if player has the card, if they do, it removes the card
-     *
-     * @param: hand: Arraylist of user hand of cards
-     * @param : card: card to be choosen from the enemy player hand
-     *
-     * @return always return false because it has to be checked by another method.
-     */
-    public boolean discardNoble(ArrayList hand, Card card) {
-        if (hand.contains(card)) {
-            hand.remove(card);
-            return true;
-        }
-        return false;
-    }
-
-
-    /**
-     * This method place the noble card from the noble line and place it in the player's field.
-     *
-     * @param: playerField: Arraylist of cards in the player's field
-     *
-     * @return always return true because it has to be checked by another method.
-     */
-    public boolean placeNoble(ArrayList playerField) {
-        //check if card is first noble, then check if player exists
-        //add card to player's hand
-        playerField.add(this.nobleLine.get(0));
-        this.nobleLine.remove(0);
-        //remove card from noble line
-        return true;
-
-    }
-
-
-    /**
      * This method removes card from array of cards, then make everycard's location in bewteen
      * nobleCardLocation and newLocation have their location +1, then put the card in newLocation
      *
@@ -1420,7 +1257,7 @@ public class GuillotineState extends GameState {
                 case "Spy":
                     this.actionCardPlayed = true;
                     for(int i = 0; i < nobleLine.size(); i++){
-                        if(nobleLine.get(i).id.equals("Spy")){
+                        if(nobleLine.get(i).id.equals("Spy") && i != 0){
                             temp = nobleLine.get(i);
                             nobleLine.remove(i);
                             nobleLine.add(temp);

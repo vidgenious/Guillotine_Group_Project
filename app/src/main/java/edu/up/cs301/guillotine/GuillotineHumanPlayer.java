@@ -403,10 +403,20 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
             return;
         }
 
+        //sets the state var to the guillotine state object
+        //calls on the board with current guillotine state and gives board player names and nums
         this.state = (GuillotineState)info;
         board.setPlayerHuman(this.playerNum);
+        board.setHumanName(this.allPlayerNames[this.playerNum]);
+        if(this.playerNum == 0){
+            board.setAIName(this.allPlayerNames[1]);
+        }
+        else{
+            board.setAIName(this.allPlayerNames[0]);
+        }
         board.setState(state);
         board.invalidate();
+
     }
 
     /**
