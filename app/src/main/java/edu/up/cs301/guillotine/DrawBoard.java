@@ -29,6 +29,8 @@ public class DrawBoard extends FlashSurfaceView {
     private Paint black = new Paint(); //black paint that will be used
     private Paint choice = new Paint(); //color for the choice pop-ups
     private int playerHuman; //holds the information of human player location
+    private String humanName; //holds the string of the human name
+    private String aiName; //holds the string of the AI name
 
     /**
      * constructor for draw board
@@ -61,6 +63,18 @@ public class DrawBoard extends FlashSurfaceView {
     public void setPlayerHuman(int human){this.playerHuman = human;}
 
     /**
+     * this sets the humanName String to equal the human player name
+     * @param name String of human player name
+     */
+    public void setHumanName(String name){this.humanName = name;}
+
+    /**
+     *  this sets the aiName string to equal the ai player name
+     * @param name String of AI player name
+     */
+    public void setAIName(String name){this.aiName = name;}
+
+    /**
      * this method draws the entire board by using the information from playerHuman and state
      * always draws the human player hand and field at the bottom of the board
      * @param canvas canvas that will be drawn on
@@ -74,22 +88,34 @@ public class DrawBoard extends FlashSurfaceView {
             return;
         }
 
+        //text for accept and skip buttons
         canvas.drawRect(10.0f, 970.0f, 170.0f, 1070.0f, grey);
         canvas.drawText("Skip", 30.0f,1030.0f, black);
         canvas.drawRect(10.0f, 860.0f, 170.0f, 960.0f, grey);
         canvas.drawText("Accept", 10.0f,930.0f, black);
 
         grey.setTextSize(50.0f);
-        canvas.drawText("Day: " + state.getDayNum(), 10.0f, 400.0f, grey);
-        canvas.drawText("Player 1: " + state.getP1Score(), 10.0f, 200.0f, grey);
-        canvas.drawText("Player 0: " + state.getP0Score(), 10.0f, 300.0f, grey);
+        //text for the card decks
+        if(!state.getDeckDiscard().isEmpty()) {
+            canvas.drawText("Discard Deck", 130.0f, 650.0f, grey);
+        }
+        if(!state.getDeckNoble().isEmpty()){
+            canvas.drawText("Noble Deck", 130.0f, 800.0f, grey);
+        }
+        if(!state.getDeckAction().isEmpty()){
+            canvas.drawText("Action Deck", 130.0f, 500.0f, grey);
+        }
 
-
-        grey.setTextSize(50.0f);
         canvas.drawText("GUILLOTINE GAME ", 10.0f, 100.0f, grey);
 
         //check if human is player 0
         if(playerHuman == 0) {
+
+            //text for the days and players names
+            canvas.drawText("Day: " + state.getDayNum(), 10.0f, 400.0f, grey);
+            canvas.drawText(this.aiName + ": " + state.getP1Score(), 10.0f, 200.0f, grey);
+            canvas.drawText(this.humanName + ": " + state.getP0Score(), 10.0f, 300.0f, grey);
+
             if(state.getTurnPhase() == 0 || state.getTurnPhase() == 1 || state.getTurnPhase() == 2){
                 //Maximize Hand Symbol
                 draw = BitmapFactory.decodeResource(getResources(), R.drawable.plus);
@@ -299,6 +325,12 @@ public class DrawBoard extends FlashSurfaceView {
 
         //for when human is player 1
         else{
+
+            //text for the days and players names
+            canvas.drawText("Day: " + state.getDayNum(), 10.0f, 400.0f, grey);
+            canvas.drawText(this.aiName + ": " + state.getP0Score(), 10.0f, 200.0f, grey);
+            canvas.drawText(this.humanName + ": " + state.getP1Score(), 10.0f, 300.0f, grey);
+
             if(state.getTurnPhase() == 0 || state.getTurnPhase() == 1 || state.getTurnPhase() == 2){
                 //Maximize Hand Symbol
                 draw = BitmapFactory.decodeResource(getResources(), R.drawable.plus);
