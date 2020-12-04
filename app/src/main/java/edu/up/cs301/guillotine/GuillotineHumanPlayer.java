@@ -67,24 +67,10 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
             int y = (int) event.getY();
 
             boolean handArrow = handArrow(x, y);
-            boolean p0Arrow = p0FieldArrow(x, y);
-            boolean p1Arrow = p1FieldArrow(x, y);
 
             //check if hand arrow is pressed
             if (handArrow) {
                 HandMoveAction action = new HandMoveAction(this);
-                game.sendAction(action);
-            }
-
-            //check if p0 arrow is pressed
-            if (p0Arrow) {
-                P0MoveAction action = new P0MoveAction(this);
-                game.sendAction(action);
-            }
-
-            //check if p1 arrow is pressed
-            if (p1Arrow) {
-                P1MoveAction action = new P1MoveAction(this);
                 game.sendAction(action);
             }
 
@@ -128,7 +114,7 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
 
                 int cardPos = lineCard(x, y);
 
-                if (cardPos > -1 && !(cardPos + 1 > state.getNobleLine().size())) {
+                if (cardPos > -1 && !(cardPos >= state.getNobleLine().size())) {
                     ChooseAction action = new ChooseAction(this, cardPos, 1);
                     game.sendAction(action);
                 }
@@ -232,24 +218,10 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
                 int y = (int) event.getY();
 
                 boolean handArrow = handArrow(x, y);
-                boolean p0Arrow = p0FieldArrow(x, y);
-                boolean p1Arrow = p1FieldArrow(x, y);
 
                 //check if hand arrow is pressed
                 if (handArrow) {
                     HandMoveAction action = new HandMoveAction(this);
-                    game.sendAction(action);
-                }
-
-                //check if p0 arrow is pressed
-                if (p0Arrow) {
-                    P1MoveAction action = new P1MoveAction(this);
-                    game.sendAction(action);
-                }
-
-                //check if p1 arrow is pressed
-                if (p1Arrow) {
-                    P0MoveAction action = new P0MoveAction(this);
                     game.sendAction(action);
                 }
 
@@ -292,7 +264,7 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
 
                     int cardPos = lineCard(x, y);
 
-                    if (cardPos > -1 && !(cardPos + 1 > state.getNobleLine().size())) {
+                    if (cardPos > -1 && !(cardPos >= state.getNobleLine().size())) {
                         ChooseAction action = new ChooseAction(this, cardPos, 1);
                         game.sendAction(action);
                     }
@@ -494,20 +466,6 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
 
     private boolean handArrow(int x, int y){
         if(x > 240 && x < 310 && y > 880 && y < 950){
-            return true;
-        }
-        return false;
-    }
-
-    private boolean p0FieldArrow(int x, int y){
-        if(x > 250 && x < 300 && y > 675 && y < 725){
-            return true;
-        }
-        return false;
-    }
-
-    private boolean p1FieldArrow(int x, int y){
-        if(x > 250 && x < 300 && y > 175 && y < 225){
             return true;
         }
         return false;

@@ -152,20 +152,6 @@ public class DrawBoard extends FlashSurfaceView {
                 canvas.drawBitmap(draw, 250.0f, 890.0f, null);
             }
 
-            //p0field arrow
-            if (state.getP0Field().size() > 12) {
-                draw = BitmapFactory.decodeResource(getResources(), R.drawable.left_arrow_transparent);
-                draw = Bitmap.createScaledBitmap(draw, 50, 50, true);
-                canvas.drawBitmap(draw, 300.0f, 675.0f, null);
-            }
-
-            //p1field arrow
-            if (state.getP1Field().size() > 12) {
-                draw = BitmapFactory.decodeResource(getResources(), R.drawable.left_arrow_transparent);
-                draw = Bitmap.createScaledBitmap(draw, 50, 50, true);
-                canvas.drawBitmap(draw, 300.0f, 175.0f, null);
-            }
-
             //Draws the P0 Hand cards on the UI
             float left = 1700;
             for (int i = 0; i < state.getP0Hand().size() && i < 7; i++) {
@@ -399,20 +385,6 @@ public class DrawBoard extends FlashSurfaceView {
                 draw = BitmapFactory.decodeResource(getResources(), R.drawable.left_arrow_transparent);
                 draw = Bitmap.createScaledBitmap(draw, 100, 100, true);
                 canvas.drawBitmap(draw, 250.0f, 890.0f, null);
-            }
-
-            //p1field arrow
-            if (state.getP1Field().size() > 12) {
-                draw = BitmapFactory.decodeResource(getResources(), R.drawable.left_arrow_transparent);
-                draw = Bitmap.createScaledBitmap(draw, 50, 50, true);
-                canvas.drawBitmap(draw, 300.0f, 675.0f, null);
-            }
-
-            //p0field arrow
-            if (state.getP0Field().size() > 12) {
-                draw = BitmapFactory.decodeResource(getResources(), R.drawable.left_arrow_transparent);
-                draw = Bitmap.createScaledBitmap(draw, 50, 50, true);
-                canvas.drawBitmap(draw, 300.0f, 175.0f, null);
             }
 
             //Draws the P1 Hand cards on the UI
