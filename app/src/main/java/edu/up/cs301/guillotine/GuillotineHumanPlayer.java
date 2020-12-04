@@ -406,7 +406,12 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
         board.setState(state);
 
     }
-
+    /**
+     * dimensions of the hand of cards on the GUI
+     *
+     * @param int x: position of the card
+     *            int y: position of the card
+     */
     private int handCard(int x, int y){
         if(x > 1700 && x < 1900 && y > 800 && y < 1080){
             return 0;
@@ -426,6 +431,12 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
         return -1;
     }
 
+    /**
+     * dimentions of the line card on the screen
+     *
+     * @param int x: position of the card
+     *            int y: position of the card
+     */
     private int lineCard(int x, int y){
         if(x > 1700 && x < 1900 && y > 350 && y < 630){
             return 0;
@@ -461,7 +472,12 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
         return -1;
     }
 
-
+    /**
+     * dimensions of the hand arrow on the UI
+     *
+     * @param int x: position of the card
+     *            int y: position of the card
+     */
 
 
     private boolean handArrow(int x, int y){
@@ -470,6 +486,12 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
         }
         return false;
     }
+    /**
+     * dimensions of the choice arrow on the GUI
+     *
+     * @param int x: x-position of the arrow
+     *            int y: y-position of the arrow
+     */
 
     private boolean choiceArrow(int x, int y){
         if(x > 300 && x < 450 && y > 530 && y < 680){
@@ -477,6 +499,13 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
         }
         return false;
     }
+
+    /**
+     * dimensions of the zoom feature on the GUI
+     *
+     * @param int x: x-position of the arrow
+     *            int y: y-position of the arrow
+     */
 
     private int zoom(int x, int y){
         if(x > 1550.0f && x < 1800.0f && y > 40 && y < 190){
@@ -488,7 +517,12 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
         return -1;
     }
 
-
+    /**
+     * dimensions of accept button on the GUI
+     *
+     * @param int x: x-position of button
+     *            int y: y-position of the button
+     */
     private boolean acceptButton(int x, int y){
         if(x > 10 && x < 170 && y > 860 && y < 960){
             return true;
@@ -496,6 +530,12 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
         return false;
     }
 
+    /**
+     * dimensions of skip button on the GUI
+     *
+     * @param int x: x-position of button
+     *            int y: y-position of the button
+     */
     private boolean skipButton(int x, int y){
         if(x > 10 && x < 170 && y > 970 && y < 1070){
             return true;
@@ -503,6 +543,12 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
         return false;
     }
 
+    /**
+     * dimensions of Choice 2 on the GUI
+     *
+     * @param int x: x-position of 2 choice
+     *            int y: y-position 2 choice
+     */
     private int twoChoice(int x, int y){
         if(x > 0 && x < 1000 && y > 0 && y < 1100){
             return 1;
@@ -513,6 +559,12 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
         return -1;
     }
 
+    /**
+     * dimensions of Choice 3 on the GUI
+     *
+     * @param int x: x-position of 3 choice
+     *            int y: y-position 3 choice
+     */
     private int threeChoice(int x, int y){
         if(x > 0 && x < 667 && y > 0 && y < 1100){
             return 1;
@@ -526,6 +578,13 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
 
         return -1;
     }
+
+    /**
+     * dimensions of Choice 4 on the GUI
+     *
+     * @param int x: x-position of 4 choice
+     *            int y: y-position 4 choice
+     */
 
     private int fourChoice(int x, int y){
         if(x > 1570 && x < 1920 && y > 360 && y < 850){
