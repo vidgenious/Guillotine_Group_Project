@@ -62,8 +62,12 @@ public class GuillotineComputerPlayer1 extends GameComputerPlayer {
 
 
                     game.sendAction(new PlayAction(this, pos));
-                } else {
+
+                    gameState.setTurnPhase(1);
+                }
+                else {
                     game.sendAction(new SkipAction(this));
+                    gameState.setTurnPhase(1);
 
                 }
             }
@@ -83,24 +87,28 @@ public class GuillotineComputerPlayer1 extends GameComputerPlayer {
                 ChooseAction action = new ChooseAction(this, pos, 1);
                 game.sendAction(action);
 
-            } else if (gameState.getTurnPhase() == 4) {
+            }
+            else if (gameState.getTurnPhase() == 4) {
                 int chos = rand.nextInt(2) + 1;
 
                 ChooseAction action = new ChooseAction(this, chos, 2);
                 game.sendAction(action);
 
-            } else if (gameState.getTurnPhase() == 5) {
+            }
+            else if (gameState.getTurnPhase() == 5) {
                 int chos = rand.nextInt(3) + 1;
 
                 ChooseAction action = new ChooseAction(this, chos, 2);
                 game.sendAction(action);
 
-            } else if (gameState.getTurnPhase() == 6) {
+            }
+            else if (gameState.getTurnPhase() == 6) {
                 int chos = rand.nextInt(4) + 1;
 
                 ChooseAction action = new ChooseAction(this, chos, 1);
                 game.sendAction(action);
-            } else if (gameState.getTurnPhase() == 7) {
+            }
+            else if (gameState.getTurnPhase() == 7) {
                 int chos = rand.nextInt(gameState.getDeckDiscard().size());
 
 
@@ -131,7 +139,8 @@ public class GuillotineComputerPlayer1 extends GameComputerPlayer {
                         game.sendAction(new PlayAction(this, pos));
 
                         gameState.setTurnPhase(1);
-                    } else {
+                    }
+                    else {
                         game.sendAction(new SkipAction(this));
                         gameState.setTurnPhase(1);
 
@@ -153,24 +162,28 @@ public class GuillotineComputerPlayer1 extends GameComputerPlayer {
                     ChooseAction action = new ChooseAction(this, pos, 1);
                     game.sendAction(action);
 
-                } else if (gameState.getTurnPhase() == 4) {
+                }
+                else if (gameState.getTurnPhase() == 4) {
                     int chos = rand.nextInt(2) + 1;
 
                     ChooseAction action = new ChooseAction(this, chos, 2);
                     game.sendAction(action);
 
-                } else if (gameState.getTurnPhase() == 5) {
+                }
+                else if (gameState.getTurnPhase() == 5) {
                     int chos = rand.nextInt(3) + 1;
 
                     ChooseAction action = new ChooseAction(this, chos, 2);
                     game.sendAction(action);
 
-                } else if (gameState.getTurnPhase() == 6) {
+                }
+                else if (gameState.getTurnPhase() == 6) {
                     int chos = rand.nextInt(4) + 1;
 
                     ChooseAction action = new ChooseAction(this, chos, 1);
                     game.sendAction(action);
-                } else if (gameState.getTurnPhase() == 7) {
+                }
+                else if (gameState.getTurnPhase() == 7) {
                     int chos = rand.nextInt(gameState.getDeckDiscard().size());
 
 

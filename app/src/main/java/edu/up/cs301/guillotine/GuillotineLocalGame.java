@@ -62,12 +62,13 @@ public class GuillotineLocalGame extends LocalGame {
                 int cardPlayed = -1;
 
                 //For loop to find the card selected in the hand
-                for (int i = 0; i < gameState.getP0Hand().size(); i++) {
-                    if (i == ((PlayAction) action).getPos()) {
-                        cardPlayed = i;
-                        this.temp = gameState.getP0Hand().get(i);
+                    for (int i = 0; i < gameState.getP0Hand().size(); i++) {
+                        if (i == ((PlayAction) action).getPos()) {
+                            cardPlayed = i;
+                            this.temp = gameState.getP0Hand().get(i);
+                        }
                     }
-                }
+
 
                 //Calls the play action method in the state
                 gameState.playAction(gameState.getP0Hand(), cardPlayed);
