@@ -627,7 +627,7 @@ public class GuillotineState extends GameState {
     }
 
     /**
-     * This method deals action cards at end of turn
+     * This method deals noble cards
      * @param: This method takes no parameters.
      *
      * @return always return false because it has to be checked by another method.

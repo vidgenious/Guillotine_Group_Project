@@ -118,7 +118,14 @@ public class GuillotineComputerPlayer2 extends GameComputerPlayer {
             //ai picks a second card
             else if (gameState.getTurnPhase() == 3) {
 
-                ChooseAction action = new ChooseAction(this, this.pos, 1);
+                ChooseAction action;
+
+                if(gameState.getNobleLine().size() > 0){
+                    action = new ChooseAction(this, this.pos, 1);
+                } else{
+                    action = new ChooseAction(this, 0, 1);
+                }
+
                 game.sendAction(action);
 
             }

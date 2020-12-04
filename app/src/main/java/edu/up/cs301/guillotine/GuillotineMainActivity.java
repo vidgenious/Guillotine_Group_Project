@@ -65,7 +65,8 @@ import edu.up.cs301.game.GameFramework.gameConfiguration.GamePlayerType;
  *      The player types are now interchangeable.
  *
  * Extra Functionality:
- *      Ability to zoom in on the hand and on the line.
+ *      Ability to zoom in on the hand
+ *      Ability to zoom in on the noble line
  */
 
 
