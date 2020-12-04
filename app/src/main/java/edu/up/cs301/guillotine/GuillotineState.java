@@ -96,6 +96,7 @@ public class GuillotineState extends GameState {
 
         this.actionCardPlayed = false;
 
+
         startGame();
     }
     //Deep copy constructor
@@ -169,6 +170,7 @@ public class GuillotineState extends GameState {
         for (Card c : origin.tempList) {
             this.tempList.add(c);
         }
+
     }
 
 
@@ -479,7 +481,9 @@ public class GuillotineState extends GameState {
             //check if p0 has shuffle
             if (shuffle0) {
                 if (this.playerTurn == 0) {
-                    Collections.shuffle(this.nobleLine);
+                    if(this.nobleLine.size() > 1) {
+                        Collections.shuffle(this.nobleLine);
+                    }
                     shuffle0 = false;
                 }
 
@@ -488,7 +492,9 @@ public class GuillotineState extends GameState {
             //check if p1 has shuffle
             else if (shuffle1) {
                 if (this.playerTurn == 1) {
-                    Collections.shuffle(this.nobleLine);
+                    if(this.nobleLine.size() > 1) {
+                        Collections.shuffle(this.nobleLine);
+                    }
                     shuffle1 = false;
                 }
             }
@@ -542,7 +548,7 @@ public class GuillotineState extends GameState {
             if(turnPhase == 1){
                 turnPhase = 2;
             }
-
+            return true;
         }
 
 
@@ -757,25 +763,6 @@ public class GuillotineState extends GameState {
         reciever.add(card);
         return true;
 
-    }
-
-    /**
-     * This method lets players trade eah other the cards they have in hands.
-     *
-     * @param: p0: Arraylist of cards of player 0
-     * @param: p1: Arraylist of cards of player 1
-     *
-     * @return returns false if a hand is null, returns true otherwise
-     */
-    public boolean tradeHands(ArrayList p0, ArrayList p1) {
-        if(p0 != null && p1 != null) {
-            tempList = (ArrayList) p0.clone();
-            p0 = (ArrayList) p1.clone();
-            p1 = (ArrayList) tempList.clone();
-
-            return true;
-        }
-        return false;
     }
 
     /**
@@ -1156,7 +1143,7 @@ public class GuillotineState extends GameState {
                     //collect another noble from front of line after collecting this noble
                 case "Fast_Noble":
                     this.actionCardPlayed = true;
-                    if(!this.nobleLine.isEmpty() && this.nobleLine.size() > 0) {
+                    if(!this.nobleLine.isEmpty() && this.nobleLine.size() > 1) {
                         if (this.playerTurn == 0) {
                             p0Field.add(nobleLine.get(1));
                             nobleLine.remove(1);
@@ -1377,7 +1364,7 @@ public class GuillotineState extends GameState {
                 case "Bribed":
                     this.actionCardPlayed = true;
 
-                    if(!nobleLine.isEmpty() || nobleLine.size() < 1) {
+                    if(!nobleLine.isEmpty() || nobleLine.size() < 2) {
                         moveNoble(0, this.nobleLine.size() - 1);
                     }
 
@@ -1607,7 +1594,7 @@ public class GuillotineState extends GameState {
                 case "Escape":
                     this.actionCardPlayed = true;
 
-                    if (this.playerTurn == 0 && !nobleLine.isEmpty()) {
+                    if (this.playerTurn == 0 && nobleLine.size() > 1) {
                         int rand1 = (int) (Math.random() * this.nobleLine.size());
                         this.deckDiscard.add(this.nobleLine.get(rand1));
                         this.nobleLine.remove(rand1);
@@ -1623,7 +1610,8 @@ public class GuillotineState extends GameState {
                                 this.p0Hand.remove(i);
                             }
                         }
-                    } else {
+                    }
+                    else {
                         for (int i = 0; i < this.p1Hand.size(); i++) {
                             if (this.p1Hand.get(i).getId().equals("Escape")) {
                                 this.deckDiscard.add(this.p1Hand.get(i));
@@ -2118,7 +2106,13 @@ public class GuillotineState extends GameState {
                 case "Info_Exchange":
                     this.actionCardPlayed = true;
 
-                    tradeHands(p0Hand, p1Hand);
+                    if(this.p0Hand != null && this.p1Hand != null) {
+                        tempList = (ArrayList) this.p0Hand.clone();
+                        this.p0Hand = (ArrayList) this.p1Hand.clone();
+                        this.p1Hand = (ArrayList) tempList.clone();
+
+                        return true;
+                    }
 
                     if (this.playerTurn == 0) {
                         for (int i = 0; i < this.p0Hand.size(); i++) {

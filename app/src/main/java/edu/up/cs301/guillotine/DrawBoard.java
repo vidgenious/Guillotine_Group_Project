@@ -135,13 +135,13 @@ public class DrawBoard extends FlashSurfaceView {
                 //Maximize Line Symbol
                 draw = BitmapFactory.decodeResource(getResources(), R.drawable.plus);
                 draw = Bitmap.createScaledBitmap(draw, 150, 150, true);
-                canvas.drawText("Zoom Line", 1300.0f, 40.0f, black);
+                canvas.drawText("Zoom Line", 1300.0f, 40.0f, grey);
                 canvas.drawBitmap(draw, 1350.0f, 40.0f, null);
             } else if (state.getTurnPhase() == 8){
                 //Minimize Line Symbol
                 draw = BitmapFactory.decodeResource(getResources(), R.drawable.minus);
                 draw = Bitmap.createScaledBitmap(draw, 150, 150, true);
-                canvas.drawText("Zoom Line", 1300.0f, 40.0f, black);
+                canvas.drawText("Zoom Line", 1300.0f, 40.0f, grey);
                 canvas.drawBitmap(draw, 1350.0f, 40.0f, null);
             }
 
