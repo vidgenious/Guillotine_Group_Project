@@ -94,7 +94,7 @@ public class DrawBoard extends FlashSurfaceView {
         canvas.drawRect(10.0f, 860.0f, 170.0f, 960.0f, grey);
         canvas.drawText("Accept", 10.0f,930.0f, black);
 
-        grey.setTextSize(50.0f);
+        grey.setTextSize(40.0f);
         //text for the card decks
         if(!state.getDeckDiscard().isEmpty()) {
             canvas.drawText("Discard Deck", 130.0f, 650.0f, grey);
@@ -106,6 +106,7 @@ public class DrawBoard extends FlashSurfaceView {
             canvas.drawText("Action Deck", 130.0f, 500.0f, grey);
         }
 
+        grey.setTextSize(50.0f);
         canvas.drawText("GUILLOTINE GAME ", 10.0f, 100.0f, grey);
 
         //check if human is player 0
