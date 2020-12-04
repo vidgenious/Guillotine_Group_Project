@@ -476,7 +476,7 @@ public class GuillotineState extends GameState {
     public boolean getNoble(ArrayList field) {
         if (this.turnPhase == 1 || this.actionCardPlayed) {
 
-
+            //check if p0 has shuffle
             if (shuffle0) {
                 if (this.playerTurn == 0) {
                     Collections.shuffle(this.nobleLine);
@@ -484,6 +484,8 @@ public class GuillotineState extends GameState {
                 }
 
             }
+
+            //check if p1 has shuffle
             else if (shuffle1) {
                 if (this.playerTurn == 1) {
                     Collections.shuffle(this.nobleLine);
@@ -491,19 +493,20 @@ public class GuillotineState extends GameState {
                 }
             }
 
+            //check for clown
             if (this.nobleLine.get(0).getId().equals("Clown")) {
-                if (this.playerTurn == 0) {
-                    placeClown(this.p1Field, this.nobleLine.get(0));
-                    this.nobleLine.remove(0);
-                } else {
-                    placeClown(this.p0Field, this.nobleLine.get(0));
-                    this.nobleLine.remove(0);
-                }
+                field.add(this.nobleLine.get(0));
+                this.nobleLine.remove(0);
+                acknowledgeCardAbility((Card) field.get(field.size() - 1));
+
             }
+
+            //else if card isnt clown
             else {
                 if (this.FS0 && this.playerTurn == 0) {
                     field.add(this.nobleLine.get(0));
                     this.nobleLine.remove(0);
+                    acknowledgeCardAbility((Card) field.get(field.size() - 1));
                     if (this.p0Field.get(p0Field.size() - 1).cardColor.equals("Purple")) {
                         actionCardPlayed = true;
                         dealActionCard(p0Hand);
@@ -513,6 +516,7 @@ public class GuillotineState extends GameState {
                 else if (this.FS1 && this.playerTurn == 1) {
                     p1Field.add(this.nobleLine.get(0));
                     this.nobleLine.remove(0);
+                    acknowledgeCardAbility((Card) field.get(field.size() - 1));
                     if (this.p1Field.get(p1Field.size() - 1).cardColor.equals("Purple")) {
                         actionCardPlayed = true;
                         dealActionCard(p1Hand);
@@ -528,11 +532,12 @@ public class GuillotineState extends GameState {
                     }
                     else {
                         field.add(this.nobleLine.get(0));
-                        acknowledgeCardAbility((Card) field.get(field.size() - 1));
                         this.nobleLine.remove(0);
+                        acknowledgeCardAbility((Card) field.get(field.size() - 1));
+
                     }
-                }
-            }
+                }//end else
+            }//end clown else
 
             if(turnPhase == 1){
                 turnPhase = 2;
