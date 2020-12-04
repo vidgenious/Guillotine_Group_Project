@@ -24,12 +24,17 @@ import edu.up.cs301.game.R;
  */
 public class DrawBoard extends FlashSurfaceView {
 
-    private GuillotineState state;
-    private Paint grey = new Paint();
-    private Paint black = new Paint();
-    private Paint choice = new Paint();
-    private int playerHuman;
+    private GuillotineState state; //holds the GuillotineState object
+    private Paint grey = new Paint(); //grey paint that will be used
+    private Paint black = new Paint(); //black paint that will be used
+    private Paint choice = new Paint(); //color for the choice pop-ups
+    private int playerHuman; //holds the information of human player location
 
+    /**
+     * constructor for draw board
+     * @param context
+     * @param attrs
+     */
     public DrawBoard(Context context, AttributeSet attrs) {
         super(context, attrs);
         setWillNotDraw(false);
@@ -41,12 +46,25 @@ public class DrawBoard extends FlashSurfaceView {
 
     }
 
+    /**
+     * this sets the private state variable to the parameter state
+     * @param state Guillotine state object that will be clone by this class
+     */
     public void setState(GuillotineState state) {
         this.state = state;
     }
 
+    /**
+     * this sets a private int to the parameter human in order to determine what position the human player is
+     * @param human int of human player position. IE, if human is player 0 or player 1
+     */
     public void setPlayerHuman(int human){this.playerHuman = human;}
 
+    /**
+     * this method draws the entire board by using the information from playerHuman and state
+     * always draws the human player hand and field at the bottom of the board
+     * @param canvas canvas that will be drawn on
+     */
     @Override
     public void onDraw(Canvas canvas) {
 
@@ -168,21 +186,21 @@ public class DrawBoard extends FlashSurfaceView {
             //And what action to take in each phase.
             if (state.getTurnPhase() == 0) {
                 canvas.drawText("Action Card Phase", 800.0f, 50.0f, grey);
-                canvas.drawText("click action card", 700.0f, 90.0f, grey);
+                canvas.drawText("Touch an action card", 800.0f, 115.0f, grey);
             }
 
             if (state.getTurnPhase() == 1) {
                 canvas.drawText("Take Noble Phase", 800.0f, 50.0f, grey);
 
-                canvas.drawText("Click accept", 700.0f, 90.0f, grey);
+                canvas.drawText("Touch accept button", 800.0f, 115.0f, grey);
             }
             if (state.getTurnPhase() == 2) {
                 canvas.drawText("Draw card Phase", 800.0f, 50.0f, grey);
-                canvas.drawText("Click card from the deck", 700.0f, 90.0f, grey);
+                canvas.drawText("Touch accept button", 800.0f, 115.0f, grey);
             }
             if (state.getTurnPhase() == 3) {
                 canvas.drawText("Select Noble in Line", 800.0f, 50.0f, grey);
-                canvas.drawText("click noble card", 700.0f, 90.0f, grey);
+                canvas.drawText("Touch noble card", 800.0f, 115.0f, grey);
             }
 
             if (state.getTurnPhase() == 4) {
@@ -346,21 +364,21 @@ public class DrawBoard extends FlashSurfaceView {
             //And what action to take in each phase.
             if (state.getTurnPhase() == 0) {
                 canvas.drawText("Action Card Phase", 800.0f, 50.0f, grey);
-                canvas.drawText("click action card", 700.0f, 90.0f, grey);
+                canvas.drawText("Touch an action card", 800.0f, 115.0f, grey);
             }
 
             if (state.getTurnPhase() == 1) {
                 canvas.drawText("Take Noble Phase", 800.0f, 50.0f, grey);
 
-                canvas.drawText("Click accept", 700.0f, 90.0f, grey);
+                canvas.drawText("Touch accept button", 800.0f, 115.0f, grey);
             }
             if (state.getTurnPhase() == 2) {
                 canvas.drawText("Draw card Phase", 800.0f, 50.0f, grey);
-                canvas.drawText("Click card from the deck", 700.0f, 90.0f, grey);
+                canvas.drawText("Touch accept button", 800.0f, 115.0f, grey);
             }
             if (state.getTurnPhase() == 3) {
                 canvas.drawText("Select Noble in Line", 800.0f, 50.0f, grey);
-                canvas.drawText("click noble card", 700.0f, 90.0f, grey);
+                canvas.drawText("Touch noble card", 800.0f, 115.0f, grey);
             }
 
             if (state.getTurnPhase() == 4) {
