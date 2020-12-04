@@ -162,7 +162,7 @@ public class GuillotineComputerPlayer2 extends GameComputerPlayer {
                 }
             }
 
-            //code for if AI is player 1
+            //code for if AI is player 0
             if (gameState.getPlayerTurn() == 0) {
                 if (gameState.getTurnPhase() == 0) {
 
