@@ -57,6 +57,11 @@ import edu.up.cs301.game.GameFramework.gameConfiguration.GamePlayerType;
  * action card
  * if the AI does not have specific cards, it will play a random action card to change the line
  * everything else it does it random
+ *
+ * If you try to move a card an amount of spaces that it cannot, the card is discarded and nothing happens.
+ * That is not a bug.
+ *
+ *
  */
 
 

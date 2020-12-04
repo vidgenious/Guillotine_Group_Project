@@ -89,8 +89,12 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
             }
 
             if(state.getTurnPhase() == 0 || state.getTurnPhase() == 1 || state.getTurnPhase() == 2){
-                if(zoom(x, y)){
-                    ZoomAction action = new ZoomAction(this);
+                if(zoom(x, y) == 0){
+                    ZoomAction action = new ZoomAction(this, 0);
+                    game.sendAction(action);
+                    return true;
+                } else if(zoom(x, y) == 1){
+                    ZoomAction action = new ZoomAction(this, 1);
                     game.sendAction(action);
                     return true;
                 }
@@ -168,12 +172,18 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
                 }
 
             } else if (state.getTurnPhase() == 8){
-                if(zoom(x, y)){
-                    ZoomAction action = new ZoomAction(this);
+                if(zoom(x, y) == 0){
+                    ZoomAction action = new ZoomAction(this, 0);
+                    game.sendAction(action);
+                } else if(zoom(x, y) == 1){
+                    ZoomAction action = new ZoomAction(this, 1);
                     game.sendAction(action);
                 }
-                if(choiceArrow(x, y)){
+                if(choiceArrow(x, y) && state.getZoom() == 0){
                     HandMoveAction action = new HandMoveAction(this);
+                    game.sendAction(action);
+                } else if(choiceArrow(x, y) && state.getZoom() == 1){
+                    LineMoveAction action = new LineMoveAction(this);
                     game.sendAction(action);
                 }
 
@@ -244,8 +254,12 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
                 }
 
                 if(state.getTurnPhase() == 0 || state.getTurnPhase() == 1 || state.getTurnPhase() == 2){
-                    if(zoom(x, y)){
-                        ZoomAction action = new ZoomAction(this);
+                    if(zoom(x, y) == 0){
+                        ZoomAction action = new ZoomAction(this, 0);
+                        game.sendAction(action);
+                        return true;
+                    } else if(zoom(x, y) == 1){
+                        ZoomAction action = new ZoomAction(this, 1);
                         game.sendAction(action);
                         return true;
                     }
@@ -322,12 +336,18 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
                     }
 
                 } else if (state.getTurnPhase() == 8){
-                    if(zoom(x, y)){
-                        ZoomAction action = new ZoomAction(this);
+                    if(zoom(x, y) == 0){
+                        ZoomAction action = new ZoomAction(this, 0);
+                        game.sendAction(action);
+                    } else if(zoom(x, y) == 1){
+                        ZoomAction action = new ZoomAction(this, 1);
                         game.sendAction(action);
                     }
-                    if(choiceArrow(x, y)){
+                    if(choiceArrow(x, y) && state.getZoom() == 0){
                         HandMoveAction action = new HandMoveAction(this);
+                        game.sendAction(action);
+                    } else if(choiceArrow(x, y) && state.getZoom() == 1){
+                        LineMoveAction action = new LineMoveAction(this);
                         game.sendAction(action);
                     }
 
@@ -425,30 +445,36 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
     }
 
     private int lineCard(int x, int y){
-        if(x > 1800 && x < 1900 && y > 350 && y < 630){
+        if(x > 1700 && x < 1900 && y > 350 && y < 630){
             return 0;
-        } else if(x > 1700 && x < 1800 && y > 350 && y < 630){
-            return 1;
         } else if(x > 1600 && x < 1700 && y > 350 && y < 630){
-            return 2;
+            return 1;
         } else if(x > 1500 && x < 1600 && y > 350 && y < 630){
-            return 3;
+            return 2;
         } else if(x > 1400 && x < 1500 && y > 350 && y < 630){
-            return 4;
+            return 3;
         } else if(x > 1300 && x < 1400 && y > 350 && y < 630){
-            return 5;
+            return 4;
         } else if(x > 1200 && x < 1300 && y > 350 && y < 630){
-            return 6;
+            return 5;
         } else if(x > 1100 && x < 1200 && y > 350 && y < 630){
-            return 7;
+            return 6;
         } else if(x > 1000 && x < 1100 && y > 350 && y < 630){
-            return 8;
+            return 7;
         } else if(x > 900 && x < 1000 && y > 350 && y < 630){
-            return 9;
+            return 8;
         } else if(x > 800 && x < 900 && y > 350 && y < 630){
-            return 10;
+            return 9;
         } else if(x > 700 && x < 800 && y > 350 && y < 630){
+            return 10;
+        } else if(x > 600 && x < 700 && y > 350 && y < 630){
             return 11;
+        } else if(x > 500 && x < 600 && y > 350 && y < 630){
+            return 12;
+        } else if(x > 400 && x < 500 && y > 350 && y < 630){
+            return 13;
+        } else if(x > 300 && x < 400 && y > 350 && y < 630){
+            return 14;
         }
         return -1;
     }
@@ -484,12 +510,14 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
         return false;
     }
 
-    private boolean zoom(int x, int y){
+    private int zoom(int x, int y){
         if(x > 1550.0f && x < 1800.0f && y > 40 && y < 190){
-            return true;
+            return 0;
+        } else if(x > 1300 && x < 1550 && y > 40 && y < 190){
+            return 1;
         }
 
-        return false;
+        return -1;
     }
 
 

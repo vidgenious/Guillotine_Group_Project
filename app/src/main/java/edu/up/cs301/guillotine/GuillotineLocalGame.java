@@ -183,10 +183,19 @@ public class GuillotineLocalGame extends LocalGame {
         } else if(action instanceof  RatMoveAction) {
             gameState.moveThroughRat();
 
+        } else if(action instanceof  LineMoveAction){
+            gameState.moveThroughLine();
+
         } else if(action instanceof ZoomAction) {
-            if(gameState.getTurnPhase() != 8){
+            if(gameState.getTurnPhase() != 8 && ((ZoomAction) action).getSubject() == 0) {
                 tempPhase = gameState.getTurnPhase();
                 gameState.setTurnPhase(8);
+                gameState.setZoom(0);
+            } else if(gameState.getTurnPhase() != 8 && ((ZoomAction) action).getSubject() == 1){
+                tempPhase = gameState.getTurnPhase();
+                gameState.setTurnPhase(8);
+                gameState.setZoom(1);
+                gameState.cloneLine();
             } else if(gameState.getTurnPhase() == 8){
                 gameState.setTurnPhase(tempPhase);
             }
