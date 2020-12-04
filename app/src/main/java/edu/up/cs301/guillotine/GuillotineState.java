@@ -621,10 +621,11 @@ public class GuillotineState extends GameState {
             }
             hand.add(this.deckAction.get(0));
             this.deckAction.remove(0);
-            if (!this.actionCardPlayed && !this.actionCardPlayed) {
+            if (!this.actionCardPlayed) {
                 this.turnPhase = 0;
                 return true;
-            } else {
+            }
+            else {
                 return true;
             }
         }
@@ -810,10 +811,17 @@ public class GuillotineState extends GameState {
         return true;
     }
 
+    /**
+     * This method goes through the line
+     * @return always returns true
+     */
     public boolean moveThroughLine(){
-        tempList.add(tempList.get(0));
-        tempList.remove(0);
-        return true;
+        if(!tempList.isEmpty()) {
+            tempList.add(tempList.get(0));
+            tempList.remove(0);
+            return true;
+        }
+        return false;
     }
 
     /**
