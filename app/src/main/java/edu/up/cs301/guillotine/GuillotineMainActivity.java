@@ -14,15 +14,7 @@ import edu.up.cs301.game.GameFramework.gameConfiguration.GamePlayerType;
  * @author Maxwell McAtee
  * @version Beta November 2020
  *
- * Meeting 12/2/2020 with Professor Nuxoll
- *      Granted 3-star status to guillotine game
- *      Allowed to forgo implementation for 6 cards
- *          Cards chosen:
- *              Callous Guards
- *              Clerical Error
- *              Opinionated Guards
- *              Twist of Fate
- *              Infighting
+ *
  *
  *
  * Beta:
@@ -44,8 +36,16 @@ import edu.up.cs301.game.GameFramework.gameConfiguration.GamePlayerType;
  *
  * Full Release:
  *
- */
-/**
+ * Meeting 12/2/2020 with Professor Nuxoll
+ *     Granted 3-star status to guillotine game
+ *     Allowed to forgo implementation for 6 cards
+ *         Cards chosen:
+ *             Callous Guards
+ *             Clerical Error
+ *             Opinionated Guards
+ *             Twist of Fate
+ *             Infighting
+ *
  * Dumb AI: Everything it does is random
  * Smart AI:
  * 1) Checks if it has a game ending card and checks to see if the conditions are right before using that card
@@ -61,7 +61,11 @@ import edu.up.cs301.game.GameFramework.gameConfiguration.GamePlayerType;
  * If you try to move a card an amount of spaces that it cannot, the card is discarded and nothing happens.
  * That is not a bug.
  *
+ * Fixed from Beta:
+ *      The player types are now interchangeable.
  *
+ * Extra Functionality:
+ *      Ability to zoom in on the hand and on the line.
  */
 
 

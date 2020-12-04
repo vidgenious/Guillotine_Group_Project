@@ -62,11 +62,8 @@ public class GuillotineComputerPlayer1 extends GameComputerPlayer {
 
 
                     game.sendAction(new PlayAction(this, pos));
-
-                    gameState.setTurnPhase(1);
                 } else {
                     game.sendAction(new SkipAction(this));
-                    gameState.setTurnPhase(1);
 
                 }
             }

@@ -250,7 +250,7 @@ public class GuillotineHumanPlayer extends GameHumanPlayer implements View.OnTou
 
                         //If an invalid place on the screen is touched
                     }
-                    if (state.getPlayerTurn() == 0)
+                    if (state.getPlayerTurn() == 1)
                         if (cardPos < 0 || cardPos + 1 > state.getP1Hand().size()) {
                             return false;
                         }
