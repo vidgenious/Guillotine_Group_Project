@@ -9,7 +9,7 @@ import edu.up.cs301.game.R;
  * @author William Cloutier
  * @author Moses Karemera
  * @author Maxwell McAtee
- * @version Beta November 2020
+ * @version Final December 2020
  */
 
 /**
@@ -243,8 +243,11 @@ public class GuillotineLocalGame extends LocalGame {
             if(gameState.getP0Score() > gameState.getP1Score()){
                 winner = this.playerNames[0];
             }
-            else{
+            else if(gameState.getP0Score() < gameState.getP1Score()){
                 winner = this.playerNames[1];
+            }
+            else{
+                return "DRAW. Everyone wins!";
             }
             return winner + " is the winner! ";
         }

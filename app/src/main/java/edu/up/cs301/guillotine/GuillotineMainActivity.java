@@ -12,7 +12,7 @@ import edu.up.cs301.game.GameFramework.gameConfiguration.GamePlayerType;
  * @author William Cloutier
  * @author Moses Karemera
  * @author Maxwell McAtee
- * @version Beta November 2020
+ * @version Final December 2020
  *
  *
  *
@@ -36,6 +36,8 @@ import edu.up.cs301.game.GameFramework.gameConfiguration.GamePlayerType;
  *
  * Full Release:
  *
+ * Didn't delete beta comment in case code was not downloaded during beta
+ *
  * Meeting 12/2/2020 with Professor Nuxoll
  *     Granted 3-star status to guillotine game
  *     Allowed to forgo implementation for 6 cards
@@ -46,7 +48,12 @@ import edu.up.cs301.game.GameFramework.gameConfiguration.GamePlayerType;
  *             Twist of Fate
  *             Infighting
  *
- * Dumb AI: Everything it does is random
+ * Email 12/2/20 from Professor Nuxoll
+ *      "If you'd like to wait until Friday (Dec 4) to turn in your final
+ *      release that will be fine.  I won't start until after then."
+ *
+ * Dumb AI:
+ * 1) Everything it does is random
  * Smart AI:
  * 1) Checks if it has a game ending card and checks to see if the conditions are right before using that card
  * Those conditions are based off of both players score and what day it is.
@@ -73,6 +80,11 @@ import edu.up.cs301.game.GameFramework.gameConfiguration.GamePlayerType;
  *      This has been seen to happen when last noble has an action
  *      Some parameter changes have been implemented to stop this, but it is hard to know if
  *      the bug fix fully worked. So far, the bug has not been recreated, but there is still a possibility it exists
+ *
+ *      After one attempted fix of crash bug, we ran into a freeze bug when the crash bug should have appeared
+ *      This falls into the same category as the above bug report in the sense that we are not completely sure if
+ *      we fixed this bug or not since this bug was very random to begin with. However, we have tested this game multiple
+ *      times since our last fix and have not run into the bug. So, it is likely we have fixed the bug
  */
 
 

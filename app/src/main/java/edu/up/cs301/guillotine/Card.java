@@ -6,8 +6,9 @@ import android.graphics.Bitmap;
  * @author William Cloutier
  * @author Moses Karemera
  * @author Maxwell McAtee
- * @version Beta November 2020
+ * @version Final December 2020
  */
+
 
 /**
  * This class is responsible for acting as the constructor for every Guillotine card
