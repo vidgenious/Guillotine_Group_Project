@@ -16,8 +16,6 @@ import edu.up.cs301.game.GameFramework.infoMessage.GameInfo;
  * This class acts as the code for the dumb AI and relies on making random choices for functionality
  */
 public class GuillotineComputerPlayer2 extends GameComputerPlayer {
-    //private ArrayList<Card> nobleLine = new ArrayList<Card>();
-    //private ArrayList<Card> hand = new ArrayList<Card>();
     private boolean hasScarlet = false;
     private int pos = 0;
 
