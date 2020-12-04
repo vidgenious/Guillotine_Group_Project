@@ -640,7 +640,7 @@ public class GuillotineState extends GameState {
             return true;
         }
         else{
-            return false;
+            return true;
         }
     }
 
